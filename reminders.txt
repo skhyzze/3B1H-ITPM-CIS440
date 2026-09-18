@@ -1,0 +1,10 @@
+Sprint 1 - foundation of site
+
+<!-- Homepage:Jake  -->
+<!-- Fellow/Pathway: Kat  -->
+<!-- Lab Mission : Henry  -->
+<!-- Events Page: Skhy  -->
+
+  For making a other page please put it under pages folder and code from there(add file) 
+
+<!-- If we need help with git stuff please ask and update team members when your assigned code is done so that we can check and review before merging it into main hub -->
