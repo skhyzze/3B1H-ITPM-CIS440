@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Fellowship &amp; Pathways | Analytics &amp; Applied AI Lab</title>
+  <style>
+    :root{--navy:#0c2340;--navy-deep:#071627;--navy-soft:#143257;--gold:#ffb81c;--bg:#fff;--fg:#13233b;--muted:#657184;--border:#dfe4eb}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:"Space Grotesk",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}
+    a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .container{width:min(100% - 40px,1152px);margin:auto}
+    .label-mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase}
+    .tech-grid{background-image:linear-gradient(to right,rgba(255,184,28,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,184,28,.12) 1px,transparent 1px);background-size:48px 48px}
+    .tech-grid-soft{background-image:linear-gradient(to right,rgba(12,35,64,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(12,35,64,.07) 1px,transparent 1px);background-size:40px 40px}
+    .draft-note{padding:9px 0;background:#fff2d1;color:var(--navy);font-size:13px;line-height:1.5}
+    .site-nav{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(12,35,64,.95);backdrop-filter:blur(12px)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:4px;background:var(--gold);font-family:monospace;font-size:14px;font-weight:700;color:var(--navy)}
+    .brand-title{display:block;font-size:14px;font-weight:600;color:#fff;line-height:1.25}
+    .brand-sub{display:block;color:rgba(255,255,255,.5);line-height:1.25}
+    .nav-links{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+    .nav-link{border-radius:4px;padding:8px 12px;font-size:14px;color:rgba(255,255,255,.75);transition:.2s}
+    .nav-link:hover{background:rgba(255,255,255,.1);color:#fff}
+    .nav-link.active{color:var(--gold);background:rgba(255,255,255,.05)}
+    .page-hero{position:relative;overflow:hidden;background:var(--navy)}
+    .page-hero-content{position:relative;padding:80px 0}
+    .page-hero h1{margin:12px 0 0;font-size:clamp(40px,5vw,52px);line-height:1.12;color:#fff}
+    .page-hero p.lead{max-width:680px;margin:16px 0 0;color:rgba(255,255,255,.7);line-height:1.6}
+    .section{padding:80px 0}
+    .section-kicker{margin:0;color:var(--gold)}
+    .section-kicker.light{color:rgba(12,35,64,.5)}
+    .section h2{margin:12px 0 0;font-size:32px;line-height:1.2}
+    .intro{max-width:800px}
+    .intro h2{color:var(--navy)}
+    .intro-text{margin:20px 0 0;border-left:4px solid var(--gold);padding-left:24px;font-size:clamp(18px,2.5vw,23px);line-height:1.65;color:var(--navy)}
+    .fellow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+    .fellow-card{border:1px solid var(--border);border-radius:12px;background:#fff;padding:24px;transition:.2s}
+    .fellow-card:hover{border-color:rgba(12,35,64,.3)}
+    .initials{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--navy);font-family:monospace;font-size:18px;font-weight:700;color:var(--gold)}
+    .fellow-card h3{margin:16px 0 0;font-size:18px;color:var(--navy)}
+    .fellow-role,.fellow-focus{color:var(--muted);font-size:14px;line-height:1.65}
+    .fellow-role{margin:2px 0 0}
+    .fellow-focus{margin:12px 0 0}
+    .details-section{background:var(--navy-deep);color:#fff}
+    .details-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px}
+    .detail-card{border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.04);padding:24px}
+    .detail-card h3{margin:0;font-size:20px}
+    .detail-card p{margin:12px 0 0;color:rgba(255,255,255,.7);font-size:14px;line-height:1.7}
+    .placeholder{font-style:italic}
+    .site-footer{border-top:1px solid rgba(255,255,255,.1);background:var(--navy-deep);color:rgba(255,255,255,.7)}
+    .footer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;padding:56px 0}
+    .footer-title{margin:8px 0 0;font-size:18px;font-weight:600;color:#fff}
+    .footer-text{margin:12px 0 0;max-width:400px;font-size:14px;line-height:1.55}
+    .footer-list{margin:12px 0 0;padding:0;list-style:none;font-size:14px}
+    .footer-list li{margin:8px 0}
+    .footer-list a:hover{color:var(--gold)}
+    .footer-note{border-top:1px solid rgba(255,255,255,.1);padding:20px;text-align:center;font-size:12px;color:rgba(255,255,255,.4)}
+    @media(max-width:767px){.container{width:min(100% - 32px,1152px)}.nav-inner{align-items:flex-start;flex-direction:column;padding:12px 0}.nav-links{width:100%}.nav-link{padding:8px}.page-hero-content{padding:64px 0}.section{padding:60px 0}.fellow-grid,.details-grid,.footer-grid{grid-template-columns:1fr}.footer-grid{padding:48px 0}}
+  </style>
+</head>
+<body id="top">
+  <div class="draft-note"><div class="container"><strong>Draft preview:</strong> Replace all bracketed text with client-approved details before publishing.</div></div>
+  <header class="site-nav">
+    <nav class="container nav-inner" aria-label="Page navigation">
+      <a href="#top" class="brand"><span class="brand-mark">AI</span><span><span class="brand-title">Analytics &amp; Applied AI Lab</span><span class="label-mono brand-sub">Quinnipiac University</span></span></a>
+      <div class="nav-links"><a class="nav-link active" href="#about">Fellowship</a><a class="nav-link" href="#fellows">Student fellows</a><a class="nav-link" href="#joining">How to join</a></div>
+    </nav>
+  </header>
+  <main>
+    <section class="page-hero">
+      <div class="tech-grid" style="position:absolute;inset:0;opacity:.6"></div>
+      <div class="container page-hero-content">
+        <p class="label-mono section-kicker">Opportunities</p>
+        <h1>Fellowship &amp; Pathways</h1>
+        <p class="lead placeholder">[One-sentence introduction to the fellowship and who it is for.]</p>
+      </div>
+    </section>
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container intro">
+        <p class="label-mono section-kicker light">Overview</p>
+        <h2 id="about-title">About the fellowship</h2>
+        <p class="intro-text placeholder">[Briefly explain what the fellowship does, what students might work on, and what they can expect to gain. Confirm the wording with the client.]</p>
+      </div>
+    </section>
+    <section class="section tech-grid-soft" id="fellows" aria-labelledby="fellows-title">
+      <div class="container">
+        <p class="label-mono section-kicker light">People</p>
+        <h2 id="fellows-title" style="color:var(--navy)">Meet the student fellows</h2>
+        <div class="fellow-grid">
+          <article class="fellow-card"><div class="initials" aria-hidden="true">?</div><h3>[Student name]</h3><p class="fellow-role">Major: [Major]</p><p class="fellow-focus placeholder">[Short description or quote approved by the student.]</p></article>
+          <article class="fellow-card"><div class="initials" aria-hidden="true">?</div><h3>[Student name]</h3><p class="fellow-role">Major: [Major]</p><p class="fellow-focus placeholder">[Short description or quote approved by the student.]</p></article>
+          <article class="fellow-card"><div class="initials" aria-hidden="true">?</div><h3>[Student name]</h3><p class="fellow-role">Major: [Major]</p><p class="fellow-focus placeholder">[Short description or quote approved by the student.]</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="section details-section" id="joining" aria-labelledby="joining-title">
+      <div class="container">
+        <p class="label-mono section-kicker">Next steps</p>
+        <h2 id="joining-title">How to join and what to expect</h2>
+        <div class="details-grid">
+          <article class="detail-card"><h3>How to sign up</h3><p class="placeholder">[Who can apply, how to express interest or apply, any required materials, and the current contact or deadline.]</p></article>
+          <article class="detail-card"><h3>Curriculum or pathway</h3><p class="placeholder">[The confirmed program stages, activities, learning goals, or curriculum. Replace this once the client explains how the pathway works.]</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-grid"><div><p class="label-mono" style="color:var(--gold);margin:0">Quinnipiac University</p><p class="footer-title">Analytics &amp; Applied AI Lab</p><p class="footer-text">Fellowship &amp; Pathways draft for team review.</p></div><div><p class="label-mono" style="color:rgba(255,255,255,.4);margin:0">Explore this page</p><ul class="footer-list"><li><a href="#about">About the fellowship</a></li><li><a href="#fellows">Student fellows</a></li><li><a href="#joining">How to join</a></li></ul></div></div><div class="footer-note">Quinnipiac University · Analytics &amp; Applied AI Lab</div></footer>
+</body>
+</html>
