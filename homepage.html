@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Home page for the Quinnipiac Analytics & Applied AI Lab." />
+  <title>Analytics & Applied AI Lab | Quinnipiac University</title>
+  <style>
+    :root{
+      --navy:#0C2340;
+      --navy-2:#15395f;
+      --gold:#FFB81C;
+      --ink:#132238;
+      --muted:#5d6b7b;
+      --paper:#ffffff;
+      --soft:#f5f7fa;
+      --line:#dfe5eb;
+      --max:1180px;
+      --radius:22px;
+      --shadow:0 18px 50px rgba(12,35,64,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:var(--paper);
+      line-height:1.65;
+    }
+    a{color:inherit}
+    .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      color:var(--gold);font-size:.78rem;font-weight:800;
+      letter-spacing:.14em;text-transform:uppercase
+    }
+    .eyebrow:before{content:"";width:28px;height:2px;background:currentColor}
+    h1,h2,h3{line-height:1.08;margin:0;color:var(--navy)}
+    h1{font-size:clamp(3rem,7vw,6.5rem);letter-spacing:-.055em}
+    h2{font-size:clamp(2.2rem,4vw,4rem);letter-spacing:-.04em}
+    h3{font-size:1.35rem}
+    p{margin:0}
+    .lead{font-size:clamp(1.08rem,1.7vw,1.3rem);color:#dbe6f1;max-width:760px}
+    .section-intro{font-size:1.08rem;color:var(--muted);max-width:720px;margin-top:20px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:50px;padding:0 22px;border-radius:999px;
+      font-weight:800;text-decoration:none;border:1px solid transparent;
+      transition:.2s ease;cursor:pointer
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-gold{background:var(--gold);color:var(--navy)}
+    .btn-outline{border-color:rgba(255,255,255,.38);color:#fff}
+    .btn-dark{background:var(--navy);color:#fff}
+    .btn-light{background:#fff;color:var(--navy)}
+    header{
+      position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);border-bottom:1px solid rgba(12,35,64,.08)
+    }
+    nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900;color:var(--navy)}
+    .mark{
+      width:38px;height:38px;border-radius:10px;background:var(--navy);
+      color:var(--gold);display:grid;place-items:center;font-size:1.15rem
+    }
+    .brand small{display:block;font-weight:650;color:var(--muted);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}
+    .navlinks{display:flex;align-items:center;gap:24px;font-size:.9rem;font-weight:750}
+    .nav-item{position:relative}
+    .nav-branch{
+      display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+      cursor:pointer;background:none;border:0;padding:10px 0;
+      font:inherit;color:inherit;font-weight:750
+    }
+    .nav-branch:after{content:"▾";font-size:.72em;color:#7b8794}
+    .branch-menu{
+      display:none;position:absolute;top:calc(100% + 12px);left:50%;
+      transform:translateX(-50%);min-width:220px;background:#fff;
+      border:1px solid var(--line);border-radius:14px;padding:10px;
+      box-shadow:var(--shadow);z-index:50
+    }
+    .nav-item:hover .branch-menu,.nav-item:focus-within .branch-menu{display:block}
+    .branch-placeholder{
+      display:block;padding:12px 14px;border-radius:10px;color:var(--navy);
+      font-size:.86rem;font-weight:800;white-space:nowrap;background:var(--soft)
+    }
+    .branch-placeholder small{
+      display:block;margin-top:3px;color:var(--muted);font-weight:600
+    }
+
+    .navlinks a{text-decoration:none}
+    .hero{
+      position:relative;overflow:hidden;background:
+      radial-gradient(circle at 82% 18%,rgba(255,184,28,.22),transparent 22%),
+      linear-gradient(135deg,var(--navy) 0%,#102e50 70%,#163f68 100%);
+      color:#fff;padding:110px 0 105px
+    }
+    .hero:after{
+      content:"";position:absolute;inset:0;opacity:.18;pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);
+      background-size:44px 44px;
+      mask-image:linear-gradient(to left,#000,transparent 65%)
+    }
+    .hero h1{color:#fff;max-width:900px;margin:18px 0 28px}
+    .hero h1 span{color:var(--gold)}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+    section{padding:92px 0}
+    .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start}
+    #about{background:var(--paper);color:var(--ink)}
+    #about h2{color:var(--navy)}
+    #about .copy{color:var(--muted)}
+    #about .eyebrow{color:#9a6a00 !important}
+    .big-number{font-size:7rem;font-weight:900;color:rgba(12,35,64,.06);line-height:.8}
+    .copy p+p{margin-top:18px}
+    .copy{font-size:1.08rem;color:var(--muted)}
+    .about-photo{
+      margin-top:32px;width:100%;aspect-ratio:16/9;object-fit:cover;
+      border-radius:var(--radius);box-shadow:var(--shadow);
+      border:1px solid var(--line)
+    }
+    .about-photo-caption{
+      margin-top:10px;font-size:.82rem;color:#7b8794
+    }
+    .purpose{background:var(--soft)}
+    .cards-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:44px}
+    .card{
+      background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+      padding:34px;box-shadow:var(--shadow)
+    }
+    .card .icon{
+      width:48px;height:48px;border-radius:14px;background:rgba(255,184,28,.18);
+      display:grid;place-items:center;color:var(--navy);font-weight:900;margin-bottom:24px
+    }
+    .card p{color:var(--muted);margin-top:12px}
+    .meet{background:var(--navy);color:#fff}
+    .meet h2,.meet h3{color:#fff}
+    .meet .section-intro{color:#c8d5e3}
+    .people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px}
+    .person{padding:28px;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(255,255,255,.05)}
+    .person strong{display:block;color:var(--gold);margin-bottom:8px}
+    .person p{font-size:.94rem;color:#cbd7e3}
+    .audiences{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
+    .audience{border-radius:var(--radius);padding:38px;background:var(--soft)}
+    .audience.gold{background:#fff6df}
+    .audience ul{padding-left:20px;color:var(--muted);margin:22px 0 28px}
+    .audience li{margin:9px 0}
+    .resources{background:var(--soft)}
+    .resource-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px}
+    .resource{
+      min-height:230px;background:#fff;border:1px solid var(--line);border-radius:18px;
+      padding:26px;text-decoration:none;display:flex;flex-direction:column;transition:.2s ease
+    }
+    .resource:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:#c9d2dc}
+    .resource .num{font-size:.72rem;font-weight:900;letter-spacing:.12em;color:#9aa6b2}
+    .resource h3{margin-top:auto;margin-bottom:10px}
+    .resource p{color:var(--muted);font-size:.9rem}
+    .arrow{color:var(--gold);font-weight:900;margin-top:16px}
+    .cta{padding:70px 0 100px}
+    .cta-box{
+      background:linear-gradient(135deg,var(--navy),var(--navy-2));
+      border-radius:30px;padding:64px;color:#fff;position:relative;overflow:hidden
+    }
+    .cta-box:after{
+      content:"AI";position:absolute;right:-10px;bottom:-70px;
+      font-size:15rem;font-weight:950;color:rgba(255,255,255,.035);line-height:1
+    }
+    .cta-box h2{color:#fff;max-width:700px}
+    .cta-box p{max-width:700px;color:#cbd8e5;margin:20px 0 30px;font-size:1.08rem}
+    footer{background:#081a2d;color:#aebdca;padding:34px 0}
+    footer .wrap{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:.85rem}
+
+    .theme-toggle{
+      width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+      background:var(--soft);color:var(--navy);display:grid;place-items:center;
+      cursor:pointer;font-size:1.15rem;transition:.2s ease;flex:0 0 auto
+    }
+    .theme-toggle:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(12,35,64,.12)}
+    body.dark{
+      --ink:#edf3f8;
+      --muted:#b8c5d2;
+      --paper:#0b1726;
+      --soft:#10243a;
+      --line:#29415b;
+      --shadow:0 18px 50px rgba(0,0,0,.28);
+      background:#0b1726;color:#edf3f8
+    }
+    body.dark header{background:rgba(8,26,45,.95);border-bottom-color:#29415b}
+    body.dark .brand,body.dark h1,body.dark h2,body.dark h3{color:#f5f8fb}
+    body.dark .card,body.dark .resource{background:#10243a}
+    body.dark .audience{background:#10243a}
+    body.dark .audience.gold{background:#172a3e}
+    body.dark #about{background:#0b1726;color:#edf3f8}
+    body.dark #about h2{color:#fff}
+    body.dark #about .copy{color:#b8c5d2}
+    body.dark .purpose,body.dark .resources{background:#0e1d2e}
+    body.dark .branch-menu{background:#10243a}
+    body.dark .branch-placeholder{background:#0b1726;color:#fff}
+    body.dark .theme-toggle{background:#172a3e;color:var(--gold);border-color:#35506d}
+
+    @media(max-width:900px){
+      .navlinks a:not(.nav-cta){display:none}
+      .about-grid,.cards-2,.audiences{grid-template-columns:1fr}
+      .people-grid{grid-template-columns:1fr 1fr}
+      .resource-grid{grid-template-columns:1fr 1fr}
+      .big-number{display:none}
+    }
+    @media(max-width:600px){
+      .wrap{width:min(calc(100% - 28px),var(--max))}
+      .hero{padding:80px 0 74px}
+      section{padding:68px 0}
+      .people-grid,.resource-grid{grid-template-columns:1fr}
+      .cta-box{padding:38px 26px}
+      footer .wrap{display:block}
+      footer .wrap div+div{margin-top:8px}
+    }
+  
+    /* Dark-mode contrast fixes */
+    body.dark,
+    body.dark main,
+    body.dark section,
+    body.dark #about,
+    body.dark .purpose,
+    body.dark .resources,
+    body.dark .cta {
+      background-color:#0b1726;
+      color:#edf3f8;
+    }
+
+    body.dark h1,
+    body.dark h2,
+    body.dark h3,
+    body.dark strong,
+    body.dark .brand,
+    body.dark .resource h3,
+    body.dark .audience h3,
+    body.dark #about h2,
+    body.dark #about strong {
+      color:#f7f9fc !important;
+    }
+
+    body.dark p,
+    body.dark li,
+    body.dark .copy,
+    body.dark .section-intro,
+    body.dark .resource p,
+    body.dark .audience li,
+    body.dark .card p {
+      color:#c8d3df !important;
+    }
+
+    body.dark .card,
+    body.dark .resource,
+    body.dark .audience,
+    body.dark .audience.gold {
+      background:#10243a !important;
+      border-color:#29415b;
+      color:#edf3f8;
+    }
+
+    body.dark .resource:hover {
+      background:#142b44 !important;
+      border-color:#46627e;
+    }
+
+    body.dark .btn-dark {
+      background:var(--gold);
+      color:#0C2340 !important;
+    }
+
+    body.dark .btn-light {
+      background:#edf3f8;
+      color:#0C2340 !important;
+    }
+
+    body.dark .resource .num {
+      color:#93a7ba;
+    }
+
+    body.dark footer {
+      background:#06111e;
+      color:#b8c5d2;
+    }
+
+    body.dark a:not(.btn):not(.brand):not(.resource) {
+      color:#f0c45c;
+    }
+
+    body.dark .navlinks > a:not(.btn) {
+      color:#edf3f8;
+    }
+
+    body.dark .nav-branch {
+      color:#edf3f8;
+    }
+
+  
+    /* Requested accent + Keep Exploring fixes */
+    .card .icon{
+      color:var(--gold) !important;
+    }
+
+    /* Specifically keeps the P and V gold in both themes */
+    body.dark .card .icon{
+      color:var(--gold) !important;
+      background:rgba(255,184,28,.14);
+    }
+
+    /* Keep Exploring / More at Quinnipiac section */
+    body.dark section[style*="background:#fff"]{
+      background:#10243a !important;
+      color:#edf3f8 !important;
+    }
+
+    body.dark section[style*="background:#fff"] h2,
+    body.dark section[style*="background:#fff"] h3{
+      color:#ffffff !important;
+    }
+
+    body.dark section[style*="background:#fff"] .section-intro,
+    body.dark section[style*="background:#fff"] p{
+      color:#c8d3df !important;
+    }
+
+    body.dark section[style*="background:#fff"] .card{
+      background:#16304b !important;
+      border-color:#35506d !important;
+    }
+
+    body.dark section[style*="background:#fff"] a{
+      color:var(--gold) !important;
+    }
+
+  </style>
+</head>
+<body>
+<header>
+  <nav class="wrap" aria-label="Main navigation">
+    <a class="brand" href="#top">
+      <span class="mark">Q</span>
+      <span>Analytics & AI Lab<small>Quinnipiac University</small></span>
+    </a>
+    <div class="navlinks">
+      <a href="#top">Home</a>
+      <div class="nav-item">
+        <button class="nav-branch" type="button">Industry Partners</button>
+        <div class="branch-menu"><span class="branch-placeholder">Industry Partners<small>Page coming soon</small></span></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-branch" type="button">Fellowship Pathway</button>
+        <div class="branch-menu"><span class="branch-placeholder">Fellowship Pathway<small>Page coming soon</small></span></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-branch" type="button">Events</button>
+        <div class="branch-menu"><span class="branch-placeholder">Events<small>Page coming soon</small></span></div>
+      </div>
+      <a class="btn btn-dark nav-cta" href="#opportunities">Get Involved</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Light / Dark mode">☾</button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Our Mission</span>
+      <h1>Where Analytics, AI & <span>Ideas</span> Come Together.</h1>
+      <p class="lead">The Quinnipiac Analytics & AI Lab connects students, faculty, and industry through hands-on exploration of data, analytics, and artificial intelligence. Our mission is to create opportunities for collaboration, experimentation, and learning that turn ideas into meaningful real-world impact.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#get-involved">Get Involved →</a>
+        <a class="btn btn-outline" href="#about">Explore the Lab</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <span class="eyebrow" style="color:#9a6a00">About the Lab</span>
+        <h2 style="margin-top:16px">A place to explore what comes next.</h2>
+        <div class="big-number">01</div>
+      </div>
+      <div class="copy">
+        <p>The Analytics & AI Lab is a collaborative space for the Quinnipiac community to explore how analytics and artificial intelligence can be applied across disciplines.</p>
+        <p>The Lab brings together students, faculty, and industry partners to learn new technologies, develop projects, exchange ideas, and solve real-world problems. Whether someone has years of technical experience or is exploring analytics and AI for the first time, the Lab provides opportunities to learn, contribute, and collaborate.</p>
+        <p><strong style="color:var(--navy)">The goal isn't simply to study emerging technology. It's to use it, experiment with it, and build with it.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="purpose">
+    <div class="wrap">
+      <span class="eyebrow" style="color:#9a6a00">Purpose & Vision</span>
+      <h2 style="margin-top:16px">Building a community around analytics & AI.</h2>
+      <div class="cards-2">
+        <article class="card">
+          <div class="icon">P</div>
+          <h3>Our Purpose</h3>
+          <p>Make analytics and AI more accessible across Quinnipiac by connecting people with the knowledge, technology, resources, and opportunities needed to explore them.</p>
+        </article>
+        <article class="card">
+          <div class="icon">V</div>
+          <h3>Our Vision</h3>
+          <p>Build an interdisciplinary community where analytics and AI bring together different schools, fields, and perspectives—and where ideas can develop into projects with meaningful academic and real-world applications.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="meet" id="meet">
+    <div class="wrap">
+      <span class="eyebrow">Meet the Lab</span>
+      <h2 style="margin-top:16px">Built around collaboration.</h2>
+      <p class="section-intro">The Lab is more than a physical space or collection of technology. It's a community shaped by the people who participate in it.</p><div style="margin-top:26px"><a class="btn btn-gold" href="https://www.qu.edu/schools/business/programs/bachelors-degree/applied-ai-business-analytics/faculty-and-staff/" target="_blank" rel="noopener">Explore Quinnipiac Faculty →</a></div>
+      <div class="people-grid">
+        <article class="person"><strong>Students</strong><p>Bring curiosity, new ideas, technical skills, and perspectives from across Quinnipiac.</p></article>
+        <article class="person"><strong>Student Fellows</strong><p>Take an active role in Lab initiatives, events, projects, and the broader Lab community.</p></article>
+        <article class="person"><strong>Faculty Fellows</strong><p>Contribute expertise, research interests, mentorship, and interdisciplinary collaboration.</p></article>
+        <article class="person"><strong>Industry Partners</strong><p>Connect the Lab with real-world challenges, technologies, professional expertise, and projects.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="opportunities">
+    <div class="wrap">
+      <span class="eyebrow" style="color:#9a6a00">Get Involved</span>
+      <h2 style="margin-top:16px">There's a place for you in the Lab.</h2>
+      <div class="audiences">
+        <article class="audience gold">
+          <h3>For Students</h3>
+          <ul>
+            <li>Participate in Lab events and workshops</li>
+            <li>Join or propose analytics and AI projects</li>
+            <li>Explore Lab technology and computing resources</li>
+            <li>Collaborate with faculty and other students</li>
+            <li>Connect with visiting companies and professionals</li>
+            <li>Participate in the Lab's fellowship pathway</li>
+          </ul>
+          <a class="btn btn-dark" href="#get-involved">Student Opportunities →</a><a href="https://www.qu.edu/academics/experiential-learning/" target="_blank" rel="noopener" style="display:block;margin-top:18px;font-weight:800;color:var(--navy)">More student opportunities at Quinnipiac ↗</a>
+        </article>
+        <article class="audience">
+          <h3>For Faculty</h3>
+          <ul>
+            <li>Collaborate across disciplines and schools</li>
+            <li>Develop analytics and AI research projects</li>
+            <li>Mentor student projects and fellows</li>
+            <li>Explore Lab computing resources</li>
+            <li>Connect coursework with Lab initiatives</li>
+            <li>Engage with industry partners and organizations</li>
+          </ul>
+          <a class="btn btn-dark" href="#get-involved">Faculty Opportunities →</a><a href="https://www.qu.edu/research/" target="_blank" rel="noopener" style="display:block;margin-top:18px;font-weight:800;color:var(--navy)">Explore research at Quinnipiac ↗</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="resources">
+    <div class="wrap">
+      <span class="eyebrow" style="color:#9a6a00">Resources & Opportunities</span>
+      <h2 style="margin-top:16px">More than a Lab space.</h2>
+      <p class="section-intro">Explore the people, technology, projects, and experiences that make the Lab a place to learn and build.</p>
+      <div class="resource-grid">
+        <a class="resource" href="resources.html" data-lab-route="resources"><span class="num">01</span><h3>Computing Resources</h3><p>Explore technical resources and learn how to request access.</p><span class="arrow">Explore →</span></a>
+        <a class="resource" href="projects.html" data-lab-route="projects"><span class="num">02</span><h3>Projects</h3><p>Discover current work or find opportunities to contribute.</p><span class="arrow">Explore →</span></a>
+        <a class="resource" href="events.html" data-lab-route="events"><span class="num">03</span><h3>Events</h3><p>Attend workshops, presentations, company visits, and Lab events.</p><span class="arrow">Explore →</span></a>
+        <a class="resource" href="fellowship.html" data-lab-route="fellowship"><span class="num">04</span><h3>Fellowship</h3><p>Learn about the pathway to deeper involvement and recognition.</p><span class="arrow">Explore →</span></a>
+        
+      </div>
+    </div>
+  </section>
+
+
+  <section style="padding:64px 0;background:#fff">
+    <div class="wrap">
+      <span class="eyebrow" style="color:#9a6a00">More at Quinnipiac</span>
+      <h2 style="margin-top:16px">Keep exploring.</h2>
+      <p class="section-intro">These official Quinnipiac resources provide more information about research, hands-on learning, and opportunities across the university.</p>
+      <div class="cards-2" style="margin-top:34px">
+        <article class="card">
+          <h3>Undergraduate Research</h3>
+          <p>Explore research opportunities, showcases, faculty mentorship, and interdisciplinary programs available to Quinnipiac students.</p>
+          <a href="https://www.qu.edu/research/undergraduate-research/" target="_blank" rel="noopener" style="display:inline-block;margin-top:20px;font-weight:800;color:var(--navy)">Explore Undergraduate Research ↗</a>
+        </article>
+        <article class="card">
+          <h3>Experiential Learning</h3>
+          <p>Discover ways Quinnipiac students can learn through applied work, research, projects, fellowships, service, and other experiences.</p>
+          <a href="https://www.qu.edu/academics/experiential-learning/" target="_blank" rel="noopener" style="display:inline-block;margin-top:20px;font-weight:800;color:var(--navy)">Explore Experiential Learning ↗</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong style="color:#fff">Quinnipiac Analytics & AI Lab</strong></div>
+    <div>Mission Page Prototype • Internal Lab links are ready to connect to team-built pages.</div>
+  </div>
+</footer>
+<!--
+TEAM INTEGRATION NOTES
+Internal Lab routes used on this page:
+  resources.html     -> Computing Resources page
+  projects.html      -> Projects page
+  events.html        -> Events page
+  fellowship.html    -> Fellowship page
+  get-involved.html  -> Get Involved page
+
+If your team uses folders or different filenames, update these href values.
+The data-lab-route attributes make these links easy to locate with Find/Search.
+External qu.edu links intentionally open in a new tab.
+-->
+
+<!--
+HOME PAGE NAVIGATION NOTES
+The About tab has been removed.
+The About/Lab section uses analytics-applied-ai-lab-home.jpeg as its background.
+The former bottom "Your Next Step" CTA section has been removed.
+Future top-level branches are intentionally not linked yet:
+- Industry Partners
+- Fellowship Pathway
+- Events
+
+When teammates finish those pages, change the corresponding button into an <a href="...">
+or add their real page links inside each .branch-menu.
+-->
+
+
+<script>
+(function () {
+  const button = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('lab-theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  function setTheme(dark) {
+    document.body.classList.toggle('dark', dark);
+    button.textContent = dark ? '☀' : '☾';
+    button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    localStorage.setItem('lab-theme', dark ? 'dark' : 'light');
+  }
+
+  setTheme(saved ? saved === 'dark' : prefersDark);
+  button.addEventListener('click', function () {
+    setTheme(!document.body.classList.contains('dark'));
+  });
+})();
+</script>
+
+</body>
+</html>
