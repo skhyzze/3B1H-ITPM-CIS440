@@ -331,6 +331,90 @@
       color:var(--gold) !important;
     }
 
+  
+    /* Mobile QA fix: prevent desktop navigation from crowding the header */
+    @media(max-width:900px){
+      nav{height:64px;gap:12px}
+      .nav-item,.nav-cta,.navlinks > a:not(.nav-cta){display:none !important}
+      .navlinks{gap:8px;margin-left:auto}
+      .theme-toggle{display:grid}
+      .brand{min-width:0;gap:9px}
+      .brand > span:last-child{font-size:.9rem;line-height:1.05}
+      .brand small{font-size:.58rem;margin-top:3px}
+      .mark{width:34px;height:34px;border-radius:9px;flex:0 0 auto}
+    }
+    @media(max-width:420px){
+      .brand > span:last-child{font-size:.82rem}
+      .brand small{font-size:.52rem;letter-spacing:.05em}
+      .theme-toggle{width:40px;height:40px}
+      h1{font-size:clamp(2.15rem,12vw,3rem)}
+      .hero-actions .btn{width:100%;justify-content:center}
+    }
+
+  
+    /* Mobile navigation: keep title tabs visible */
+    @media(max-width:900px){
+      nav{
+        height:auto;
+        min-height:64px;
+        flex-wrap:wrap;
+        padding-top:10px;
+        padding-bottom:10px;
+      }
+
+      .brand{order:1}
+      .navlinks{
+        order:2;
+        width:100%;
+        display:flex;
+        align-items:center;
+        gap:8px;
+        overflow-x:auto;
+        white-space:nowrap;
+        padding:7px 0 3px;
+        scrollbar-width:none;
+        -webkit-overflow-scrolling:touch;
+      }
+      .navlinks::-webkit-scrollbar{display:none}
+
+      .nav-item,
+      .nav-cta,
+      .navlinks > a:not(.nav-cta){
+        display:flex !important;
+        flex:0 0 auto;
+      }
+
+      .navlinks > a:not(.nav-cta),
+      .nav-branch{
+        font-size:.78rem;
+        padding:9px 10px;
+      }
+
+      .nav-cta{
+        font-size:.78rem;
+        padding:9px 12px;
+      }
+
+      .theme-toggle{
+        display:grid !important;
+        flex:0 0 40px;
+        width:40px;
+        height:40px;
+        margin-left:auto;
+      }
+
+      /* Dropdowns are awkward on touch screens, so tabs stay visible
+         while their placeholder menus remain suppressed on mobile. */
+      .branch-menu{display:none !important}
+    }
+
+    @media(max-width:420px){
+      .navlinks{gap:6px}
+      .navlinks > a:not(.nav-cta),
+      .nav-branch,
+      .nav-cta{font-size:.74rem}
+    }
+
   </style>
 </head>
 <body>
@@ -436,7 +520,7 @@
             <li>Connect with visiting companies and professionals</li>
             <li>Participate in the Lab's fellowship pathway</li>
           </ul>
-          <a class="btn btn-dark" href="#get-involved">Student Opportunities →</a><a href="https://www.qu.edu/academics/experiential-learning/" target="_blank" rel="noopener" style="display:block;margin-top:18px;font-weight:800;color:var(--navy)">More student opportunities at Quinnipiac ↗</a>
+          <a class="btn btn-dark" href="#get-involved">Pathway Program Information →</a><a href="https://www.qu.edu/academics/experiential-learning/" target="_blank" rel="noopener" style="display:block;margin-top:18px;font-weight:800;color:var(--navy)">More student opportunities at Quinnipiac ↗</a>
         </article>
         <article class="audience">
           <h3>For Faculty</h3>
@@ -448,7 +532,7 @@
             <li>Connect coursework with Lab initiatives</li>
             <li>Engage with industry partners and organizations</li>
           </ul>
-          <a class="btn btn-dark" href="#get-involved">Faculty Opportunities →</a><a href="https://www.qu.edu/research/" target="_blank" rel="noopener" style="display:block;margin-top:18px;font-weight:800;color:var(--navy)">Explore research at Quinnipiac ↗</a>
+          <a class="btn btn-dark" href="#get-involved">Pathway Program Information →</a><a href="https://www.qu.edu/research/" target="_blank" rel="noopener" style="display:block;margin-top:18px;font-weight:800;color:var(--navy)">Explore research at Quinnipiac ↗</a>
         </article>
       </div>
     </div>
