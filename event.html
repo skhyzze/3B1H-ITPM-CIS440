@@ -19,11 +19,10 @@
 <body>
 <div class="page" id="page">
   <header class="navbar"><nav class="navbar-inner" aria-label="Main navigation">
-    <a class="brand" href="../homepage.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-name">Analytics &amp; AI Lab<small>Quinnipiac University</small></span></a>
-    <div class="nav-links"><a class="hide-mobile" href="../homepage.html">Home</a>
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-name">Analytics &amp; AI Lab<small>Quinnipiac University</small></span></a>
+    <div class="nav-links"><a class="hide-mobile" href="index.html">Home</a>
       <div class="nav-dropdown hide-mobile"><button type="button">Industry Partners</button><div class="nav-dropdown-menu"><span class="nav-dropdown-card">Industry Partners<small>Page coming soon</small></span></div></div>
-      <div class="nav-dropdown hide-mobile"><button type="button">Fellowship Pathway</button><div class="nav-dropdown-menu"><span class="nav-dropdown-card">Fellowship Pathway<small>Page coming soon</small></span></div></div>
-      <a href="#events">Events</a><a class="nav-cta" href="#events">Get Involved</a><button type="button" class="icon-button" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">☾</button>
+<a class="hide-mobile" href="fellowship.html">Fellowship Pathway</a>      <a href="#events">Events</a><a class="nav-cta" href="#events">Get Involved</a><button type="button" class="icon-button" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">☾</button>
     </div>
   </nav></header>
   <main class="main"><div class="container">
@@ -50,8 +49,40 @@
   document.getElementById('previous-month').addEventListener('click',()=>{displayedMonth=new Date(displayedMonth.getFullYear(),displayedMonth.getMonth()-1,1);renderCalendar()});
   document.getElementById('next-month').addEventListener('click',()=>{displayedMonth=new Date(displayedMonth.getFullYear(),displayedMonth.getMonth()+1,1);renderCalendar()});
   for(const view of ['upcoming','past'])document.getElementById(`${view}-button`).addEventListener('click',()=>{eventView=view;updateEvents()});
-  document.getElementById('theme-toggle').addEventListener('click',event=>{const dark=document.getElementById('page').classList.toggle('dark');event.currentTarget.textContent=dark?'☀':'☾';event.currentTarget.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');event.currentTarget.setAttribute('aria-pressed',String(dark))});
-  renderCalendar();
+const themeButton = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('lab-theme');
+const prefersDark =
+  window.matchMedia &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+function setTheme(dark) {
+  document.body.classList.toggle('dark', dark);
+
+  themeButton.textContent = dark ? '☀' : '☾';
+
+  themeButton.setAttribute(
+    'aria-label',
+    dark ? 'Switch to light mode' : 'Switch to dark mode'
+  );
+
+  themeButton.setAttribute('aria-pressed', String(dark));
+
+  localStorage.setItem(
+    'lab-theme',
+    dark ? 'dark' : 'light'
+  );
+}
+
+setTheme(
+  savedTheme
+    ? savedTheme === 'dark'
+    : prefersDark
+);
+
+themeButton.addEventListener('click', function () {
+  setTheme(!document.body.classList.contains('dark'));
+});
+renderCalendar();
 </script>
 </body>
 </html>
