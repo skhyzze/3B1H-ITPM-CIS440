@@ -17,18 +17,58 @@
     .tech-grid{background-image:linear-gradient(to right,rgba(255,184,28,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,184,28,.12) 1px,transparent 1px);background-size:48px 48px}
     .tech-grid-soft{background-image:linear-gradient(to right,rgba(12,35,64,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(12,35,64,.07) 1px,transparent 1px);background-size:40px 40px}
     .draft-note{padding:9px 0;background:#fff2d1;color:var(--navy);font-size:13px;line-height:1.5}
-    .site-nav{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(12,35,64,.08);background:rgba(255,255,255,.94);backdrop-filter:blur(12px)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--navy);font-size:18px;font-weight:900;color:var(--gold)}
-    .brand-title{display:block;font-size:14px;font-weight:900;color:var(--navy);line-height:1.25}
-    .brand-sub{display:block;color:var(--muted);line-height:1.25}
-    .nav-links{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
-    .nav-link{border-radius:999px;padding:8px 12px;font-size:14px;font-weight:750;color:var(--navy);transition:.2s}
-    .nav-link:hover{background:var(--soft)}
-    .nav-link.active{color:var(--navy);background:rgba(255,184,28,.28)}
-    .theme-toggle{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:#fff;color:var(--navy);font-size:1.05rem;cursor:pointer;transition:.2s}
-    .theme-toggle:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(12,35,64,.12)}
+
+
+    /* Navigation copied from the homepage */
+    header{
+      --navy:#0C2340;--gold:#FFB81C;--muted:#5d6b7b;--soft:#f5f7fa;
+      --line:#dfe5eb;--shadow:0 18px 50px rgba(12,35,64,.10);
+      position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);border-bottom:1px solid rgba(12,35,64,.08)
+    }
+    header .wrap{width:min(calc(100% - 40px),1180px);margin:auto}
+    header nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    header .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900;color:var(--navy)}
+    header .mark{width:38px;height:38px;border-radius:10px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:1.15rem}
+    header .brand small{display:block;font-weight:650;color:var(--muted);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}
+    header .navlinks{display:flex;align-items:center;gap:24px;font-size:.9rem;font-weight:750}
+    header .navlinks a{text-decoration:none}
+    header .nav-item{position:relative}
+    header .nav-branch{display:inline-flex;align-items:center;gap:6px;cursor:pointer;background:none;border:0;padding:10px 0;font:inherit;color:inherit;font-weight:750}
+    header .nav-branch:after{content:"▾";font-size:.72em;color:#7b8794}
+    header .branch-menu{display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);min-width:220px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;box-shadow:var(--shadow);z-index:50}
+    header .nav-item:hover .branch-menu,header .nav-item:focus-within .branch-menu{display:block}
+    header .branch-placeholder{display:block;padding:12px 14px;border-radius:10px;color:var(--navy);font-size:.86rem;font-weight:800;white-space:nowrap;background:var(--soft)}
+    header .branch-placeholder small{display:block;margin-top:3px;color:var(--muted);font-weight:600}
+    header .nav-cta{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;border-radius:999px;background:var(--navy);color:#fff;font-weight:800;border:1px solid transparent;transition:.2s ease}
+    header .nav-cta:hover{transform:translateY(-2px)}
+    header .theme-toggle{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--soft);color:var(--navy);display:grid;place-items:center;cursor:pointer;font-size:1.15rem;transition:.2s ease;flex:0 0 auto}
+    header .theme-toggle:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(12,35,64,.12)}
+    body.dark header{background:rgba(8,26,45,.95);border-bottom-color:#29415b}
+    body.dark header .brand{color:#f5f8fb}
+    body.dark header .branch-menu{background:#10243a}
+    body.dark header .branch-placeholder{background:#0b1726;color:#fff}
+    body.dark header .theme-toggle{background:#172a3e;color:var(--gold);border-color:#35506d}
+    @media(max-width:900px){
+      header nav{height:auto;min-height:64px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+      header .brand{order:1;min-width:0;gap:9px}
+      header .brand>span:last-child{font-size:.9rem;line-height:1.05}
+      header .brand small{font-size:.58rem;margin-top:3px}
+      header .mark{width:34px;height:34px;border-radius:9px;flex:0 0 auto}
+      header .navlinks{order:2;width:100%;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap;padding:7px 0 3px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+      header .navlinks::-webkit-scrollbar{display:none}
+      header .nav-item,header .nav-cta,header .navlinks>a:not(.nav-cta){display:flex!important;flex:0 0 auto}
+      header .navlinks>a:not(.nav-cta),header .nav-branch{font-size:.78rem;padding:9px 10px}
+      header .nav-cta{min-height:auto;font-size:.78rem;padding:9px 12px}
+      header .theme-toggle{display:grid!important;flex:0 0 40px;width:40px;height:40px;margin-left:auto}
+      header .branch-menu{display:none!important}
+    }
+    @media(max-width:420px){
+      header .wrap{width:min(calc(100% - 28px),1180px)}
+      header .navlinks{gap:6px}
+      header .navlinks>a:not(.nav-cta),header .nav-branch,header .nav-cta{font-size:.74rem}
+    }
+
     .page-hero{position:relative;overflow:hidden;background:var(--navy)}
     .page-hero-content{position:relative;padding:80px 0}
     .page-hero h1{margin:12px 0 0;font-size:clamp(40px,5vw,52px);line-height:1.12;color:#fff}
@@ -76,40 +116,36 @@
     .footer-note{border-top:1px solid rgba(255,255,255,.1);padding:20px;text-align:center;font-size:12px;color:rgba(255,255,255,.4)}
     body.dark{--paper:#0b1726;--ink:#edf3f8;--muted:#b8c5d2;--soft:#10243a;--border:#29415b;color-scheme:dark;background:#0b1726;color:#edf3f8}
     body.dark .draft-note{background:#172a3e;color:#edf3f8}
-    body.dark .site-nav{background:rgba(8,26,45,.95);border-bottom-color:#29415b}
-    body.dark .brand-title,body.dark .nav-link{color:#edf3f8}
-    body.dark .nav-link:hover{background:#172a3e}
-    body.dark .nav-link.active{color:var(--gold);background:rgba(255,184,28,.12)}
-    body.dark .theme-toggle{background:#172a3e;color:var(--gold);border-color:#35506d}
     body.dark .intro h2,body.dark .intro-text,body.dark #fellows-title,body.dark .fellow-card h3{color:#f7f9fc!important}
     body.dark .tech-grid-soft{background-color:#0e1d2e;background-image:linear-gradient(to right,rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.05) 1px,transparent 1px)}
     body.dark .fellow-card{background:#10243a;border-color:#29415b}
     body.dark .fellow-role,body.dark .fellow-focus{color:#c8d3df}
     body.dark .carousel-button{background:#10243a;color:var(--gold);border-color:#35506d}
     @media(max-width:900px){.fellow-card{flex-basis:calc((100% - 20px)/2)}}
-    @media(max-width:640px){.container{width:min(100% - 32px,1152px)}.nav-inner{align-items:flex-start;flex-direction:column;padding:12px 0}.nav-links{width:100%}.nav-link{padding:8px}.theme-toggle{margin-left:auto}.page-hero-content{padding:64px 0}.section{padding:60px 0}.fellow-card{flex-basis:100%}.details-grid,.footer-grid{grid-template-columns:1fr}.footer-grid{padding:48px 0}.carousel-dots{display:none}}
+    @media(max-width:640px){.container{width:min(100% - 32px,1152px)}.page-hero-content{padding:64px 0}.section{padding:60px 0}.fellow-card{flex-basis:100%}.details-grid,.footer-grid{grid-template-columns:1fr}.footer-grid{padding:48px 0}.carousel-dots{display:none}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.fellow-track{transition:none}}
   </style>
 </head>
 <body id="top">
   <div class="draft-note"><div class="container"><strong>Draft preview:</strong> Please replace all bracketed text with client-approved details before publishing.</div></div>
-  <header class="site-nav">
-    <nav class="container nav-inner" aria-label="Page navigation">
-      <a href="index.html" class="brand"><span class="brand-mark">Q</span><span><span class="brand-title">Analytics &amp; AI Lab</span><span class="label-mono brand-sub">Quinnipiac University</span></span></a>
-<div class="nav-links">
-  <a class="nav-link" href="index.html">Home</a>
-  <a class="nav-link active" href="#about">Fellowship</a>
-  <a class="nav-link" href="#fellows">Student Fellows</a>
-  <a class="nav-link" href="#joining">How to Join</a>
-  <a class="nav-link" href="event.html">Events</a>
-  <button
-    class="theme-toggle"
-    id="themeToggle"
-    type="button"
-    aria-label="Switch to dark mode"
-    title="Light / Dark mode"
-  >☾</button>
-</div>    </nav>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html">
+        <span class="mark">Q</span>
+        <span>Analytics &amp; AI Lab<small>Quinnipiac University</small></span>
+      </a>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <div class="nav-item">
+          <button class="nav-branch" type="button">Industry Partners</button>
+          <div class="branch-menu"><span class="branch-placeholder">Industry Partners<small>Page coming soon</small></span></div>
+        </div>
+        <a href="fellowship.html">Fellowship Pathway</a>
+        <a href="event.html">Events</a>
+        <a class="nav-cta" href="index.html#opportunities">Get Involved</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Light / Dark mode">☾</button>
+      </div>
+    </nav>
   </header>
   <main>
     <section class="page-hero">
