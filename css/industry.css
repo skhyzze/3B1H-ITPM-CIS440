@@ -28,7 +28,7 @@ body.page-industry {
 /* Dark sections alternate black and blue, as on the homepage. */
 body.page-industry.dark {
   --ink: #f4efeb;
-  --paper: #000000;
+  --paper: #07121f;
   --alternate: #123a63;
   --warm: #e6ded8;
   --muted: #e6ded8;
