@@ -1,6 +1,5 @@
 (function () {
   const themeButton = document.getElementById('themeToggle');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function readSavedTheme() {
     try {
@@ -19,6 +18,11 @@
 
   function setTheme(dark) {
     document.body.classList.toggle('dark', dark);
+
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) {
+      themeColor.setAttribute('content', dark ? '#07121f' : '#f8f8f6');
+    }
 
     if (themeButton) {
       themeButton.textContent = dark ? '☀' : '☾';
@@ -39,30 +43,4 @@
     });
   }
 
-  document.querySelectorAll('.logo-trigger').forEach(function (trigger) {
-    const logo = trigger.querySelector('.js-hover-logo');
-    if (!logo) return;
-
-    const staticLogo = logo.dataset.staticLogo;
-    const animatedLogo = logo.dataset.animatedLogo;
-    const preload = new Image();
-    preload.src = animatedLogo;
-
-    function playLogo() {
-      if (reduceMotion.matches) return;
-      logo.removeAttribute('src');
-      requestAnimationFrame(function () {
-        logo.src = animatedLogo;
-      });
-    }
-
-    function stopLogo() {
-      logo.src = staticLogo;
-    }
-
-    trigger.addEventListener('mouseenter', playLogo);
-    trigger.addEventListener('mouseleave', stopLogo);
-    trigger.addEventListener('focus', playLogo);
-    trigger.addEventListener('blur', stopLogo);
-  });
 })();

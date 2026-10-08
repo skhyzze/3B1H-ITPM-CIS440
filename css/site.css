@@ -1,4 +1,21 @@
 
+/* Shared local fonts keep every page visually consistent without a third-party request. */
+@font-face {
+  font-family: "Orbitron";
+  src: url("../fonts/orbitron/Orbitron-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/space-grotesk/SpaceGrotesk-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -571,4 +588,674 @@ body.dark.page-industry .draft-note {
   .page-events .lab-card {
     transition: none;
   }
+}
+
+/* Shared, logo-free navigation for every Applied AI Lab page. */
+.lab-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: rgba(248, 248, 246, .96);
+  color: #07121f;
+  border-bottom: 1px solid rgba(7, 18, 31, .16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.lab-nav {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 72px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.lab-brand {
+  flex: 0 0 auto;
+  color: #07121f !important;
+  text-decoration: none !important;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+}
+
+.lab-nav-links {
+  min-width: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lab-nav-links > a {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 10px 12px;
+  color: #07121f !important;
+  text-decoration: none !important;
+  font-size: .82rem;
+  font-weight: 750;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.lab-nav-links > a:not(.lab-nav-cta)::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 5px;
+  left: 12px;
+  height: 2px;
+  background: #a11b2e;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+
+.lab-nav-links > a:not(.lab-nav-cta):hover,
+.lab-nav-links > a:not(.lab-nav-cta):focus-visible {
+  background: #e6ded8;
+}
+
+.lab-nav-links > a[aria-current="page"]::after,
+.lab-nav-links > a:not(.lab-nav-cta):hover::after,
+.lab-nav-links > a:not(.lab-nav-cta):focus-visible::after {
+  transform: scaleX(1);
+}
+
+.lab-nav-links > .lab-nav-cta {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  padding-inline: 16px !important;
+  background: #123a63;
+  color: #fff !important;
+}
+
+.lab-nav-links > .lab-nav-cta:hover { transform: translateY(-1px); }
+
+.lab-theme-toggle {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  margin-left: 4px;
+  padding: 0;
+  border: 1px solid #07121f;
+  border-radius: 0;
+  background: transparent;
+  color: #07121f;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.lab-theme-toggle:hover {
+  background: #e6ded8;
+  transform: translateY(-1px);
+}
+
+.lab-brand:focus-visible,
+.lab-nav-links > a:focus-visible,
+.lab-theme-toggle:focus-visible {
+  outline: 2px solid #a11b2e;
+  outline-offset: 3px;
+}
+
+body.page-home.dark .lab-header,
+body.page-industry.dark .lab-header,
+body.page-fellowship.dark .lab-header,
+body.page-events.dark .lab-header {
+  background: rgba(7, 18, 31, .96) !important;
+  color: #f8f8f6 !important;
+  border-bottom-color: rgba(230, 222, 216, .35) !important;
+}
+
+body.dark .lab-brand,
+body.dark .lab-nav-links > a:not(.lab-nav-cta) {
+  color: #f8f8f6 !important;
+}
+
+body.dark .lab-nav-links > a:not(.lab-nav-cta):hover,
+body.dark .lab-nav-links > a:not(.lab-nav-cta):focus-visible,
+body.dark .lab-theme-toggle:hover {
+  background: rgba(230, 222, 216, .14);
+}
+
+body.dark .lab-theme-toggle {
+  color: #f8f8f6;
+  border-color: #e6ded8;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .lab-nav {
+    min-height: 64px;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .lab-brand { order: 1; }
+
+  .lab-theme-toggle {
+    order: 1;
+    margin-left: auto;
+  }
+
+  .lab-nav-links {
+    order: 2;
+    width: 100%;
+    margin: 0;
+    gap: 4px;
+    overflow-x: auto;
+    padding: 5px 0 2px;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lab-nav-links::-webkit-scrollbar { display: none; }
+  .lab-nav-links > a { padding: 9px 10px; font-size: .76rem; }
+  .lab-nav-links > a:not(.lab-nav-cta)::after { right: 10px; left: 10px; }
+  .lab-nav-cta { min-height: 36px; padding-inline: 12px !important; }
+  .lab-theme-toggle { width: 36px; height: 36px; flex-basis: 36px; }
+}
+
+@media (max-width: 560px) {
+  .lab-nav { width: min(100% - 28px, 1180px); }
+  .lab-brand { font-size: .92rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-nav-links > a,
+  .lab-nav-links > a::after,
+  .lab-theme-toggle { transition: none !important; }
+}
+
+/* Events + Fellowship visual language for Home and Industry.
+   This layer changes presentation only; existing page structure stays intact. */
+body.page-home,
+body.page-industry {
+  --hybrid-navy: #07121f;
+  --hybrid-blue: #123a63;
+  --hybrid-red: #a11b2e;
+  --hybrid-sand: #e6dfd8;
+  --hybrid-paper: #ffffff;
+  --hybrid-soft: #f7f4f1;
+  --hybrid-muted: #56616d;
+  --hybrid-line: rgba(7, 18, 31, .14);
+  font-family: "Space Grotesk", Arial, sans-serif;
+}
+
+body.page-home :is(h1, h2),
+body.page-industry :is(h1, h2) {
+  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-weight: 650;
+  letter-spacing: -.045em;
+}
+
+body.page-home .hero h1 { line-height: .94; }
+
+body.page-home :is(h3, p, a, button),
+body.page-industry :is(h3, p, a, button) {
+  font-family: "Space Grotesk", Arial, sans-serif;
+}
+
+body.page-home .lab-brand,
+body.page-industry .lab-brand {
+  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-weight: 650;
+}
+
+body.page-home .hero,
+body.page-industry .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+body.page-home .hero::before,
+body.page-industry .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: .42;
+  background-image:
+    linear-gradient(rgba(18, 58, 99, .10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 58, 99, .10) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(90deg, transparent, #000 34%, #000);
+}
+
+body.page-home .hero::after,
+body.page-industry .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 8%;
+  right: 3%;
+  width: min(30vw, 390px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  border: 1px solid rgba(18, 58, 99, .14);
+  border-radius: 50%;
+  box-shadow: 0 0 0 34px rgba(18, 58, 99, .035);
+}
+
+body.page-home .kicker,
+body.page-home .eyebrow,
+body.page-industry .kicker,
+body.page-industry .eyebrow {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  letter-spacing: .16em;
+}
+
+body.page-home .eyebrow,
+body.page-industry .eyebrow { color: var(--hybrid-red) !important; }
+
+body.page-home.dark .eyebrow,
+body.page-industry.dark .eyebrow { color: #ff7187 !important; }
+
+body.page-home:not(.dark) .hero,
+body.page-industry:not(.dark) .hero {
+  background:
+    linear-gradient(110deg, #ffffff 48%, rgba(230, 223, 216, .36)),
+    var(--hybrid-paper) !important;
+}
+
+body.page-home:not(.dark) .hero h1,
+body.page-industry:not(.dark) .hero h1 {
+  color: var(--hybrid-navy) !important;
+}
+
+body.page-home:not(.dark) .lead,
+body.page-industry:not(.dark) .hero-copy {
+  color: var(--hybrid-muted) !important;
+}
+
+body.page-home:not(.dark) h1 span {
+  color: transparent !important;
+  -webkit-text-stroke: 1.5px var(--hybrid-blue);
+}
+
+body.page-industry:not(.dark) h1 span { color: var(--hybrid-red) !important; }
+
+body.page-home .btn,
+body.page-industry .button {
+  border-radius: 4px;
+  transition: transform .2s ease, background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+body.page-home:not(.dark) .btn-dark,
+body.page-industry:not(.dark) .button-primary {
+  background: var(--hybrid-red) !important;
+  color: #ffffff !important;
+  border-color: var(--hybrid-red) !important;
+}
+
+body.page-home:not(.dark) .btn-light,
+body.page-industry:not(.dark) .button-outline {
+  color: var(--hybrid-navy) !important;
+  border-color: var(--hybrid-navy) !important;
+}
+
+body.page-home:not(.dark) .btn-light:hover,
+body.page-industry:not(.dark) .button-outline:hover {
+  background: var(--hybrid-navy) !important;
+  color: #ffffff !important;
+}
+
+body.page-home:not(.dark) #lab,
+body.page-home:not(.dark) .people,
+body.page-home:not(.dark) #resources,
+body.page-industry:not(.dark) .benefits,
+body.page-industry:not(.dark) #current-partners,
+body.page-industry:not(.dark) .pathway {
+  background: var(--hybrid-soft) !important;
+}
+
+body.page-home:not(.dark) .purpose {
+  background: var(--hybrid-blue) !important;
+  color: #ffffff !important;
+}
+
+body.page-home:not(.dark) .purpose :is(h2, h3) { color: #ffffff !important; }
+body.page-home:not(.dark) .purpose :is(.section-copy, .logic-card p) { color: #d7e0e9 !important; }
+body.page-home:not(.dark) .purpose .logic-grid { background: rgba(255,255,255,.18) !important; border-color: rgba(255,255,255,.18) !important; }
+body.page-home:not(.dark) .purpose .logic-card { background: rgba(7,18,31,.28) !important; color: #ffffff !important; }
+body.page-home:not(.dark) .purpose .logic-card .letter { color: #ffffff !important; border-color: rgba(255,255,255,.55) !important; }
+
+body.page-home .preview-card,
+body.page-home .logic-card,
+body.page-home .audience,
+body.page-home .resource,
+body.page-home .explore-card,
+body.page-industry .value-grid,
+body.page-industry .partner-card,
+body.page-industry .spotlight-card,
+body.page-industry .cta-box {
+  border-radius: 7px;
+}
+
+body.page-home:not(.dark) .preview-card {
+  border-color: rgba(18,58,99,.34) !important;
+  background: #ffffff !important;
+  box-shadow: 14px 14px 0 rgba(230,223,216,.82);
+}
+
+body.page-home:not(.dark) .preview-image {
+  background:
+    linear-gradient(rgba(18,58,99,.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,58,99,.09) 1px, transparent 1px),
+    var(--hybrid-soft);
+  background-size: 18px 18px;
+  border-color: rgba(18,58,99,.28);
+}
+
+body.page-home:not(.dark) :is(.audience, .resource, .explore-card),
+body.page-industry:not(.dark) :is(.partner-card, .value-card) {
+  background: rgba(255,255,255,.92) !important;
+  border-color: var(--hybrid-line) !important;
+}
+
+body.page-home .resource:hover,
+body.page-industry .partner-card:hover {
+  box-shadow: 8px 8px 0 var(--hybrid-sand);
+}
+
+body.page-industry .collaboration-item,
+body.page-industry .step,
+body.page-industry .spotlight-card {
+  border-top-color: rgba(18,58,99,.38);
+}
+
+body.page-industry .collaboration-item > span,
+body.page-industry .value-icon,
+body.page-industry .step::before,
+body.page-home .preview-type,
+body.page-home .resource-num {
+  color: var(--hybrid-red);
+}
+
+body.page-industry:not(.dark) .cta {
+  background: var(--hybrid-blue);
+  color: #ffffff;
+}
+
+body.page-industry:not(.dark) .cta :is(h2, p, .pending-status) { color: #ffffff !important; }
+body.page-industry:not(.dark) .cta .cta-box { padding-left: 26px; border-left: 4px solid var(--hybrid-red); }
+
+body.page-home.dark .hero,
+body.page-industry.dark .hero {
+  background: var(--hybrid-navy) !important;
+}
+
+body.page-home.dark .hero h1 span {
+  color: transparent !important;
+  -webkit-text-stroke: 1.5px #f8f8f6;
+}
+
+body.page-industry.dark .hero h1 span { color: #ff7187 !important; }
+
+body.page-home.dark .btn-dark,
+body.page-industry.dark .button-primary {
+  background: var(--hybrid-red) !important;
+  color: #ffffff !important;
+  border-color: var(--hybrid-red) !important;
+}
+
+body.page-home.dark .hero::before,
+body.page-industry.dark .hero::before {
+  opacity: .24;
+  background-image:
+    linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+}
+
+body.page-home.dark .hero::after,
+body.page-industry.dark .hero::after {
+  border-color: rgba(255,255,255,.12);
+  box-shadow: 0 0 0 34px rgba(18,58,99,.24);
+}
+
+body.page-home.dark .preview-card,
+body.page-industry.dark :is(.partner-card, .value-card) {
+  border-color: rgba(255,255,255,.22) !important;
+  background: #102c47 !important;
+  box-shadow: 12px 12px 0 rgba(230,223,216,.10);
+}
+
+body.page-home.dark .preview-image {
+  background:
+    linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px),
+    #0d2135 !important;
+  background-size: 18px 18px !important;
+}
+
+body.page-industry.dark .collaboration-item > span,
+body.page-industry.dark .value-icon,
+body.page-industry.dark .step::before {
+  color: #ff7187 !important;
+}
+
+body.page-home.dark .progress-dot.active { background-color: #ff7187 !important; }
+
+@media (max-width: 700px) {
+  body.page-home .hero::after,
+  body.page-industry .hero::after {
+    width: 260px;
+    right: -120px;
+  }
+}
+
+/* Keep Industry card copy comfortable when real partner content replaces placeholders. */
+body.page-industry :is(.value-card, .collaboration-item, .partner-card, .spotlight-card, .step) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+body.page-industry :is(.value-card, .partner-card) {
+  padding: clamp(20px, 2vw, 26px);
+}
+
+body.page-industry :is(.value-card, .collaboration-item, .partner-card) h3 {
+  max-width: 100%;
+  font-size: clamp(.98rem, 1.25vw, 1.1rem);
+  line-height: 1.28;
+  letter-spacing: -.018em;
+}
+
+body.page-industry .step h3 {
+  max-width: 100%;
+  font-size: clamp(.92rem, 1.1vw, 1rem);
+  line-height: 1.3;
+  letter-spacing: -.012em;
+}
+
+body.page-industry :is(.value-card, .collaboration-item, .partner-card, .step) p {
+  max-width: 100%;
+  font-size: clamp(.8rem, .95vw, .86rem);
+  line-height: 1.52;
+}
+
+body.page-industry :is(.value-icon, .collaboration-item > span, .partner-industry, .step::before) {
+  font-size: .64rem;
+  line-height: 1.35;
+}
+
+body.page-industry .collaboration-grid {
+  align-items: stretch;
+}
+
+body.page-industry .collaboration-item {
+  min-height: 182px;
+  padding: 24px;
+  border: 1px solid var(--hybrid-line);
+  border-radius: 7px;
+  background: var(--hybrid-paper);
+}
+
+body.page-industry .collaboration-item > span {
+  margin-bottom: 14px;
+}
+
+body.page-industry .collaboration-item p {
+  margin-bottom: 0;
+}
+
+body.page-industry.dark .collaboration-item {
+  border-color: rgba(255, 255, 255, .16);
+  background: #102c47;
+}
+
+@media (max-width: 760px) {
+  body.page-industry .collaboration-item {
+    min-height: 164px;
+    padding: 22px;
+  }
+}
+
+/* Final cross-page system: one type hierarchy, palette, and text wordmark. */
+body.page-home,
+body.page-industry,
+body.page-fellowship,
+body.page-events {
+  font-family: "Space Grotesk", Arial, sans-serif !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(h1, h2) {
+  font-family: "Orbitron", "Arial Black", sans-serif !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(h3, h4, p, li, a, button, input, textarea, select) {
+  font-family: "Space Grotesk", Arial, sans-serif !important;
+}
+
+.lab-header {
+  font-family: "Space Grotesk", Arial, sans-serif !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-brand {
+  color: #07121f !important;
+  font-family: "Orbitron", "Arial Black", sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 650 !important;
+  line-height: 1 !important;
+  letter-spacing: -.025em !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) {
+  background: #07121f !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-brand {
+  color: #f8f8f6 !important;
+}
+
+body.dark.page-home { --red: #ff7187; }
+body.dark.page-industry { --crimson: #ff7187; }
+body.dark.page-fellowship { --red: #ff7187; }
+
+body.dark.page-fellowship :is(.section-kicker, .section-kicker span, .fellow-role, .fellow-project a, .contact-arrow) {
+  color: #ff7187 !important;
+}
+
+body.dark.page-fellowship .button-primary {
+  background: #a11b2e !important;
+  color: #ffffff !important;
+  border-color: #a11b2e !important;
+}
+
+body.dark.page-fellowship .contact-strip .contact-arrow {
+  color: #a11b2e !important;
+}
+
+body.dark.page-fellowship .skip-link {
+  background: #ffffff !important;
+  color: #07121f !important;
+}
+
+/* Industry spotlight always sits on navy, including in light mode. */
+body.page-industry .spotlight,
+body.page-industry .spotlight h2 {
+  color: #f8f8f6 !important;
+}
+
+body.page-industry .spotlight-card,
+body.page-industry .spotlight-row {
+  border-color: rgba(230, 223, 216, .35) !important;
+}
+
+body.page-industry .spotlight-row strong {
+  color: #ff8295 !important;
+}
+
+body.page-industry .spotlight-row span {
+  color: #e6dfd8 !important;
+}
+
+/* High-contrast homepage resource-card interactions. */
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) {
+  background: #123a63 !important;
+  color: #ffffff !important;
+  border-color: #123a63 !important;
+  box-shadow: 8px 8px 0 #e6dfd8 !important;
+}
+
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) :is(h3, p, .resource-num, .arrow) {
+  color: #ffffff !important;
+}
+
+body.page-home.dark #resources .resource:is(:hover, :focus-visible) {
+  background: #f8f8f6 !important;
+  color: #07121f !important;
+  border-color: #f8f8f6 !important;
+  box-shadow: 8px 8px 0 rgba(230, 223, 216, .18) !important;
+}
+
+body.page-home.dark #resources .resource:is(:hover, :focus-visible) :is(h3, p, .resource-num, .arrow) {
+  color: #07121f !important;
+}
+
+body.page-home > .skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  transform: translateY(-180%);
+  padding: 10px 14px;
+  background: #ffffff;
+  color: #07121f;
+  border: 2px solid #a11b2e;
+  font-weight: 700;
+}
+
+body.page-home > .skip-link:focus { transform: none; }
+
+/* Brighter red is reserved for accents that sit directly on navy. */
+body.page-home:not(.dark) .purpose .eyebrow,
+body.page-industry .spotlight .eyebrow,
+body.dark.page-home .eyebrow,
+body.dark.page-industry .eyebrow,
+body.dark.page-fellowship p.section-kicker,
+body.dark.page-fellowship p.section-kicker span {
+  color: #ff8295 !important;
+}
+
+body.page-fellowship :is(.console-bar p, .console-line > span, .console-line small) {
+  color: #c0cfdb !important;
 }
