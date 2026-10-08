@@ -5,26 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Explore upcoming workshops, events and featured projects at the Quinnipiac Analytics & Applied AI Lab.">
   <title>Events | Quinnipiac Analytics & Applied AI Lab</title>
-  <style>
-    :root{--brand-navy:#0c2340;--brand-deep-blue:#316a9f;--brand-blue:#418fde;--brand-gold:#ffc92d;--background:#f5f8fc;--foreground:#0c2340;--card:#fff;--muted:#eef3f8;--muted-foreground:#5d6b7a;--border:#d9e2ec;--soft-blue:#e8f1fa;--soft-line:#d5e0ec;--shadow-color:rgba(12,35,64,.12);--ring:#418fde}
-    .dark{--background:#142338;--foreground:#f5f8fc;--card:#203650;--muted:#2b4059;--muted-foreground:#b5c7d9;--border:#4e6580;--soft-blue:#2b4561;--soft-line:#4e6580;--shadow-color:rgba(0,0,0,.3)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"DM Sans",Arial,sans-serif}button{font:inherit;cursor:pointer}a{color:inherit;text-decoration:none}button,a{-webkit-tap-highlight-color:transparent}:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
-    .page{min-height:100vh;background:var(--background);color:var(--foreground);display:flex;flex-direction:column}
-    .navbar{position:sticky;top:0;z-index:30;background:var(--card);border-bottom:1px solid var(--border)}.navbar-inner{max-width:1180px;min-height:72px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px;min-width:0;font-weight:800}.brand-mark{width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:10px;background:var(--brand-navy);color:var(--brand-gold);font-size:22px}.brand-name small{display:block;font-size:11px;font-weight:500;color:var(--muted-foreground);margin-top:2px}.nav-links{display:flex;align-items:center;gap:23px;font-size:13px;font-weight:650}.nav-links>a:hover,.nav-dropdown>button:hover{color:var(--brand-blue)}.nav-dropdown{position:relative}.nav-dropdown>button{border:0;background:transparent;color:inherit;padding:10px 0}.nav-dropdown>button::after{content:"⌄";padding-left:5px}.nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;min-width:180px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 26px var(--shadow-color)}.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu{display:block}.nav-dropdown-card small{display:block;color:var(--muted-foreground);margin-top:4px}.nav-cta{background:var(--brand-gold);color:var(--brand-navy);padding:10px 15px;border-radius:9px}.nav-links .nav-cta:hover{color:var(--brand-navy);filter:brightness(.96)}.icon-button{border:1px solid var(--border);background:var(--card);color:var(--foreground);border-radius:9px;width:36px;height:36px;display:grid;place-items:center;font-size:19px;line-height:1}.icon-button:hover{background:var(--muted)}
-    .main{flex:1}.container{max-width:1180px;margin:auto;padding:38px 20px 75px}.hero{position:relative;overflow:hidden;border-radius:22px;padding:65px clamp(25px,6vw,78px);color:white}.event-hero{background:linear-gradient(115deg,var(--brand-navy) 7%,#193d65 70%,var(--brand-deep-blue) 145%);box-shadow:0 18px 50px var(--shadow-color)}.event-hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.10) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(90deg,transparent 30%,black 100%)}.event-hero::after{content:"";position:absolute;right:-36px;top:-35px;width:min(40%,420px);aspect-ratio:1;border:1px solid rgba(255,255,255,.14);border-radius:50%;box-shadow:0 0 0 66px rgba(255,255,255,.03),0 0 0 132px rgba(255,255,255,.02);pointer-events:none}.hero>*{position:relative;z-index:1}.hero-eyebrow{text-transform:uppercase;letter-spacing:.17em;color:#c6d4e4;font-size:12px;font-weight:750;margin:0 0 22px}.hero-title{font-size:clamp(30px,4.4vw,55px);line-height:1.14;letter-spacing:-.035em;margin:0;max-width:850px}.gold{color:var(--brand-gold)}.hero-subtitle{margin:24px 0 0;color:#d7e2ef;font-size:clamp(15px,2vw,18px)}.hero-dots{display:flex;align-items:center;gap:9px;margin-top:36px}.dot{width:8px;height:8px;border-radius:50%}.dot-gold{background:var(--brand-gold)}.dot-blue{background:var(--brand-blue)}.line{width:30px;height:2px;background:#9eb6cb}.hero-bars{position:absolute;right:50px;bottom:35px;display:flex;align-items:end;gap:8px;opacity:.45}.hero-bars span{display:block;width:8px;height:25px;border-radius:5px;background:var(--brand-blue)}.hero-bars span:nth-child(2){height:42px}.hero-bars span:nth-child(3){height:65px;background:var(--brand-gold)}.hero-bars span:nth-child(4){height:38px}.hero-bars span:nth-child(5){height:53px}
-    .events-section{padding-top:54px;scroll-margin-top:95px}.section-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.17em;color:var(--brand-deep-blue);margin:0 0 15px}.dark .section-label{color:#a4d0ff}.two-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;min-width:0}.lab-card{box-shadow:0 14px 42px -20px var(--shadow-color),0 2px 10px -5px var(--shadow-color);transition:box-shadow .2s}.lab-card:hover{box-shadow:0 20px 48px -20px var(--shadow-color),0 3px 12px -4px var(--shadow-color)}.card-header{display:flex;align-items:start;justify-content:space-between;gap:12px;padding-bottom:23px;border-bottom:1px solid var(--border)}.card-title{font-size:24px;margin:0 0 5px}.card-subtitle{margin:0;color:var(--muted-foreground);font-size:14px}.card-icon{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:11px;background:var(--soft-blue);color:var(--brand-deep-blue);font-size:23px}.dark .card-icon{color:#b6d7ff}.calendar-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:22px 0 14px}.calendar-month{font-size:18px;margin:0}.calendar-nav{display:flex;gap:7px}.simple-calendar{border-collapse:separate;border-spacing:3px;width:100%;table-layout:fixed;text-align:center}.simple-calendar th{font-size:12px;color:var(--muted-foreground);font-weight:650;padding:8px 0}.simple-calendar td{height:47px}.simple-calendar td button{width:min(100%,40px);height:40px;border:0;border-radius:9px;background:transparent;color:var(--foreground)}.simple-calendar td button:hover{background:var(--muted)}.simple-calendar td button.today{border:1px solid var(--brand-blue);color:var(--brand-deep-blue);font-weight:800}.dark .simple-calendar td button.today{color:#b6d7ff}.simple-calendar td button.selected{background:var(--brand-navy);color:white;font-weight:800}.calendar-hint{color:var(--muted-foreground);font-size:13px;margin:19px 0 0;text-align:center}.view-toggle-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0;color:var(--muted-foreground);font-size:13px;font-weight:650}.view-toggle{display:flex;flex-wrap:wrap;gap:5px;padding:4px;border-radius:10px;background:var(--muted)}.view-toggle button{border:0;border-radius:7px;background:transparent;color:var(--foreground);padding:8px 10px;font-size:12px;font-weight:650}.view-toggle button.active{background:var(--card);box-shadow:0 1px 6px var(--shadow-color);color:var(--brand-deep-blue)}.dark .view-toggle button.active{color:#b6d7ff}.empty-state{min-height:250px;border:1px dashed var(--border);border-radius:14px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:25px;background:var(--background)}.empty-state-icon{font-size:28px;color:var(--brand-blue);margin-bottom:15px}.empty-state-title{font-size:17px;font-weight:750;margin:0 0 9px}.empty-state-text{font-size:14px;color:var(--muted-foreground);margin:0}.footer{border-top:1px solid var(--border);background:var(--card)}.footer-inner{max-width:1180px;min-height:75px;margin:auto;padding:17px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted-foreground)}.footer-dots{display:flex;gap:5px}.footer-dots span{width:7px;height:7px;border-radius:50%;background:var(--brand-navy)}.footer-dots span:nth-child(2){background:var(--brand-blue)}.footer-dots span:nth-child(3){background:var(--brand-gold)}
-    @media(max-width:850px){.nav-links{gap:10px}.hide-mobile{display:none}.two-columns{grid-template-columns:1fr}.hero-bars{display:none}}@media(max-width:520px){.brand-name{font-size:13px}.brand-name small{font-size:10px}.nav-cta{display:none}.container{padding-top:22px}.hero{padding:45px 25px}.hero-title br{display:none}.card{padding:18px}.footer-dots{display:none}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
-  </style>
+  <link rel="stylesheet" href="css/event.css">
+  <link rel="stylesheet" href="css/site.css">
 </head>
-<body>
+<body class="page-events">
 <div class="page" id="page">
-  <header class="navbar"><nav class="navbar-inner" aria-label="Main navigation">
-    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-name">Analytics &amp; AI Lab<small>Quinnipiac University</small></span></a>
-    <div class="nav-links"><a class="hide-mobile" href="index.html">Home</a>
-      <div class="nav-dropdown hide-mobile"><button type="button">Industry Partners</button><div class="nav-dropdown-menu"><span class="nav-dropdown-card">Industry Partners<small>Page coming soon</small></span></div></div>
-<a class="hide-mobile" href="fellowship.html">Fellowship Pathway</a>      <a href="#events">Events</a><a class="nav-cta" href="#events">Get Involved</a><button type="button" class="icon-button" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">☾</button>
+  <header class="site-header">
+  <nav class="site-nav" aria-label="Main navigation">
+    <a class="site-brand logo-trigger" href="index.html">
+      <img
+        class="site-brand-logo js-hover-logo"
+        src="images_icons/Quinnovation-Logo.png"
+        data-static-logo="images_icons/Quinnovation-Logo.png"
+        data-animated-logo="images_icons/Quinnovation-Logo-Animated.gif"
+        alt=""
+      >
+      <span class="site-brand-text">Analytics &amp; AI Lab<small>Quinnipiac University</small></span>
+    </a>
+    <div class="site-nav-links">
+      <a href="index.html">Home</a>
+      <a href="industry.html">Industry Partners</a>
+      <a href="fellowship.html">Fellowship Pathway</a>
+      <a href="event.html" aria-current="page">Events</a>
+      <a class="site-nav-cta" href="index.html#opportunities">Get Involved</a>
+      <button class="site-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
     </div>
-  </nav></header>
+  </nav>
+</header>
   <main class="main"><div class="container">
     <section class="hero event-hero" aria-labelledby="welcome-heading"><p class="hero-eyebrow">Quinnipiac University</p><h1 class="hero-title" id="welcome-heading">Discover what's next in<br><span class="gold">the Analytics &amp; AI Lab</span></h1><p class="hero-subtitle">Explore upcoming workshops, events and featured projects.</p><div class="hero-dots" aria-hidden="true"><span class="dot dot-gold"></span><span class="line"></span><span class="dot dot-blue"></span></div><div class="hero-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></section>
     <section id="events" class="events-section" aria-label="Calendar and events"><p class="section-label">Lab calendar</p><div class="two-columns">
@@ -34,55 +41,8 @@
   </div></main>
   <footer class="footer"><div class="footer-inner"><span><strong>Analytics &amp; AI Lab</strong> · Quinnipiac University</span><span class="footer-dots" aria-hidden="true"><span></span><span></span><span></span></span><span id="copyright"></span></div></footer>
 </div>
-<script>
-  const today = new Date();
-  let displayedMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  let selectedDate = null;
-  let eventView = 'upcoming';
-  const monthLabel = document.getElementById('calendar-month');
-  const calendarDays = document.getElementById('calendar-days');
-  const dateFormatter = new Intl.DateTimeFormat('en-US', {month:'long', day:'numeric', year:'numeric'});
-  document.getElementById('copyright').textContent = `© ${today.getFullYear()} Quinnipiac University`;
-  function sameDay(a,b){return a && b && a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate()}
-  function updateEvents(){document.getElementById('event-title').textContent=selectedDate?dateFormatter.format(selectedDate):'Select a date from the calendar';document.getElementById('event-text').textContent=selectedDate?`No ${eventView} events are listed for this date.`:'Select a date from the calendar to view events.';for(const view of ['upcoming','past']){const button=document.getElementById(`${view}-button`);button.classList.toggle('active',eventView===view);button.setAttribute('aria-pressed',String(eventView===view))}}
-  function renderCalendar(){const year=displayedMonth.getFullYear(),month=displayedMonth.getMonth();monthLabel.textContent=new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(displayedMonth);calendarDays.replaceChildren();const firstDay=new Date(year,month,1).getDay(),count=new Date(year,month+1,0).getDate(),rows=Math.ceil((firstDay+count)/7);for(let row=0;row<rows;row++){const tr=document.createElement('tr');for(let column=0;column<7;column++){const td=document.createElement('td'),day=row*7+column-firstDay+1;if(day>=1&&day<=count){const date=new Date(year,month,day),button=document.createElement('button');button.type='button';button.textContent=String(day);button.setAttribute('aria-label',dateFormatter.format(date));if(sameDay(date,selectedDate)){button.className='selected';button.setAttribute('aria-pressed','true')}else if(sameDay(date,today)){button.className='today';button.setAttribute('aria-current','date')}button.addEventListener('click',()=>{selectedDate=date;renderCalendar();updateEvents()});td.append(button)}tr.append(td)}calendarDays.append(tr)}}
-  document.getElementById('previous-month').addEventListener('click',()=>{displayedMonth=new Date(displayedMonth.getFullYear(),displayedMonth.getMonth()-1,1);renderCalendar()});
-  document.getElementById('next-month').addEventListener('click',()=>{displayedMonth=new Date(displayedMonth.getFullYear(),displayedMonth.getMonth()+1,1);renderCalendar()});
-  for(const view of ['upcoming','past'])document.getElementById(`${view}-button`).addEventListener('click',()=>{eventView=view;updateEvents()});
-const themeButton = document.getElementById('theme-toggle');
-const savedTheme = localStorage.getItem('lab-theme');
-const prefersDark =
-  window.matchMedia &&
-  window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-function setTheme(dark) {
-  document.body.classList.toggle('dark', dark);
-
-  themeButton.textContent = dark ? '☀' : '☾';
-
-  themeButton.setAttribute(
-    'aria-label',
-    dark ? 'Switch to light mode' : 'Switch to dark mode'
-  );
-
-  themeButton.setAttribute('aria-pressed', String(dark));
-
-  localStorage.setItem(
-    'lab-theme',
-    dark ? 'dark' : 'light'
-  );
-}
-
-setTheme(
-  savedTheme
-    ? savedTheme === 'dark'
-    : prefersDark
-);
-
-themeButton.addEventListener('click', function () {
-  setTheme(!document.body.classList.contains('dark'));
-});
-renderCalendar();
-</script>
+  <script src="js/site.js" defer></script>
+  <script src="js/event.js" defer></script>
 </body>
 </html>
