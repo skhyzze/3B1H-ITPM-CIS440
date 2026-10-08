@@ -12,7 +12,7 @@
     year: 'numeric'
   });
 
-  document.getElementById('copyright').textContent = `© ${today.getFullYear()} Quinnipiac University`;
+  document.getElementById('copyright').textContent = `© ${today.getFullYear()} Applied AI Lab`;
 
   function sameDay(first, second) {
     return first && second &&
