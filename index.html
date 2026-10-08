@@ -1,176 +1,213 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Home page for the Quinnipiac Analytics & Applied AI Lab." />
-  <title>Analytics & Applied AI Lab | Quinnipiac University</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Applied AI Lab — a technical environment for experimentation, research, collaboration, and applied artificial intelligence.">
+  <title>Applied AI Lab</title>
+  
+
+
+
   <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/site.css">
 </head>
 <body class="page-home">
-<header class="site-header">
-  <nav class="site-nav" aria-label="Main navigation">
-    <a class="site-brand logo-trigger" href="index.html">
-      <img
-        class="site-brand-logo js-hover-logo"
-        src="images_icons/Quinnovation-Logo.png"
-        data-static-logo="images_icons/Quinnovation-Logo.png"
-        data-animated-logo="images_icons/Quinnovation-Logo-Animated.gif"
-        alt=""
-      >
-      <span class="site-brand-text">Analytics &amp; AI Lab<small>Quinnipiac University</small></span>
-    </a>
-    <div class="site-nav-links">
-      <a href="index.html" aria-current="page">Home</a>
-      <a href="industry.html">Industry Partners</a>
-      <a href="fellowship.html">Fellowship Pathway</a>
-      <a href="event.html">Events</a>
-      <a class="site-nav-cta" href="#opportunities">Get Involved</a>
-      <button class="site-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
-    </div>
-  </nav>
+<header>
+  <div class="wrap">
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#top">
+        <span class="brand-mark">AI</span>
+        <span>Applied AI Lab</span>
+      </a>
+      <div class="navlinks">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="industry.html">Industry Partners</a>
+        <a href="fellowship.html">Fellowship Pathway</a>
+        <a href="event.html">Events</a>
+        <a href="#opportunities">Get Involved</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Light / Dark mode">◐</button>
+    </nav>
+  </div>
 </header>
 
 <main id="top">
   <section class="hero">
-    <div class="wrap">
-      <span class="eyebrow">Our Mission</span>
-      <h1>Where Analytics, AI & <span>Ideas</span> Come Together.</h1>
-      <p class="lead">The Quinnipiac Analytics & AI Lab connects students, faculty, and industry through hands-on exploration of data, analytics, and artificial intelligence. Our mission is to create opportunities for collaboration, experimentation, and learning that turn ideas into meaningful real-world impact.</p>
-      <div class="hero-actions">
-        <a class="btn btn-gold" href="#get-involved">Get Involved →</a>
-        <a class="btn btn-outline" href="#about">Explore the Lab</a>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">Applied Intelligence / Human Curiosity</div>
+        <h1>Build.<br><span>Test.</span><br>Think.</h1>
+        <p class="lead">The Applied AI Lab is a collaborative environment for exploring artificial intelligence through experimentation, research, technical projects, and interdisciplinary problem solving.</p>
+        <div class="hero-actions">
+          <a class="btn btn-dark" href="#opportunities">Explore the Lab →</a>
+          <a class="btn btn-light" href="#resources">View Resources</a>
+        </div>
       </div>
+      <aside class="preview-carousel" aria-label="Explore the Applied AI Lab">
+        <div class="carousel-stage">
+          <a class="preview-card active" href="event.html" data-index="0">
+            <span class="preview-type">01 / EVENTS</span><div class="preview-image"><span>EVENT IMAGE</span></div>
+            <div>
+              <h2>Events</h2>
+              <p>Discover workshops, talks, demonstrations, guest speakers, and hands-on sessions that bring new ideas into the Lab and give the community opportunities to learn, connect, and experiment.</p>
+            </div>
+            <span class="preview-link">Explore Events ↗</span>
+          </a>
+
+          <a class="preview-card next" href="industry.html" data-index="1">
+            <span class="preview-type">02 / INDUSTRY</span><div class="preview-image"><span>PARTNER IMAGE</span></div>
+            <div>
+              <h2>Industry Partners</h2>
+              <p>Connect with organizations bringing real challenges, professional perspectives, and emerging technology into the Lab through collaborative projects, conversations, and applied experiences.</p>
+            </div>
+            <span class="preview-link">Meet Our Partners ↗</span>
+          </a>
+
+          <a class="preview-card prev" href="fellowship.html" data-index="2">
+            <span class="preview-type">03 / FELLOWS</span><div class="preview-image"><span>FELLOWS IMAGE</span></div>
+            <div>
+              <h2>Fellows</h2>
+              <p>Meet students and faculty taking a deeper role in research, technical projects, events, mentorship, and the continued development of the Applied AI Lab community.</p>
+            </div>
+            <span class="preview-link">Explore the Pathway ↗</span>
+          </a>
+        </div>
+
+        <div class="carousel-controls">
+          <div class="carousel-progress" aria-hidden="true">
+            <span class="progress-dot active"></span>
+            <span class="progress-dot"></span>
+            <span class="progress-dot"></span>
+          </div>
+          <input class="carousel-scroll" id="carouselScroll" type="range"
+             min="0" max="2" step="1" value="0"
+             aria-label="Choose carousel preview">
+        </div>
+      </aside>
     </div>
   </section>
 
-  <section id="about">
-    <div class="wrap about-grid">
+  <section id="lab">
+    <div class="wrap section-grid">
       <div>
-        <span class="eyebrow" style="color:#9a6a00">About the Lab</span>
-        <h2 style="margin-top:16px">A place to explore what comes next.</h2>
-        <div class="big-number">01</div>
+        <span class="eyebrow">The Lab</span>
+        <h2>A place to explore what comes next.</h2>
+        <div class="index-no">01</div>
       </div>
-      <div class="copy">
-        <p>The Analytics & AI Lab is a collaborative space for the Quinnipiac community to explore how analytics and artificial intelligence can be applied across disciplines.</p>
-        <p>The Lab brings together students, faculty, and industry partners to learn new technologies, develop projects, exchange ideas, and solve real-world problems. Whether someone has years of technical experience or is exploring analytics and AI for the first time, the Lab provides opportunities to learn, contribute, and collaborate.</p>
-        <p><strong style="color:var(--navy)">The goal isn't simply to study emerging technology. It's to use it, experiment with it, and build with it.</strong></p>
+      <div class="section-copy">
+        <p>The Applied AI Lab brings together students, faculty, and external partners to investigate emerging technology, develop new ideas, and turn complex questions into working solutions.</p>
+        <p>It is designed for both technical depth and open exploration. Members can learn new tools, collaborate across disciplines, prototype ideas, test systems, and contribute to projects with academic or real-world impact.</p>
+        <p>The goal is not simply to study artificial intelligence. It is to understand it by building with it.</p>
       </div>
     </div>
   </section>
 
   <section class="purpose">
-    <div class="wrap">
-      <span class="eyebrow" style="color:#9a6a00">Purpose & Vision</span>
-      <h2 style="margin-top:16px">Building a community around analytics & AI.</h2>
-      <div class="cards-2">
-        <article class="card">
-          <div class="icon">P</div>
-          <h3>Our Purpose</h3>
-          <p>Make analytics and AI more accessible across Quinnipiac by connecting people with the knowledge, technology, resources, and opportunities needed to explore them.</p>
-        </article>
-        <article class="card">
-          <div class="icon">V</div>
-          <h3>Our Vision</h3>
-          <p>Build an interdisciplinary community where analytics and AI bring together different schools, fields, and perspectives—and where ideas can develop into projects with meaningful academic and real-world applications.</p>
-        </article>
+    <div class="wrap section-grid">
+      <div>
+        <span class="eyebrow">Direction</span>
+        <h2>Purpose &amp; vision.</h2>
+        <div class="index-no">02</div>
+      </div>
+      <div class="section-copy">
+        <p>Advanced technology becomes more useful when people can question it, experiment with it, and apply it across different fields.</p>
+        <div class="logic-grid">
+          <article class="logic-card">
+            <div class="letter">P</div>
+            <h3>Our Purpose</h3>
+            <p>Connect people with the knowledge, tools, computing resources, and opportunities needed to explore applied artificial intelligence.</p>
+          </article>
+          <article class="logic-card">
+            <div class="letter">V</div>
+            <h3>Our Vision</h3>
+            <p>Build an interdisciplinary community where ambitious ideas can develop into thoughtful projects with meaningful academic and real-world applications.</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="meet" id="meet">
+  <section class="people">
     <div class="wrap">
-      <span class="eyebrow">Meet the Lab</span>
-      <h2 style="margin-top:16px">Built around collaboration.</h2>
-      <p class="section-intro">The Lab is more than a physical space or collection of technology. It's a community shaped by the people who participate in it.</p><div style="margin-top:26px"><a class="btn btn-gold" href="https://www.qu.edu/schools/business/programs/bachelors-degree/applied-ai-business-analytics/faculty-and-staff/" target="_blank" rel="noopener">Explore Quinnipiac Faculty →</a></div>
+      <span class="eyebrow">Community</span>
+      <h2>Different perspectives.<br>Shared problems.</h2>
       <div class="people-grid">
-        <article class="person"><strong>Students</strong><p>Bring curiosity, new ideas, technical skills, and perspectives from across Quinnipiac.</p></article>
-        <article class="person"><strong>Student Fellows</strong><p>Take an active role in Lab initiatives, events, projects, and the broader Lab community.</p></article>
-        <article class="person"><strong>Faculty Fellows</strong><p>Contribute expertise, research interests, mentorship, and interdisciplinary collaboration.</p></article>
-        <article class="person"><strong>Industry Partners</strong><p>Connect the Lab with real-world challenges, technologies, professional expertise, and projects.</p></article>
+        <article class="person"><span class="num">01</span><h3>Students</h3><p>Learn, experiment, contribute technical skills, and turn curiosity into working projects.</p></article>
+        <article class="person"><span class="num">02</span><h3>Student Fellows</h3><p>Take a deeper role in Lab initiatives, collaboration, events, and project development.</p></article>
+        <article class="person"><span class="num">03</span><h3>Faculty Fellows</h3><p>Connect research, teaching, mentorship, and interdisciplinary work through the Lab.</p></article>
+        <article class="person"><span class="num">04</span><h3>Industry Partners</h3><p>Bring real problems, professional insight, and opportunities for applied collaboration.</p></article>
       </div>
     </div>
   </section>
 
-  <section id="opportunities">
+  <section class="opportunities" id="opportunities">
     <div class="wrap">
-      <span class="eyebrow" style="color:#9a6a00">Get Involved</span>
-      <h2 style="margin-top:16px">There's a place for you in the Lab.</h2>
-      <div class="audiences">
-        <article class="audience gold">
+      <span class="eyebrow">Participation</span>
+      <h2>Learn by doing.</h2>
+      <div class="audience-grid">
+        <article class="audience">
           <h3>For Students</h3>
           <ul>
-            <li>Participate in Lab events and workshops</li>
-            <li>Join or propose analytics and AI projects</li>
-            <li>Explore Lab technology and computing resources</li>
+            <li>Participate in workshops, events, and demonstrations</li>
+            <li>Join or propose artificial intelligence projects</li>
+            <li>Explore technical and computing resources</li>
             <li>Collaborate with faculty and other students</li>
-            <li>Connect with visiting companies and professionals</li>
-            <li>Participate in the Lab's fellowship pathway</li>
+            <li>Connect with visiting organizations and professionals</li>
           </ul>
-          <a class="btn btn-dark" href="#get-involved">Pathway Program Information →</a><a href="https://www.qu.edu/academics/experiential-learning/" target="_blank" rel="noopener" style="display:block;margin-top:18px;font-weight:800;color:var(--navy)">More student opportunities at Quinnipiac ↗</a>
+          <a class="btn btn-dark" href="fellowship.html">Pathway Program Information →</a>
         </article>
         <article class="audience">
           <h3>For Faculty</h3>
           <ul>
-            <li>Collaborate across disciplines and schools</li>
-            <li>Develop analytics and AI research projects</li>
-            <li>Mentor student projects and fellows</li>
-            <li>Explore Lab computing resources</li>
+            <li>Develop interdisciplinary research projects</li>
+            <li>Mentor students and fellows</li>
+            <li>Explore advanced computing resources</li>
             <li>Connect coursework with Lab initiatives</li>
-            <li>Engage with industry partners and organizations</li>
+            <li>Collaborate with external partners</li>
           </ul>
-          <a class="btn btn-dark" href="#get-involved">Pathway Program Information →</a><a href="https://www.qu.edu/research/" target="_blank" rel="noopener" style="display:block;margin-top:18px;font-weight:800;color:var(--navy)">Explore research at Quinnipiac ↗</a>
+          <a class="btn btn-dark" href="fellowship.html">Pathway Program Information →</a>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="resources">
+  <section id="resources">
     <div class="wrap">
-      <span class="eyebrow" style="color:#9a6a00">Resources & Opportunities</span>
-      <h2 style="margin-top:16px">More than a Lab space.</h2>
-      <p class="section-intro">Explore the people, technology, projects, and experiences that make the Lab a place to learn and build.</p>
-      <div class="resource-grid">
-        <a class="resource" href="resources.html" data-lab-route="resources"><span class="num">01</span><h3>Computing Resources</h3><p>Explore technical resources and learn how to request access.</p><span class="arrow">Explore →</span></a>
-        <a class="resource" href="projects.html" data-lab-route="projects"><span class="num">02</span><h3>Projects</h3><p>Discover current work or find opportunities to contribute.</p><span class="arrow">Explore →</span></a>
-        <a class="resource" href="event.html" data-lab-route="events"><span class="num">03</span><h3>Events</h3><p>Attend workshops, presentations, company visits, and Lab events.</p><span class="arrow">Explore →</span></a>
-        <a class="resource" href="fellowship.html" data-lab-route="fellowship"><span class="num">04</span><h3>Fellowship</h3><p>Learn about the pathway to deeper involvement and recognition.</p><span class="arrow">Explore →</span></a>
-        
+      <span class="eyebrow">Access</span>
+      <h2>Resources &amp; opportunities.</h2>
+      <div class="resources-grid">
+        <article class="resource"><span class="resource-num">R/01</span><h3>Computing Resources</h3><p>Explore available systems and request access to Lab technology.</p><span class="arrow">↗</span></article>
+        <article class="resource"><span class="resource-num">R/02</span><h3>Projects</h3><p>Discover active work, ideas in development, and opportunities to contribute.</p><span class="arrow">↗</span></article>
+        <a class="resource" href="event.html"><span class="resource-num">R/03</span><h3>Events</h3><p>Find workshops, talks, demonstrations, and upcoming Lab activities.</p><span class="arrow">↗</span></a>
+        <a class="resource" href="fellowship.html"><span class="resource-num">R/04</span><h3>Fellowship</h3><p>Learn about the pathway for deeper participation in the Lab community.</p><span class="arrow">↗</span></a>
       </div>
     </div>
   </section>
 
-
-  <section style="padding:64px 0;background:#fff">
+  <section class="explore">
     <div class="wrap">
-      <span class="eyebrow" style="color:#9a6a00">More at Quinnipiac</span>
-      <h2 style="margin-top:16px">Keep exploring.</h2>
-      <p class="section-intro">These official Quinnipiac resources provide more information about research, hands-on learning, and opportunities across the university.</p>
-      <div class="cards-2" style="margin-top:34px">
-        <article class="card">
-          <h3>Undergraduate Research</h3>
-          <p>Explore research opportunities, showcases, faculty mentorship, and interdisciplinary programs available to Quinnipiac students.</p>
-          <a href="https://www.qu.edu/research/undergraduate-research/" target="_blank" rel="noopener" style="display:inline-block;margin-top:20px;font-weight:800;color:var(--navy)">Explore Undergraduate Research ↗</a>
-        </article>
-        <article class="card">
-          <h3>Experiential Learning</h3>
-          <p>Discover ways Quinnipiac students can learn through applied work, research, projects, fellowships, service, and other experiences.</p>
-          <a href="https://www.qu.edu/academics/experiential-learning/" target="_blank" rel="noopener" style="display:inline-block;margin-top:20px;font-weight:800;color:var(--navy)">Explore Experiential Learning ↗</a>
-        </article>
+      <span class="eyebrow">Keep Exploring</span>
+      <h2>Go deeper.</h2>
+      <div class="explore-grid">
+        <article class="explore-card"><h3>Research</h3><p>Explore opportunities for faculty mentorship, interdisciplinary investigation, and project development.</p><a href="https://www.qu.edu/research/undergraduate-research/">Explore Research →</a></article>
+        <article class="explore-card"><h3>Experiential Learning</h3><p>Connect technical learning with projects, fellowships, service, and applied experiences.</p><a href="https://www.qu.edu/academics/experiential-learning/">Explore Opportunities →</a></article>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <div><strong style="color:#fff">Quinnipiac Analytics & AI Lab</strong></div>
-    <div>Mission Page Prototype • Internal Lab links are ready to connect to team-built pages.</div>
+  <div class="wrap footer-row">
+    <div><strong>Applied AI Lab</strong></div>
+    <div>Experiment / Build / Question / Apply</div>
   </div>
 </footer>
 
 
+
+
+
   <script src="js/site.js" defer></script>
+  <script src="js/index.js" defer></script>
 </body>
 </html>
