@@ -3,46 +3,308 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Explore upcoming workshops, events and featured projects at the Quinnipiac Analytics & Applied AI Lab.">
-  <title>Events | Quinnipiac Analytics & Applied AI Lab</title>
-  <link rel="stylesheet" href="css/event.css">
-  <link rel="stylesheet" href="css/site.css">
-</head>
-<body class="page-events">
-<div class="page" id="page">
-  <header class="site-header">
-  <nav class="site-nav" aria-label="Main navigation">
-    <a class="site-brand logo-trigger" href="index.html">
-      <img
-        class="site-brand-logo js-hover-logo"
-        src="images_icons/Quinnovation-Logo.png"
-        data-static-logo="images_icons/Quinnovation-Logo.png"
-        data-animated-logo="images_icons/Quinnovation-Logo-Animated.gif"
-        alt=""
-      >
-      <span class="site-brand-text">Analytics &amp; AI Lab<small>Quinnipiac University</small></span>
-    </a>
-    <div class="site-nav-links">
-      <a href="index.html">Home</a>
-      <a href="industry.html">Industry Partners</a>
-      <a href="fellowship.html">Fellowship Pathway</a>
-      <a href="event.html" aria-current="page">Events</a>
-      <a class="site-nav-cta" href="index.html#opportunities">Get Involved</a>
-      <button class="site-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
-    </div>
-  </nav>
-</header>
-  <main class="main"><div class="container">
-    <section class="hero event-hero" aria-labelledby="welcome-heading"><p class="hero-eyebrow">Quinnipiac University</p><h1 class="hero-title" id="welcome-heading">Discover what's next in<br><span class="gold">the Analytics &amp; AI Lab</span></h1><p class="hero-subtitle">Explore upcoming workshops, events and featured projects.</p><div class="hero-dots" aria-hidden="true"><span class="dot dot-gold"></span><span class="line"></span><span class="dot dot-blue"></span></div><div class="hero-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></section>
-    <section id="events" class="events-section" aria-label="Calendar and events"><p class="section-label">Lab calendar</p><div class="two-columns">
-      <section class="card lab-card" aria-labelledby="calendar-heading"><div class="card-header"><div><h2 id="calendar-heading" class="card-title">Calendar</h2><p class="card-subtitle">Find a date that works for you.</p></div><span class="card-icon" aria-hidden="true">▦</span></div><div class="calendar-toolbar"><h3 class="calendar-month" id="calendar-month" aria-live="polite"></h3><div class="calendar-nav"><button type="button" class="icon-button" id="previous-month" aria-label="Previous month">‹</button><button type="button" class="icon-button" id="next-month" aria-label="Next month">›</button></div></div><table class="simple-calendar" aria-label="Events calendar"><thead><tr><th scope="col">Sun</th><th scope="col">Mon</th><th scope="col">Tue</th><th scope="col">Wed</th><th scope="col">Thu</th><th scope="col">Fri</th><th scope="col">Sat</th></tr></thead><tbody id="calendar-days"></tbody></table><p class="calendar-hint">Select a date to explore events</p></section>
-      <section class="card lab-card" aria-labelledby="events-heading"><div class="card-header"><div><h2 id="events-heading" class="card-title">Events</h2><p class="card-subtitle">What's happening at the Lab.</p></div><span class="card-icon" aria-hidden="true">↗</span></div><div class="view-toggle-row"><span>View Events:</span><div class="view-toggle" role="group" aria-label="Event view"><button type="button" id="upcoming-button" class="active" aria-pressed="true">Upcoming Events</button><button type="button" id="past-button" aria-pressed="false">Past Events</button></div></div><div class="empty-state" aria-live="polite"><div class="empty-state-icon" aria-hidden="true">▦</div><p class="empty-state-title" id="event-title">Select a date from the calendar</p><p class="empty-state-text" id="event-text">Select a date from the calendar to view events.</p></div></section>
-    </div></section>
-  </div></main>
-  <footer class="footer"><div class="footer-inner"><span><strong>Analytics &amp; AI Lab</strong> · Quinnipiac University</span><span class="footer-dots" aria-hidden="true"><span></span><span></span><span></span></span><span id="copyright"></span></div></footer>
-</div>
+  <meta name="description" content="Explore workshops, research events, and Idea Lab sessions at the Applied AI Lab.">
+  <title>Events | Applied AI Lab</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/event.css">
+</head>
+
+<body class="page-events">
+  <a class="skip-link" href="#main">Skip to events</a>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="site-brand" href="index.html">
+        <span class="site-brand-text">
+          Applied AI Lab
+          <small>Explore. Build. Connect.</small>
+        </span>
+      </a>
+
+      <div class="site-nav-links">
+        <a href="index.html">Home</a>
+        <a href="industry.html">Industry Partners</a>
+        <a href="fellowship.html">Fellowship Pathway</a>
+        <a href="event.html" aria-current="page">Events</a>
+
+        <a class="site-nav-cta" href="index.html#opportunities">
+          Get Involved
+        </a>
+
+        <button
+          class="site-theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+          title="Light / Dark mode"
+        >
+          ☾
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="events-main">
+    <section class="events-intro" aria-labelledby="page-title">
+      <p class="eyebrow">Explore New Possibilities.</p>
+
+      <h1 id="page-title">
+        Events &amp;<br>
+        <span>workshops.</span>
+      </h1>
+
+      <p class="intro-copy">
+        Discover hands-on workshops, research conversations, and ideas
+        worth exploring at the Applied AI Lab.
+      </p>
+
+      <nav class="section-links" aria-label="Browse events">
+        <a class="primary-link" href="#upcoming">
+          Upcoming events <span aria-hidden="true">↗</span>
+        </a>
+
+        <a href="#past">
+          Past events <span aria-hidden="true">↓</span>
+        </a>
+      </nav>
+    </section>
+
+    <!-- Replace sample listings with confirmed events before publishing. -->
+    <aside class="demo-notice">
+      <strong>Design preview.</strong>
+      These are sample events. Dates, locations, images, and faculty
+      contacts still need confirmation.
+    </aside>
+
+    <section
+      id="upcoming"
+      class="event-section"
+      aria-labelledby="upcoming-title"
+    >
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">What's next</p>
+          <h2 id="upcoming-title">Upcoming events</h2>
+        </div>
+
+        <span class="section-note">Sample listings</span>
+      </div>
+
+      <div class="event-grid">
+        <!-- Workshop -->
+        <article class="event-card">
+          <!-- Replace this placeholder with an actual event image. -->
+          <div
+            class="event-image placeholder workshop-art"
+            role="img"
+            aria-label="Workshop image placeholder"
+          >
+            <span class="image-caption">Event image placeholder</span>
+            <span class="art-label" aria-hidden="true">
+              BUILD<br>SOMETHING.
+            </span>
+          </div>
+
+          <div class="event-content">
+            <div class="event-topline">
+              <span class="category">Workshop</span>
+              <span class="sample-label">Demo</span>
+            </div>
+
+            <h3>Getting started with applied AI</h3>
+
+            <dl class="event-meta">
+              <div>
+                <dt>Date &amp; time</dt>
+                <dd>To be announced</dd>
+              </div>
+              <div>
+                <dt>Location</dt>
+                <dd>To be confirmed</dd>
+              </div>
+            </dl>
+
+            <p class="event-summary">
+              Explore practical AI tools through a guided,
+              beginner-friendly session.
+            </p>
+
+            <details>
+              <summary>Event details</summary>
+              <div class="detail-copy">
+                <p>
+                  An introduction to the Applied AI Lab, including hands-on
+                  exercises, discussions, and Q&amp;A. No prior experience
+                  required.
+                </p>
+                <p>
+                  <strong>Faculty contact:</strong> To be confirmed.
+                </p>
+                <!-- Add a confirmed faculty email link here. -->
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- Research -->
+        <article class="event-card">
+          <div
+            class="event-image placeholder research-art"
+            role="img"
+            aria-label="Research image placeholder"
+          >
+            <span class="image-caption">Event image placeholder</span>
+            <span class="art-label" aria-hidden="true">
+              ASK<br>QUESTIONS.
+            </span>
+          </div>
+
+          <div class="event-content">
+            <div class="event-topline">
+              <span class="category">Research</span>
+              <span class="sample-label">Demo</span>
+            </div>
+
+            <h3>Research & Discussion</h3>
+
+            <dl class="event-meta">
+              <div>
+                <dt>Date &amp; time</dt>
+                <dd>To be announced</dd>
+              </div>
+              <div>
+                <dt>Location</dt>
+                <dd>To be confirmed</dd>
+              </div>
+            </dl>
+
+            <p class="event-summary">
+              Meet fellow researchers and discuss how analytics can
+              support your next project.
+            </p>
+
+            <details>
+              <summary>Event details</summary>
+              <div class="detail-copy">
+                <p>
+                  Project introductions, open discussion, and opportunities
+                  to connect with students and faculty.
+                </p>
+                <p>
+                  <strong>Faculty contact:</strong> To be confirmed.
+                </p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- Idea Lab -->
+        <article class="event-card">
+          <div
+            class="event-image placeholder idea-art"
+            role="img"
+            aria-label="Idea Lab image placeholder"
+          >
+            <span class="image-caption">Event image placeholder</span>
+            <span class="art-label" aria-hidden="true">
+              WHAT<br>IF?
+            </span>
+          </div>
+
+          <div class="event-content">
+            <div class="event-topline">
+              <span class="category">Idea Lab</span>
+              <span class="sample-label">Demo</span>
+            </div>
+
+            <h3>From idea to first prototype</h3>
+
+            <dl class="event-meta">
+              <div>
+                <dt>Date &amp; time</dt>
+                <dd>To be announced</dd>
+              </div>
+              <div>
+                <dt>Location</dt>
+                <dd>To be confirmed</dd>
+              </div>
+            </dl>
+
+            <p class="event-summary">
+              Bring a question or a rough idea and explore what you
+              could build with the lab.
+            </p>
+
+            <details>
+              <summary>Event details</summary>
+              <div class="detail-copy">
+                <p>
+                  Brainstorming and feedback! Bring a notebook or laptop.
+                </p>
+                <p>
+                  <strong>Faculty contact:</strong> To be confirmed.
+                </p>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="past"
+      class="event-section past-section"
+      aria-labelledby="past-title"
+    >
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Previously at the lab</p>
+          <h2 id="past-title">Past events</h2>
+        </div>
+      </div>
+
+      <article class="past-card">
+        <span class="category">Event</span>
+
+        <div>
+          <h3>
+            Student project showcase
+            <span class="sample-label">Demo</span>
+          </h3>
+
+          <p class="past-meta">Date and location to be confirmed</p>
+
+          <p>
+            A sample archive entry for sharing student work and lessons
+            learned.
+          </p>
+
+          <details>
+            <summary>Event recap</summary>
+            <div class="detail-copy">
+              <p>
+                Replace this text with the actual recap, event date,
+                photos, and project links after the event has taken place.
+              </p>
+            </div>
+          </details>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="events-footer">
+    <span>Applied &amp; AI Lab</span>
+    <span aria-hidden="true">↗</span>
+  </footer>
+
+  <!-- Reuse the existing site-wide theme controls. -->
   <script src="js/site.js" defer></script>
-  <script src="js/event.js" defer></script>
 </body>
 </html>
