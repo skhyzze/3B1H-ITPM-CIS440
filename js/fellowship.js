@@ -9,46 +9,76 @@
   const dots = document.getElementById('fellowDots');
   const count = document.getElementById('fellowCount');
   const status = document.getElementById('fellowStatus');
+  const progress = document.getElementById('fellowProgress');
+  const optionCount = Math.min(3, Math.max(0, cards.length - 1));
   let current = 0;
 
-  function visibleCards() {
-    if (window.matchMedia('(max-width: 640px)').matches) return 1;
-    if (window.matchMedia('(max-width: 900px)').matches) return 2;
-    return 3;
+  function normalize(index) {
+    return (index + cards.length) % cards.length;
   }
 
-  function maximumIndex() {
-    return Math.max(0, cards.length - visibleCards());
+  function visibleIndices() {
+    return Array.from({ length: optionCount + 1 }, function (_, offset) {
+      return normalize(current + offset);
+    });
   }
 
   function makeDots() {
     dots.innerHTML = '';
-    for (let index = 0; index <= maximumIndex(); index += 1) {
+    cards.forEach(function (card, index) {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot';
       dot.type = 'button';
-      dot.setAttribute('aria-label', `Show student fellows starting with profile ${index + 1}`);
+      dot.setAttribute('aria-label', `Feature student profile ${index + 1}`);
       dot.addEventListener('click', function () {
         current = index;
-        update();
+        update(true);
       });
       dots.appendChild(dot);
-    }
+    });
   }
 
-  function update() {
-    current = Math.min(current, maximumIndex());
-    track.style.transform = `translateX(-${cards[current].offsetLeft}px)`;
-    previous.disabled = current === 0;
-    next.disabled = current === maximumIndex();
-
-    const end = Math.min(cards.length, current + visibleCards());
-    count.textContent = `${current + 1}–${end} of ${cards.length}`;
-    status.textContent = `Showing student fellows ${current + 1} through ${end} of ${cards.length}`;
+  function update(animate) {
+    const visible = visibleIndices();
 
     cards.forEach(function (card, index) {
-      card.setAttribute('aria-hidden', index < current || index >= end ? 'true' : 'false');
+      const position = visible.indexOf(index);
+      const active = index === current;
+      const option = position > 0;
+      const studentName = card.querySelector('h3')?.textContent || `Student ${index + 1}`;
+
+      card.classList.toggle('is-visible', position >= 0);
+      card.classList.toggle('is-active', active);
+      card.classList.toggle('is-option', option);
+      card.classList.remove('is-entering');
+      card.style.order = position >= 0 ? String(position) : '';
+      card.setAttribute('aria-hidden', position >= 0 ? 'false' : 'true');
+
+      if (option) {
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Feature ${studentName}, profile ${index + 1}`);
+        card.removeAttribute('aria-current');
+      } else {
+        card.removeAttribute('role');
+        card.setAttribute('tabindex', '-1');
+        card.removeAttribute('aria-label');
+        if (active) card.setAttribute('aria-current', 'true');
+        else card.removeAttribute('aria-current');
+      }
     });
+
+    if (animate) {
+      requestAnimationFrame(function () {
+        cards[current].classList.add('is-entering');
+      });
+    }
+
+    previous.disabled = cards.length < 2;
+    next.disabled = cards.length < 2;
+    count.textContent = `${current + 1} of ${cards.length}`;
+    status.textContent = `Student profile ${current + 1} is featured. Select one of the next ${optionCount} profiles to change the feature.`;
+    if (progress) progress.style.width = `${((current + 1) / cards.length) * 100}%`;
 
     Array.from(dots.children).forEach(function (dot, index) {
       dot.classList.toggle('active', index === current);
@@ -56,32 +86,45 @@
     });
   }
 
+  cards.forEach(function (card, index) {
+    card.addEventListener('click', function () {
+      if (!card.classList.contains('is-option')) return;
+      current = index;
+      update(true);
+    });
+
+    card.addEventListener('keydown', function (event) {
+      if (!card.classList.contains('is-option')) return;
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        current = index;
+        update(true);
+      }
+    });
+  });
+
   previous.addEventListener('click', function () {
-    current -= 1;
-    update();
+    current = normalize(current - 1);
+    update(true);
   });
 
   next.addEventListener('click', function () {
-    current += 1;
-    update();
+    current = normalize(current + 1);
+    update(true);
   });
 
   carousel.addEventListener('keydown', function (event) {
-    if (event.key === 'ArrowLeft' && current > 0) {
-      current -= 1;
-      update();
+    if (event.target !== carousel) return;
+    if (event.key === 'ArrowLeft') {
+      current = normalize(current - 1);
+      update(true);
     }
-    if (event.key === 'ArrowRight' && current < maximumIndex()) {
-      current += 1;
-      update();
+    if (event.key === 'ArrowRight') {
+      current = normalize(current + 1);
+      update(true);
     }
-  });
-
-  window.addEventListener('resize', function () {
-    makeDots();
-    update();
   });
 
   makeDots();
-  update();
+  update(false);
 })();
