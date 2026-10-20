@@ -43,4 +43,65 @@
     });
   }
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll('.lab-brand[data-logo-animated]').forEach(function (brand) {
+    const animatedLogo = brand.querySelector('.lab-brand-image-animated');
+    const animationSource = brand.dataset.logoAnimated;
+    const animationDuration = Number(brand.dataset.logoDuration) || 2700;
+    const revealDelay = 40;
+    let animationTimer;
+    let cleanupTimer;
+    let revealTimer;
+    let playToken = 0;
+
+    if (!animatedLogo || !animationSource) return;
+
+    function finishAnimation() {
+      window.clearTimeout(animationTimer);
+      window.clearTimeout(cleanupTimer);
+      window.clearTimeout(revealTimer);
+      playToken += 1;
+      brand.classList.remove('is-animating');
+      brand.classList.add('is-returning');
+      animatedLogo.onload = null;
+      animatedLogo.onerror = null;
+
+      cleanupTimer = window.setTimeout(function () {
+        brand.classList.remove('is-returning');
+        brand.removeAttribute('data-logo-playing');
+        animatedLogo.removeAttribute('src');
+      }, reducedMotion.matches ? 0 : 160);
+    }
+
+    function playAnimation() {
+      if (reducedMotion.matches || brand.hasAttribute('data-logo-playing')) return;
+
+      brand.setAttribute('data-logo-playing', '');
+      animatedLogo.removeAttribute('src');
+      const currentPlay = ++playToken;
+
+      animatedLogo.onload = function () {
+        if (currentPlay !== playToken) return;
+
+        revealTimer = window.setTimeout(function () {
+          if (currentPlay !== playToken) return;
+
+          brand.classList.add('is-animating');
+          animationTimer = window.setTimeout(finishAnimation, animationDuration);
+        }, revealDelay);
+      };
+
+      animatedLogo.onerror = finishAnimation;
+
+      window.requestAnimationFrame(function () {
+        if (currentPlay !== playToken) return;
+        animatedLogo.src = animationSource;
+      });
+    }
+
+    brand.addEventListener('pointerenter', playAnimation);
+    brand.addEventListener('focus', playAnimation);
+  });
+
 })();
