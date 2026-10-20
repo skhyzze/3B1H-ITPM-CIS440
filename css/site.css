@@ -615,6 +615,8 @@ body.dark.page-industry .draft-note {
 
 .lab-brand {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
   color: #07121f !important;
   text-decoration: none !important;
   font-size: 1rem;
@@ -623,8 +625,60 @@ body.dark.page-industry .draft-note {
   white-space: nowrap;
 }
 
+.lab-brand-logo {
+  position: relative;
+  display: block;
+  width: 92px;
+  height: auto;
+  aspect-ratio: 92 / 57;
+  overflow: hidden;
+}
+
+.lab-brand-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity .12s ease;
+}
+
+.lab-brand-image-static {
+  object-fit: cover;
+  object-position: center 52%;
+  opacity: 1;
+}
+
+.lab-brand-image-animated {
+  object-fit: cover;
+  object-position: center 52%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.lab-brand.is-animating .lab-brand-image-static { opacity: 0; }
+.lab-brand.is-animating .lab-brand-image-animated {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lab-brand.is-returning .lab-brand-image-animated {
+  opacity: 0;
+  visibility: visible;
+}
+
+.lab-brand.is-returning .lab-brand-image {
+  transition: none;
+}
+
+body.dark .lab-brand-image {
+  filter: invert(1);
+}
+
 .lab-nav-links {
   min-width: 0;
+  margin-right: 0;
   margin-left: auto;
   display: flex;
   align-items: center;
@@ -741,21 +795,22 @@ body.dark .lab-theme-toggle {
 @media (max-width: 900px) {
   .lab-nav {
     min-height: 64px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 10px;
-    padding: 10px 0;
+    padding: 4px 0;
   }
 
-  .lab-brand { order: 1; }
+  .lab-brand { order: initial; }
 
   .lab-theme-toggle {
-    order: 1;
-    margin-left: auto;
+    order: initial;
+    margin-left: 0;
   }
 
   .lab-nav-links {
-    order: 2;
-    width: 100%;
+    order: initial;
+    flex: 1 1 auto;
+    width: auto;
     margin: 0;
     gap: 4px;
     overflow-x: auto;
@@ -775,12 +830,14 @@ body.dark .lab-theme-toggle {
 @media (max-width: 560px) {
   .lab-nav { width: min(100% - 28px, 1180px); }
   .lab-brand { font-size: .92rem; }
+  .lab-brand-logo { width: 82px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .lab-nav-links > a,
   .lab-nav-links > a::after,
-  .lab-theme-toggle { transition: none !important; }
+  .lab-theme-toggle,
+  .lab-brand-image { transition: none !important; }
 }
 
 /* Events + Fellowship visual language for Home and Industry.
@@ -1258,4 +1315,175 @@ body.dark.page-fellowship p.section-kicker span {
 
 body.page-fellowship :is(.console-bar p, .console-line > span, .console-line small) {
   color: #c0cfdb !important;
+}
+
+/* Shared chrome: one footer, skip link, and accent color for every page. */
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(
+  footer,
+  .industry-footer,
+  .site-footer,
+  .events-footer
+) {
+  background: #07121f !important;
+  color: #aebbc7 !important;
+  border-top: 0 !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(
+  footer strong,
+  .industry-footer strong,
+  .footer-title
+) {
+  color: #ffffff !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) .skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  transform: translateY(-180%);
+  padding: 10px 14px;
+  background: #ffffff;
+  color: #07121f;
+  border: 2px solid #a11b2e;
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-weight: 700;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) .skip-link:focus {
+  transform: none;
+}
+
+body.page-fellowship .skip-link {
+  width: auto;
+  height: auto;
+  clip: auto;
+  overflow: visible;
+  transform: translateY(-180%);
+  white-space: nowrap;
+}
+
+body.page-fellowship .skip-link:focus {
+  transform: none;
+}
+
+.page-industry .kicker,
+.page-home .kicker,
+.page-fellowship .section-kicker,
+.page-events .eyebrow {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace !important;
+}
+
+.page-home .btn,
+.page-industry .button,
+.page-fellowship .button,
+.page-events .button,
+.lab-nav-cta {
+  border-radius: 4px !important;
+}
+
+/* Final shared dark-mode palette and contrast treatment. */
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) {
+  --unified-dark-ink: #07121f;
+  --unified-dark-blue: #123a63;
+  --unified-dark-card: #102c47;
+  --unified-dark-text: #f8f8f6;
+  --unified-dark-muted: #d2dce5;
+  --unified-dark-line: rgba(230, 223, 216, .28);
+  background: var(--unified-dark-ink) !important;
+  color: var(--unified-dark-text) !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) main {
+  background: var(--unified-dark-ink) !important;
+  color: var(--unified-dark-text) !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(h1, h2, h3, h4) {
+  color: var(--unified-dark-text) !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(p, li) {
+  color: var(--unified-dark-muted);
+}
+
+body.dark.page-industry :is(.hero, .collaboration, .spotlight, .cta),
+body.dark.page-fellowship :is(.page-hero, .fellows-section),
+body.dark.page-events :is(.events-hero, .past-section) {
+  background: var(--unified-dark-ink) !important;
+  color: var(--unified-dark-text) !important;
+}
+
+body.dark.page-industry :is(.benefits, #current-partners, .pathway),
+body.dark.page-fellowship :is(.overview-section, .details-section),
+body.dark.page-events .event-section:not(.past-section) {
+  background: var(--unified-dark-blue) !important;
+  color: var(--unified-dark-text) !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(
+  .preview-card,
+  .logic-card,
+  .audience,
+  .resource,
+  .explore-card,
+  .value-card,
+  .collaboration-item,
+  .partner-card,
+  .fellow-card,
+  .event-card,
+  .past-card
+) {
+  background: var(--unified-dark-card) !important;
+  color: var(--unified-dark-text) !important;
+  border-color: var(--unified-dark-line) !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(
+  .preview-card,
+  .logic-card,
+  .audience,
+  .resource,
+  .explore-card,
+  .value-card,
+  .collaboration-item,
+  .partner-card,
+  .fellow-card,
+  .event-card,
+  .past-card
+) :is(p, li) {
+  color: var(--unified-dark-muted) !important;
+}
+
+body.dark.page-fellowship :is(.section-aside, .intro-text, .fellow-focus, .fellow-project, .content-pending),
+body.dark.page-industry :is(.section-intro, .hero-copy, .spotlight-row span),
+body.dark.page-events :is(.hero-subtitle, .intro-copy, .event-summary, .detail-copy, .past-card p) {
+  color: var(--unified-dark-muted) !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(
+  .eyebrow,
+  .section-kicker,
+  .fellow-role,
+  .fellow-project a,
+  .value-icon,
+  .collaboration-item > span,
+  .step::before,
+  .preview-type,
+  .resource-num
+) {
+  color: #ff8295 !important;
+}
+
+/* Industry uses the same outlined hero-word treatment as the other pathways. */
+body.page-industry .hero h1 span {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px #a11b2e;
+  paint-order: stroke fill;
+}
+
+body.dark.page-industry .hero h1 span {
+  -webkit-text-stroke-color: #ff8295;
 }

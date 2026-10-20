@@ -16,7 +16,12 @@
 
   <header class="lab-header">
     <nav class="lab-nav" aria-label="Main navigation">
-      <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home">Applied AI Lab</a>
+      <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
+        <span class="lab-brand-logo" aria-hidden="true">
+          <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
+          <img class="lab-brand-image lab-brand-image-animated" alt="">
+        </span>
+      </a>
       <div class="lab-nav-links">
         <a href="index.html">Home</a>
         <a href="industry.html">Industry Partners</a>
@@ -28,31 +33,34 @@
     </nav>
   </header>
 
-  <main id="main" class="events-main">
-    <section class="events-intro" aria-labelledby="page-title">
-      <p class="eyebrow">Explore New Possibilities.</p>
+  <main id="main">
+    <section class="events-hero" aria-labelledby="page-title">
+      <div class="container">
+        <p class="eyebrow"><span>Lab 04</span> Community calendar</p>
 
-      <h1 id="page-title">
-        Events &amp;<br>
-        <span>workshops.</span>
-      </h1>
+        <h1 id="page-title">
+          Events &amp;<br>
+          <em>workshops.</em>
+        </h1>
 
-      <p class="intro-copy">
-        Discover hands-on workshops, research conversations, and ideas
-        worth exploring at the Applied AI Lab.
-      </p>
+        <p class="intro-copy">
+          Discover hands-on workshops, research conversations, and ideas
+          worth exploring at the Applied AI Lab.
+        </p>
 
-      <nav class="section-links" aria-label="Browse events">
-        <a class="primary-link" href="#upcoming">
-          Upcoming events <span aria-hidden="true">↗</span>
-        </a>
+        <nav class="section-links" aria-label="Browse events">
+          <a class="button button-primary" href="#upcoming">
+            Upcoming events <span aria-hidden="true">↗</span>
+          </a>
 
-        <a href="#past">
-          Past events <span aria-hidden="true">↓</span>
-        </a>
-      </nav>
+          <a class="button button-ghost" href="#past">
+            Past events <span aria-hidden="true">↓</span>
+          </a>
+        </nav>
+      </div>
     </section>
 
+    <div class="events-body">
     <!-- Replace sample listings with confirmed events before publishing. -->
     <aside class="demo-notice">
       <strong>Design preview.</strong>
@@ -275,11 +283,14 @@
         </div>
       </article>
     </section>
+    </div>
   </main>
 
   <footer class="events-footer">
-    <span>Applied AI Lab</span>
-    <span aria-hidden="true">↗</span>
+    <div class="container footer-row">
+      <div><strong>Applied AI Lab</strong><p>Events</p></div>
+      <a href="#main">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
   </footer>
 
   <!-- Reuse the existing site-wide theme controls. -->
