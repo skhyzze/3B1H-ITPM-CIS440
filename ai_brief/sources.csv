@@ -1,0 +1,28 @@
+name,url,content_type
+MIT Technology Review - AI,https://www.technologyreview.com/topic/artificial-intelligence/feed/,news
+Google AI Blog,https://blog.google/technology/ai/rss/,news
+Google DeepMind Blog,https://deepmind.google/blog/rss.xml,research
+OpenAI News,https://openai.com/news/rss.xml,news
+Hugging Face Blog,https://huggingface.co/blog/feed.xml,tutorial
+Berkeley AI Research (BAIR),https://bair.berkeley.edu/blog/feed.xml,research
+Machine Learning Mastery,https://machinelearningmastery.com/feed/,tutorial
+MarkTechPost,https://www.marktechpost.com/feed/,news
+VentureBeat AI,https://venturebeat.com/category/ai/feed/,news
+TechCrunch AI,https://techcrunch.com/category/artificial-intelligence/feed/,news
+arXiv cs.AI (new papers),https://export.arxiv.org/rss/cs.AI,research
+The Gradient,https://thegradient.pub/rss/,educational
+MIT News - AI,https://news.mit.edu/rss/topic/artificial-intelligence2,use case
+AWS Machine Learning Blog,https://aws.amazon.com/blogs/machine-learning/feed/,use case
+NVIDIA Blog,https://blogs.nvidia.com/feed/,use case
+Microsoft Research Blog,https://www.microsoft.com/en-us/research/feed/,research
+Google Research Blog,https://research.google/blog/rss/,research
+GitHub Blog - AI & ML,https://github.blog/ai-and-ml/feed/,tool
+Simon Willison's Weblog,https://simonwillison.net/atom/everything/,tool
+Latent Space,https://www.latent.space/feed,tool
+The Verge - AI,https://www.theverge.com/rss/ai-artificial-intelligence/index.xml,news
+Wired - AI,https://www.wired.com/feed/tag/ai/latest/rss,news
+IEEE Spectrum - AI,https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss,news
+Import AI,https://importai.substack.com/feed,educational
+IBM Technology (YouTube),https://www.youtube.com/feeds/videos.xml?channel_id=UCKWaEZ-_VweaEx1j62do_vQ,video
+Two Minute Papers (YouTube),https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg,video
+3Blue1Brown (YouTube),https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw,video
