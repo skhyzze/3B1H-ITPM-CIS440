@@ -1,0 +1,47 @@
+{
+ "https://huggingface.co/blog/ibm-research/altk-evolve-bc": {
+  "image": "https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/rzXYJh7e7UdoYgCLwOZjH.jpeg",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ },
+ "https://www.marktechpost.com/2026/10/20/deepseek-deepinfer-open-source-inference-framework/": {
+  "image": "https://www.marktechpost.com/wp-content/uploads/2026/10/WP-BLOG-BANNER-454-15-scaled.png",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ },
+ "https://www.technologyreview.com/2026/10/20/1145916/dispatch-visit-to-samsung-massive-new-semiconductor-hub/": {
+  "image": "https://wp.technologyreview.com/wp-content/uploads/2026/10/GettyImages-2277893810.jpg?resize=1200,600",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ },
+ "https://techcrunch.com/2026/10/19/mamdani-says-feds-have-abdicated-on-ai-urges-new-yorkers-to-push-back/": {
+  "image": "https://techcrunch.com/wp-content/uploads/2026/10/IMG_1933.jpg?resize=1200,900",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ },
+ "https://www.technologyreview.com/2026/10/19/1147186/making-the-internet-better-for-ai-agents-might-make-it-worse-for-everyone-else/": {
+  "image": "https://wp.technologyreview.com/wp-content/uploads/2026/10/261016_Algo.jpg?resize=1200,600",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ },
+ "https://www.technologyreview.com/2026/10/16/1146224/roundtables-a-conversation-with-the-creator-of-ai-designed-viruses/": {
+  "image": "https://wp.technologyreview.com/wp-content/uploads/2024/01/MIT-TR-Roundtables_Oct-2-Thumbnail.png?resize=1200,600",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ },
+ "https://deepmind.google/blog/accelerating-antimicrobial-discovery/": {
+  "image": "https://lh3.googleusercontent.com/Xgnc_DxAUS2Fs9H2rokxsYwPnnM_KOkPyPtKm7V2C_sjZ7YS4N1-D6lD8wjYIRQoKaiSwHUXB7qmw77m6FCfHLZenWdNymO7B_JLChlB6ied6emR=w1200-h630-n-nu-rw",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ },
+ "https://machinelearningmastery.com/choosing-a-chunking-strategy-for-your-llm-apps-a-decision-tree-approach/": {
+  "image": "https://machinelearningmastery.com/wp-content/uploads/2026/08/mlm-chunking-strategy-selection-cover-1024x576.png",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ },
+ "https://openai.com/index/third-moment-research": {
+  "image": "https://images.ctfassets.net/kftzwdyauwt9/m0YDNMUPfmBJYf8nw2LGR/202c3cb46da0506d77cce90027c1ef9c/third-moment-research-first-light-social-1920x1080.png?w=1600&h=900&fit=fill",
+  "checked": "2026-10-20T14:32:35",
+  "v": 4
+ }
+}
