@@ -10,8 +10,11 @@
   const count = document.getElementById('fellowCount');
   const status = document.getElementById('fellowStatus');
   const progress = document.getElementById('fellowProgress');
+  const viewport = carousel.querySelector('.carousel-viewport');
   const optionCount = Math.min(3, Math.max(0, cards.length - 1));
   let current = 0;
+  let swipeStartX = null;
+  let motionTimer;
 
   function normalize(index) {
     return (index + cards.length) % cards.length;
@@ -31,15 +34,19 @@
       dot.type = 'button';
       dot.setAttribute('aria-label', `Feature student profile ${index + 1}`);
       dot.addEventListener('click', function () {
+        const direction = index >= current ? 'next' : 'previous';
         current = index;
-        update(true);
+        update(true, direction);
       });
       dots.appendChild(dot);
     });
   }
 
-  function update(animate) {
+  function update(animate, direction) {
     const visible = visibleIndices();
+
+    window.clearTimeout(motionTimer);
+    track.classList.remove('is-shifting-next', 'is-shifting-previous');
 
     cards.forEach(function (card, index) {
       const position = visible.indexOf(index);
@@ -50,7 +57,6 @@
       card.classList.toggle('is-visible', position >= 0);
       card.classList.toggle('is-active', active);
       card.classList.toggle('is-option', option);
-      card.classList.remove('is-entering');
       card.style.order = position >= 0 ? String(position) : '';
       card.setAttribute('aria-hidden', position >= 0 ? 'false' : 'true');
 
@@ -69,9 +75,13 @@
     });
 
     if (animate) {
+      void track.offsetWidth;
       requestAnimationFrame(function () {
-        cards[current].classList.add('is-entering');
+        track.classList.add(direction === 'previous' ? 'is-shifting-previous' : 'is-shifting-next');
       });
+      motionTimer = window.setTimeout(function () {
+        track.classList.remove('is-shifting-next', 'is-shifting-previous');
+      }, 500);
     }
 
     previous.disabled = cards.length < 2;
@@ -90,7 +100,7 @@
     card.addEventListener('click', function () {
       if (!card.classList.contains('is-option')) return;
       current = index;
-      update(true);
+      update(true, 'next');
     });
 
     card.addEventListener('keydown', function (event) {
@@ -98,33 +108,99 @@
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         current = index;
-        update(true);
+        update(true, 'next');
       }
     });
   });
 
   previous.addEventListener('click', function () {
     current = normalize(current - 1);
-    update(true);
+    update(true, 'previous');
   });
 
   next.addEventListener('click', function () {
     current = normalize(current + 1);
-    update(true);
+    update(true, 'next');
   });
 
   carousel.addEventListener('keydown', function (event) {
     if (event.target !== carousel) return;
     if (event.key === 'ArrowLeft') {
       current = normalize(current - 1);
-      update(true);
+      update(true, 'previous');
     }
     if (event.key === 'ArrowRight') {
       current = normalize(current + 1);
-      update(true);
+      update(true, 'next');
     }
   });
 
+  if (viewport) {
+    viewport.addEventListener('pointerdown', function (event) {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      swipeStartX = event.clientX;
+      viewport.classList.add('is-swiping');
+    });
+
+    viewport.addEventListener('pointerup', function (event) {
+      if (swipeStartX === null) return;
+      const distance = event.clientX - swipeStartX;
+      swipeStartX = null;
+      viewport.classList.remove('is-swiping');
+
+      if (Math.abs(distance) < 48) return;
+      current = normalize(current + (distance < 0 ? 1 : -1));
+      update(true, distance < 0 ? 'next' : 'previous');
+    });
+
+    viewport.addEventListener('pointercancel', function () {
+      swipeStartX = null;
+      viewport.classList.remove('is-swiping');
+    });
+  }
+
   makeDots();
   update(false);
+})();
+
+(function () {
+  const pathwayButtons = Array.from(document.querySelectorAll('[data-pathway-target]'));
+  if (!pathwayButtons.length) return;
+
+  pathwayButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      const target = document.querySelector(button.dataset.pathwayTarget);
+      if (!target) return;
+
+      pathwayButtons.forEach(function (item) {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        if (active) item.setAttribute('aria-current', 'step');
+        else item.removeAttribute('aria-current');
+      });
+
+      target.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    });
+  });
+})();
+
+(function () {
+  const signalButtons = Array.from(document.querySelectorAll('.signal-item'));
+  const detail = document.getElementById('signalDetail');
+  const detailTitle = detail && detail.querySelector('strong');
+  if (!signalButtons.length || !detailTitle) return;
+
+  signalButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      signalButtons.forEach(function (item) {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-expanded', String(active));
+      });
+      detailTitle.textContent = button.dataset.signalTitle;
+    });
+  });
 })();

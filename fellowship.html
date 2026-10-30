@@ -8,6 +8,8 @@
   <title>Fellowship Pathway | Applied AI Lab</title>
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/fellowship.css">
+  <link rel="stylesheet" href="css/blended-theme.css">
+  <link rel="stylesheet" href="css/chatbot.css">
 </head>
 <body class="page-fellowship" id="top">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -24,6 +26,7 @@
         <a href="index.html">Home</a>
         <a href="industry.html">Industry Partners</a>
         <a href="fellowship.html" aria-current="page">Fellowship Pathway</a>
+        <a href="studentoutcomes.html">Student Outcomes</a>
         <a href="event.html">Events</a>
         <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
       </div>
@@ -37,7 +40,7 @@
       <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
       <div class="container hero-layout">
         <div class="page-hero-content">
-          <p class="section-kicker"><span>Pathway 01</span> Student experience</p>
+          <p class="section-kicker">Student experience</p>
           <h1 id="hero-title">Build what’s <em>next.</em></h1>
           <p class="lead content-pending">A concise, client-approved introduction to the fellowship, who it serves, and the opportunity it creates will appear here.</p>
           <div class="hero-actions">
@@ -49,10 +52,11 @@
         <div class="hero-console" aria-label="Fellowship pathway overview">
           <div class="console-bar"><span></span><span></span><span></span><p>fellowship_pathway.json</p></div>
           <div class="console-body">
-            <p class="console-line"><span>01</span><code>EXPLORE</code><small>Find your focus</small></p>
-            <p class="console-line"><span>02</span><code>APPLY</code><small>Work on real questions</small></p>
-            <p class="console-line"><span>03</span><code>CONNECT</code><small>Learn with a cohort</small></p>
+            <button class="console-line is-active" type="button" data-pathway-target="#about" aria-current="step"><span>01</span><code>EXPLORE</code><small>Find your focus</small></button>
+            <button class="console-line" type="button" data-pathway-target="#joining"><span>02</span><code>APPLY</code><small>Work on real questions</small></button>
+            <button class="console-line" type="button" data-pathway-target="#fellows"><span>03</span><code>CONNECT</code><small>Learn with a cohort</small></button>
             <p class="console-line console-status"><span aria-hidden="true">●</span><code>DETAILS</code><small>Pending client confirmation</small></p>
+            <p class="console-instruction">Select a stage to explore the pathway.</p>
           </div>
         </div>
       </div>
@@ -62,16 +66,16 @@
     <section class="section overview-section" id="about" aria-labelledby="about-title">
       <div class="container overview-grid">
         <div class="section-heading">
-          <p class="section-kicker light">01 / Overview</p>
           <h2 id="about-title">A launchpad for applied learning.</h2>
         </div>
         <div class="overview-copy">
           <p class="intro-text content-pending">Briefly explain what the fellowship does, what students may work on, and what they can expect to gain. Confirm the final wording with the client.</p>
-          <div class="signal-row" aria-label="Program information awaiting confirmation">
-            <div><strong>01</strong><span>Eligibility</span><small>Content pending</small></div>
-            <div><strong>02</strong><span>Timeline</span><small>Content pending</small></div>
-            <div><strong>03</strong><span>Commitment</span><small>Content pending</small></div>
+          <div class="signal-row" aria-label="Explore program information">
+            <button class="signal-item is-active" type="button" data-signal-title="Eligibility" aria-expanded="true" aria-controls="signalDetail"><strong>01</strong><span>Eligibility</span><small>Select for status</small></button>
+            <button class="signal-item" type="button" data-signal-title="Timeline" aria-expanded="false" aria-controls="signalDetail"><strong>02</strong><span>Timeline</span><small>Select for status</small></button>
+            <button class="signal-item" type="button" data-signal-title="Commitment" aria-expanded="false" aria-controls="signalDetail"><strong>03</strong><span>Commitment</span><small>Select for status</small></button>
           </div>
+          <div class="signal-detail" id="signalDetail" aria-live="polite"><strong>Eligibility</strong><p>Program details are awaiting client confirmation.</p></div>
         </div>
       </div>
     </section>
@@ -79,7 +83,7 @@
     <section class="section fellows-section" id="fellows" aria-labelledby="fellows-title">
       <div class="container">
         <div class="section-heading section-heading-row">
-          <div><p class="section-kicker light">02 / Community</p><h2 id="fellows-title">Meet the student fellows.</h2></div>
+          <div><h2 id="fellows-title">Meet the student fellows.</h2></div>
           <p class="section-aside">A growing community of students exploring analytics, AI, and applied problem-solving.</p>
         </div>
 
@@ -135,7 +139,7 @@
     <section class="section details-section" id="joining" aria-labelledby="joining-title">
       <div class="container">
         <div class="section-heading section-heading-row">
-          <div><p class="section-kicker">03 / Next steps</p><h2 id="joining-title">Your pathway starts here.</h2></div>
+          <div><h2 id="joining-title">Your pathway starts here.</h2></div>
           <p class="section-aside">The application process and program structure below are ready for confirmed details.</p>
         </div>
         <div class="details-grid">
@@ -147,15 +151,18 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div><p class="section-kicker">Independent applied learning</p><p class="footer-title">Applied AI Lab</p><p class="footer-text">Fellowship Pathway</p></div>
-      <div><p class="footer-label">Explore</p><ul class="footer-list"><li><a href="index.html">Home</a></li><li><a href="#about">Overview</a></li><li><a href="#fellows">Student fellows</a></li><li><a href="#joining">Next steps</a></li></ul></div>
+  <footer class="lab-site-footer" id="site-footer">
+    <div class="lab-footer-inner">
+      <div class="lab-footer-brand"><strong>Applied AI Lab</strong><span>Experiment. Build. Question. Apply.</span></div>
+      <nav class="lab-footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a><a href="industry.html">Industry Partners</a><a href="fellowship.html">Fellowship</a><a href="studentoutcomes.html">Student Outcomes</a><a href="event.html">Events</a><a href="index.html#opportunities">Get Involved</a>
+      </nav>
+      <a class="lab-footer-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
     </div>
-    <div class="footer-note">Applied AI Lab · Fellowship Pathway</div>
   </footer>
 
   <script src="js/site.js" defer></script>
   <script src="js/fellowship.js" defer></script>
+  <script src="js/chatbot.js" defer></script>
 </body>
 </html>
