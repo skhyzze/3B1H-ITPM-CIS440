@@ -12,6 +12,8 @@
 
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/blended-theme.css">
+  <link rel="stylesheet" href="css/chatbot.css">
 </head>
 <body class="page-home">
 <a class="skip-link" href="#top">Skip to main content</a>
@@ -27,6 +29,7 @@
         <a href="index.html" aria-current="page">Home</a>
         <a href="industry.html">Industry Partners</a>
         <a href="fellowship.html">Fellowship Pathway</a>
+        <a href="studentoutcomes.html">Student Outcomes</a>
         <a href="event.html">Events</a>
         <a class="lab-nav-cta" href="#opportunities">Get Involved</a>
       </div>
@@ -179,10 +182,10 @@
       <span class="eyebrow">Access</span>
       <h2>Resources &amp; opportunities.</h2>
       <div class="resources-grid">
-        <article class="resource"><span class="resource-num">R/01</span><h3>Computing Resources</h3><p>Explore available systems and request access to Lab technology.</p><span class="arrow">↗</span></article>
-        <article class="resource"><span class="resource-num">R/02</span><h3>Projects</h3><p>Discover active work, ideas in development, and opportunities to contribute.</p><span class="arrow">↗</span></article>
-        <a class="resource" href="event.html"><span class="resource-num">R/03</span><h3>Events</h3><p>Find workshops, talks, demonstrations, and upcoming Lab activities.</p><span class="arrow">↗</span></a>
-        <a class="resource" href="fellowship.html"><span class="resource-num">R/04</span><h3>Fellowship</h3><p>Learn about the pathway for deeper participation in the Lab community.</p><span class="arrow">↗</span></a>
+        <article class="resource"><h3>Computing Resources</h3><p>Explore available systems and request access to Lab technology.</p><span class="arrow">↗</span></article>
+        <article class="resource"><h3>Projects</h3><p>Discover active work, ideas in development, and opportunities to contribute.</p><span class="arrow">↗</span></article>
+        <a class="resource" href="event.html"><h3>Events</h3><p>Find workshops, talks, demonstrations, and upcoming Lab activities.</p><span class="arrow">↗</span></a>
+        <a class="resource" href="fellowship.html"><h3>Fellowship</h3><p>Learn about the pathway for deeper participation in the Lab community.</p><span class="arrow">↗</span></a>
       </div>
     </div>
   </section>
@@ -199,10 +202,13 @@
   </section>
 </main>
 
-<footer>
-  <div class="wrap footer-row">
-    <div><strong>Applied AI Lab</strong></div>
-    <div>Experiment / Build / Question / Apply</div>
+<footer class="lab-site-footer" id="site-footer">
+  <div class="lab-footer-inner">
+    <div class="lab-footer-brand"><strong>Applied AI Lab</strong><span>Experiment. Build. Question. Apply.</span></div>
+    <nav class="lab-footer-nav" aria-label="Footer navigation">
+      <a href="index.html">Home</a><a href="industry.html">Industry Partners</a><a href="fellowship.html">Fellowship</a><a href="studentoutcomes.html">Student Outcomes</a><a href="event.html">Events</a><a href="#opportunities">Get Involved</a>
+    </nav>
+    <a class="lab-footer-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </div>
 </footer>
 
@@ -212,5 +218,6 @@
 
   <script src="js/site.js" defer></script>
   <script src="js/index.js" defer></script>
+  <script src="js/chatbot.js" defer></script>
 </body>
 </html>

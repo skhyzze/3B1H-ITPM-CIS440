@@ -1337,7 +1337,7 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(
   color: #ffffff !important;
 }
 
-body:is(.page-home, .page-industry, .page-fellowship, .page-events) .skip-link {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link {
   position: fixed;
   top: 12px;
   left: 12px;
@@ -1351,7 +1351,7 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events) .skip-link {
   font-weight: 700;
 }
 
-body:is(.page-home, .page-industry, .page-fellowship, .page-events) .skip-link:focus {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link:focus {
   transform: none;
 }
 
