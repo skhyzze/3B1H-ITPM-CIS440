@@ -57,6 +57,8 @@
   grid-template-rows: auto minmax(0, 1fr) auto;
   width: min(390px, calc(100vw - 32px));
   height: min(620px, calc(100vh - 124px));
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   border: 1px solid rgba(7, 18, 31, 0.2);
   border-radius: 22px;
@@ -75,6 +77,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  min-height: 0;
+  margin: 0;
   padding: 17px 18px;
   background: #07121f;
   color: #fff;
