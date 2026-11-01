@@ -1,0 +1,89 @@
+<!doctype html>
+<!-- AI Insights: shared site navigation and external JavaScript. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Circuit | Applied AI Lab  </title>
+<link rel="stylesheet" href="css/chatbot.css">
+<link rel="stylesheet" href="css/ai-insights.css">
+<!-- Shared navbar styles, also used by index.html. -->
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/blended-theme.css">
+</head>
+<body class="page-ai-brief">
+<!-- Same navigation as index.html; Home and Get Involved return there. -->
+<header class="lab-header" id="nav">
+    <nav class="lab-nav" aria-label="Main navigation">
+      <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
+        <span class="lab-brand-logo" aria-hidden="true">
+          <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
+          <img class="lab-brand-image lab-brand-image-animated" alt="">
+        </span>
+      </a>
+      <div class="lab-nav-links">
+        <a href="index.html">Home</a>
+        <a href="industry.html">Industry Partners</a>
+        <a href="fellowship.html">Fellowship Pathway</a>
+        <a href="studentoutcomes.html">Student Outcomes</a>
+        <a href="event.html">Events</a>
+        <a href="ai-insights.html" aria-current="page">AI Insights</a>
+        <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
+        <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
+      </div>
+      <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
+       <button class="lab-theme-toggle lab-language-toggle"  id="languageToggle" type="button" aria-label="English / Español — translation coming soon" title="English / Español — coming soon"> EN/ES</button>
+    </nav>
+</header>
+
+<!-- Your existing script builds the newsletter inside this container. -->
+<div id="app" tabindex="-1"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="modal-box">
+    <div class="modal-frame" id="modal-frame"></div>
+    <div class="modal-bar">
+      <h4 id="modal-title"></h4>
+      <div class="acts"><a id="modal-link" href="#" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a><button id="modal-close" type="button">Close ✕</button></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- adding new footer for AiNewletter page  -->
+ <footer class="lab-site-footer" id="site-footer">
+  <div class="lab-footer-inner">
+
+    <div class="lab-footer-brand">
+      <strong>Applied AI Lab</strong>
+      <span>Experiment. Build. Question. Apply.</span>
+
+      <a class="footer-circuit" href="ai-insights.html#subscribe">
+        Join The Circuit →
+      </a>
+    </div>
+
+    <nav class="lab-footer-nav" aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="industry.html">Industry Partners</a>
+      <a href="fellowship.html">Fellowship</a>
+      <a href="studentoutcomes.html">Student Outcomes</a>
+      <a href="event.html">Events</a>
+      <a href="ai-insights.html">AI Insights</a>
+      
+    </nav>
+
+    <a class="lab-footer-top" href="#top">
+      Back to top <span aria-hidden="true">↑</span>
+    </a>
+
+  </div>
+</footer>
+
+<!-- Newsletter data must load before the newsletter script. -->
+<script src="ai_brief/static-newsletter-data.js" defer></script>
+<!-- Load shared site behavior, then your existing newsletter script. -->
+<script src="js/site.js" defer></script>
+<script src="js/ai-insights.js" defer></script>
+<script src="js/chatbot.js" defer></script>
+</body>
+</html>

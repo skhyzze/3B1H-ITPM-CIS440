@@ -978,3 +978,441 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
     scroll-behavior: auto !important;
   }
 }
+
+/* Join The Circuit: consistent on every page */
+.lab-header .lab-nav-links > a.circuit-join {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  height: 44px;
+  min-height: 44px;
+  padding: 0 16px !important;
+
+  background: #A11B2E !important;
+  border: 1px solid #A11B2E !important;
+  border-radius: 16px !important;
+  color: #fff !important;
+
+  transform: translateY(0);
+  box-shadow: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lab-header .lab-nav-links > a.circuit-join:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(161, 27, 46, 0.22) !important;
+}
+
+.lab-header .lab-nav-links > a.circuit-join:active {
+  transform: translateY(0);
+  box-shadow: none !important;
+}
+
+.lab-header .lab-nav-links > a.circuit-join::after {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-header .lab-nav-links > a.circuit-join {
+    transition: none;
+    transform: none;
+  }
+}
+
+.lab-site-footer a.footer-circuit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+
+  width: fit-content;
+  min-width: 0;
+  max-width: 100%;
+  padding: 10px 18px;
+
+  background: #A11B2E !important;
+  border: 1px solid #A11B2E !important;
+  border-radius: 16px !important;
+  color: #fff !important;
+  white-space: nowrap;
+}
+
+/*  for ai newletter page  */
+/* AI Tools section */
+body.page-ai-brief #ai-tools {
+  background: var(--bg);
+  padding-block: 48px;
+}
+
+/* Featured tool */
+body.page-ai-brief #ai-tools .tool-hero {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--blend-line) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 8px 24px rgba(19, 54, 77, 0.06) !important;
+}
+
+body.page-ai-brief #ai-tools .tool-shot {
+  min-width: 0;
+  border: 0;
+  border-radius: 16px !important;
+  overflow: hidden;
+  transform: none;
+  box-shadow: none;
+}
+
+body.page-ai-brief #ai-tools .tool-hero:hover .tool-shot {
+  transform: none;
+}
+
+body.page-ai-brief #ai-tools .tool-info {
+  min-width: 0;
+}
+
+body.page-ai-brief #ai-tools .kicker {
+  color: #A11B2E;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+body.page-ai-brief #ai-tools .tool-info h4 {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.2;
+  margin: 14px 0;
+}
+
+body.page-ai-brief #ai-tools .tool-info .desc {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+body.page-ai-brief #ai-tools .tool-ctas {
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+body.page-ai-brief #ai-tools .tool-ctas .btn {
+  background: #13364d !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: none;
+}
+
+/* Additional tools */
+body.page-ai-brief #ai-tools .tool-shelf {
+  margin-top: 24px;
+  gap: 20px;
+  border-top: 0;
+}
+
+body.page-ai-brief #ai-tools .tool-row {
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--blend-line) !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+}
+
+body.page-ai-brief #ai-tools .tool-row .media {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px !important;
+}
+
+body.page-ai-brief #ai-tools .tool-row > div {
+  min-width: 0;
+}
+
+/* Keep smaller cards from becoming crowded */
+body.page-ai-brief #ai-tools .tool-row .go {
+  display: none;
+}
+
+body.page-ai-brief #ai-tools .save {
+  border-radius: 50% !important;
+}
+
+/* Dark-mode accent */
+body.page-ai-brief.dark #ai-tools .kicker {
+  color: #ffadb5;
+}
+
+/* Stack comfortably on smaller screens */
+@media (max-width: 1020px) {
+  body.page-ai-brief #ai-tools .tool-hero,
+  body.page-ai-brief #ai-tools .tool-shelf {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  body.page-ai-brief #ai-tools .tool-hero {
+    padding: 16px;
+    gap: 22px;
+  }
+
+  body.page-ai-brief #ai-tools .tool-row {
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    padding: 14px;
+    gap: 10px;
+  }
+
+  body.page-ai-brief #ai-tools .tool-row .media {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* ===== Research: individual rounded cards ===== */
+body.page-ai-brief #research-spotlight .papers {
+  display: grid;
+  gap: 16px;
+  overflow: visible;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.page-ai-brief #research-spotlight .paper {
+  grid-template-columns: 40px 110px minmax(0, 1fr) auto;
+  gap: 20px;
+  padding: 22px;
+  background: var(--surface) !important;
+  border: 1px solid var(--blend-line) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 6px 20px rgba(19, 54, 77, 0.05) !important;
+  transition: background-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+body.page-ai-brief #research-spotlight .paper:hover {
+  box-shadow: 0 10px 26px rgba(19, 54, 77, 0.12) !important;
+}
+
+body.page-ai-brief #research-spotlight .paper > div {
+  min-width: 0;
+}
+
+body.page-ai-brief #research-spotlight .paper .n {
+  font-size: 25px;
+  color: var(--muted);
+  -webkit-text-stroke: 0;
+}
+
+body.page-ai-brief #research-spotlight .paper .media {
+  width: 110px;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+body.page-ai-brief #research-spotlight .paper h4 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+body.page-ai-brief #research-spotlight .paper .desc {
+  line-height: 1.65;
+}
+
+body.page-ai-brief #research-spotlight .save {
+  border-radius: 50% !important;
+}
+
+
+/* ===== Subscribe: navy panel and red action ===== */
+body.page-ai-brief #subscribe {
+  margin-top: 64px;
+  margin-bottom: 48px;
+}
+
+body.page-ai-brief #subscribe .sub-card {
+  padding: 40px;
+  gap: 32px;
+  background: #13364d !important;
+  border: 1px solid #13364d !important;
+  border-radius: 24px !important;
+  color: #fff;
+  box-shadow: none !important;
+}
+
+/* Remove the old decorative overlay */
+body.page-ai-brief #subscribe .sub-card::before {
+  display: none;
+}
+
+body.page-ai-brief #subscribe .tag {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: #fff;
+}
+
+body.page-ai-brief #subscribe h3 {
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.2;
+  color: #fff;
+}
+
+body.page-ai-brief #subscribe p {
+  color: #d4dfe7;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+body.page-ai-brief #subscribe .sub-form {
+  padding: 6px;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 16px;
+}
+
+body.page-ai-brief #subscribe .sub-form input {
+  background: transparent;
+  color: #13364d;
+  padding: 12px;
+}
+
+body.page-ai-brief #subscribe input::placeholder {
+  color: #647380;
+}
+
+body.page-ai-brief #subscribe input:focus-visible {
+  outline: 2px solid #13364d;
+  outline-offset: -2px;
+}
+
+body.page-ai-brief #subscribe .sub-form button {
+  background: #A11B2E !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 12px 18px;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+body.page-ai-brief #subscribe .sub-form button:hover {
+  background: #801525 !important;
+}
+
+body.page-ai-brief #subscribe .sub-note {
+  color: #d4dfe7;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* ===== Smaller screens ===== */
+@media (max-width: 1020px) {
+  body.page-ai-brief #subscribe .sub-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  body.page-ai-brief #research-spotlight .paper {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 18px;
+    gap: 12px;
+  }
+
+  body.page-ai-brief #research-spotlight .paper .n,
+  body.page-ai-brief #research-spotlight .paper > a {
+    display: none;
+  }
+
+  body.page-ai-brief #subscribe .sub-card {
+    padding: 26px 20px;
+    gap: 24px;
+  }
+
+  body.page-ai-brief #subscribe .sub-form {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-ai-brief #research-spotlight .paper,
+  body.page-ai-brief #subscribe .sub-form button {
+    transition: none;
+  }
+}
+/* Round the three picture cards at the top */
+body.page-ai-brief .collage .frame {
+  border-radius: 22px !important;
+  overflow: hidden;
+}
+
+/* Round the pictures inside each card */
+body.page-ai-brief .collage .frame .media {
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+/* Get involed button */
+/* Always red, including hover and click */
+body a.get-involved-btn,
+body a.get-involved-btn:hover,
+body a.get-involved-btn:focus,
+body a.get-involved-btn:active {
+  background: #A11B2E !important;
+  border: 1px solid #A11B2E !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  margin-top: 14px;
+  margin-left: 100px;
+}
+
+/* Keeps the theme button's existing shape and size. */
+.lab-header #languageToggle {
+  background: #f5f0ff;
+  color: #6935a5;
+  border-color: #cbb5e8;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.15);
+
+  transition: background-color 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.lab-header #languageToggle:hover {
+  background: #ede2ff;
+  border-color: #9460d3;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.35);
+}
+
+body.dark .lab-header #languageToggle {
+  background: #251d36;
+  color: #d8bcff;
+  border-color: #79569f;
+  box-shadow: 0 0 12px rgba(185, 132, 255, 0.2);
+}
+
+body.dark .lab-header #languageToggle:hover {
+  background: #352447;
+  border-color: #c69aff;
+  box-shadow: 0 0 20px rgba(185, 132, 255, 0.4);
+}
+
+.lab-header #languageToggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-header #languageToggle {
+    transition: none;
+  }
+}
