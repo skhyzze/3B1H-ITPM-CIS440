@@ -800,3 +800,4 @@ body.page-home.dark :is(a,button,input):focus-visible{
   outline:2px solid var(--dark-text);
   outline-offset:3px;
 }
+

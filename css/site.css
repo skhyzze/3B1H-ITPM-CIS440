@@ -1487,3 +1487,8 @@ body.page-industry .hero h1 span {
 body.dark.page-industry .hero h1 span {
   -webkit-text-stroke-color: #ff8295;
 }
+
+#themeToggle {
+  position: relative;
+  left: 10px;
+}

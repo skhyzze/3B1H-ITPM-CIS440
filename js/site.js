@@ -119,3 +119,11 @@
   });
 
 })();
+
+// function openSpanishTranslation() {
+//   const translatedPage =
+//     "https://translate.google.com/translate?sl=en&tl=es&u=" +
+//     encodeURIComponent(window.location.href);
+
+//   window.open(translatedPage, "_blank", "noopener,noreferrer");
+// }
