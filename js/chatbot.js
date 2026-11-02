@@ -54,7 +54,7 @@
       link: { label: 'Go to Get Involved', href: pageLinks.involved }
     },
     {
-      pattern: /\b(what is|about|purpose|applied ai lab|the lab|artificial intelligence)\b/i,
+      pattern: /\b(applied ai lab|the lab|lab purpose|about the lab|artificial intelligence)\b/i,
       answer: 'The Applied AI Lab is a collaborative environment for exploring artificial intelligence through experimentation, research, technical projects, and interdisciplinary problem-solving.',
       link: { label: 'Learn about the Lab', href: pageLinks.home }
     }
@@ -64,21 +64,21 @@
   root.dataset.labChat = '';
   root.innerHTML = [
     '<button class="lab-chat-launcher" type="button" aria-expanded="false" aria-controls="labChatPanel">Ask the Lab</button>',
-    '<section class="lab-chat-panel" id="labChatPanel" role="dialog" aria-modal="false" aria-labelledby="labChatTitle" hidden>',
-    '  <header class="lab-chat-header">',
+    '<div class="lab-chat-panel" id="labChatPanel" role="dialog" aria-modal="false" aria-labelledby="labChatTitle" hidden>',
+    '  <div class="lab-chat-header">',
     '    <div class="lab-chat-title">',
     '      <strong id="labChatTitle">Ask the Lab</strong>',
     '      <span class="lab-chat-status">' + (config.endpoint ? 'Connected' : 'Demo mode - approved site content') + '</span>',
     '    </div>',
     '    <button class="lab-chat-close" type="button" aria-label="Close chat">&times;</button>',
-    '  </header>',
+    '  </div>',
     '  <div class="lab-chat-messages" aria-live="polite" aria-relevant="additions text"></div>',
     '  <form class="lab-chat-form">',
     '    <label class="lab-chat-visually-hidden" for="labChatInput">Ask a question about the Applied AI Lab</label>',
     '    <input class="lab-chat-input" id="labChatInput" name="message" type="text" maxlength="500" autocomplete="off" placeholder="Ask about the Lab..." required>',
     '    <button class="lab-chat-send" type="submit">Send</button>',
     '  </form>',
-    '</section>'
+    '</div>'
   ].join('');
   document.body.appendChild(root);
 
@@ -219,6 +219,7 @@
     input.value = '';
     input.disabled = true;
     sendButton.disabled = true;
+    messages.setAttribute('aria-busy', 'true');
     addMessage('user', question);
 
     const typing = addMessage('assistant', 'Checking the available Lab information...');
@@ -242,7 +243,8 @@
       busy = false;
       input.disabled = false;
       sendButton.disabled = false;
-      input.focus();
+      messages.setAttribute('aria-busy', 'false');
+      if (!panel.hidden) input.focus();
     }
   }
 
