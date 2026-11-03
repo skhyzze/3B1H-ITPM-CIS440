@@ -5,7 +5,7 @@
 
   const externalConfig = window.LAB_CHAT_CONFIG || {};
   const config = {
-    endpoint: typeof externalConfig.endpoint === 'string' ? externalConfig.endpoint : '',
+    endpoint: typeof externalConfig.endpoint === 'string' ? externalConfig.endpoint : 'https://lab-chat.tan-gurpinar.workers.dev',
     requestTimeout: Number(externalConfig.requestTimeout) || 12000
   };
 
@@ -149,8 +149,8 @@
     addMessage(
       'assistant',
       config.endpoint
-        ? 'Welcome! Ask me a question about the Applied AI Lab.'
-        : 'Welcome! This demo uses approved information already published on the Lab website. It is not connected to Grok yet.'
+        ? 'Welcome! Ask me a question about the Applied AI Lab'
+        : 'Welcome! This chatbot is now active {message will change soon]}.'
     );
     addSuggestions();
   }
