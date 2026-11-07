@@ -79,6 +79,7 @@ function itemAttrs(item, index) {
 
 // ---- 3c. Saved reading list (remembered in this browser only) -----------
 const SAVE_KEY = "appliedAIBrief.saved";
+const SUBSCRIBED_KEY = "circuit.subscribed";
 let saved = new Set();
 try { saved = new Set(JSON.parse(localStorage.getItem(SAVE_KEY) || "[]")); } catch (e) { saved = new Set(); }
 // Remembers saved links in this browser.
@@ -183,7 +184,7 @@ function exploreHtml(d) {
     .concat(d.sections.map(function (s) {
       return '<button class="fchip" type="button" data-filter="' + esc(s.id) + '" data-c="' + esc(s.id) + '"><i></i>' + esc(LABELS[s.id] || s.name) + '</button>';
     }))
-    // .concat(['<button class="fchip" type="button" data-filter="saved" data-c="videos"><i></i>♥ Liked</button>']);
+    .concat(['<button class="fchip" type="button" data-filter="saved" data-c="videos"><i></i>♥ Liked <small id="liked-count">0</small></button>']);
   return '<div class="explore" id="explore"><div class="wrap">' +
     '<div class="filters" role="toolbar" aria-label="Filter by topic">' + chips.join("") + '</div>' +
     '<label class="search"><span class="sr">Search this issue</span>' + icon("search", 17) + '<input id="search" type="search" placeholder="Search this issue..." autocomplete="off"></label>' +
@@ -279,11 +280,14 @@ function sectionHtml(section, list) {
 // Builds the signup preview; emails are not saved.
 function subscribeHtml(d) {
   return '<section class="subscribe" id="subscribe"><div class="wrap"><div class="sub-card reveal">' +
-    '<div><span class="tag">' + icon("sparkle", 14) + '"NEW"</span>' +
+    '<div><span class="tag">' + icon("sparkle", 14) + 'NEW</span>' +
     '<h3>Subscribe to the ' + esc(d.lab) + ' Newsletter</h3>' +
     '<p>Get The Applied AI Brief in your inbox every week: one spotlight, the best of the rest, zero noise.</p></div>' +
-    '<div><form class="sub-form" id="sub-form"><input type="email" placeholder="you@university.edu" aria-label="Email address" required><button type="submit">Notify me</button></form>' +
-    '<div class="sub-note" id="sub-note"></div></div>' +
+    '<div><form class="sub-form" id="sub-form"><input type="email" placeholder="you@university.edu" aria-label="Email address" required>' +
+    '<input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">' +
+    '<button type="submit">Notify me</button></form>' +
+    '<div class="sub-note" id="sub-note"></div>' +
+    '<div class="sub-note">We only use your email to send The Circuit. Unsubscribe anytime.</div></div>' +
     '</div></div></section>';
 }
 
@@ -320,6 +324,7 @@ if (footer) {
 
 wireUp();
   app.focus({ preventScroll: true });   // lets arrow keys / space bar scroll right away
+  scrollToHash();
 }
 
 // ---- 3e. Interactivity -------------------------------------------------------
@@ -345,7 +350,14 @@ function applyFilters() {
     shown += visible;
   });
   const empty = document.getElementById("empty-state");
-  if (empty) empty.style.display = shown ? "none" : "block";
+  if (empty) {
+    if (filterState.topic === "saved" && saved.size === 0) {
+      empty.innerHTML = "<b>You haven't liked anything yet.</b> Tap the heart on any story to save it here.";
+    } else {
+      empty.innerHTML = "<b>Nothing matches that yet.</b>Try another topic or clear your search.";
+    }
+    empty.style.display = shown ? "none" : "block";
+  }
   const note = document.getElementById("result-note");
   if (note) {
     const filtered = filterState.topic !== "all" || q;
@@ -370,7 +382,7 @@ function refreshSaved() {
     if (label) label.textContent = on ? "Liked" : "Like";
   });
   const n = saved.size;
-  ["saved-count"].forEach(function (id) { const el = document.getElementById(id); if (el) el.textContent = n; });
+  ["saved-count", "liked-count"].forEach(function (id) { const el = document.getElementById(id); if (el) el.textContent = n; });
 }
 
 let toastTimer;
@@ -386,6 +398,15 @@ function jumpTo(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+// Scrolls to the section in the URL after the page is built.
+function scrollToHash() {
+  var id = decodeURIComponent(location.hash.replace(/^#/, ""));
+  if (!id) return;
+  var el = document.getElementById(id);
+  if (el) requestAnimationFrame(function () { el.scrollIntoView({ block: "start" }); });
+}
+window.addEventListener("hashchange", scrollToHash);
 
 // Opens a YouTube video in the popup.
 function openVideo(index) {
@@ -449,69 +470,80 @@ function wireUp() {
   if (search) search.addEventListener("input", function () { filterState.query = search.value; applyFilters(); });
   const form = document.getElementById("sub-form");
   form.addEventListener("submit", async function (e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const input = form.querySelector('input[type="email"]');
-  const button = form.querySelector('button[type="submit"]');
-  const note = document.getElementById("sub-note");
+    const input = form.querySelector('input[type="email"]');
+    const button = form.querySelector('button[type="submit"]');
+    const note = document.getElementById("sub-note");
+    const trap = form.querySelector('input[name="company"]');
+    if (trap && trap.value) return;
 
-  button.disabled = true;
-  note.textContent = "Thanks for joining The Circuit! You're now on the list.";
+    let already = false;
+    try { already = localStorage.getItem(SUBSCRIBED_KEY) === "1"; } catch (err) { already = false; }
+    if (already) {
+      note.textContent = "You're already subscribed on this device.";
+      return;
+    }
 
-  try {
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
-      {
-        method: "POST",
-        mode: "no-cors",
-        body: new URLSearchParams({
-          email: input.value.trim()
-        })
-      }
-    );
+    const email = input.value.trim().toLowerCase();
+    button.disabled = true;
+    note.textContent = "Sending…";
 
-    note.textContent = "Subscription request sent.";
-    form.reset();
-  } catch (error) {
-    note.textContent = "Could not send. Please try again.";
-  } finally {
-    button.disabled = false;
-  }
-});
-  
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          body: new URLSearchParams({ email: email })
+        }
+      );
+      note.textContent = "Thanks for joining The Circuit! You're on the list.";
+      form.reset();
+      try { localStorage.setItem(SUBSCRIBED_KEY, "1"); } catch (err) { /* private mode */ }
+    } catch (error) {
+      note.textContent = "Could not send. Please try again.";
+    } finally {
+      button.disabled = false;
+    }
+  });
 }
 
-// const LIKES_URL = "https://script.google.com/macros/s/AKfycbzAKsbaQZBCjk2Nvy41X4u76dRuA36ayQN5ZEl5NDW-0K_3rMHmaBNNqFPy4SYAdeq4sA/exec";
+const LIKES_URL = "https://script.google.com/macros/s/AKfycbzAKsbaQZBCjk2Nvy41X4u76dRuA36ayQN5ZEl5NDW-0K_3rMHmaBNNqFPy4SYAdeq4sA/exec";
 
-// function sendLikeToSheet(url) {
-//   const item =
-//     ITEMS.find(item => item.url === url) ||
-//     (ITEMS[-1]?.url === url ? ITEMS[-1] : null);
+function sendLikeToSheet(url) {
+  const item =
+    ITEMS.find(item => item.url === url) ||
+    (ITEMS[-1] && ITEMS[-1].url === url ? ITEMS[-1] : null);
 
-//   if (!item) return;
+  if (!item) return;
 
-//   // Remember a random ID for this browser.
-//   let userId = localStorage.getItem("circuit.userId");
+  // Remember a random ID for this browser.
+  let userId = "";
+  try { userId = localStorage.getItem("circuit.userId") || ""; } catch (e) { userId = ""; }
 
-//   if (!userId) {
-//     userId = crypto.randomUUID();
-//     localStorage.setItem("circuit.userId", userId);
-//   }
+  if (!userId) {
+    try {
+      userId = (window.crypto && typeof crypto.randomUUID === "function") ? crypto.randomUUID() : "";
+    } catch (e) { userId = ""; }
+    if (!userId) userId = String(Date.now() + Math.random());
+    try { localStorage.setItem("circuit.userId", userId); } catch (e) { /* private mode */ }
+  }
 
-//   // Send the title, URL, and current heart selection.
-//   fetch(LIKES_URL, {
-//     method: "POST",
-//     mode: "no-cors",
-//     body: new URLSearchParams({
-//       userId: userId,
-//       title: item.title,
-//       url: url,
-//       liked: String(saved.has(url))
-//     })
-//   }).catch(function (error) {
-//     console.error("Could not send the like:", error);
-//   });
-// }
+  // Send the title, URL, and current heart selection.
+  fetch(LIKES_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: new URLSearchParams({
+      userId: userId,
+      title: item.title,
+      url: url,
+      liked: String(saved.has(url))
+    })
+  }).catch(function (error) {
+    console.error("Could not send the like:", error);
+  });
+}
 
 // One click handler for everything clickable on the page.
 document.addEventListener("click", function (e) {
@@ -566,6 +598,17 @@ function updateBriefThemeButton(button) {
   button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
   button.setAttribute("aria-pressed", String(dark));
 }
+
+// Matches the scrolling area to the real site header height.
+function syncHeaderOffset() {
+  const header = document.querySelector(".lab-header");
+  if (!header) return;
+  document.documentElement.style.setProperty("--header-offset", header.offsetHeight + "px");
+}
+document.addEventListener("DOMContentLoaded", syncHeaderOffset);
+window.addEventListener("load", syncHeaderOffset);
+window.addEventListener("resize", syncHeaderOffset);
+syncHeaderOffset();
 
 // Applies the preferred theme, then builds the page from the data file.
 const savedBriefTheme = readBriefTheme();
