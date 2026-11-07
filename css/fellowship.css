@@ -336,9 +336,110 @@ html.reveal-ready .skill-card.reveal:nth-child(6) { transition-delay: .4s; }
 @media (prefers-reduced-motion: reduce) {
   html.reveal-ready .reveal,html.reveal-ready .reveal.is-in { opacity: 1; transform: none; transition: none; }
   .path-panel { animation: none; }
+  .page-hero h1,.page-hero h1 em,html.reveal-ready .section-heading.reveal.is-in h2 { animation: none !important; clip-path: none; transform: none; }
+  .circuit-trace,.circuit-node,.hero-orbit,.circuit-field,.fellows-section::before,.page-fellowship .is-clicked,.page-fellowship .carousel-progress span::after,.page-fellowship .fellow-card.is-active::after,.console-bar > span,.path-step.is-selected .ico path { animation: none !important; }
 }
 
 @keyframes path-panel-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
+
+.hero-layout { position: relative; z-index: 1; }
+.circuit-field { position: absolute; z-index: 0; top: 36px; right: -30px; width: min(48vw, 620px); height: auto; color: var(--blue); opacity: .42; pointer-events: none; }
+.hero-orbit-one { border-color: transparent; border-top-color: rgba(18,58,99,.55); border-right-color: rgba(161,27,46,.55); animation: orbit-spin 32s linear infinite; }
+.hero-orbit-two { border-color: transparent; border-bottom-color: rgba(18,58,99,.5); border-left-color: rgba(161,27,46,.45); animation: orbit-spin 20s linear infinite reverse; }
+.circuit-trace { stroke-dasharray: 7 9; animation: circuit-flow 7s linear infinite; }
+.circuit-trace-b { animation-duration: 9s; animation-direction: reverse; }
+.circuit-trace-c { animation-duration: 11s; }
+.circuit-trace-d { animation-duration: 5s; }
+.circuit-trace-e { animation-duration: 6.5s; animation-direction: reverse; }
+.circuit-node { transform-box: fill-box; transform-origin: center; animation: node-pulse 2.2s ease-in-out infinite; }
+.circuit-node-hot { animation-delay: .6s; }
+.about-fellowship,.ideal-candidates,.fellow-skills,.how-to-become { position: relative; }
+.circuit-decor { position: absolute; top: 28px; width: 150px; height: 58px; pointer-events: none; color: var(--blue); opacity: .55; }
+.about-fellowship .circuit-decor,.fellow-skills .circuit-decor { right: max(18px, calc((100% - 1180px) / 2)); }
+.ideal-candidates .circuit-decor { left: max(18px, calc((100% - 1180px) / 2)); }
+.how-to-become .circuit-decor { right: max(18px, calc((100% - 1180px) / 2)); color: #ffc1c9; opacity: .7; }
+.console-bar > span:first-child { animation: node-pulse 1.6s ease-in-out infinite; }
+button.console-line:active { background: rgba(161,27,46,.28); }
+.page-fellowship .button:active:not(:disabled) { transform: translateY(0) scale(.97); }
+.page-fellowship .lab-nav-links > a:active,.page-fellowship .lab-footer-nav a:active,.page-fellowship .footer-circuit:active,.page-fellowship .lab-footer-top:active { transform: translateY(1px) scale(.98); }
+.page-fellowship .lab-theme-toggle:active { transform: scale(.9) rotate(-14deg); }
+.page-fellowship .lab-chat-launcher:active,.page-fellowship .lab-chat-close:active,.page-fellowship .lab-chat-send:active { transform: scale(.94); }
+.page-fellowship .is-clicked { animation: click-pulse .48s ease; }
+
+.ico { display: block; width: 22px; height: 22px; flex: 0 0 auto; }
+.program-support { display: flex; align-items: flex-start; gap: 12px; }
+.program-support .ico { margin-top: 3px; color: var(--red); }
+.card-icon-row { display: flex; align-items: center; gap: 10px; }
+.card-icon { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line); color: var(--red); transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+.candidate-card,.skill-card { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.candidate-card:hover,.skill-card:hover,html.reveal-ready .candidate-card.reveal.is-in:hover,html.reveal-ready .skill-card.reveal.is-in:hover { transform: translateY(-6px); border-color: rgba(161,27,46,.45); box-shadow: 8px 8px 0 var(--sand); }
+.candidate-card:hover .card-icon,.skill-card:hover .card-icon { transform: rotate(-8deg) scale(1.05); border-color: var(--red); background: rgba(161,27,46,.08); }
+.path-number { display: inline-flex; align-items: center; gap: 8px; }
+.path-number .ico { width: 18px; height: 18px; }
+.path-step { transition: transform .18s ease, border-color .2s ease, background .2s ease; }
+.path-step:hover { border-color: rgba(255,255,255,.55); background: rgba(7,18,31,.4); }
+.path-step:active { transform: translateY(1px) scale(.98); }
+.path-step.is-selected .ico path { stroke-dasharray: 80; stroke-dashoffset: 80; animation: icon-draw .55s ease forwards; }
+body.page-fellowship .path-facts li { display: flex; align-items: flex-start; gap: 8px; }
+.fact-ico { width: 16px; height: 16px; margin-top: 1px; }
+
+.page-fellowship .carousel-button { transition: transform .16s ease, background .2s ease, color .2s ease; }
+.page-fellowship .carousel-button:hover:not(:disabled) { transform: translateY(-2px); }
+.page-fellowship .carousel-button:active:not(:disabled) { transform: scale(.9); }
+.page-fellowship .fellow-card.is-option:active { transform: translateY(-1px) scale(.98); }
+.page-fellowship .fellow-card.is-active::after { animation: circuit-corner 3s ease-in-out infinite; }
+.page-fellowship .carousel-progress span { position: relative; overflow: hidden; }
+.page-fellowship .carousel-progress span::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent); animation: progress-sheen 1.7s ease-in-out infinite; }
+.fellows-section::before { animation: circuit-drift 12s linear infinite; }
+.page-fellowship .fellow-project a { transition: color .2s ease, transform .2s ease; }
+.page-fellowship .fellow-project a:active { transform: translateX(3px); }
+
+body.dark.page-fellowship .hero-orbit-one { border-color: transparent; border-top-color: rgba(255,255,255,.55); border-right-color: rgba(255,155,168,.75); }
+body.dark.page-fellowship .hero-orbit-two { border-color: transparent; border-bottom-color: rgba(255,255,255,.4); border-left-color: rgba(255,155,168,.55); }
+body.dark.page-fellowship .circuit-field { color: #d7e4ef; opacity: .3; }
+body.dark.page-fellowship .circuit-decor { color: #d7e4ef; }
+body.dark.page-fellowship .how-to-become .circuit-decor { color: #ffc1c9; }
+body.dark.page-fellowship .candidate-card:hover,body.dark.page-fellowship .skill-card:hover { box-shadow: 8px 8px 0 rgba(230,223,216,.14); }
+body.dark.page-fellowship .program-support .ico { color: #ff9ba8; }
+
+@media (max-width: 940px) {
+  .circuit-field { width: 240px; opacity: .2; top: auto; bottom: 12px; }
+  .circuit-decor { width: 110px; opacity: .35; }
+}
+
+@media (max-width: 640px) {
+  .circuit-decor,.circuit-field { display: none; }
+  .hero-orbit-one,.hero-orbit-two,.fellows-section::before,.page-fellowship .carousel-progress span::after,.page-fellowship .fellow-card.is-active::after { animation: none; }
+  .card-icon { width: 34px; height: 34px; }
+  .ico { width: 18px; height: 18px; }
+  html.reveal-ready .reveal { transform: translateY(10px); transition-duration: .4s; }
+  html.reveal-ready .candidate-card.reveal:nth-child(n),html.reveal-ready .skill-card.reveal:nth-child(n) { transition-delay: 0s; }
+  .candidate-card:hover,.skill-card:hover,html.reveal-ready .candidate-card.reveal.is-in:hover,html.reveal-ready .skill-card.reveal.is-in:hover,body.dark.page-fellowship .candidate-card:hover,body.dark.page-fellowship .skill-card:hover { transform: none; box-shadow: none; }
+  .candidate-card:hover .card-icon,.skill-card:hover .card-icon { transform: none; }
+  .page-fellowship .carousel-button:hover:not(:disabled) { transform: none; }
+}
+
+.page-hero h1,.page-hero h1 em,html.reveal-ready .section-heading.reveal.is-in h2 { animation: heading-grow .95s cubic-bezier(.2,.7,.2,1) both; }
+.page-hero h1,.page-hero h1 em,html.reveal-ready .about-fellowship .section-heading.reveal.is-in h2,html.reveal-ready #fellows .section-heading.reveal.is-in h2 { transform-origin: left center; }
+html.reveal-ready .ideal-candidates .section-heading.reveal.is-in h2 { transform-origin: right center; }
+html.reveal-ready .fellow-skills .section-heading.reveal.is-in h2,html.reveal-ready .how-to-become .section-heading.reveal.is-in h2 { transform-origin: center center; }
+.page-hero h1 em { animation-delay: .14s; }
+
+@keyframes heading-grow { from { opacity: 0; transform: translateY(16px) scale(.94); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 640px) {
+  .page-hero h1,.page-hero h1 em,html.reveal-ready .section-heading.reveal.is-in h2 { animation-duration: .55s; transform-origin: left center; }
+  .page-hero h1 em { animation-delay: .08s; }
+}
+
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@keyframes circuit-flow { to { stroke-dashoffset: -220; } }
+@keyframes node-pulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+@keyframes icon-draw { to { stroke-dashoffset: 0; } }
+@keyframes click-pulse { 0% { box-shadow: 0 0 0 0 rgba(161,27,46,.45); } 100% { box-shadow: 0 0 0 12px rgba(161,27,46,0); } }
+@keyframes circuit-corner { 0%, 100% { border-color: var(--sand); } 50% { border-color: var(--red); } }
+@keyframes progress-sheen { 0% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+@keyframes circuit-drift { to { background-position: 28px 12px; } }
