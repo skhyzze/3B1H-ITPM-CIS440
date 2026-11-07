@@ -6,7 +6,7 @@
  * collector, review workflow, and newsletter component remain unchanged.
  */
 const STATIC_NEWSLETTER_DATA = {
-  title: "The Applied AI Brief",
+  title: "The Circuit",
   lab: "Applied AI Lab",
   intro: "Your weekly digest of what matters in artificial intelligence: the news worth knowing, tutorials worth your time, tools worth trying, and real examples of AI being applied. Every link below was hand-picked by the Applied AI Lab team.",
   weekOf: "Oct 26, 2026",

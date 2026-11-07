@@ -4,10 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
+  <meta name="description" content="Learn how students join the Applied AI Lab Fellowship Pathway and take a deeper role in research, projects, and the Lab community.">
+  <meta property="og:title" content="Fellowship Pathway | Applied AI Lab">
+  <meta property="og:description" content="Learn how students join the Applied AI Lab Fellowship Pathway and take a deeper role in research, projects, and the Lab community.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="images_icons/AAI-Logo-Black-Animated-Match.png" type="image/png">
   <meta name="theme-color" content="#f8f8f6">
   <title>Fellowship Pathway | Applied AI Lab</title>
   <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/fellowship.css">
+  <link rel="stylesheet" href="css/fellowship.css?v=10">
   <link rel="stylesheet" href="css/blended-theme.css">
   <link rel="stylesheet" href="css/chatbot.css">
 </head>
@@ -41,13 +47,26 @@
     <section class="page-hero" aria-labelledby="hero-title">
       <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
       <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+      <svg class="circuit-field" viewBox="0 0 760 520" fill="none" aria-hidden="true" focusable="false">
+        <path class="circuit-trace" d="M40 90H190V200H340" stroke="currentColor" stroke-width="1.5"/>
+        <path class="circuit-trace circuit-trace-b" d="M340 200H500V110H720" stroke="currentColor" stroke-width="1.5"/>
+        <path class="circuit-trace circuit-trace-c" d="M190 200V360H420V450H640" stroke="currentColor" stroke-width="1.5"/>
+        <path class="circuit-trace circuit-trace-d" d="M70 360H190" stroke="currentColor" stroke-width="1.5"/>
+        <path class="circuit-trace circuit-trace-e" d="M500 200V330H690" stroke="#a11b2e" stroke-width="1.5"/>
+        <circle class="circuit-node" cx="190" cy="90" r="4" fill="currentColor"/>
+        <circle class="circuit-node" cx="340" cy="200" r="4" fill="currentColor"/>
+        <circle class="circuit-node circuit-node-hot" cx="500" cy="110" r="4" fill="#a11b2e"/>
+        <circle class="circuit-node" cx="420" cy="360" r="4" fill="currentColor"/>
+        <circle class="circuit-node circuit-node-hot" cx="640" cy="450" r="4" fill="#a11b2e"/>
+        <circle class="circuit-node" cx="690" cy="330" r="4" fill="currentColor"/>
+      </svg>
       <div class="container hero-layout">
         <div class="page-hero-content">
           <p class="section-kicker">Student experience</p>
           <h1 id="hero-title">Build what’s <em>next.</em></h1>
-          <p class="lead content-pending">A concise, client-approved introduction to the fellowship, who it serves, and the opportunity it creates will appear here.</p>
+          <p class="lead content-pending">[One or two sentences introducing the Fellowship to prospective students. Confirm with the client.]</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#joining">How the pathway works <span aria-hidden="true">↘</span></a>
+            <a class="button button-primary" href="#how-to-become">Become a Fellow <span aria-hidden="true">↘</span></a>
             <a class="button button-ghost" href="#fellows">Meet the fellows</a>
           </div>
         </div>
@@ -55,9 +74,10 @@
         <div class="hero-console" aria-label="Fellowship pathway overview">
           <div class="console-bar"><span></span><span></span><span></span><p>fellowship_pathway.json</p></div>
           <div class="console-body">
-            <button class="console-line is-active" type="button" data-pathway-target="#about" aria-current="step"><span>01</span><code>EXPLORE</code><small>Find your focus</small></button>
-            <button class="console-line" type="button" data-pathway-target="#joining"><span>02</span><code>APPLY</code><small>Work on real questions</small></button>
-            <button class="console-line" type="button" data-pathway-target="#fellows"><span>03</span><code>CONNECT</code><small>Learn with a cohort</small></button>
+            <button class="console-line is-active" type="button" data-pathway-target="#about-fellowship" aria-current="step"><span>01</span><code>WHAT</code><small>What the Fellowship is</small></button>
+            <button class="console-line" type="button" data-pathway-target="#ideal-candidates"><span>02</span><code>WHO</code><small>Who can be a Fellow</small></button>
+            <button class="console-line" type="button" data-pathway-target="#fellow-skills"><span>03</span><code>SKILLS</code><small>What you’ll develop</small></button>
+            <button class="console-line" type="button" data-pathway-target="#how-to-become"><span>04</span><code>APPLY</code><small>How to become a Fellow</small></button>
             <p class="console-line console-status"><span aria-hidden="true">●</span><code>DETAILS</code><small>Pending client confirmation</small></p>
             <p class="console-instruction">Select a stage to explore the pathway.</p>
           </div>
@@ -66,19 +86,167 @@
       <div class="hero-index" aria-hidden="true">FEL / 001</div>
     </section>
 
-    <section class="section overview-section" id="about" aria-labelledby="about-title">
-      <div class="container overview-grid">
-        <div class="section-heading">
-          <h2 id="about-title">A launchpad for applied learning.</h2>
-        </div>
-        <div class="overview-copy">
-          <p class="intro-text content-pending">Briefly explain what the fellowship does, what students may work on, and what they can expect to gain. Confirm the final wording with the client.</p>
-          <div class="signal-row" aria-label="Explore program information">
-            <button class="signal-item is-active" type="button" data-signal-title="Eligibility" aria-expanded="true" aria-controls="signalDetail"><strong>01</strong><span>Eligibility</span><small>Select for status</small></button>
-            <button class="signal-item" type="button" data-signal-title="Timeline" aria-expanded="false" aria-controls="signalDetail"><strong>02</strong><span>Timeline</span><small>Select for status</small></button>
-            <button class="signal-item" type="button" data-signal-title="Commitment" aria-expanded="false" aria-controls="signalDetail"><strong>03</strong><span>Commitment</span><small>Select for status</small></button>
+    <section class="section about-fellowship" id="about-fellowship" aria-labelledby="about-fellowship-title">
+      <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+        <path class="circuit-trace" d="M8 48H48V18H110V48H172" stroke="currentColor" stroke-width="1.4"/>
+        <circle class="circuit-node" cx="48" cy="18" r="3" fill="currentColor"/>
+        <circle class="circuit-node circuit-node-hot" cx="110" cy="48" r="3" fill="#a11b2e"/>
+        <circle class="circuit-node" cx="172" cy="48" r="3" fill="currentColor"/>
+      </svg>
+      <div class="container">
+        <div class="program-layout">
+          <div class="section-heading reveal">
+            <p class="section-kicker">01 / The program</p>
+            <h2 id="about-fellowship-title">What is the Fellowship?</h2>
           </div>
-          <div class="signal-detail" id="signalDetail" aria-live="polite"><strong>Eligibility</strong><p>Program details are awaiting client confirmation.</p></div>
+          <div class="program-copy reveal">
+            <p class="intro-text content-pending">[One or two sentences that explain what the Fellowship is and why it exists. Confirm final wording with the client.]</p>
+            <p class="program-support content-pending"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16v12H4zM8 7V5h8v2M4 12h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[What Fellows do day to day (projects, mentorship, events, research).]</p>
+            <p class="program-support content-pending"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 16l5-5 3 3 8-8M14 6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>[What Fellows gain from the experience.]</p>
+          </div>
+          <!--
+            IMAGE PLACEHOLDER: [Program image]
+            Page: Fellowship. Section: "What is the Fellowship?" (#about-fellowship).
+            On screen it sits to the right of that heading, lined up with the heading, in a 4:3 frame.
+            To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+            Replace the svg and the [Program image] label with:
+            <img src="images/your-program-photo.jpg" alt="Fellows at work">
+            Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+          -->
+          <figure class="image-slot image-slot-43 reveal">
+            <div class="image-slot-frame" role="img" aria-label="Image placeholder for the Fellowship program">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">[Program image]</span>
+            </div>
+            <figcaption class="content-pending">[Add a photo of Fellows at work. Confirm with the client.]</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ideal-candidates" id="ideal-candidates" aria-labelledby="ideal-candidates-title">
+      <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+        <path class="circuit-trace" d="M8 22H70V52H120V22H172" stroke="currentColor" stroke-width="1.4"/>
+        <circle class="circuit-node" cx="70" cy="52" r="3" fill="currentColor"/>
+        <circle class="circuit-node circuit-node-hot" cx="120" cy="22" r="3" fill="#a11b2e"/>
+        <circle class="circuit-node" cx="172" cy="22" r="3" fill="currentColor"/>
+      </svg>
+      <div class="container">
+        <div class="content-split">
+          <div class="section-heading reveal">
+            <p class="section-kicker">02 / Ideal candidates</p>
+            <h2 id="ideal-candidates-title">Who can be a Fellow?</h2>
+          </div>
+          <p class="program-intro content-pending reveal">[Describe the type of student the Lab is looking for.]</p>
+          <!--
+            IMAGE PLACEHOLDER: [Candidate image]
+            Page: Fellowship. Section: "Who can be a Fellow?" (#ideal-candidates).
+            On screen it sits to the left of that heading, lined up with the heading, in a 4:3 frame.
+            To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+            Replace the svg and the [Candidate image] label with:
+            <img src="images/your-candidate-photo.jpg" alt="The kind of student the Lab hopes to meet">
+            Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+          -->
+          <figure class="image-slot image-slot-43 reveal">
+            <div class="image-slot-frame" role="img" aria-label="Image placeholder for ideal Fellowship candidates">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">[Candidate image]</span>
+            </div>
+            <figcaption class="content-pending">[Add a photo that shows the kind of student the Lab hopes to meet.]</figcaption>
+          </figure>
+        </div>
+        <div class="candidate-grid">
+          <article class="candidate-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M12 3l7 3v6c0 4.5-3 7.2-7 8.5C8 19.2 5 16.5 5 12V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <p class="candidate-label">Eligibility</p>
+            </div>
+            <h3>General Eligibility Standards</h3>
+            <p class="content-pending">[Class standing, enrollment status, and any GPA or prerequisite requirements.]</p>
+          </article>
+          <article class="candidate-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg></span>
+              <p class="candidate-label">Interest</p>
+            </div>
+            <h3>Interests and qualities</h3>
+            <p>A specific major is not required. A strong interest in the Fellowship matters most, together with curiosity, initiative, and a collaborative mindset.</p>
+          </article>
+          <article class="candidate-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4.5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <p class="candidate-label">Commitment</p>
+            </div>
+            <h3>Time and availability</h3>
+            <p class="content-pending">[Expected weekly time commitment and length of the program.]</p>
+          </article>
+        </div>
+        <p class="pending-note">[Details awaiting client confirmation.]</p>
+      </div>
+    </section>
+
+    <section class="section fellow-skills" id="fellow-skills" aria-labelledby="fellow-skills-title">
+      <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+        <path class="circuit-trace" d="M8 36H46V14H96V52H140V28H172" stroke="currentColor" stroke-width="1.4"/>
+        <circle class="circuit-node" cx="46" cy="14" r="3" fill="currentColor"/>
+        <circle class="circuit-node circuit-node-hot" cx="96" cy="52" r="3" fill="#a11b2e"/>
+        <circle class="circuit-node" cx="140" cy="28" r="3" fill="currentColor"/>
+      </svg>
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">03 / Skills and growth</p>
+          <h2 id="fellow-skills-title">What it means to be a Fellow.</h2>
+        </div>
+        <p class="program-intro content-pending reveal">[Explain what Fellows develop and practice during the experience.]</p>
+        <div class="skill-grid">
+          <article class="skill-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><rect x="7" y="7" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+              <p class="skill-number">01</p>
+            </div>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Technical skill (for example, working with AI tools or data analysis).]</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M6 16L12 6l6 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6" cy="16" r="2" fill="currentColor"/><circle cx="12" cy="6" r="2" fill="currentColor"/><circle cx="18" cy="16" r="2" fill="currentColor"/></svg></span>
+              <p class="skill-number">02</p>
+            </div>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Applied problem solving.]</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M8 14a3 3 0 1 0-2-5.2M16 14a3 3 0 1 1 2-5.2M12 18a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12h2.2M13.8 12H16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+              <p class="skill-number">03</p>
+            </div>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Collaboration and teamwork across disciplines.]</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M5 12h2M9 8v8M13 5v14M17 8v8M21 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+              <p class="skill-number">04</p>
+            </div>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Communication and presenting work.]</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M6 20V5h10l-2.2 3L16 11H6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+              <p class="skill-number">05</p>
+            </div>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Leadership and mentorship.]</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M8 7V5h8v2M4 7h16v12H4zM4 12h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+              <p class="skill-number">06</p>
+            </div>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Professional and career readiness.]</p>
+          </article>
         </div>
       </div>
     </section>
@@ -139,17 +307,89 @@
       </div>
     </section>
 
-    <section class="section details-section" id="joining" aria-labelledby="joining-title">
+    <section class="section details-section how-to-become" id="how-to-become" aria-labelledby="how-to-become-title">
+      <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+        <path class="circuit-trace" d="M8 50H60V16H118V50H172" stroke="currentColor" stroke-width="1.4"/>
+        <circle class="circuit-node" cx="60" cy="16" r="3" fill="currentColor"/>
+        <circle class="circuit-node circuit-node-hot" cx="118" cy="50" r="3" fill="#a11b2e"/>
+        <circle class="circuit-node" cx="172" cy="50" r="3" fill="currentColor"/>
+      </svg>
       <div class="container">
-        <div class="section-heading section-heading-row">
-          <div><h2 id="joining-title">Your pathway starts here.</h2></div>
-          <p class="section-aside">The application process and program structure below are ready for confirmed details.</p>
+        <div class="section-heading reveal">
+          <p class="section-kicker">04 / Your path</p>
+          <h2 id="how-to-become-title">How do I become a Fellow?</h2>
         </div>
-        <div class="details-grid">
-          <article class="detail-card"><div class="detail-number">01</div><div><p class="detail-label">Application</p><h3>How to express interest</h3><p class="content-pending">Add who can apply, required materials, the current contact, and any relevant deadline.</p></div></article>
-          <article class="detail-card"><div class="detail-number">02</div><div><p class="detail-label">Experience</p><h3>What the pathway includes</h3><p class="content-pending">Add confirmed stages, activities, learning goals, curriculum, and completion expectations.</p></div></article>
+        <p class="program-intro content-pending reveal">[One sentence explaining that becoming a Fellow follows the steps below.]</p>
+        <div class="path-board reveal">
+          <ol class="path-steps">
+            <li>
+              <button class="path-step is-selected" type="button" aria-expanded="true" aria-controls="path-panel-1">
+                <span class="path-number" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M6 5h9l3 3v11H6zM15 5v3h3M9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>01</span>
+                <span>Learn about the Fellowship</span>
+              </button>
+            </li>
+            <li>
+              <button class="path-step" type="button" aria-expanded="false" aria-controls="path-panel-2">
+                <span class="path-number" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.2l2.2 2.2 4.8-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>02</span>
+                <span>Confirm you are eligible</span>
+              </button>
+            </li>
+            <li>
+              <button class="path-step" type="button" aria-expanded="false" aria-controls="path-panel-3">
+                <span class="path-number" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M7 4h7l4 4v12H7zM14 4v4h4M9 13h6M9 17h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>03</span>
+                <span>Submit your application</span>
+              </button>
+            </li>
+            <li>
+              <button class="path-step" type="button" aria-expanded="false" aria-controls="path-panel-4">
+                <span class="path-number" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M5 6h10a3 3 0 0 1 0 6H9l-4 4V6zM15 14h2a2.5 2.5 0 0 1 0 5H11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>04</span>
+                <span>Interview or conversation</span>
+              </button>
+            </li>
+            <li>
+              <button class="path-step" type="button" aria-expanded="false" aria-controls="path-panel-5">
+                <span class="path-number" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><circle cx="8" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 18c.6-2.2 2.2-3.2 3.5-3.2S11 15.8 11.5 18M12.5 18c.5-2.2 2.1-3.2 3.5-3.2s2.9 1 3.5 3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>05</span>
+                <span>Join the cohort</span>
+              </button>
+            </li>
+          </ol>
+          <div class="path-panels">
+            <p class="path-panel content-pending" id="path-panel-1">[Where to learn more (events, information sessions, this page).]</p>
+            <p class="path-panel content-pending" id="path-panel-2" hidden>[Quick eligibility checklist.]</p>
+            <p class="path-panel content-pending" id="path-panel-3" hidden>[Required materials, form link, and deadline.]</p>
+            <p class="path-panel content-pending" id="path-panel-4" hidden>[What the selection process looks like and who reviews applications.]</p>
+            <p class="path-panel content-pending" id="path-panel-5" hidden>[What happens after acceptance, including orientation and start date.]</p>
+          </div>
         </div>
-        <div class="contact-strip"><p><span>Ready when the details are.</span> Add the client-approved fellowship contact and call to action here.</p><span class="contact-arrow" aria-hidden="true">→</span></div>
+        <div class="path-close">
+          <div class="path-close-copy">
+        <ul class="path-facts">
+          <li class="content-pending"><svg class="ico fact-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="15" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 3v4M16 3v4M4 10h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>[Application opens: To be announced]</li>
+          <li class="content-pending"><svg class="ico fact-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 20V5h10l-2 3 2 3H6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[Deadline: To be announced]</li>
+          <li class="content-pending"><svg class="ico fact-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 16v.5M9.5 9.5a2.5 2.5 0 1 1 3.2 2.4c-.7.3-1.2.9-1.2 1.6V14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>[Questions: Contact to be confirmed]</li>
+        </ul>
+        <div class="contact-strip">
+          <p class="content-pending">[Add the client-approved Fellowship contact and application link here.]</p>
+          <button class="button path-apply" type="button" disabled aria-disabled="true">Application link coming soon</button>
+        </div>
+          </div>
+          <!--
+            IMAGE PLACEHOLDER: [Pathway image]
+            Page: Fellowship. Section: "How do I become a Fellow?" (#how-to-become).
+            On screen it sits beside the dates and contact details, after the five steps, in a 4:3 frame.
+            To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+            Replace the svg and the [Pathway image] label with:
+            <img src="images/your-pathway-photo.jpg" alt="An information session or the start of a cohort">
+            Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+          -->
+          <figure class="image-slot image-slot-43 image-slot-on-navy reveal">
+            <div class="image-slot-frame" role="img" aria-label="Image placeholder for the Fellowship application path">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">[Pathway image]</span>
+            </div>
+            <figcaption class="content-pending">[Add a photo from an information session or the start of a cohort.]</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
   </main>
@@ -184,7 +424,7 @@
 </footer>
 
   <script src="js/site.js" defer></script>
-  <script src="js/fellowship.js" defer></script>
+  <script src="js/fellowship.js?v=4" defer></script>
   <script src="js/chatbot.js" defer></script>
 </body>
 </html>

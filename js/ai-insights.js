@@ -66,8 +66,16 @@ function meta(item) {
 }
 // Creates a Save button.
 function saveBtn(item) {
-  return '<button class="save" type="button" data-save="' + esc(item.url) + '" aria-label="Like">' + icon("heart", 18) + '</button>';
+  return '<button class="save" type="button" data-save="' + esc(item.url) + '" aria-label="Like: ' + esc(item.title) + '" aria-pressed="false">' + icon("heart", 18) + '</button>';
 }
+// A description paragraph, or nothing when the text is blank.
+function descriptionHtml(item, clamp) {
+  const text = String(item.description == null ? "" : item.description).trim();
+  if (!text) return "";
+  return '<p class="desc ' + clamp + '">' + esc(text) + '</p>';
+}
+// News items read; other tools can be tried.
+function toolAction(item) { return item.type === "News" ? "Read more" : "Try it"; }
 // Uses pick or picks for the item count.
 function picks(n) { return n + (n === 1 ? " pick" : " picks"); }
 // Combines item details for searching.
@@ -79,6 +87,7 @@ function itemAttrs(item, index) {
 
 // ---- 3c. Saved reading list (remembered in this browser only) -----------
 const SAVE_KEY = "appliedAIBrief.saved";
+const SUBSCRIBED_KEY = "circuit.subscribed";
 let saved = new Set();
 try { saved = new Set(JSON.parse(localStorage.getItem(SAVE_KEY) || "[]")); } catch (e) { saved = new Set(); }
 // Remembers saved links in this browser.
@@ -171,7 +180,7 @@ function spotlightHtml(d) {
         '<p class="clamp4">' + esc(s.description) + '</p>' +
         '<div class="spot-meta"><b>' + esc(s.source) + '</b>' + (s.date ? '<span>·</span><span>' + esc(s.date) + '</span>' : '') + '</div>' +
         '<div class="spot-ctas">' + cta +
-          '<button class="btn outline" type="button" data-save="' + esc(s.url) + '">' + icon("heart", 18) + ' <span>Like</span></button>' +
+          '<button class="btn outline" type="button" data-save="' + esc(s.url) + '" aria-label="Like: ' + esc(s.title) + '" aria-pressed="false">' + icon("heart", 18) + ' <span>Like</span></button>' +
         '</div>' +
       '</div>' +
     '</div></div></section>';
@@ -183,7 +192,7 @@ function exploreHtml(d) {
     .concat(d.sections.map(function (s) {
       return '<button class="fchip" type="button" data-filter="' + esc(s.id) + '" data-c="' + esc(s.id) + '"><i></i>' + esc(LABELS[s.id] || s.name) + '</button>';
     }))
-    // .concat(['<button class="fchip" type="button" data-filter="saved" data-c="videos"><i></i>♥ Liked</button>']);
+    .concat(['<button class="fchip" type="button" data-filter="saved" data-c="videos"><i></i>♥ Liked <small id="liked-count">0</small></button>']);
   return '<div class="explore" id="explore"><div class="wrap">' +
     '<div class="filters" role="toolbar" aria-label="Filter by topic">' + chips.join("") + '</div>' +
     '<label class="search"><span class="sr">Search this issue</span>' + icon("search", 17) + '<input id="search" type="search" placeholder="Search this issue..." autocomplete="off"></label>' +
@@ -198,7 +207,7 @@ function storyCard(item, i, section, lead) {
     '<div class="body">' +
       '<div><span class="chip">' + esc(item.type) + '</span></div>' +
       '<h4 class="clamp3">' + esc(item.title) + '</h4>' +
-      '<p class="desc ' + (lead ? 'clamp2' : 'clamp3') + '">' + esc(item.description) + '</p>' +
+      descriptionHtml(item, lead ? 'clamp2' : 'clamp3') +
       '<div class="foot">' + meta(item) + '<span class="go">' + esc(section.button) + ' ' + icon("arrow", 15) + '</span></div>' +
     '</div></a>';
 }
@@ -212,7 +221,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<a class="item lesson reveal" ' + itemAttrs(item, x.i) + ' ' + linkAttrs(item) + '>' + media(item, "", 40) + saveBtn(item) +
         '<div class="body"><span class="num">LESSON ' + String(n + 1).padStart(2, "0") + ' · ' + esc(item.type.toUpperCase()) + '</span>' +
-        '<h4 class="clamp2">' + esc(item.title) + '</h4><p class="desc clamp3">' + esc(item.description) + '</p>' +
+        '<h4 class="clamp2">' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp3') +
         '<div class="foot">' + meta(item) + '<span class="go">' + esc(s.button) + ' ' + icon("arrow", 15) + '</span></div></div></a>';
     }).join("") + '</div>';
   },
@@ -221,14 +230,14 @@ const LAYOUTS = {
     let html = '<div class="item tool-hero" ' + itemAttrs(top, list[0].i) + '>' +
       '<a class="tool-shot reveal" ' + linkAttrs(top) + '>' + media(top, "", 72) + '</a>' +
       '<div class="tool-info reveal"><span class="kicker">' + icon("sparkle", 16) + ' TOOL OF THE WEEK</span>' +
-      '<h4>' + esc(top.title) + '</h4><p class="desc clamp4">' + esc(top.description) + '</p>' + meta(top) +
-      '<div class="tool-ctas"><a class="btn" ' + linkAttrs(top) + '>Try it ' + icon("arrow", 16) + '</a>' + saveBtn(top) + '</div></div></div>';
+      '<h4>' + esc(top.title) + '</h4>' + descriptionHtml(top, 'clamp4') + meta(top) +
+      '<div class="tool-ctas"><a class="btn" ' + linkAttrs(top) + '>' + toolAction(top) + ' ' + icon("arrow", 16) + '</a>' + saveBtn(top) + '</div></div></div>';
     if (list.length > 1) {
       html += '<div class="tool-shelf">' + list.slice(1).map(function (x) {
         const item = x.item;
         return '<a class="item tool-row reveal" ' + itemAttrs(item, x.i) + ' ' + linkAttrs(item) + '>' + media(item, "", 28) +
-          '<div><h5 class="clamp2">' + esc(item.title) + '</h5><p class="desc clamp2">' + esc(item.description) + '</p>' + meta(item) + '</div>' +
-          '<div style="display:flex;align-items:center;gap:12px"><span class="go">Try it ' + icon("arrow", 15) + '</span>' + saveBtn(item) + '</div></a>';
+          '<div><h5 class="clamp2">' + esc(item.title) + '</h5>' + descriptionHtml(item, 'clamp2') + meta(item) + '</div>' +
+          '<div style="display:flex;align-items:center;gap:12px"><span class="go">' + toolAction(item) + ' ' + icon("arrow", 15) + '</span>' + saveBtn(item) + '</div></a>';
       }).join("") + '</div>';
     }
     return html;
@@ -248,7 +257,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<div class="item case reveal" ' + itemAttrs(item, x.i) + '>' + '<a ' + linkAttrs(item) + ' class="media-link" style="display:contents">' + media(item, "", 64) + '</a>' +
         '<div class="body"><span class="kicker">CASE ' + String(n + 1).padStart(2, "0") + ' · ' + esc(item.source.toUpperCase()) + '</span>' +
-        '<h4>' + esc(item.title) + '</h4><p class="desc clamp3">' + esc(item.description) + '</p>' + meta(item) +
+        '<h4>' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp3') + meta(item) +
         '<div style="display:flex;gap:10px;align-items:center"><a class="btn" ' + linkAttrs(item) + '>' + esc(s.button) + ' ' + icon("arrow", 15) + '</a>' +
         saveBtn(item).replace('class="save"', 'class="save" style="position:static"') + '</div></div></div>';
     }).join("") + '</div>';
@@ -258,7 +267,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<div class="item paper reveal" ' + itemAttrs(item, x.i) + '><span class="n">' + String(n + 1).padStart(2, "0") + '</span>' +
         '<a ' + linkAttrs(item) + '>' + media(item, "", 26) + '</a>' +
-        '<div><a ' + linkAttrs(item) + '><h4 class="clamp2">' + esc(item.title) + '</h4></a><p class="desc clamp2">' + esc(item.description) + '</p>' +
+        '<div><a ' + linkAttrs(item) + '><h4 class="clamp2">' + esc(item.title) + '</h4></a>' + descriptionHtml(item, 'clamp2') +
         '<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">' + meta(item) + '<a class="go" ' + linkAttrs(item) + '>' + esc(s.button) + ' ' + icon("arrow", 15) + '</a></div></div>' +
         saveBtn(item) + '</div>';
     }).join("") + '</div>';
@@ -279,11 +288,14 @@ function sectionHtml(section, list) {
 // Builds the signup preview; emails are not saved.
 function subscribeHtml(d) {
   return '<section class="subscribe" id="subscribe"><div class="wrap"><div class="sub-card reveal">' +
-    '<div><span class="tag">' + icon("sparkle", 14) + '"NEW"</span>' +
+    '<div><span class="tag">' + icon("sparkle", 14) + 'NEW</span>' +
     '<h3>Subscribe to the ' + esc(d.lab) + ' Newsletter</h3>' +
-    '<p>Get The Applied AI Brief in your inbox every week: one spotlight, the best of the rest, zero noise.</p></div>' +
-    '<div><form class="sub-form" id="sub-form"><input type="email" placeholder="you@university.edu" aria-label="Email address" required><button type="submit">Notify me</button></form>' +
-    '<div class="sub-note" id="sub-note"></div></div>' +
+    '<p>Get The Circuit in your inbox every week: one spotlight, the best of the rest, zero noise.</p></div>' +
+    '<div><form class="sub-form" id="sub-form"><input type="email" placeholder="you@university.edu" aria-label="Email address" required>' +
+    '<input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">' +
+    '<button type="submit">Notify me</button></form>' +
+    '<div class="sub-note" id="sub-note"></div>' +
+    '<div class="sub-note">We only use your email to send The Circuit. Unsubscribe anytime.</div></div>' +
     '</div></div></section>';
 }
 
@@ -320,6 +332,7 @@ if (footer) {
 
 wireUp();
   app.focus({ preventScroll: true });   // lets arrow keys / space bar scroll right away
+  scrollToHash();
 }
 
 // ---- 3e. Interactivity -------------------------------------------------------
@@ -345,7 +358,14 @@ function applyFilters() {
     shown += visible;
   });
   const empty = document.getElementById("empty-state");
-  if (empty) empty.style.display = shown ? "none" : "block";
+  if (empty) {
+    if (filterState.topic === "saved" && saved.size === 0) {
+      empty.innerHTML = "<b>You haven't liked anything yet.</b> Tap the heart on any story to save it here.";
+    } else {
+      empty.innerHTML = "<b>Nothing matches that yet.</b>Try another topic or clear your search.";
+    }
+    empty.style.display = shown ? "none" : "block";
+  }
   const note = document.getElementById("result-note");
   if (note) {
     const filtered = filterState.topic !== "all" || q;
@@ -370,7 +390,7 @@ function refreshSaved() {
     if (label) label.textContent = on ? "Liked" : "Like";
   });
   const n = saved.size;
-  ["saved-count"].forEach(function (id) { const el = document.getElementById(id); if (el) el.textContent = n; });
+  ["saved-count", "liked-count"].forEach(function (id) { const el = document.getElementById(id); if (el) el.textContent = n; });
 }
 
 let toastTimer;
@@ -386,6 +406,15 @@ function jumpTo(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+// Scrolls to the section in the URL after the page is built.
+function scrollToHash() {
+  var id = decodeURIComponent(location.hash.replace(/^#/, ""));
+  if (!id) return;
+  var el = document.getElementById(id);
+  if (el) requestAnimationFrame(function () { el.scrollIntoView({ block: "start" }); });
+}
+window.addEventListener("hashchange", scrollToHash);
 
 // Opens a YouTube video in the popup.
 function openVideo(index) {
@@ -444,86 +473,121 @@ function wireUp() {
   }
   const nav = document.getElementById("nav");
   const scroller = document.getElementById("app");
-  scroller.onscroll = function () { nav.classList.toggle("scrolled", scroller.scrollTop > 8); };
+  let backToTop = document.getElementById("back-to-top");
+  if (!backToTop) {
+    backToTop = document.createElement("button");
+    backToTop.type = "button";
+    backToTop.id = "back-to-top";
+    backToTop.className = "back-to-top";
+    backToTop.setAttribute("aria-label", "Back to top");
+    backToTop.hidden = true;
+    backToTop.innerHTML = '<span aria-hidden="true">↑</span>';
+    document.body.appendChild(backToTop);
+  }
+  backToTop.onclick = function () {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    scroller.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  };
+  scroller.onscroll = function () {
+    nav.classList.toggle("scrolled", scroller.scrollTop > 8);
+    backToTop.hidden = scroller.scrollTop <= 800;
+  };
+  scroller.onscroll();
   const search = document.getElementById("search");
   if (search) search.addEventListener("input", function () { filterState.query = search.value; applyFilters(); });
   const form = document.getElementById("sub-form");
   form.addEventListener("submit", async function (e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const input = form.querySelector('input[type="email"]');
-  const button = form.querySelector('button[type="submit"]');
-  const note = document.getElementById("sub-note");
+    const input = form.querySelector('input[type="email"]');
+    const button = form.querySelector('button[type="submit"]');
+    const note = document.getElementById("sub-note");
+    const trap = form.querySelector('input[name="company"]');
+    if (trap && trap.value) return;
 
-  button.disabled = true;
-  note.textContent = "Thanks for joining The Circuit! You're now on the list.";
+    let already = false;
+    try { already = localStorage.getItem(SUBSCRIBED_KEY) === "1"; } catch (err) { already = false; }
+    if (already) {
+      note.textContent = "You're already subscribed on this device.";
+      return;
+    }
 
-  try {
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
-      {
-        method: "POST",
-        mode: "no-cors",
-        body: new URLSearchParams({
-          email: input.value.trim()
-        })
-      }
-    );
+    const email = input.value.trim().toLowerCase();
+    button.disabled = true;
+    note.textContent = "Sending…";
 
-    note.textContent = "Subscription request sent.";
-    form.reset();
-  } catch (error) {
-    note.textContent = "Could not send. Please try again.";
-  } finally {
-    button.disabled = false;
-  }
-});
-  
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          body: new URLSearchParams({ email: email })
+        }
+      );
+      note.textContent = "Thanks for joining The Circuit! You're on the list.";
+      form.reset();
+      try { localStorage.setItem(SUBSCRIBED_KEY, "1"); } catch (err) { /* private mode */ }
+    } catch (error) {
+      note.textContent = "Could not send. Please try again.";
+    } finally {
+      button.disabled = false;
+    }
+  });
 }
 
-// const LIKES_URL = "https://script.google.com/macros/s/AKfycbzAKsbaQZBCjk2Nvy41X4u76dRuA36ayQN5ZEl5NDW-0K_3rMHmaBNNqFPy4SYAdeq4sA/exec";
+const LIKES_URL = "https://script.google.com/macros/s/AKfycbzAKsbaQZBCjk2Nvy41X4u76dRuA36ayQN5ZEl5NDW-0K_3rMHmaBNNqFPy4SYAdeq4sA/exec";
 
-// function sendLikeToSheet(url) {
-//   const item =
-//     ITEMS.find(item => item.url === url) ||
-//     (ITEMS[-1]?.url === url ? ITEMS[-1] : null);
+function sendLikeToSheet(url) {
+  const item =
+    ITEMS.find(item => item.url === url) ||
+    (ITEMS[-1] && ITEMS[-1].url === url ? ITEMS[-1] : null);
 
-//   if (!item) return;
+  if (!item) return;
 
-//   // Remember a random ID for this browser.
-//   let userId = localStorage.getItem("circuit.userId");
+  // Remember a random ID for this browser.
+  let userId = "";
+  try { userId = localStorage.getItem("circuit.userId") || ""; } catch (e) { userId = ""; }
 
-//   if (!userId) {
-//     userId = crypto.randomUUID();
-//     localStorage.setItem("circuit.userId", userId);
-//   }
+  if (!userId) {
+    try {
+      userId = (window.crypto && typeof crypto.randomUUID === "function") ? crypto.randomUUID() : "";
+    } catch (e) { userId = ""; }
+    if (!userId) userId = String(Date.now() + Math.random());
+    try { localStorage.setItem("circuit.userId", userId); } catch (e) { /* private mode */ }
+  }
 
-//   // Send the title, URL, and current heart selection.
-//   fetch(LIKES_URL, {
-//     method: "POST",
-//     mode: "no-cors",
-//     body: new URLSearchParams({
-//       userId: userId,
-//       title: item.title,
-//       url: url,
-//       liked: String(saved.has(url))
-//     })
-//   }).catch(function (error) {
-//     console.error("Could not send the like:", error);
-//   });
-// }
+  // Send the title, URL, and current heart selection.
+  fetch(LIKES_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: new URLSearchParams({
+      userId: userId,
+      title: item.title,
+      url: url,
+      liked: String(saved.has(url))
+    })
+  }).catch(function (error) {
+    console.error("Could not send the like:", error);
+  });
+}
+
+// Toggles a heart and keeps the surrounding article link from opening.
+function toggleLike(button) {
+  const url = button.dataset.save;
+  if (saved.has(url)) { saved.delete(url); toast("Removed from Liked Feedback"); }
+  else { saved.add(url); toast("♥ LIKED! Thanks for you feedback!"); }
+  persistSaved(); refreshSaved();
+  sendLikeToSheet(url);
+  if (filterState.topic === "saved") applyFilters();
+}
 
 // One click handler for everything clickable on the page.
 document.addEventListener("click", function (e) {
   const save = e.target.closest("[data-save]");
   if (save) {
     e.preventDefault(); e.stopPropagation();
-    const url = save.dataset.save;
-    if (saved.has(url)) { saved.delete(url); toast("Removed from Liked Feedback"); }
-    else { saved.add(url); toast("♥ LIKED! Thanks for you feedback!"); }
-    persistSaved(); refreshSaved();
-    sendLikeToSheet(url);
-    if (filterState.topic === "saved") applyFilters();
+    toggleLike(save);
     return;
   }
   const video = e.target.closest("[data-video]");
@@ -542,6 +606,13 @@ document.addEventListener("click", function (e) {
 });
 // Escape closes videos; Enter or Space opens a selected video.
 document.addEventListener("keydown", function (e) {
+  const save = e.target.closest && e.target.closest("[data-save]");
+  if (save && (e.key === "Enter" || e.key === " ")) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!e.repeat) toggleLike(save);
+    return;
+  }
   if (e.key === "Escape") closeVideo();
   const vid = e.target.closest && e.target.closest("[data-video]");
   if (vid && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openVideo(+vid.dataset.video); }
@@ -566,6 +637,17 @@ function updateBriefThemeButton(button) {
   button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
   button.setAttribute("aria-pressed", String(dark));
 }
+
+// Matches the scrolling area to the real site header height.
+function syncHeaderOffset() {
+  const header = document.querySelector(".lab-header");
+  if (!header) return;
+  document.documentElement.style.setProperty("--header-offset", header.offsetHeight + "px");
+}
+document.addEventListener("DOMContentLoaded", syncHeaderOffset);
+window.addEventListener("load", syncHeaderOffset);
+window.addEventListener("resize", syncHeaderOffset);
+syncHeaderOffset();
 
 // Applies the preferred theme, then builds the page from the data file.
 const savedBriefTheme = readBriefTheme();

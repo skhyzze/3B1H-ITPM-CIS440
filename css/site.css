@@ -1492,3 +1492,108 @@ body.dark.page-industry .hero h1 span {
   position: relative;
   left: 10px;
 }
+
+/* Phone navigation: a menu button replaces the sideways-scrolling link strip. */
+.lab-menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #07121f;
+  border-radius: 0;
+  background: transparent;
+  color: #07121f;
+  cursor: pointer;
+}
+
+.lab-menu-toggle:focus-visible {
+  outline: 2px solid #a11b2e;
+  outline-offset: 3px;
+}
+
+.lab-menu-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+}
+
+.lab-menu-icon::before,
+.lab-menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+}
+
+.lab-menu-icon::before { top: -6px; }
+.lab-menu-icon::after { top: 6px; }
+
+body.dark .lab-menu-toggle {
+  color: #f8f8f6;
+  border-color: #e6ded8;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .lab-menu-toggle {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+    margin-left: auto;
+  }
+
+  .lab-header .lab-nav-links {
+    display: none;
+  }
+
+  .lab-header .lab-nav-links.is-open {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    margin: 0;
+    padding: 8px 16px 12px;
+    overflow: visible;
+    white-space: normal;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(19, 54, 77, 0.18);
+  }
+
+  .lab-header .lab-nav-links.is-open > a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    white-space: normal;
+  }
+
+  body.dark .lab-header .lab-nav-links.is-open {
+    background: #14171d;
+    border-bottom-color: rgba(185, 200, 212, 0.24);
+  }
+
+  body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-header .lab-nav-links.is-open {
+    background: #07121f;
+    border-bottom-color: rgba(230, 222, 216, 0.35);
+  }
+}

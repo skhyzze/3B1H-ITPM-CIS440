@@ -178,9 +178,15 @@ def clean_description(text, max_length=300):
     # Collapse repeated spaces/newlines into single spaces.
     result = " ".join(result.split())
 
-    # Trim to a reasonable length and add "..." if we cut it off.
+    # Cut at the last whole word before the limit, drop trailing punctuation,
+    # then mark the cut with an ellipsis.
     if len(result) > max_length:
-        result = result[:max_length].rstrip() + "..."
+        shortened = result[:max_length]
+        last_space = shortened.rfind(" ")
+        if last_space > 0:
+            shortened = shortened[:last_space]
+        shortened = shortened.rstrip(".,;:!?\"'“”‘’()[]{}-–—")
+        result = shortened + "…"
 
     return result
 

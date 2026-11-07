@@ -150,7 +150,7 @@
       'assistant',
       config.endpoint
         ? 'Welcome! Ask me a question about the Applied AI Lab'
-        : 'Welcome! This chatbot is now active {message will change soon]}.'
+        : 'Welcome! This chatbot is now active.'
     );
     addSuggestions();
   }

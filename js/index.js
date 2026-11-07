@@ -7,6 +7,7 @@
 
   let current = 0;
   let timer;
+  let pausedByUser = false;
 
   function render(){
     cards.forEach((card, i) => {
@@ -27,6 +28,7 @@
 
   function restart(){
     clearInterval(timer);
+    if (pausedByUser) return;
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(advance, 4200);
   }
 
@@ -37,6 +39,21 @@
   });
 
   const carousel = document.querySelector('.preview-carousel');
+  const pauseButton = carousel?.querySelector('.carousel-pause');
+
+  function setPauseButton(paused){
+    if (!pauseButton) return;
+    pauseButton.classList.toggle('is-paused', paused);
+    pauseButton.setAttribute('aria-label', paused ? 'Play carousel' : 'Pause carousel');
+  }
+
+  pauseButton?.addEventListener('click', () => {
+    pausedByUser = !pausedByUser;
+    setPauseButton(pausedByUser);
+    if (pausedByUser) clearInterval(timer);
+    else restart();
+  });
+
   carousel?.addEventListener('focusin', () => clearInterval(timer));
   carousel?.addEventListener('focusout', restart);
   carousel?.addEventListener('mouseenter', () => clearInterval(timer));
