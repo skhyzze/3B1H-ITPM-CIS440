@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#f8f8f6">
   <title>Fellowship Pathway | Applied AI Lab</title>
   <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/fellowship.css?v=5">
+  <link rel="stylesheet" href="css/fellowship.css?v=10">
   <link rel="stylesheet" href="css/blended-theme.css">
   <link rel="stylesheet" href="css/chatbot.css">
 </head>
@@ -94,14 +94,32 @@
         <circle class="circuit-node" cx="172" cy="48" r="3" fill="currentColor"/>
       </svg>
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="section-kicker">01 / The program</p>
-          <h2 id="about-fellowship-title">What is the Fellowship?</h2>
-        </div>
-        <div class="program-copy reveal">
-          <p class="intro-text content-pending">[One or two sentences that explain what the Fellowship is and why it exists. Confirm final wording with the client.]</p>
-          <p class="program-support content-pending"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16v12H4zM8 7V5h8v2M4 12h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[What Fellows do day to day (projects, mentorship, events, research).]</p>
-          <p class="program-support content-pending"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 16l5-5 3 3 8-8M14 6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>[What Fellows gain from the experience.]</p>
+        <div class="program-layout">
+          <div class="section-heading reveal">
+            <p class="section-kicker">01 / The program</p>
+            <h2 id="about-fellowship-title">What is the Fellowship?</h2>
+          </div>
+          <div class="program-copy reveal">
+            <p class="intro-text content-pending">[One or two sentences that explain what the Fellowship is and why it exists. Confirm final wording with the client.]</p>
+            <p class="program-support content-pending"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16v12H4zM8 7V5h8v2M4 12h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[What Fellows do day to day (projects, mentorship, events, research).]</p>
+            <p class="program-support content-pending"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 16l5-5 3 3 8-8M14 6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>[What Fellows gain from the experience.]</p>
+          </div>
+          <!--
+            IMAGE PLACEHOLDER: [Program image]
+            Page: Fellowship. Section: "What is the Fellowship?" (#about-fellowship).
+            On screen it sits to the right of that heading, lined up with the heading, in a 4:3 frame.
+            To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+            Replace the svg and the [Program image] label with:
+            <img src="images/your-program-photo.jpg" alt="Fellows at work">
+            Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+          -->
+          <figure class="image-slot image-slot-43 reveal">
+            <div class="image-slot-frame" role="img" aria-label="Image placeholder for the Fellowship program">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">[Program image]</span>
+            </div>
+            <figcaption class="content-pending">[Add a photo of Fellows at work. Confirm with the client.]</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -114,11 +132,29 @@
         <circle class="circuit-node" cx="172" cy="22" r="3" fill="currentColor"/>
       </svg>
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="section-kicker">02 / Ideal candidates</p>
-          <h2 id="ideal-candidates-title">Who can be a Fellow?</h2>
+        <div class="content-split">
+          <div class="section-heading reveal">
+            <p class="section-kicker">02 / Ideal candidates</p>
+            <h2 id="ideal-candidates-title">Who can be a Fellow?</h2>
+          </div>
+          <p class="program-intro content-pending reveal">[Describe the type of student the Lab is looking for.]</p>
+          <!--
+            IMAGE PLACEHOLDER: [Candidate image]
+            Page: Fellowship. Section: "Who can be a Fellow?" (#ideal-candidates).
+            On screen it sits to the left of that heading, lined up with the heading, in a 4:3 frame.
+            To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+            Replace the svg and the [Candidate image] label with:
+            <img src="images/your-candidate-photo.jpg" alt="The kind of student the Lab hopes to meet">
+            Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+          -->
+          <figure class="image-slot image-slot-43 reveal">
+            <div class="image-slot-frame" role="img" aria-label="Image placeholder for ideal Fellowship candidates">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">[Candidate image]</span>
+            </div>
+            <figcaption class="content-pending">[Add a photo that shows the kind of student the Lab hopes to meet.]</figcaption>
+          </figure>
         </div>
-        <p class="program-intro content-pending reveal">[Describe the type of student the Lab is looking for.]</p>
         <div class="candidate-grid">
           <article class="candidate-card reveal">
             <div class="card-icon-row">
@@ -325,6 +361,8 @@
             <p class="path-panel content-pending" id="path-panel-5" hidden>[What happens after acceptance, including orientation and start date.]</p>
           </div>
         </div>
+        <div class="path-close">
+          <div class="path-close-copy">
         <ul class="path-facts">
           <li class="content-pending"><svg class="ico fact-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="15" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 3v4M16 3v4M4 10h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>[Application opens: To be announced]</li>
           <li class="content-pending"><svg class="ico fact-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 20V5h10l-2 3 2 3H6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[Deadline: To be announced]</li>
@@ -333,6 +371,24 @@
         <div class="contact-strip">
           <p class="content-pending">[Add the client-approved Fellowship contact and application link here.]</p>
           <button class="button path-apply" type="button" disabled aria-disabled="true">Application link coming soon</button>
+        </div>
+          </div>
+          <!--
+            IMAGE PLACEHOLDER: [Pathway image]
+            Page: Fellowship. Section: "How do I become a Fellow?" (#how-to-become).
+            On screen it sits beside the dates and contact details, after the five steps, in a 4:3 frame.
+            To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+            Replace the svg and the [Pathway image] label with:
+            <img src="images/your-pathway-photo.jpg" alt="An information session or the start of a cohort">
+            Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+          -->
+          <figure class="image-slot image-slot-43 image-slot-on-navy reveal">
+            <div class="image-slot-frame" role="img" aria-label="Image placeholder for the Fellowship application path">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">[Pathway image]</span>
+            </div>
+            <figcaption class="content-pending">[Add a photo from an information session or the start of a cohort.]</figcaption>
+          </figure>
         </div>
       </div>
     </section>
