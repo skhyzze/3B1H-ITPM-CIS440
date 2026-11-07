@@ -473,7 +473,26 @@ function wireUp() {
   }
   const nav = document.getElementById("nav");
   const scroller = document.getElementById("app");
-  scroller.onscroll = function () { nav.classList.toggle("scrolled", scroller.scrollTop > 8); };
+  let backToTop = document.getElementById("back-to-top");
+  if (!backToTop) {
+    backToTop = document.createElement("button");
+    backToTop.type = "button";
+    backToTop.id = "back-to-top";
+    backToTop.className = "back-to-top";
+    backToTop.setAttribute("aria-label", "Back to top");
+    backToTop.hidden = true;
+    backToTop.innerHTML = '<span aria-hidden="true">↑</span>';
+    document.body.appendChild(backToTop);
+  }
+  backToTop.onclick = function () {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    scroller.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  };
+  scroller.onscroll = function () {
+    nav.classList.toggle("scrolled", scroller.scrollTop > 8);
+    backToTop.hidden = scroller.scrollTop <= 800;
+  };
+  scroller.onscroll();
   const search = document.getElementById("search");
   if (search) search.addEventListener("input", function () { filterState.query = search.value; applyFilters(); });
   const form = document.getElementById("sub-form");

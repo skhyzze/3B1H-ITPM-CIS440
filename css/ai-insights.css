@@ -555,3 +555,29 @@ body.dark .toast { background: #E6DED8; color: #080808; }
 .page-ai-brief .explore {
   position: static;
 }
+
+/* Square control pinned to the bottom-left, clear of the chat launcher. */
+.back-to-top {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 90;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1;
+}
+.back-to-top[hidden] { display: none; }
+body.dark .back-to-top {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
