@@ -118,7 +118,8 @@ img { display: block; }
 .ticker .label { flex-shrink: 0; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 14px 20px 14px 28px;
   font-size: 12px; font-weight: 700; letter-spacing: .12em; background: linear-gradient(90deg, var(--ink) 80%, transparent); }
 .ticker .track { flex-shrink: 0; width: max-content; display: flex; gap: 44px; white-space: nowrap; animation: marquee 60s linear infinite; padding-left: 20px; }
-.ticker:hover .track { animation-play-state: paused; }
+.ticker:hover .track,
+.ticker:focus-within .track { animation-play-state: paused; }
 .ticker .track a { font-size: 14px; color: rgba(255,255,255,.85); display: inline-flex; align-items: center; gap: 10px; }
 .ticker .track a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 .ticker .track a i { width: 6px; height: 6px; border-radius: 0; background: var(--c); }

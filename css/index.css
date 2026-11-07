@@ -456,7 +456,8 @@
       transition:.3s ease;
     }
     .progress-dot.active{background:var(--red);width:38px}
-    .carousel-next{
+    .carousel-next,
+    .carousel-pause{
       width:40px;height:40px;
       border:1px solid var(--black);
       background:transparent;
@@ -465,7 +466,30 @@
       font-size:1rem;
       transition:.2s ease;
     }
-    .carousel-next:hover{
+    .carousel-pause{
+      display:grid;
+      place-items:center;
+      padding:0;
+      flex:0 0 40px;
+    }
+    .carousel-pause-icon{
+      display:block;
+      width:10px;
+      height:12px;
+      background:
+        linear-gradient(currentColor, currentColor) left center / 3px 12px no-repeat,
+        linear-gradient(currentColor, currentColor) right center / 3px 12px no-repeat;
+    }
+    .carousel-pause.is-paused .carousel-pause-icon{
+      width:0;
+      height:0;
+      background:none;
+      border-style:solid;
+      border-width:6px 0 6px 10px;
+      border-color:transparent transparent transparent currentColor;
+    }
+    .carousel-next:hover,
+    .carousel-pause:hover{
       background:var(--black);
       color:var(--white);
     }
@@ -481,11 +505,13 @@
     body.dark .preview-type{
       color:#E6DED8 !important;
     }
-    body.dark .carousel-next{
+    body.dark .carousel-next,
+    body.dark .carousel-pause{
       border-color:#E6DED8;
       color:#E6DED8;
     }
-    body.dark .carousel-next:hover{
+    body.dark .carousel-next:hover,
+    body.dark .carousel-pause:hover{
       background:#E6DED8;
       color:#123A63;
     }
@@ -781,11 +807,13 @@ body.page-home.dark #resources .resource:hover .arrow{
   color:var(--dark-blue) !important;
 }
 
-body.page-home.dark .carousel-next{
+body.page-home.dark .carousel-next,
+body.page-home.dark .carousel-pause{
   border-color:var(--dark-muted) !important;
   color:var(--dark-text) !important;
 }
-body.page-home.dark .carousel-next:hover{
+body.page-home.dark .carousel-next:hover,
+body.page-home.dark .carousel-pause:hover{
   background:var(--dark-muted) !important;
   color:var(--dark-blue) !important;
 }
@@ -799,5 +827,56 @@ body.page-home.dark .carousel-scroll::-moz-range-thumb{background:var(--dark-mut
 body.page-home.dark :is(a,button,input):focus-visible{
   outline:2px solid var(--dark-text);
   outline-offset:3px;
+}
+
+/* Cards that are not links yet: no pointer, no hover shift, no arrow. */
+body.page-home #resources .resources-grid > article.resource.coming-soon{
+  pointer-events:none !important;
+  cursor:default !important;
+}
+body.page-home #resources .resources-grid > article.resource.coming-soon > .arrow{
+  display:none !important;
+}
+body.page-home #resources .resources-grid > article.resource.coming-soon > .coming-soon-label{
+  margin-top:auto;
+  font:700 .7rem/1 ui-monospace,SFMono-Regular,Menlo,monospace !important;
+  letter-spacing:.12em;
+  color:var(--red);
+}
+body.page-home:not(.dark) #resources .resources-grid > article.resource.coming-soon:is(:hover, :focus-visible, :focus-within){
+  transform:none !important;
+  cursor:default !important;
+  background:rgba(255,255,255,.92) !important;
+  background-image:none !important;
+  color:#0c1114 !important;
+  border-color:rgba(19,54,77,.18) !important;
+  box-shadow:0 12px 30px rgba(12, 17, 20, 0.08) !important;
+}
+body.page-home:not(.dark) #resources .resources-grid > article.resource.coming-soon:is(:hover, :focus-visible, :focus-within) h3{
+  color:#0c1114 !important;
+}
+body.page-home:not(.dark) #resources .resources-grid > article.resource.coming-soon:is(:hover, :focus-visible, :focus-within) p{
+  color:#666 !important;
+}
+body.page-home:not(.dark) #resources .resources-grid > article.resource.coming-soon:is(:hover, :focus-visible, :focus-within) .coming-soon-label{
+  color:#a30b16 !important;
+}
+body.page-home.dark #resources .resources-grid > article.resource.coming-soon:is(:hover, :focus-visible, :focus-within){
+  transform:none !important;
+  cursor:default !important;
+  background:#07121f !important;
+  background-image:none !important;
+  color:#f8f8f6 !important;
+  border-color:rgba(230,222,216,.42) !important;
+  box-shadow:none !important;
+}
+body.page-home.dark #resources .resources-grid > article.resource.coming-soon:is(:hover, :focus-visible, :focus-within) h3{
+  color:#f8fafc !important;
+}
+body.page-home.dark #resources .resources-grid > article.resource.coming-soon:is(:hover, :focus-visible, :focus-within) p{
+  color:#b9c8d4 !important;
+}
+body.page-home.dark #resources .resources-grid > article.resource.coming-soon:is(:hover, :focus-visible, :focus-within) .coming-soon-label{
+  color:#ff6b78 !important;
 }
 

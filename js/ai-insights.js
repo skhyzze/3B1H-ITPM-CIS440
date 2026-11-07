@@ -66,8 +66,16 @@ function meta(item) {
 }
 // Creates a Save button.
 function saveBtn(item) {
-  return '<button class="save" type="button" data-save="' + esc(item.url) + '" aria-label="Like">' + icon("heart", 18) + '</button>';
+  return '<button class="save" type="button" data-save="' + esc(item.url) + '" aria-label="Like: ' + esc(item.title) + '" aria-pressed="false">' + icon("heart", 18) + '</button>';
 }
+// A description paragraph, or nothing when the text is blank.
+function descriptionHtml(item, clamp) {
+  const text = String(item.description == null ? "" : item.description).trim();
+  if (!text) return "";
+  return '<p class="desc ' + clamp + '">' + esc(text) + '</p>';
+}
+// News items read; other tools can be tried.
+function toolAction(item) { return item.type === "News" ? "Read more" : "Try it"; }
 // Uses pick or picks for the item count.
 function picks(n) { return n + (n === 1 ? " pick" : " picks"); }
 // Combines item details for searching.
@@ -172,7 +180,7 @@ function spotlightHtml(d) {
         '<p class="clamp4">' + esc(s.description) + '</p>' +
         '<div class="spot-meta"><b>' + esc(s.source) + '</b>' + (s.date ? '<span>·</span><span>' + esc(s.date) + '</span>' : '') + '</div>' +
         '<div class="spot-ctas">' + cta +
-          '<button class="btn outline" type="button" data-save="' + esc(s.url) + '">' + icon("heart", 18) + ' <span>Like</span></button>' +
+          '<button class="btn outline" type="button" data-save="' + esc(s.url) + '" aria-label="Like: ' + esc(s.title) + '" aria-pressed="false">' + icon("heart", 18) + ' <span>Like</span></button>' +
         '</div>' +
       '</div>' +
     '</div></div></section>';
@@ -199,7 +207,7 @@ function storyCard(item, i, section, lead) {
     '<div class="body">' +
       '<div><span class="chip">' + esc(item.type) + '</span></div>' +
       '<h4 class="clamp3">' + esc(item.title) + '</h4>' +
-      '<p class="desc ' + (lead ? 'clamp2' : 'clamp3') + '">' + esc(item.description) + '</p>' +
+      descriptionHtml(item, lead ? 'clamp2' : 'clamp3') +
       '<div class="foot">' + meta(item) + '<span class="go">' + esc(section.button) + ' ' + icon("arrow", 15) + '</span></div>' +
     '</div></a>';
 }
@@ -213,7 +221,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<a class="item lesson reveal" ' + itemAttrs(item, x.i) + ' ' + linkAttrs(item) + '>' + media(item, "", 40) + saveBtn(item) +
         '<div class="body"><span class="num">LESSON ' + String(n + 1).padStart(2, "0") + ' · ' + esc(item.type.toUpperCase()) + '</span>' +
-        '<h4 class="clamp2">' + esc(item.title) + '</h4><p class="desc clamp3">' + esc(item.description) + '</p>' +
+        '<h4 class="clamp2">' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp3') +
         '<div class="foot">' + meta(item) + '<span class="go">' + esc(s.button) + ' ' + icon("arrow", 15) + '</span></div></div></a>';
     }).join("") + '</div>';
   },
@@ -222,14 +230,14 @@ const LAYOUTS = {
     let html = '<div class="item tool-hero" ' + itemAttrs(top, list[0].i) + '>' +
       '<a class="tool-shot reveal" ' + linkAttrs(top) + '>' + media(top, "", 72) + '</a>' +
       '<div class="tool-info reveal"><span class="kicker">' + icon("sparkle", 16) + ' TOOL OF THE WEEK</span>' +
-      '<h4>' + esc(top.title) + '</h4><p class="desc clamp4">' + esc(top.description) + '</p>' + meta(top) +
-      '<div class="tool-ctas"><a class="btn" ' + linkAttrs(top) + '>Try it ' + icon("arrow", 16) + '</a>' + saveBtn(top) + '</div></div></div>';
+      '<h4>' + esc(top.title) + '</h4>' + descriptionHtml(top, 'clamp4') + meta(top) +
+      '<div class="tool-ctas"><a class="btn" ' + linkAttrs(top) + '>' + toolAction(top) + ' ' + icon("arrow", 16) + '</a>' + saveBtn(top) + '</div></div></div>';
     if (list.length > 1) {
       html += '<div class="tool-shelf">' + list.slice(1).map(function (x) {
         const item = x.item;
         return '<a class="item tool-row reveal" ' + itemAttrs(item, x.i) + ' ' + linkAttrs(item) + '>' + media(item, "", 28) +
-          '<div><h5 class="clamp2">' + esc(item.title) + '</h5><p class="desc clamp2">' + esc(item.description) + '</p>' + meta(item) + '</div>' +
-          '<div style="display:flex;align-items:center;gap:12px"><span class="go">Try it ' + icon("arrow", 15) + '</span>' + saveBtn(item) + '</div></a>';
+          '<div><h5 class="clamp2">' + esc(item.title) + '</h5>' + descriptionHtml(item, 'clamp2') + meta(item) + '</div>' +
+          '<div style="display:flex;align-items:center;gap:12px"><span class="go">' + toolAction(item) + ' ' + icon("arrow", 15) + '</span>' + saveBtn(item) + '</div></a>';
       }).join("") + '</div>';
     }
     return html;
@@ -249,7 +257,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<div class="item case reveal" ' + itemAttrs(item, x.i) + '>' + '<a ' + linkAttrs(item) + ' class="media-link" style="display:contents">' + media(item, "", 64) + '</a>' +
         '<div class="body"><span class="kicker">CASE ' + String(n + 1).padStart(2, "0") + ' · ' + esc(item.source.toUpperCase()) + '</span>' +
-        '<h4>' + esc(item.title) + '</h4><p class="desc clamp3">' + esc(item.description) + '</p>' + meta(item) +
+        '<h4>' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp3') + meta(item) +
         '<div style="display:flex;gap:10px;align-items:center"><a class="btn" ' + linkAttrs(item) + '>' + esc(s.button) + ' ' + icon("arrow", 15) + '</a>' +
         saveBtn(item).replace('class="save"', 'class="save" style="position:static"') + '</div></div></div>';
     }).join("") + '</div>';
@@ -259,7 +267,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<div class="item paper reveal" ' + itemAttrs(item, x.i) + '><span class="n">' + String(n + 1).padStart(2, "0") + '</span>' +
         '<a ' + linkAttrs(item) + '>' + media(item, "", 26) + '</a>' +
-        '<div><a ' + linkAttrs(item) + '><h4 class="clamp2">' + esc(item.title) + '</h4></a><p class="desc clamp2">' + esc(item.description) + '</p>' +
+        '<div><a ' + linkAttrs(item) + '><h4 class="clamp2">' + esc(item.title) + '</h4></a>' + descriptionHtml(item, 'clamp2') +
         '<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">' + meta(item) + '<a class="go" ' + linkAttrs(item) + '>' + esc(s.button) + ' ' + icon("arrow", 15) + '</a></div></div>' +
         saveBtn(item) + '</div>';
     }).join("") + '</div>';
@@ -282,7 +290,7 @@ function subscribeHtml(d) {
   return '<section class="subscribe" id="subscribe"><div class="wrap"><div class="sub-card reveal">' +
     '<div><span class="tag">' + icon("sparkle", 14) + 'NEW</span>' +
     '<h3>Subscribe to the ' + esc(d.lab) + ' Newsletter</h3>' +
-    '<p>Get The Applied AI Brief in your inbox every week: one spotlight, the best of the rest, zero noise.</p></div>' +
+    '<p>Get The Circuit in your inbox every week: one spotlight, the best of the rest, zero noise.</p></div>' +
     '<div><form class="sub-form" id="sub-form"><input type="email" placeholder="you@university.edu" aria-label="Email address" required>' +
     '<input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">' +
     '<button type="submit">Notify me</button></form>' +
@@ -545,17 +553,22 @@ function sendLikeToSheet(url) {
   });
 }
 
+// Toggles a heart and keeps the surrounding article link from opening.
+function toggleLike(button) {
+  const url = button.dataset.save;
+  if (saved.has(url)) { saved.delete(url); toast("Removed from Liked Feedback"); }
+  else { saved.add(url); toast("♥ LIKED! Thanks for you feedback!"); }
+  persistSaved(); refreshSaved();
+  sendLikeToSheet(url);
+  if (filterState.topic === "saved") applyFilters();
+}
+
 // One click handler for everything clickable on the page.
 document.addEventListener("click", function (e) {
   const save = e.target.closest("[data-save]");
   if (save) {
     e.preventDefault(); e.stopPropagation();
-    const url = save.dataset.save;
-    if (saved.has(url)) { saved.delete(url); toast("Removed from Liked Feedback"); }
-    else { saved.add(url); toast("♥ LIKED! Thanks for you feedback!"); }
-    persistSaved(); refreshSaved();
-    sendLikeToSheet(url);
-    if (filterState.topic === "saved") applyFilters();
+    toggleLike(save);
     return;
   }
   const video = e.target.closest("[data-video]");
@@ -574,6 +587,13 @@ document.addEventListener("click", function (e) {
 });
 // Escape closes videos; Enter or Space opens a selected video.
 document.addEventListener("keydown", function (e) {
+  const save = e.target.closest && e.target.closest("[data-save]");
+  if (save && (e.key === "Enter" || e.key === " ")) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!e.repeat) toggleLike(save);
+    return;
+  }
   if (e.key === "Escape") closeVideo();
   const vid = e.target.closest && e.target.closest("[data-video]");
   if (vid && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openVideo(+vid.dataset.video); }

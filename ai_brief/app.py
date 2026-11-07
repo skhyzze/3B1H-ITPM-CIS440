@@ -57,7 +57,7 @@ COLLECTED_FILE = os.path.join(BASE_DIR, "output", "ai_resources.csv")
 # collector (which overwrites ai_resources.csv every time).
 APPROVED_FILE = os.path.join(BASE_DIR, "output", "approved_resources.csv")
 
-NEWSLETTER_TITLE = "The Applied AI Brief"
+NEWSLETTER_TITLE = "The Circuit"
 LAB_NAME = "Applied AI Lab"
 INTRO_MESSAGE = (
     "Your weekly digest of what matters in artificial intelligence: the news "
