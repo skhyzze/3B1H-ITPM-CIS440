@@ -204,3 +204,46 @@
     });
   });
 })();
+
+(function () {
+  const steps = Array.from(document.querySelectorAll('.path-step'));
+  if (!steps.length) return;
+
+  steps.forEach(function (step) {
+    step.addEventListener('click', function () {
+      steps.forEach(function (item) {
+        const selected = item === step;
+        item.classList.toggle('is-selected', selected);
+        item.setAttribute('aria-expanded', String(selected));
+        const panel = document.getElementById(item.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !selected;
+      });
+    });
+  });
+})();
+
+(function () {
+  const nodes = Array.from(document.querySelectorAll('.about-fellowship .reveal, .ideal-candidates .reveal, .fellow-skills .reveal, .how-to-become .reveal'));
+  if (!nodes.length) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    nodes.forEach(function (node) { node.classList.add('is-in'); });
+    return;
+  }
+
+  nodes.forEach(function (node) {
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) node.classList.add('is-in');
+  });
+  document.documentElement.classList.add('reveal-ready');
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+  nodes.forEach(function (node) { observer.observe(node); });
+})();

@@ -259,3 +259,86 @@ body.dark.page-fellowship .signal-detail p { color: #c0cfdb; }
   0% { opacity: .5; transform: translateX(-46px); }
   100% { opacity: 1; transform: translateX(0); }
 }
+
+.about-fellowship .program-copy { max-width: 760px; margin-top: 36px; }
+.program-support { max-width: 680px; margin: 18px 0 0; color: #34414e; font-size: .95rem; line-height: 1.7; }
+.program-intro { max-width: 720px; margin: 28px 0 0; color: var(--muted); font-size: 1.02rem; line-height: 1.7; }
+.ideal-candidates { background: var(--surface); border-block: 1px solid var(--line); }
+.candidate-grid,.skill-grid { display: grid; gap: 14px; margin-top: 42px; }
+.candidate-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.skill-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.candidate-card,.skill-card { min-width: 0; padding: 28px 24px 32px; border: 1px solid var(--line); border-radius: 2px; background: var(--white); }
+.candidate-label,.skill-number { margin: 0; color: var(--red); font: 700 .68rem var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.candidate-card h3,.skill-card h3 { margin: 16px 0 0; color: var(--navy); font-size: 1.15rem; letter-spacing: -.02em; }
+.candidate-card p:last-child,.skill-card p:last-child { margin: 14px 0 0; color: var(--muted); font-size: .9rem; line-height: 1.65; }
+.pending-note { display: inline-block; margin: 22px 0 0; color: var(--muted); font: 700 .68rem var(--mono); letter-spacing: .06em; }
+.ideal-candidates .section-heading { text-align: right; }
+.ideal-candidates .section-heading h2 { margin-left: auto; }
+.ideal-candidates .program-intro { margin-left: auto; text-align: right; }
+.fellow-skills .section-heading,.how-to-become .section-heading { text-align: center; }
+.fellow-skills .section-heading h2,.how-to-become .section-heading h2 { margin-inline: auto; }
+.fellow-skills .program-intro,.how-to-become .program-intro { margin-inline: auto; text-align: center; }
+
+body.dark.page-fellowship .program-support,body.dark.page-fellowship .program-intro { color: #b7c4cf; }
+body.dark.page-fellowship .ideal-candidates { background: #091725; }
+body.dark.page-fellowship .candidate-card,body.dark.page-fellowship .skill-card { background: #0d2135; }
+body.dark.page-fellowship .candidate-card h3,body.dark.page-fellowship .skill-card h3 { color: var(--white); }
+body.dark.page-fellowship .pending-note { color: #edf3f8; }
+
+@media (max-width: 940px) {
+  .candidate-grid,.skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .candidate-grid,.skill-grid { grid-template-columns: 1fr; }
+}
+
+.how-to-become .program-intro { max-width: 720px; color: #d1dce5; }
+.path-board { margin-top: 36px; }
+.path-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.path-steps li { min-width: 0; margin: 0; }
+.path-step { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; width: 100%; min-height: 124px; padding: 16px 14px; border: 1px solid rgba(255,255,255,.22); border-radius: 2px; background: rgba(7,18,31,.24); color: var(--white); font: inherit; text-align: left; cursor: pointer; }
+.path-step.is-selected { border-color: var(--red); box-shadow: inset 3px 0 0 var(--red); }
+.path-number { color: #ffc1c9; font: 700 1.05rem var(--mono); line-height: 1; letter-spacing: .04em; }
+.path-step span:last-child { font-size: .92rem; font-weight: 750; letter-spacing: -.02em; line-height: 1.35; }
+.path-panels { margin-top: 14px; }
+.path-panel { margin: 0; padding: 22px 24px; border-left: 3px solid var(--red); background: rgba(255,255,255,.06); color: #d1dce5; font-size: 1.02rem; line-height: 1.7; }
+.path-panel[hidden] { display: none; }
+.path-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 28px; margin: 28px 0 0; padding: 0; list-style: none; }
+body.page-fellowship .path-facts li { margin: 0; color: #ffc1c9; font-family: var(--mono) !important; font-size: .68rem; font-weight: 700; letter-spacing: .08em; line-height: 1.6; text-transform: uppercase; }
+.contact-strip .path-apply { flex: 0 0 auto; gap: 0; border-color: rgba(7,18,31,.28); background: rgba(7,18,31,.06); color: var(--muted); opacity: .72; cursor: not-allowed; }
+.contact-strip .path-apply:disabled,.contact-strip .path-apply:disabled:hover { transform: none; background: rgba(7,18,31,.06); color: var(--muted); }
+
+@media (max-width: 800px) {
+  .path-steps { grid-template-columns: 1fr; }
+  .path-step { flex-direction: row; align-items: center; min-height: 0; padding: 14px 16px; }
+  .path-step span:last-child { font-size: .95rem; }
+}
+
+@media (max-width: 640px) {
+  .path-facts { grid-template-columns: 1fr; }
+  .contact-strip { flex-wrap: wrap; }
+  .contact-strip p { flex: 1 1 100%; min-width: 0; }
+  .contact-strip .path-apply { width: auto; max-width: 100%; }
+  .ideal-candidates .section-heading,.fellow-skills .section-heading,.how-to-become .section-heading,.ideal-candidates .program-intro,.fellow-skills .program-intro,.how-to-become .program-intro { text-align: left; }
+  .ideal-candidates .section-heading h2,.fellow-skills .section-heading h2,.how-to-become .section-heading h2,.ideal-candidates .program-intro,.fellow-skills .program-intro,.how-to-become .program-intro { margin-left: 0; margin-right: 0; }
+}
+
+html.reveal-ready .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+html.reveal-ready .reveal.is-in { opacity: 1; transform: none; }
+html.reveal-ready .candidate-card.reveal:nth-child(2),html.reveal-ready .skill-card.reveal:nth-child(2) { transition-delay: .08s; }
+html.reveal-ready .candidate-card.reveal:nth-child(3),html.reveal-ready .skill-card.reveal:nth-child(3) { transition-delay: .16s; }
+html.reveal-ready .skill-card.reveal:nth-child(4) { transition-delay: .24s; }
+html.reveal-ready .skill-card.reveal:nth-child(5) { transition-delay: .32s; }
+html.reveal-ready .skill-card.reveal:nth-child(6) { transition-delay: .4s; }
+.path-panel { animation: path-panel-in .35s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-ready .reveal,html.reveal-ready .reveal.is-in { opacity: 1; transform: none; transition: none; }
+  .path-panel { animation: none; }
+}
+
+@keyframes path-panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}

@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#f8f8f6">
   <title>Fellowship Pathway | Applied AI Lab</title>
   <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/fellowship.css">
+  <link rel="stylesheet" href="css/fellowship.css?v=2">
   <link rel="stylesheet" href="css/blended-theme.css">
   <link rel="stylesheet" href="css/chatbot.css">
 </head>
@@ -45,9 +45,9 @@
         <div class="page-hero-content">
           <p class="section-kicker">Student experience</p>
           <h1 id="hero-title">Build what’s <em>next.</em></h1>
-          <p class="lead content-pending">A concise, client-approved introduction to the fellowship, who it serves, and the opportunity it creates will appear here.</p>
+          <p class="lead content-pending">[One or two sentences introducing the Fellowship to prospective students. Confirm with the client.]</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#joining">How the pathway works <span aria-hidden="true">↘</span></a>
+            <a class="button button-primary" href="#how-to-become">Become a Fellow <span aria-hidden="true">↘</span></a>
             <a class="button button-ghost" href="#fellows">Meet the fellows</a>
           </div>
         </div>
@@ -55,9 +55,10 @@
         <div class="hero-console" aria-label="Fellowship pathway overview">
           <div class="console-bar"><span></span><span></span><span></span><p>fellowship_pathway.json</p></div>
           <div class="console-body">
-            <button class="console-line is-active" type="button" data-pathway-target="#about" aria-current="step"><span>01</span><code>EXPLORE</code><small>Find your focus</small></button>
-            <button class="console-line" type="button" data-pathway-target="#joining"><span>02</span><code>APPLY</code><small>Work on real questions</small></button>
-            <button class="console-line" type="button" data-pathway-target="#fellows"><span>03</span><code>CONNECT</code><small>Learn with a cohort</small></button>
+            <button class="console-line is-active" type="button" data-pathway-target="#about-fellowship" aria-current="step"><span>01</span><code>WHAT</code><small>What the Fellowship is</small></button>
+            <button class="console-line" type="button" data-pathway-target="#ideal-candidates"><span>02</span><code>WHO</code><small>Who can be a Fellow</small></button>
+            <button class="console-line" type="button" data-pathway-target="#fellow-skills"><span>03</span><code>SKILLS</code><small>What you’ll develop</small></button>
+            <button class="console-line" type="button" data-pathway-target="#how-to-become"><span>04</span><code>APPLY</code><small>How to become a Fellow</small></button>
             <p class="console-line console-status"><span aria-hidden="true">●</span><code>DETAILS</code><small>Pending client confirmation</small></p>
             <p class="console-instruction">Select a stage to explore the pathway.</p>
           </div>
@@ -66,19 +67,86 @@
       <div class="hero-index" aria-hidden="true">FEL / 001</div>
     </section>
 
-    <section class="section overview-section" id="about" aria-labelledby="about-title">
-      <div class="container overview-grid">
-        <div class="section-heading">
-          <h2 id="about-title">A launchpad for applied learning.</h2>
+    <section class="section about-fellowship" id="about-fellowship" aria-labelledby="about-fellowship-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">01 / The program</p>
+          <h2 id="about-fellowship-title">What is the Fellowship?</h2>
         </div>
-        <div class="overview-copy">
-          <p class="intro-text content-pending">Briefly explain what the fellowship does, what students may work on, and what they can expect to gain. Confirm the final wording with the client.</p>
-          <div class="signal-row" aria-label="Explore program information">
-            <button class="signal-item is-active" type="button" data-signal-title="Eligibility" aria-expanded="true" aria-controls="signalDetail"><strong>01</strong><span>Eligibility</span><small>Select for status</small></button>
-            <button class="signal-item" type="button" data-signal-title="Timeline" aria-expanded="false" aria-controls="signalDetail"><strong>02</strong><span>Timeline</span><small>Select for status</small></button>
-            <button class="signal-item" type="button" data-signal-title="Commitment" aria-expanded="false" aria-controls="signalDetail"><strong>03</strong><span>Commitment</span><small>Select for status</small></button>
-          </div>
-          <div class="signal-detail" id="signalDetail" aria-live="polite"><strong>Eligibility</strong><p>Program details are awaiting client confirmation.</p></div>
+        <div class="program-copy reveal">
+          <p class="intro-text content-pending">[One or two sentences that explain what the Fellowship is and why it exists. Confirm final wording with the client.]</p>
+          <p class="program-support content-pending">[What Fellows do day to day (projects, mentorship, events, research).]</p>
+          <p class="program-support content-pending">[What Fellows gain from the experience.]</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ideal-candidates" id="ideal-candidates" aria-labelledby="ideal-candidates-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">02 / Ideal candidates</p>
+          <h2 id="ideal-candidates-title">Who can be a Fellow?</h2>
+        </div>
+        <p class="program-intro content-pending reveal">[Describe the type of student the Lab is looking for.]</p>
+        <div class="candidate-grid">
+          <article class="candidate-card reveal">
+            <p class="candidate-label">Eligibility</p>
+            <h3>General Eligibility Standards</h3>
+            <p class="content-pending">[Class standing, enrollment status, and any GPA or prerequisite requirements.]</p>
+          </article>
+          <article class="candidate-card reveal">
+            <p class="candidate-label">Interest</p>
+            <h3>Interests and qualities</h3>
+            <p>A specific major is not required. A strong interest in the Fellowship matters most, together with curiosity, initiative, and a collaborative mindset.</p>
+          </article>
+          <article class="candidate-card reveal">
+            <p class="candidate-label">Commitment</p>
+            <h3>Time and availability</h3>
+            <p class="content-pending">[Expected weekly time commitment and length of the program.]</p>
+          </article>
+        </div>
+        <p class="pending-note">[Details awaiting client confirmation.]</p>
+      </div>
+    </section>
+
+    <section class="section fellow-skills" id="fellow-skills" aria-labelledby="fellow-skills-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">03 / Skills and growth</p>
+          <h2 id="fellow-skills-title">What it means to be a Fellow.</h2>
+        </div>
+        <p class="program-intro content-pending reveal">[Explain what Fellows develop and practice during the experience.]</p>
+        <div class="skill-grid">
+          <article class="skill-card reveal">
+            <p class="skill-number">01</p>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Technical skill (for example, working with AI tools or data analysis).]</p>
+          </article>
+          <article class="skill-card reveal">
+            <p class="skill-number">02</p>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Applied problem solving.]</p>
+          </article>
+          <article class="skill-card reveal">
+            <p class="skill-number">03</p>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Collaboration and teamwork across disciplines.]</p>
+          </article>
+          <article class="skill-card reveal">
+            <p class="skill-number">04</p>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Communication and presenting work.]</p>
+          </article>
+          <article class="skill-card reveal">
+            <p class="skill-number">05</p>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Leadership and mentorship.]</p>
+          </article>
+          <article class="skill-card reveal">
+            <p class="skill-number">06</p>
+            <h3 class="content-pending">[Skill name]</h3>
+            <p class="content-pending">[Professional and career readiness.]</p>
+          </article>
         </div>
       </div>
     </section>
@@ -139,17 +207,63 @@
       </div>
     </section>
 
-    <section class="section details-section" id="joining" aria-labelledby="joining-title">
+    <section class="section details-section how-to-become" id="how-to-become" aria-labelledby="how-to-become-title">
       <div class="container">
-        <div class="section-heading section-heading-row">
-          <div><h2 id="joining-title">Your pathway starts here.</h2></div>
-          <p class="section-aside">The application process and program structure below are ready for confirmed details.</p>
+        <div class="section-heading reveal">
+          <p class="section-kicker">04 / Your path</p>
+          <h2 id="how-to-become-title">How do I become a Fellow?</h2>
         </div>
-        <div class="details-grid">
-          <article class="detail-card"><div class="detail-number">01</div><div><p class="detail-label">Application</p><h3>How to express interest</h3><p class="content-pending">Add who can apply, required materials, the current contact, and any relevant deadline.</p></div></article>
-          <article class="detail-card"><div class="detail-number">02</div><div><p class="detail-label">Experience</p><h3>What the pathway includes</h3><p class="content-pending">Add confirmed stages, activities, learning goals, curriculum, and completion expectations.</p></div></article>
+        <p class="program-intro content-pending reveal">[One sentence explaining that becoming a Fellow follows the steps below.]</p>
+        <div class="path-board reveal">
+          <ol class="path-steps">
+            <li>
+              <button class="path-step is-selected" type="button" aria-expanded="true" aria-controls="path-panel-1">
+                <span class="path-number" aria-hidden="true">01</span>
+                <span>Learn about the Fellowship</span>
+              </button>
+            </li>
+            <li>
+              <button class="path-step" type="button" aria-expanded="false" aria-controls="path-panel-2">
+                <span class="path-number" aria-hidden="true">02</span>
+                <span>Confirm you are eligible</span>
+              </button>
+            </li>
+            <li>
+              <button class="path-step" type="button" aria-expanded="false" aria-controls="path-panel-3">
+                <span class="path-number" aria-hidden="true">03</span>
+                <span>Submit your application</span>
+              </button>
+            </li>
+            <li>
+              <button class="path-step" type="button" aria-expanded="false" aria-controls="path-panel-4">
+                <span class="path-number" aria-hidden="true">04</span>
+                <span>Interview or conversation</span>
+              </button>
+            </li>
+            <li>
+              <button class="path-step" type="button" aria-expanded="false" aria-controls="path-panel-5">
+                <span class="path-number" aria-hidden="true">05</span>
+                <span>Join the cohort</span>
+              </button>
+            </li>
+          </ol>
+          <div class="path-panels">
+            <p class="path-panel content-pending" id="path-panel-1">[Where to learn more (events, information sessions, this page).]</p>
+            <p class="path-panel content-pending" id="path-panel-2" hidden>[Quick eligibility checklist.]</p>
+            <p class="path-panel content-pending" id="path-panel-3" hidden>[Required materials, form link, and deadline.]</p>
+            <p class="path-panel content-pending" id="path-panel-4" hidden>[What the selection process looks like and who reviews applications.]</p>
+            <p class="path-panel content-pending" id="path-panel-5" hidden>[What happens after acceptance, including orientation and start date.]</p>
+          </div>
         </div>
-        <div class="contact-strip"><p><span>Ready when the details are.</span> Add the client-approved fellowship contact and call to action here.</p><span class="contact-arrow" aria-hidden="true">→</span></div>
+        <ul class="path-facts">
+          <li class="content-pending">[Application opens: To be announced]</li>
+          <li class="content-pending">[Deadline: To be announced]</li>
+          <li class="content-pending">[Questions: Contact to be confirmed]</li>
+        </ul>
+        <div class="contact-strip">
+          <p class="content-pending">[Add the client-approved Fellowship contact and application link here.]</p>
+          <button class="button path-apply" type="button" disabled aria-disabled="true">Application link coming soon</button>
+        </div>
       </div>
     </section>
   </main>
@@ -184,7 +298,7 @@
 </footer>
 
   <script src="js/site.js" defer></script>
-  <script src="js/fellowship.js" defer></script>
+  <script src="js/fellowship.js?v=2" defer></script>
   <script src="js/chatbot.js" defer></script>
 </body>
 </html>
