@@ -1597,3 +1597,7 @@ body.dark .lab-menu-toggle {
     border-bottom-color: rgba(230, 222, 216, 0.35);
   }
 }
+
+/* Hides the Industry Partners link in the navigation. To show it, remove this rule or make it a comment like this one */
+.lab-nav-links > a[href="industry.html"],
+.lab-footer-nav > a[href="industry.html"] { display: none; }
