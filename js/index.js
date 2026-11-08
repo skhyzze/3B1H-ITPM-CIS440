@@ -1,9 +1,11 @@
 
 (function(){
-  const cards = Array.from(document.querySelectorAll('.preview-card'));
+  const cards = Array.from(document.querySelectorAll('.preview-card:not([hidden])'));
   const dots = Array.from(document.querySelectorAll('.progress-dot'));
   const scrollControl = document.getElementById('carouselScroll');
   if (!cards.length) return;
+
+  if (scrollControl) scrollControl.max = String(cards.length - 1);
 
   let current = 0;
   let timer;
@@ -17,7 +19,10 @@
       const offset = (i - current + cards.length) % cards.length;
       card.classList.add(offset === 0 ? 'active' : offset === 1 ? 'next' : 'prev');
     });
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+    dots.forEach((dot, i) => {
+      dot.hidden = i >= cards.length;
+      dot.classList.toggle('active', i === current);
+    });
     if (scrollControl) scrollControl.value = current;
   }
 
