@@ -15,9 +15,9 @@
   padding: 0 20px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 999px;
-  background: #07121f;
+  background: #13364d;
   color: #fff;
-  box-shadow: 0 16px 38px rgba(7, 18, 31, 0.28);
+  box-shadow: 0 16px 38px rgba(12, 17, 20, 0.28);
   font: 700 0.86rem/1 "Space Grotesk", Arial, sans-serif;
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -30,21 +30,21 @@
   height: 9px;
   margin-right: 10px;
   border-radius: 50%;
-  background: #d44b5c;
-  box-shadow: 0 0 0 4px rgba(212, 75, 92, 0.18);
+  background: #2F7D4F;
+  box-shadow: 0 0 0 4px rgba(47, 125, 79, 0.18);
 }
 
 .lab-chat-launcher:hover {
   transform: translateY(-2px);
-  background: #123a63;
-  box-shadow: 0 20px 44px rgba(7, 18, 31, 0.34);
+  background: #24557a;
+  box-shadow: 0 20px 44px rgba(12, 17, 20, 0.34);
 }
 
 .lab-chat-launcher:focus-visible,
 .lab-chat-panel button:focus-visible,
 .lab-chat-panel input:focus-visible,
 .lab-chat-panel a:focus-visible {
-  outline: 3px solid #d44b5c;
+  outline: 3px solid #A11B2E;
   outline-offset: 3px;
 }
 
@@ -62,8 +62,8 @@
   overflow: hidden;
   border: 1px solid rgba(7, 18, 31, 0.2);
   border-radius: 22px;
-  background: #f8f8f6;
-  color: #07121f;
+  background: #f4f6f8;
+  color: #0c1114;
   box-shadow: 0 24px 70px rgba(7, 18, 31, 0.3);
   font-family: "Space Grotesk", Arial, sans-serif;
 }
@@ -80,7 +80,7 @@
   min-height: 0;
   margin: 0;
   padding: 17px 18px;
-  background: #07121f;
+  background: #13364d;
   color: #fff;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .lab-chat-title strong {
-  font-family: "Orbitron", "Space Grotesk", Arial, sans-serif;
+  font-family: "Oxanium", "Space Grotesk", Arial, sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
 }
@@ -99,7 +99,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: #e6ded8;
+  color: #b9c8d4;
   font-size: 0.72rem;
 }
 
@@ -108,7 +108,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #d44b5c;
+  background: #2F7D4F;
 }
 
 .lab-chat-close {
@@ -130,10 +130,10 @@
   overflow-y: auto;
   padding: 18px;
   background:
-    linear-gradient(rgba(248, 248, 246, 0.94), rgba(248, 248, 246, 0.94)),
-    radial-gradient(circle at top right, rgba(161, 27, 46, 0.15), transparent 42%);
+    linear-gradient(rgba(244, 246, 248, 0.94), rgba(244, 246, 248, 0.94)),
+    radial-gradient(circle at top right, rgba(47, 125, 79, 0.14), transparent 42%);
   overscroll-behavior: contain;
-  scrollbar-color: #a11b2e #e6ded8;
+  scrollbar-color: #24557a #e5e9ed;
   scrollbar-width: thin;
 }
 
@@ -165,23 +165,23 @@
   border: 1px solid rgba(7, 18, 31, 0.14);
   border-radius: 5px 16px 16px 16px;
   background: #fff;
-  color: #172334;
+  color: #111111;
   font-size: 0.9rem;
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
 .lab-chat-message[data-role="user"] .lab-chat-bubble {
-  border-color: #123a63;
+  border-color: #13364d;
   border-radius: 16px 5px 16px 16px;
-  background: #123a63;
+  background: #13364d;
   color: #fff;
 }
 
 .lab-chat-bubble a {
   display: inline-block;
   margin-top: 9px;
-  color: #8f1728;
+  color: #A11B2E;
   font-weight: 750;
   text-underline-offset: 3px;
 }
@@ -196,17 +196,17 @@
 .lab-chat-suggestion {
   min-height: 38px;
   padding: 8px 11px;
-  border: 1px solid #a8b0ba;
+  border: 1px solid #cbd4dc;
   border-radius: 999px;
   background: #fff;
-  color: #123a63;
+  color: #13364d;
   font: 700 0.75rem/1.2 "Space Grotesk", Arial, sans-serif;
   cursor: pointer;
 }
 
 .lab-chat-suggestion:hover {
-  border-color: #a11b2e;
-  color: #8f1728;
+  border-color: #2F7D4F;
+  color: #2F7D4F;
 }
 
 .lab-chat-typing .lab-chat-bubble {
@@ -227,10 +227,10 @@
   min-width: 0;
   min-height: 46px;
   padding: 0 13px;
-  border: 1px solid #a8b0ba;
+  border: 1px solid #cbd4dc;
   border-radius: 12px;
   background: #fff;
-  color: #07121f;
+  color: #111111;
   font: 0.88rem/1.3 "Space Grotesk", Arial, sans-serif;
 }
 
@@ -242,16 +242,17 @@
   min-width: 76px;
   min-height: 46px;
   padding: 0 14px;
-  border: 1px solid #a11b2e;
+  border: 1px solid #A11B2E;
   border-radius: 12px;
-  background: #a11b2e;
+  background: #A11B2E;
   color: #fff;
   font: 750 0.82rem/1 "Space Grotesk", Arial, sans-serif;
   cursor: pointer;
 }
 
 .lab-chat-send:hover {
-  background: #7f1423;
+  background: #13364d;
+  border-color: #13364d;
 }
 
 .lab-chat-send:disabled,
@@ -308,6 +309,45 @@ body.dark .lab-chat-input::placeholder {
 
 body.dark .lab-chat-form {
   border-top-color: rgba(230, 222, 216, 0.25);
+}
+
+body.dark .lab-chat-launcher {
+  background: #07121f;
+  box-shadow: 0 16px 38px rgba(7, 18, 31, 0.28);
+}
+
+body.dark .lab-chat-launcher:hover {
+  background: #123a63;
+  box-shadow: 0 20px 44px rgba(7, 18, 31, 0.34);
+}
+
+body.dark .lab-chat-launcher::before,
+body.dark .lab-chat-status::before {
+  background: #d44b5c;
+}
+
+body.dark .lab-chat-header {
+  background: #07121f;
+}
+
+body.dark .lab-chat-status {
+  color: #e6ded8;
+}
+
+body.dark .lab-chat-send {
+  border-color: #a11b2e;
+  background: #a11b2e;
+}
+
+body.dark .lab-chat-send:hover {
+  border-color: #7f1423;
+  background: #7f1423;
+}
+
+body.dark .lab-chat-message[data-role="user"] .lab-chat-bubble {
+  border-color: #123a63;
+  background: #123a63;
+  color: #fff;
 }
 
 @media (max-width: 560px) {
