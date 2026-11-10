@@ -399,7 +399,7 @@ window.LAB_FELLOWS_READY=(async function(){
   const status=document.getElementById('fellowStatus');
   track.replaceChildren();
   status.textContent='Loading student fellows…';
-  const url='https://script.google.com/macros/s/AKfycbxZixQOq57BZBvfvjQVc7lc4xLZqdPXbo6Yt6WeaPNTKB3l1Kv-Yr8lGNJTQFg-CJAP/exec?feed=fellows';
+  const url='https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-fellows.json?v=' + Date.now();
   function node(tag,cls,text){const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;}
   function safeUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}}
   try {
