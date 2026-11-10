@@ -1,5 +1,14 @@
 {
-  "projects": [],
-  "updatedAt": "2026-11-10T23:02:29.7829307Z",
+  "projects": [
+    {
+      "url": "https://coginchaugbenchwarmers.com",
+      "category": "spotlight",
+      "title": "Coginchaug Benchwarmers Website",
+      "displayOrder": 3.0,
+      "description": "A responsive website for the RSD13 booster club, showcasing its community fundraising, scholarship opportunities and recipients, and organizational history. Designed with clear navigation and light/dark viewing modes.",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1cnSu4FDXmpO79ITTGrJRYsFjMaruumIJH0yKsWuuw&s=10"
+    }
+  ],
+  "updatedAt": "2026-11-10T23:15:01.2989803Z",
   "source": "Microsoft Lists"
 }
