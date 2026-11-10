@@ -1,0 +1,30 @@
+{
+  "fellows": [
+    {
+      "projectTitle": "IB Launchpad",
+      "projectLabel": "Featured project · Prototype",
+      "bio": "Frank is exploring how AI can help students practice the technical skills they may need before beginning an analyst role.",
+      "url": "https://celadon-treacle-ba824a.netlify.app/#top",
+      "linkLabel": "View prototype ↗",
+      "displayOrder": 1.0,
+      "role": "School of Business · Finance",
+      "name": "Frank Mousa",
+      "initials": "FM",
+      "projectDescription": "An AI-supported training experience for financial modeling, credit analysis, and investment-committee preparation."
+    },
+    {
+      "projectTitle": "",
+      "projectLabel": "Featured project",
+      "bio": "Add a short, student-approved description or quote.",
+      "url": "",
+      "linkLabel": "View project ↗",
+      "displayOrder": 2.0,
+      "role": "School of Business · Master's of Business Analytics and AI",
+      "name": "Vivian Etim",
+      "initials": "VE",
+      "projectDescription": "Add the project title and a concise explanation of the student’s work."
+    }
+  ],
+  "updatedAt": "2026-11-10T23:16:51.5856827Z",
+  "source": "Microsoft Lists"
+}
