@@ -9,7 +9,7 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="images_icons/AAI-Logo-Black-Animated-Match.png" type="image/png">
-  <meta name="theme-color" content="#f8f8f6">
+  <meta name="theme-color" content="#f4f6f8">
   <title>Applied AI Lab</title>
   
 
@@ -18,7 +18,9 @@
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/blended-theme.css">
+  <link rel="stylesheet" href="css/home-motion.css">
   <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/lab-accents.css">
 </head>
 <body class="page-home">
 <a class="skip-link" href="#top">Skip to main content</a>
@@ -47,6 +49,21 @@
 
 <main id="top">
   <section class="hero">
+    <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+    <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+    <svg class="circuit-field" viewBox="0 0 760 520" fill="none" aria-hidden="true" focusable="false">
+      <path class="circuit-trace" d="M40 90H190V200H340" stroke="currentColor" stroke-width="1.5"/>
+      <path class="circuit-trace circuit-trace-b" d="M340 200H500V110H720" stroke="currentColor" stroke-width="1.5"/>
+      <path class="circuit-trace circuit-trace-c" d="M190 200V360H420V450H640" stroke="currentColor" stroke-width="1.5"/>
+      <path class="circuit-trace circuit-trace-d" d="M70 360H190" stroke="currentColor" stroke-width="1.5"/>
+      <path class="circuit-trace circuit-trace-e" d="M500 200V330H690" stroke="#a11b2e" stroke-width="1.5"/>
+      <circle class="circuit-node" cx="190" cy="90" r="4" fill="currentColor"/>
+      <circle class="circuit-node" cx="340" cy="200" r="4" fill="currentColor"/>
+      <circle class="circuit-node circuit-node-hot" cx="500" cy="110" r="4" fill="#a11b2e"/>
+      <circle class="circuit-node" cx="420" cy="360" r="4" fill="currentColor"/>
+      <circle class="circuit-node circuit-node-hot" cx="640" cy="450" r="4" fill="#a11b2e"/>
+      <circle class="circuit-node" cx="690" cy="330" r="4" fill="currentColor"/>
+    </svg>
     <div class="wrap hero-grid">
       <div>
         <div class="kicker">Applied Intelligence / Human Curiosity</div>
@@ -57,10 +74,23 @@
           <a class="btn btn-light" href="#resources">View Resources</a>
         </div>
       </div>
+      <!--
+        IMAGE PLACEHOLDERS: carousel frames
+        Page: Home. Section: hero, "Build. Test. Think."
+        Each card has one frame: Events, Industry Partners (hidden), Fellows, and Student Outcomes.
+        To add a photo, keep the preview-image frame.
+        Replace the svg and the label inside that frame with:
+        <img src="images/your-photo.jpg" alt="A short description of the photo">
+        Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+      -->
       <aside class="preview-carousel" aria-label="Explore the Applied AI Lab">
         <div class="carousel-stage">
           <a class="preview-card active" href="event.html" data-index="0">
-            <span class="preview-type">01 / EVENTS</span><div class="preview-image"><span>EVENT IMAGE</span></div>
+            <span class="preview-type">01 / EVENTS</span>
+            <div class="preview-image image-slot-frame" role="img" aria-label="Image placeholder for Lab events">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">Event image</span>
+            </div>
             <div>
               <h2>Events</h2>
               <p>Discover workshops, talks, demonstrations, guest speakers, and hands-on sessions that bring new ideas into the Lab and give the community opportunities to learn, connect, and experiment.</p>
@@ -69,7 +99,11 @@
           </a>
 
           <a class="preview-card next" href="industry.html" data-index="1" hidden>
-            <span class="preview-type">02 / INDUSTRY</span><div class="preview-image"><span>PARTNER IMAGE</span></div>
+            <span class="preview-type">02 / INDUSTRY</span>
+            <div class="preview-image image-slot-frame" role="img" aria-label="Image placeholder for industry partners">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">Partner image</span>
+            </div>
             <div>
               <h2>Industry Partners</h2>
               <p>Connect with organizations bringing real challenges, professional perspectives, and emerging technology into the Lab through collaborative projects, conversations, and applied experiences.</p>
@@ -78,7 +112,11 @@
           </a>
 
           <a class="preview-card prev" href="fellowship.html" data-index="2">
-            <span class="preview-type">03 / FELLOWS</span><div class="preview-image"><span>FELLOWS IMAGE</span></div>
+            <span class="preview-type">02 / FELLOWS</span>
+            <div class="preview-image image-slot-frame" role="img" aria-label="Image placeholder for student fellows">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">Fellows image</span>
+            </div>
             <div>
               <h2>Fellows</h2>
               <p>Meet students and faculty taking a deeper role in research, technical projects, events, mentorship, and the continued development of the Applied AI Lab community.</p>
@@ -86,8 +124,12 @@
             <span class="preview-link">Explore the Pathway ↗</span>
           </a>
 
-          <a class="preview-card prev" href="studentoutcomes.html" data-index="2">
-            <span class="preview-type">04 / STUDENT OUTCOMES</span><div class="preview-image"><span>STUDENT OUTCOMES IMAGE</span></div>
+          <a class="preview-card prev" href="studentoutcomes.html" data-index="3">
+            <span class="preview-type">03 / STUDENT OUTCOMES</span>
+            <div class="preview-image image-slot-frame" role="img" aria-label="Image placeholder for student outcomes">
+              <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+              <span class="image-slot-label">Outcomes image</span>
+            </div>
             <div>
               <h2>Student Outcomes</h2>
               <p>See the impact of our students' work and the opportunities they've gained through the Applied AI Lab.</p>
@@ -101,10 +143,10 @@
             <span class="progress-dot active"></span>
             <span class="progress-dot"></span>
             <span class="progress-dot"></span>
-            <span class="progress-dot"></span>
+            <span class="progress-dot" hidden></span>
           </div>
           <input class="carousel-scroll" id="carouselScroll" type="range"
-             min="0" max="3" step="1" value="0"
+             min="0" max="2" step="1" value="0"
              aria-label="Choose carousel preview">
           <button class="carousel-pause" type="button" aria-label="Pause carousel">
             <span class="carousel-pause-icon" aria-hidden="true"></span>
@@ -115,109 +157,268 @@
   </section>
 
   <section id="lab">
-    <div class="wrap section-grid">
+    <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+      <path class="circuit-trace" d="M8 48H48V18H110V48H172" stroke="currentColor" stroke-width="1.4"/>
+      <circle class="circuit-node" cx="48" cy="18" r="3" fill="currentColor"/>
+      <circle class="circuit-node circuit-node-hot" cx="110" cy="48" r="3" fill="#a11b2e"/>
+      <circle class="circuit-node" cx="172" cy="48" r="3" fill="currentColor"/>
+    </svg>
+    <div class="wrap home-split">
       <div>
-        <span class="eyebrow">The Lab</span>
-        <h2>A place to explore what comes next.</h2>
-        <div class="index-no">01</div>
+        <div class="section-heading reveal">
+          <span class="eyebrow">01 / The Lab</span>
+          <h2>A place to explore what comes next.</h2>
+          <div class="index-no">01</div>
+        </div>
+        <div class="section-copy reveal">
+        <p class="lab-point"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="10" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.8 18c.5-2.3 2.2-3.4 4.2-3.4s3.7 1.1 4.2 3.4M13 18c.3-1.6 1.4-2.6 2.8-2.6 1.3 0 2.3.8 2.7 2.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>The Applied AI Lab brings together students, faculty, and external partners to investigate emerging technology, develop new ideas, and turn complex questions into working solutions.</span></p>
+        <p class="lab-point"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg><span>It is designed for both technical depth and open exploration. Members can learn new tools, collaborate across disciplines, prototype ideas, test systems, and contribute to projects with academic or real-world impact.</span></p>
+        <p class="lab-point"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="7" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>The goal is not simply to study artificial intelligence. It is to understand it by building with it.</span></p>
+        </div>
       </div>
-      <div class="section-copy">
-        <p>The Applied AI Lab brings together students, faculty, and external partners to investigate emerging technology, develop new ideas, and turn complex questions into working solutions.</p>
-        <p>It is designed for both technical depth and open exploration. Members can learn new tools, collaborate across disciplines, prototype ideas, test systems, and contribute to projects with academic or real-world impact.</p>
-        <p>The goal is not simply to study artificial intelligence. It is to understand it by building with it.</p>
-      </div>
+      <!--
+        IMAGE PLACEHOLDER: [Lab workspace image]
+        Page: Home. Section: "A place to explore what comes next." (#lab).
+        On screen it sits to the right of that heading, lined up with the paragraphs, in a tall frame.
+        To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+        Replace the svg and the "Lab image" label with:
+        <img src="images/your-lab-photo.jpg" alt="Students working in the Applied AI Lab">
+        Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+      -->
+      <figure class="image-slot image-slot-43 reveal reveal-delay">
+        <div class="image-slot-frame" role="img" aria-label="Image placeholder for the Applied AI Lab workspace">
+          <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+          <span class="image-slot-label">Lab image</span>
+        </div>
+        <figcaption>A photograph of the Lab at work can replace this frame.</figcaption>
+      </figure>
     </div>
   </section>
 
-  <section class="purpose">
+  <section class="purpose" id="direction">
+    <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+      <path class="circuit-trace" d="M8 22H70V52H120V22H172" stroke="currentColor" stroke-width="1.4"/>
+      <circle class="circuit-node" cx="70" cy="52" r="3" fill="currentColor"/>
+      <circle class="circuit-node circuit-node-hot" cx="120" cy="22" r="3" fill="#a11b2e"/>
+      <circle class="circuit-node" cx="172" cy="22" r="3" fill="currentColor"/>
+    </svg>
     <div class="wrap section-grid">
-      <div>
-        <span class="eyebrow">Direction</span>
-        <h2>Purpose &amp; vision.</h2>
-        <div class="index-no">02</div>
+      <div class="section-heading reveal">
+        <span class="eyebrow">02 / Direction</span>
+        <h2>Mission &amp; vision.</h2>
+        <div class="index-no"></div>
       </div>
-      <div class="section-copy">
+      <div class="section-copy reveal">
         <p>Advanced technology becomes more useful when people can question it, experiment with it, and apply it across different fields.</p>
         <div class="logic-grid">
-          <article class="logic-card">
-            <div class="letter">P</div>
-            <h3>Our Purpose</h3>
-            <p>Connect people with the knowledge, tools, computing resources, and opportunities needed to explore applied artificial intelligence.</p>
+          <article class="logic-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            </div>
+            <h3>Our Mission</h3>
+            <p>Provide methods for students to get involved with groundbreaking technology and teach them how to apply these tools into their field of study.</p>
           </article>
-          <article class="logic-card">
-            <div class="letter">V</div>
+          <article class="logic-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M2.5 12S6.5 6.5 12 6.5 21.5 12 21.5 12 17.5 17.5 12 17.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+            </div>
             <h3>Our Vision</h3>
-            <p>Build an interdisciplinary community where ambitious ideas can develop into thoughtful projects with meaningful academic and real-world applications.</p>
+            <p>Create a showcase for the Applied AI Lab that encourages students from various interdisciplinary studies to use the tools offered to showcase their own projects, coordinate projects or events, learn more about AI tools and news, and support other students as fellows when it comes to working with AI.</p>
           </article>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="people">
+  <section class="people" id="community">
+    <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+      <path class="circuit-trace" d="M8 36H46V14H96V52H140V28H172" stroke="currentColor" stroke-width="1.4"/>
+      <circle class="circuit-node" cx="46" cy="14" r="3" fill="currentColor"/>
+      <circle class="circuit-node circuit-node-hot" cx="96" cy="52" r="3" fill="#a11b2e"/>
+      <circle class="circuit-node" cx="140" cy="28" r="3" fill="currentColor"/>
+    </svg>
     <div class="wrap">
-      <span class="eyebrow">Community</span>
-      <h2>Different perspectives.<br>Shared problems.</h2>
-      <div class="people-grid">
-        <article class="person"><span class="num">01</span><h3>Students</h3><p>Learn, experiment, contribute technical skills, and turn curiosity into working projects.</p></article>
-        <article class="person"><span class="num">02</span><h3>Student Fellows</h3><p>Take a deeper role in Lab initiatives, collaboration, events, and project development.</p></article>
-        <article class="person"><span class="num">03</span><h3>Faculty Fellows</h3><p>Connect research, teaching, mentorship, and interdisciplinary work through the Lab.</p></article>
-        <article class="person"><span class="num">04</span><h3>Industry Partners</h3><p>Bring real problems, professional insight, and opportunities for applied collaboration.</p></article>
+      <div class="home-split">
+        <div class="section-heading reveal">
+          <span class="eyebrow">03 / Community</span>
+          <h2>Different perspectives.<br>Shared problems.</h2>
+          <p class="section-lead">Meet the fellows, join what the Lab is hosting, or look through work students have already shared.</p>
+        </div>
+        <!--
+          IMAGE PLACEHOLDER: [Community image]
+          Page: Home. Section: "Different perspectives. Shared problems." (#community).
+          On screen it sits to the right of that heading, in a 4:3 frame.
+          To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+          Replace the svg and the "Community image" label with:
+          <img src="images/your-community-photo.jpg" alt="Students and fellows together in the Applied AI Lab">
+          Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+        -->
+        <figure class="image-slot image-slot-43 reveal">
+          <div class="image-slot-frame" role="img" aria-label="Image placeholder for the Lab community">
+            <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+            <span class="image-slot-label">Community image</span>
+          </div>
+          <figcaption>A photograph of students working together can replace this frame.</figcaption>
+        </figure>
+      </div>
+      <div class="community-grid">
+        <a class="community-card reveal" href="fellowship.html#fellows">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><circle cx="9" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="10" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.8 18c.5-2.3 2.2-3.4 4.2-3.4s3.7 1.1 4.2 3.4M13 18c.3-1.6 1.4-2.6 2.8-2.6 1.3 0 2.3.8 2.7 2.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="num">01</span>
+          </div>
+          <h3>Meet the student fellows</h3>
+          <p>Meet students taking a deeper role in research, technical projects, mentorship, and the life of the Lab.</p>
+          <span class="arrow">Meet the fellows ↗</span>
+        </a>
+        <a class="community-card reveal" href="event.html">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><rect x="4" y="5" width="16" height="15" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 3v4M16 3v4M4 10h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="num">02</span>
+          </div>
+          <h3>See community events</h3>
+          <p>Discover workshops, talks, demonstrations, guest speakers, and hands-on sessions that bring the community together to learn, connect, and experiment.</p>
+          <span class="arrow">View events ↗</span>
+        </a>
+        <a class="community-card reveal" href="studentoutcomes.html">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M12 4l8 4-8 4-8-4 8-4zM4 12l8 4 8-4M4 16l8 4 8-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+            <span class="num">03</span>
+          </div>
+          <h3>See what students have done</h3>
+          <p>See the impact of student work and the projects they have shared through the Applied AI Lab.</p>
+          <span class="arrow">View outcomes ↗</span>
+        </a>
       </div>
     </div>
   </section>
 
   <section class="opportunities" id="opportunities">
+    <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+      <path class="circuit-trace" d="M8 50H60V16H118V50H172" stroke="currentColor" stroke-width="1.4"/>
+      <circle class="circuit-node" cx="60" cy="16" r="3" fill="currentColor"/>
+      <circle class="circuit-node circuit-node-hot" cx="118" cy="50" r="3" fill="#a11b2e"/>
+      <circle class="circuit-node" cx="172" cy="50" r="3" fill="currentColor"/>
+    </svg>
     <div class="wrap">
-      <span class="eyebrow">Participation</span>
-      <h2>Learn by doing.</h2>
+      <div class="section-heading reveal">
+        <span class="eyebrow">04 / Participation</span>
+        <h2>Learn by doing.</h2>
+        <p class="section-lead">Two ways to learn by doing: practice with the Fellowship, or follow tools and news you can try in your own work.</p>
+      </div>
       <div class="audience-grid">
-        <article class="audience">
-          <h3>For Students</h3>
-          <ul>
-            <li>Participate in workshops, events, and demonstrations</li>
-            <li>Join or propose artificial intelligence projects</li>
-            <li>Explore technical and computing resources</li>
-            <li>Collaborate with faculty and other students</li>
-            <li>Connect with visiting organizations and professionals</li>
-          </ul>
-          <a class="btn btn-dark" href="fellowship.html">Pathway Program Information →</a>
-        </article>
-        <article class="audience">
-          <h3>For Faculty</h3>
-          <ul>
-            <li>Develop interdisciplinary research projects</li>
-            <li>Mentor students and fellows</li>
-            <li>Explore advanced computing resources</li>
-            <li>Connect coursework with Lab initiatives</li>
-            <li>Collaborate with external partners</li>
-          </ul>
-          <a class="btn btn-dark" href="fellowship.html">Pathway Program Information →</a>
-        </article>
+        <a class="audience reveal" href="fellowship.html">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M3 10l9-4 9 4-9 4-9-4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 12v4c1.4 1.2 3.1 1.8 5 1.8s3.6-.6 5-1.8v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          </div>
+          <h3>Fellowship program</h3>
+          <p>Learn by doing with the student fellows. Join the pathway to practice with AI tools, build projects, and apply what you learn in your own field.</p>
+          <span class="arrow">Explore the pathway →</span>
+        </a>
+        <a class="audience reveal" href="ai-insights.html">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M4 16l4-8 3 5 2-3 3 6h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <h3>AI Insights</h3>
+          <p>Learn by doing with the tools, methods, and news the Lab shares. Follow ideas you can try in coursework, projects, and your own discipline.</p>
+          <span class="arrow">Read AI Insights →</span>
+        </a>
       </div>
     </div>
   </section>
 
   <section id="resources">
+    <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+      <path class="circuit-trace circuit-trace-b" d="M8 18H54V48H112V18H172" stroke="currentColor" stroke-width="1.4"/>
+      <circle class="circuit-node" cx="54" cy="48" r="3" fill="currentColor"/>
+      <circle class="circuit-node circuit-node-hot" cx="112" cy="18" r="3" fill="#a11b2e"/>
+      <circle class="circuit-node" cx="172" cy="18" r="3" fill="currentColor"/>
+    </svg>
     <div class="wrap">
-      <span class="eyebrow">Access</span>
-      <h2>Resources &amp; opportunities.</h2>
+      <div class="section-heading reveal">
+        <span class="eyebrow">05 / Resources</span>
+        <h2>Resources &amp; opportunities.</h2>
+        <p class="section-lead">Use the Lab’s tools, look through student projects, and follow AI news you can apply in your own work.</p>
+      </div>
       <div class="resources-grid">
-        <article class="resource coming-soon"><h3>Computing Resources</h3><p>Explore available systems and request access to Lab technology.</p><span class="coming-soon-label">Coming soon</span></article>
-        <article class="resource coming-soon"><h3>Projects</h3><p>Discover active work, ideas in development, and opportunities to contribute.</p><span class="coming-soon-label">Coming soon</span></article>
-        <a class="resource" href="event.html"><h3>Events</h3><p>Find workshops, talks, demonstrations, and upcoming Lab activities.</p><span class="arrow">↗</span></a>
-        <a class="resource" href="fellowship.html"><h3>Fellowship</h3><p>Learn about the pathway for deeper participation in the Lab community.</p><span class="arrow">↗</span></a>
+        <article class="resource coming-soon reveal">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><rect x="7" y="7" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="resource-num">01</span>
+          </div>
+          <h3>Computing Resources</h3>
+          <p>Explore available systems and request access to Lab technology.</p>
+          <span class="coming-soon-label">Coming soon</span>
+        </article>
+        <a class="resource reveal" href="studentoutcomes.html">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M6 16L12 6l6 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6" cy="16" r="2" fill="currentColor"/><circle cx="12" cy="6" r="2" fill="currentColor"/><circle cx="18" cy="16" r="2" fill="currentColor"/></svg></span>
+            <span class="resource-num">02</span>
+          </div>
+          <h3>Projects</h3>
+          <p>Discover active work, ideas in development, and opportunities to contribute.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="resource reveal" href="ai-insights.html">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M4 16l4-8 3 5 2-3 3 6h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="resource-num">03</span>
+          </div>
+          <h3>AI Insights</h3>
+          <p>Learn about AI tools, methods, and news you can apply in your own field of study.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="resource reveal" href="industry.html">
+          <div class="card-icon-row">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M4 20V6l8-3v17M12 20V9l8 3v8M4 20h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 10h.5M8 13h.5M8 16h.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="resource-num">04</span>
+          </div>
+          <h3>Industry Partners</h3>
+          <p>Bring real problems, professional insight, and opportunities for applied collaboration.</p>
+          <span class="arrow">↗</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="explore">
+  <section class="explore" id="contact">
+    <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+      <path class="circuit-trace circuit-trace-c" d="M8 40H40V16H88V52H132V24H172" stroke="currentColor" stroke-width="1.4"/>
+      <circle class="circuit-node" cx="40" cy="16" r="3" fill="currentColor"/>
+      <circle class="circuit-node circuit-node-hot" cx="88" cy="52" r="3" fill="#a11b2e"/>
+      <circle class="circuit-node" cx="132" cy="24" r="3" fill="currentColor"/>
+    </svg>
     <div class="wrap">
-      <span class="eyebrow">Keep Exploring</span>
-      <h2>Go deeper.</h2>
-      <div class="explore-grid">
-        <article class="explore-card"><h3>Research</h3><p>Explore opportunities for faculty mentorship, interdisciplinary investigation, and project development.</p><a href="#lab">Explore Research →</a></article>
-        <article class="explore-card"><h3>Experiential Learning</h3><p>Connect technical learning with projects, fellowships, service, and applied experiences.</p><a href="#opportunities">Explore Opportunities →</a></article>
+      <div class="home-split">
+        <div class="section-heading reveal">
+          <span class="eyebrow">06 / Contact</span>
+          <h2>Contact Lab Leadership.</h2>
+          <p class="section-lead">Questions about programs, projects, or how to take part go to the people who direct the Applied AI Lab.</p>
+          <article class="explore-card reveal">
+            <div class="card-icon-row">
+              <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+            </div>
+            <h3>Reach the People in Charge</h3>
+            <p>Connect with the faculty and staff who run the Lab. A confirmed public email and phone number will be added here.</p>
+            <span class="coming-soon-label">Contact details coming soon</span>
+          </article>
+        </div>
+        <!--
+          IMAGE PLACEHOLDER: [Leadership image]
+          Page: Home. Section: "Contact Lab leadership." (#contact).
+          On screen it sits to the right of that heading and card, center aligned with the section, in a tall frame.
+          To add the photo, keep this <figure> and the <div class="image-slot-frame"> so the frame stays.
+          Replace the svg and the "Lab image" label with:
+          <img src="images/your-contact-photo.jpg" alt="The people who direct the Applied AI Lab">
+          Then remove role="img" and aria-label from the frame. The animated frame remains around the photo.
+        -->
+        <figure class="image-slot image-slot-43 reveal">
+          <div class="image-slot-frame" role="img" aria-label="Image placeholder for the people who direct the Lab">
+            <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
+            <span class="image-slot-label">Lab image</span>
+          </div>
+          <figcaption>A photograph of the people who direct the Lab can replace this frame.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -255,7 +456,7 @@
 
 
 
-  <script src="js/site.js" defer></script>
+  <script src="js/site.js?v=2" defer></script>
   <script src="js/index.js" defer></script>
   <script src="js/chatbot.js" defer></script>
 </body>

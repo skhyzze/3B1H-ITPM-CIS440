@@ -37,7 +37,12 @@ function icon(name, size) {
   return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || ICONS.star) + '</svg>';
 }
 
-// A picture, or colorful generated artwork when there isn't one.
+// IMAGE PLACEHOLDER: [Story image]
+// Page: AI Insights. Used wherever a story, tool, or video has no picture.
+// On screen it is the colored artwork with an icon and the source name.
+// To add a photo, set item.image to an https URL. media() then uses:
+// <img src="the-url" alt="" loading="lazy">
+// inside the .media frame. If that image fails, this artwork returns.
 // Creates a placeholder when there is no picture.
 function art(item, size) {
   return '<div class="art"><div class="art-in">' + icon(item.sectionId, size || 42) + '<div class="art-src">' + esc(item.source) + '</div></div></div>';

@@ -1,0 +1,771 @@
+/* Shared motion, icons, and the green accent in both color modes.
+   Loaded last so these details stay visible. No code or extra labels. */
+
+@keyframes lab-orbit-spin { to { transform: rotate(360deg); } }
+@keyframes lab-trace-flow { to { stroke-dashoffset: -220; } }
+@keyframes lab-node-pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+@keyframes lab-icon-draw { to { stroke-dashoffset: 0; } }
+@keyframes lab-btn-sheen { to { transform: translateX(380%); } }
+
+.lab-orbit {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.lab-orbit-one {
+  width: 420px;
+  height: 420px;
+  right: -180px;
+  top: -150px;
+  border: 1px solid transparent;
+  border-top-color: rgba(47, 125, 79, 0.7);
+  border-right-color: rgba(161, 27, 46, 0.45);
+  animation: lab-orbit-spin 32s linear infinite;
+}
+.lab-orbit-two {
+  width: 230px;
+  height: 230px;
+  right: -40px;
+  top: -30px;
+  border: 1px solid transparent;
+  border-bottom-color: rgba(47, 125, 79, 0.55);
+  border-left-color: rgba(19, 54, 77, 0.4);
+  animation: lab-orbit-spin 20s linear infinite reverse;
+}
+.lab-circuit {
+  position: absolute;
+  z-index: 0;
+  top: 22px;
+  right: max(18px, calc((100% - 1180px) / 2));
+  width: 150px;
+  height: 58px;
+  color: #13364d;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.lab-trace {
+  stroke-dasharray: 7 9;
+  animation: lab-trace-flow 8s linear infinite;
+}
+.lab-node { animation: lab-node-pulse 2.6s ease-in-out infinite; }
+.lab-node-hot { animation-delay: 0.6s; }
+
+:is(.page-industry, .page-events, .page-outcomes) :is(.hero, .events-hero),
+body:not(.page-home) .hero {
+  position: relative;
+  overflow: hidden;
+}
+:is(.page-industry, .page-events, .page-outcomes) :is(.hero, .events-hero) :is(.container, .wrap),
+body:not(.page-home) .hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.lab-ico {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  vertical-align: -5px;
+  color: #2F7D4F;
+  flex: 0 0 auto;
+}
+.lab-ico :is(path, circle, rect, line) {
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  animation: lab-icon-draw 1.05s ease forwards;
+}
+.page-industry .value-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.page-industry .value-icon .lab-ico { margin: 0; }
+.page-industry .collaboration-item .lab-ico,
+.page-industry .step .lab-ico {
+  display: block;
+  margin: 0 0 12px;
+}
+.page-events .category .lab-ico { margin-right: 6px; }
+
+/* Buttons: a green edge, a passing sheen, and a lift. */
+:is(a.btn, a.button, button.button, button.btn, a.lab-nav-cta, a.circuit-join, a.footer-circuit, .scroll-button, .pill-btn) {
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 -2px 0 #2F7D4F;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+:is(a.btn, a.button, button.button, button.btn, .scroll-button)::after {
+  content: "";
+  position: absolute;
+  left: -40%;
+  top: 0;
+  width: 38%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(47, 125, 79, 0.38), transparent);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+:is(a.btn, a.button, button.button, button.btn, a.lab-nav-cta, a.circuit-join, a.footer-circuit, .scroll-button, .pill-btn):hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 -2px 0 #2F7D4F, 0 10px 18px rgba(47, 125, 79, 0.22);
+}
+:is(a.btn, a.button, button.button, button.btn, .scroll-button):hover::after {
+  animation: lab-btn-sheen 0.7s ease;
+}
+:is(a.btn, a.button, button.button, button.btn, a.lab-nav-cta, a.circuit-join, a.footer-circuit, .scroll-button, .pill-btn):active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Dark mode keeps the same green card edge, grid, and rings. */
+body.dark :is(
+  .preview-card,
+  .logic-card,
+  .audience,
+  .resource,
+  .explore-card,
+  .community-card,
+  .person,
+  .value-card,
+  .partner-card,
+  .collaboration-item,
+  .step,
+  .fellow-card,
+  .candidate-card,
+  .skill-card,
+  .event-card,
+  .past-card,
+  .feature,
+  .cis-card,
+  .permanent-card,
+  .demo-notice,
+  .submission-copy,
+  .feed-message,
+  .story:not(.lead),
+  .lesson,
+  .tool-hero,
+  .tool-row,
+  .vid,
+  .case,
+  .paper,
+  .empty-state,
+  .frame
+) {
+  border-top: 3px solid #2F7D4F !important;
+}
+
+body.dark:is(.page-home, .page-industry) .hero,
+body.dark.page-fellowship .page-hero,
+body.dark.page-events .events-hero,
+body.dark.page-outcomes .hero,
+body.page-ai-brief.dark .hero {
+  background:
+    linear-gradient(rgba(47, 125, 79, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 125, 79, 0.18) 1px, transparent 1px),
+    #14171d !important;
+  background-size: 48px 48px, 48px 48px, auto !important;
+}
+
+body.dark :is(.lab-site-footer, footer) {
+  border-top-color: rgba(47, 125, 79, 0.55) !important;
+}
+
+body.dark .lab-circuit { color: #8fbfa0; opacity: 0.7; }
+body.dark .lab-orbit-one {
+  border-top-color: rgba(47, 125, 79, 0.9);
+  border-right-color: rgba(255, 107, 120, 0.55);
+}
+body.dark .lab-orbit-two {
+  border-bottom-color: rgba(47, 125, 79, 0.75);
+  border-left-color: rgba(185, 200, 212, 0.35);
+}
+body.dark ::selection {
+  background: rgba(47, 125, 79, 0.45);
+  color: #f8fafc;
+}
+
+@media (max-width: 900px) {
+  .lab-circuit { width: 110px; opacity: 0.35; }
+}
+
+@media (max-width: 640px) {
+  .lab-circuit,
+  .lab-orbit { display: none; }
+  .lab-ico :is(path, circle, rect, line) { animation: none; stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-orbit,
+  .lab-trace,
+  .lab-node,
+  .lab-ico :is(path, circle, rect, line),
+  :is(a.btn, a.button, button.button, button.btn, .scroll-button)::after {
+    animation: none !important;
+  }
+  .lab-ico :is(path, circle, rect, line) { stroke-dashoffset: 0; }
+  :is(a.btn, a.button, button.button, button.btn, a.lab-nav-cta, a.circuit-join, a.footer-circuit, .scroll-button, .pill-btn):hover {
+    transform: none;
+  }
+}
+
+/* Information cards use a plain edge instead of a green rounded frame. */
+body:not(.dark):is(.page-industry, .page-events, .page-outcomes, .page-ai-brief) :is(
+  .audience,
+  .resource,
+  .community-card,
+  .explore-card,
+  .logic-card,
+  .value-card,
+  .collaboration-item,
+  .partner-card,
+  .event-card,
+  .past-card,
+  .cis-card,
+  .feature,
+  .submission-copy,
+  .spotlight-card,
+  .step
+) {
+  border: 1px solid rgba(19, 54, 77, 0.16) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+body.dark:is(.page-industry, .page-events, .page-outcomes, .page-ai-brief) :is(
+  .audience,
+  .resource,
+  .community-card,
+  .explore-card,
+  .logic-card,
+  .value-card,
+  .collaboration-item,
+  .partner-card,
+  .event-card,
+  .past-card,
+  .cis-card,
+  .feature,
+  .submission-copy,
+  .spotlight-card,
+  .step
+) {
+  border: 1px solid rgba(185, 200, 212, 0.24) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+@keyframes lab-card-press {
+  0% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(4px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+:is(
+  .audience,
+  .resource,
+  .community-card,
+  .explore-card,
+  .logic-card,
+  .value-card,
+  .collaboration-item,
+  .partner-card,
+  .event-card,
+  .past-card,
+  .cis-card,
+  .feature,
+  .fellow-card,
+  .candidate-card,
+  .skill-card,
+  .submission-copy,
+  .spotlight-card,
+  .step,
+  .preview-card
+).is-pressed {
+  animation: lab-card-press 0.45s ease;
+}
+
+@keyframes lab-heading-grow {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+html.lab-motion body:not(.page-home):not(.page-fellowship) .lab-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+html.lab-motion body:not(.page-home):not(.page-fellowship) .lab-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+html.lab-motion body:not(.page-home):not(.page-fellowship) :is(h1, h2).lab-reveal.is-in {
+  animation: lab-heading-grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  transform-origin: left center;
+}
+
+body.page-events .event-card h3,
+body.page-outcomes :is(.cis-card, .feature) h3,
+body.page-outcomes #contribute .submission-copy h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+body.page-events .event-card h3::before,
+body.page-outcomes :is(.cis-card, .feature) h3::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  background: #2F7D4F;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='5' y='5' width='14' height='14' fill='none' stroke='%23000' stroke-width='1.8'/%3E%3Cpath d='M9 3.5V6M15 3.5V6M9 18v2.5M15 18v2.5M3.5 9H6M3.5 15H6M18 9h2.5M18 15h2.5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='5' y='5' width='14' height='14' fill='none' stroke='%23000' stroke-width='1.8'/%3E%3Cpath d='M9 3.5V6M15 3.5V6M9 18v2.5M15 18v2.5M3.5 9H6M3.5 15H6M18 9h2.5M18 15h2.5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 0.25s ease;
+}
+:is(.event-card, .cis-card, .feature):is(:hover, :active, .is-pressed) h3::before {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+/* Share your outcome: heading and copy sit in the middle of the section. */
+body.page-outcomes #contribute .section-head {
+  align-items: center;
+  text-align: center;
+  margin-bottom: 36px;
+}
+body.page-outcomes #contribute .section-head h2 {
+  margin: 12px 0 16px;
+}
+body.page-outcomes #contribute .section-head > p {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+body.page-outcomes #contribute .submission-layout {
+  display: block;
+  width: 100%;
+}
+body.page-outcomes #contribute .submission-copy {
+  max-width: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 40px 48px 36px;
+  box-sizing: border-box;
+}
+body.page-outcomes #contribute .submission-copy > .lab-ico {
+  margin: 0;
+}
+body.page-outcomes #contribute .submission-copy h3 {
+  justify-content: center;
+  width: auto;
+  margin: 0;
+}
+body.page-outcomes #contribute .submission-copy > p:not(.form-note) {
+  max-width: 42rem;
+  margin: 4px 0 0;
+}
+body.page-outcomes #contribute .submission-copy .form-note {
+  margin: 0;
+}
+body.page-outcomes #contribute .submission-copy .button {
+  margin-top: 8px;
+}
+
+@media (max-width: 760px) {
+  body.page-outcomes #contribute .submission-copy {
+    padding: 28px 22px;
+  }
+}
+
+/* Homepage cards use a plain edge. The circuit mark carries the accent. */
+body.page-home:not(.dark) :is(.audience, .resource, .community-card, .explore-card, .logic-card) {
+  border: 1px solid rgba(19, 54, 77, 0.16) !important;
+  box-shadow: 0 12px 28px rgba(19, 54, 77, 0.07) !important;
+}
+body.page-home.dark :is(.audience, .resource, .community-card, .explore-card, .logic-card) {
+  border: 1px solid rgba(185, 200, 212, 0.28) !important;
+  border-top-color: rgba(185, 200, 212, 0.28) !important;
+}
+
+/* Mission and vision span the section, then sit side by side at full width. */
+body.page-home #direction .section-grid {
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+body.page-home #direction .section-copy {
+  max-width: none;
+}
+body.page-home #direction .section-copy > p {
+  max-width: 62ch;
+  margin: 0 0 10px;
+}
+body.page-home #direction .logic-grid {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+  width: 100%;
+}
+body.page-home #direction .logic-card {
+  padding: 28px 32px 32px;
+}
+
+/* Circuit marks stay inside image areas, clear of the card text. */
+body.page-outcomes .cis-image,
+body.page-events .placeholder {
+  position: relative;
+}
+body.page-outcomes .cis-image::after,
+body.page-events .placeholder::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+  width: 64px;
+  height: 18px;
+  pointer-events: none;
+  background-image:
+    linear-gradient(#2F7D4F, #2F7D4F),
+    linear-gradient(#2F7D4F, #2F7D4F),
+    linear-gradient(#2F7D4F, #2F7D4F),
+    radial-gradient(circle, #2F7D4F 0 2px, transparent 2.4px),
+    radial-gradient(circle, #A11B2E 0 2.2px, transparent 2.6px);
+  background-repeat: no-repeat;
+  background-size: 18px 1.5px, 1.5px 8px, 32px 1.5px, 8px 8px, 8px 8px;
+  background-position: 0 4px, 18px 4px, 18px 11px, 14px 7px, 4px 7px;
+  animation: lab-card-trace 2.6s ease-in-out infinite alternate;
+}
+@keyframes lab-card-trace {
+  0% { background-position: 0 4px, 18px 4px, 18px 11px, 14px 7px, 4px 7px; opacity: 0.45; }
+  100% { background-position: 0 4px, 18px 4px, 18px 11px, 14px 7px, 46px 7px; opacity: 1; }
+}
+
+/* The lab copy sits with the heading. The index number was holding that space open. */
+body.page-home #lab .index-no { display: none; }
+body.page-home #lab .section-copy { margin-top: 22px; }
+body.page-home #lab .lab-point { margin: 0 0 16px; }
+body.page-home #lab .lab-point:last-child { margin-bottom: 0; }
+
+/* Hero titles share one size across the public pages. */
+body.page-home .hero h1,
+body.page-industry .hero h1,
+body.page-fellowship .page-hero h1,
+body.page-events .events-hero h1,
+body.page-outcomes .hero h1,
+body.page-ai-brief .hero h1 {
+  font-size: clamp(3rem, 7vw, 6rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.055em !important;
+}
+
+/* Student Outcomes hero: eyebrow, title, and lead share one center line. */
+body.page-outcomes .hero {
+  justify-content: center;
+}
+body.page-outcomes .hero .wrap {
+  width: 100%;
+  text-align: center;
+}
+body.page-outcomes .hero .lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Flat sections pick up a light field so large areas are not one empty color. */
+body.page-home:not(.dark) #lab,
+body.page-outcomes:not(.dark) :is(.cis-showcase, #people),
+body.page-fellowship:not(.dark) :is(.about-fellowship, .fellow-skills),
+body.page-events:not(.dark) {
+  background-color: #e5e9ed !important;
+  background-image:
+    linear-gradient(rgba(19, 54, 77, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 54, 77, 0.045) 1px, transparent 1px) !important;
+  background-size: 46px 46px !important;
+}
+body.page-home:not(.dark) :is(.people, #resources),
+body.page-outcomes:not(.dark) #highlights {
+  background-color: #f4f6f8 !important;
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(47, 125, 79, 0.08), transparent 28%),
+    radial-gradient(circle at 88% 80%, rgba(19, 54, 77, 0.06), transparent 32%) !important;
+}
+body.page-fellowship:not(.dark) .how-to-become {
+  background-color: #13364d !important;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px) !important;
+  background-size: 46px 46px !important;
+}
+body.page-home:not(.dark) :is(.opportunities, .explore),
+body.page-outcomes:not(.dark) #work {
+  background-color: #ffffff !important;
+  background-image:
+    linear-gradient(rgba(47, 125, 79, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 54, 77, 0.04) 1px, transparent 1px) !important;
+  background-size: 56px 56px !important;
+}
+
+/* A few showcase frames for sections that otherwise have no picture. */
+body.page-outcomes .outcomes-shot {
+  width: min(100%, 380px);
+  margin: 0;
+}
+body.page-outcomes .outcomes-shot-frame {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(19, 54, 77, 0.2);
+  border-radius: 8px;
+  color: #24557a;
+  background-color: #f4f6f8;
+  background-image:
+    linear-gradient(rgba(19, 54, 77, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 54, 77, 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+body.page-outcomes .outcomes-shot-frame svg { width: 36px; height: 36px; }
+body.page-outcomes .outcomes-shot-frame span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* People: copy and card on the left, image filling the space beside them.
+   Highlights: that arrangement flipped, with the heading on the right. */
+body.page-outcomes #people .wrap,
+body.page-outcomes #highlights .wrap {
+  display: grid;
+  gap: 22px 40px;
+  align-items: stretch;
+}
+body.page-outcomes #people .wrap {
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 380px);
+  grid-template-areas:
+    "head shot"
+    "track shot"
+    "controls controls";
+}
+body.page-outcomes #highlights .wrap {
+  grid-template-columns: minmax(240px, 380px) minmax(0, 1fr);
+  grid-template-areas:
+    "shot head"
+    "shot track"
+    "controls controls";
+}
+body.page-outcomes #people .section-head,
+body.page-outcomes #highlights .section-head {
+  grid-area: head;
+  margin-bottom: 0;
+}
+body.page-outcomes #highlights .section-head {
+  align-items: flex-end;
+  text-align: right;
+}
+body.page-outcomes #highlights .section-head > p {
+  margin-left: auto;
+  text-align: right;
+}
+body.page-outcomes #people .outcomes-shot,
+body.page-outcomes #highlights .outcomes-shot {
+  grid-area: shot;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+body.page-outcomes #people .outcomes-shot-frame,
+body.page-outcomes #highlights .outcomes-shot-frame {
+  height: 100%;
+  min-height: 210px;
+  aspect-ratio: auto;
+}
+body.page-outcomes #people .spotlight-track,
+body.page-outcomes #highlights .spotlight-track {
+  grid-area: track;
+  padding-bottom: 0;
+}
+body.page-outcomes #people .spotlight-controls,
+body.page-outcomes #highlights .spotlight-controls {
+  grid-area: controls;
+}
+@media (max-width: 760px) {
+  body.page-outcomes #people .wrap,
+  body.page-outcomes #highlights .wrap {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "head"
+      "shot"
+      "track"
+      "controls";
+  }
+  body.page-outcomes #highlights .section-head {
+    align-items: flex-start;
+    text-align: left;
+  }
+  body.page-outcomes #highlights .section-head > p {
+    margin-left: 0;
+    text-align: left;
+  }
+  body.page-outcomes #people .outcomes-shot-frame,
+  body.page-outcomes #highlights .outcomes-shot-frame {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Upcoming events uses the same page color as the area around it. */
+body.page-events:not(.dark) .event-section:not(.past-section),
+body.dark.page-events .event-section:not(.past-section),
+body.page-events.dark .event-section:not(.past-section) {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Footer keeps the lab line and the two actions. Page links stay in the header. */
+.lab-footer-nav {
+  display: none !important;
+}
+.lab-footer-inner {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 36px;
+  min-height: 0;
+  padding: 28px 0;
+}
+.lab-footer-brand {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+}
+.lab-footer-brand span {
+  padding-left: 22px;
+  border-left: 1px solid rgba(47, 125, 79, 0.55);
+}
+.lab-footer-top {
+  margin-right: 140px;
+}
+body.page-ai-brief .back-to-top {
+  bottom: 136px;
+}
+.lab-site-footer {
+  position: relative;
+  overflow: hidden;
+}
+.lab-site-footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 2px;
+  background: #2F7D4F;
+  animation: lab-footer-scan 4.8s ease-in-out infinite;
+}
+@keyframes lab-footer-scan {
+  0% { transform: translateX(-20%); opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { transform: translateX(calc(100vw - 80px)); opacity: 0.4; }
+}
+
+/* AI Insights ribbon is darker than the sections around it and stands apart. */
+body.page-ai-brief:not(.dark) .ticker,
+body.dark.page-ai-brief .ticker,
+body.page-ai-brief.dark .ticker {
+  background: #0c1114 !important;
+  margin: 22px 24px;
+  border: 1px solid rgba(47, 125, 79, 0.72) !important;
+  border-radius: 12px;
+  box-shadow: 0 16px 32px rgba(12, 17, 20, 0.22);
+}
+body.page-ai-brief:not(.dark) .ticker .label,
+body.dark.page-ai-brief .ticker .label,
+body.page-ai-brief.dark .ticker .label {
+  background: linear-gradient(90deg, #0c1114 78%, transparent) !important;
+}
+
+@media (max-width: 900px) {
+  body.page-home #direction .logic-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .lab-footer-brand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .lab-footer-brand span {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .lab-footer-inner {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  html.lab-motion body:not(.page-home):not(.page-fellowship) .lab-reveal {
+    transform: translateY(10px);
+    transition-duration: 0.4s;
+  }
+  body.page-outcomes .cis-image::after,
+  body.page-events .placeholder::after {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-pressed,
+  html.lab-motion body:not(.page-home):not(.page-fellowship) :is(h1, h2).lab-reveal.is-in,
+  :is(.event-card, .cis-card, .feature):is(:hover, :active, .is-pressed) h3::before,
+  .lab-site-footer::after,
+  body.page-outcomes .cis-image::after,
+  body.page-events .placeholder::after {
+    animation: none !important;
+    transform: none;
+  }
+  html.lab-motion body:not(.page-home):not(.page-fellowship) .lab-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Plain card edge, specific enough to replace the green top border. */
+body.page-outcomes:not(.dark) article.cis-card,
+body.page-outcomes:not(.dark) .feature,
+body.page-events:not(.dark) article.event-card,
+body.page-events:not(.dark) article.past-card,
+body.page-industry:not(.dark) article.value-card,
+body.page-ai-brief:not(.dark) :is(.story, .lesson, .tool-row, .case, .paper) {
+  border-top-width: 1px !important;
+  border-right-width: 1px !important;
+  border-bottom-width: 1px !important;
+  border-left-width: 1px !important;
+  border-top-color: rgba(19, 54, 77, 0.16) !important;
+  border-right-color: rgba(19, 54, 77, 0.16) !important;
+  border-bottom-color: rgba(19, 54, 77, 0.16) !important;
+  border-left-color: rgba(19, 54, 77, 0.16) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+body.dark.page-outcomes article.cis-card,
+body.dark.page-outcomes .feature,
+body.dark.page-events article.event-card,
+body.dark.page-events article.past-card {
+  border-top-width: 1px !important;
+  border-top-color: rgba(185, 200, 212, 0.28) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+#cis440 article.cis-card,
+#work .feature,
+#work .feed-message,
+#people .feed-message,
+#highlights .feed-message,
+#upcoming .event-card,
+#past .past-card {
+  border: 1px solid rgba(19, 54, 77, 0.16) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
