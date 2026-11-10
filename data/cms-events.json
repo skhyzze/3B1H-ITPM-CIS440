@@ -1,0 +1,48 @@
+{
+  "events": [
+    {
+      "title": "Getting started with applied AI",
+      "linkLabel": "Event link ↗",
+      "displayOrder": 1.0,
+      "summary": "Explore practical AI tools through a guided, beginner-friendly session.",
+      "contact": "To be confirmed",
+      "location": "To be confirmed",
+      "sample": true,
+      "image": "",
+      "dateTime": "To be announced",
+      "details": "An introduction to the Applied AI Lab, including hands-on exercises, discussions, and Q&A. No prior experience required.",
+      "url": "",
+      "category": "Workshop"
+    },
+    {
+      "title": "Research & Discussion",
+      "linkLabel": "Event link ↗",
+      "displayOrder": 2.0,
+      "summary": "Meet fellow researchers and discuss how analytics can support your next project.",
+      "contact": "To be confirmed",
+      "location": "To be confirmed",
+      "sample": true,
+      "image": "",
+      "dateTime": "To be announced",
+      "details": "Project introductions, open discussion, and opportunities to connect with students and faculty.",
+      "url": "",
+      "category": "Research"
+    },
+    {
+      "title": "From idea to first prototype",
+      "linkLabel": "Event link ↗",
+      "displayOrder": 3.0,
+      "summary": "Bring a question or a rough idea and explore what you could build with the lab.",
+      "contact": "To be confirmed",
+      "location": "To be confirmed",
+      "sample": true,
+      "image": "",
+      "dateTime": "To be announced",
+      "details": "Brainstorming and feedback! Bring a notebook or laptop.",
+      "url": "",
+      "category": "Idea Lab"
+    }
+  ],
+  "updatedAt": "2026-11-10T23:18:26.0421510Z",
+  "source": "Microsoft Lists"
+}
