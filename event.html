@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/event.css">
   <link rel="stylesheet" href="css/blended-theme.css">
   <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/lab-accents.css">
 </head>
 
 <body class="page-events">
@@ -46,6 +47,14 @@
 
   <main id="main">
     <section class="events-hero" aria-labelledby="page-title">
+      <span class="lab-orbit lab-orbit-one" aria-hidden="true"></span>
+      <span class="lab-orbit lab-orbit-two" aria-hidden="true"></span>
+      <svg class="lab-circuit" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
+        <path class="lab-trace" d="M8 22H70V52H120V22H172" stroke="currentColor" stroke-width="1.4"/>
+        <circle class="lab-node" cx="70" cy="52" r="3" fill="currentColor"/>
+        <circle class="lab-node lab-node-hot" cx="120" cy="22" r="3" fill="#2F7D4F"/>
+        <circle class="lab-node" cx="172" cy="22" r="3" fill="currentColor"/>
+      </svg>
       <div class="container">
         <p class="eyebrow"><span>Lab 04</span> Community calendar</p>
 
@@ -108,7 +117,7 @@
       </div>
 
       <article class="past-card">
-        <span class="category">Event</span>
+        <span class="category"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="6" width="16" height="13" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 4v4M16 4v4M4 10h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Event</span>
 
         <div>
           <h3>
@@ -168,7 +177,7 @@
 </footer>
 
   <!-- Reuse the existing site-wide theme controls. -->
-  <script src="js/site.js" defer></script>
+  <script src="js/site.js?v=2" defer></script>
   <script>
 (async function(){
   const section=document.getElementById('upcoming'),grid=section.querySelector('.event-grid'),note=section.querySelector('.section-note');
@@ -178,6 +187,13 @@
   function cardFor(event){
     const card=node('article','event-card',''),category=event.category||'Event';
     const art=category==='Research'?'research-art':category==='Idea Lab'?'idea-art':'workshop-art';
+    /*
+      IMAGE PLACEHOLDER: listing photo
+      Page: Events. Section: "Upcoming events" (#upcoming).
+      Each card builds an image frame here. The visible label stays "Event image placeholder" until a real photo is available.
+      To use a photo, set the listing's image field to an https URL. When that image loads, this frame is replaced by the photo.
+      If there is no URL, the colored frame and caption remain.
+    */
     const image=node('div','event-image placeholder '+art,'');image.setAttribute('role','img');image.setAttribute('aria-label',event.title+' image placeholder');
     image.append(node('span','image-caption','Event image placeholder'));
     const artLabel=node('span','art-label',category==='Research'?'ASK QUESTIONS.':category==='Idea Lab'?'WHAT IF?':'BUILD SOMETHING.');artLabel.setAttribute('aria-hidden','true');image.append(artLabel);

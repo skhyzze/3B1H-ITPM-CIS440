@@ -159,6 +159,70 @@
 
 })();
 
+(function () {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const skipPage = document.body.classList.contains('page-home') || document.body.classList.contains('page-fellowship');
+  const cardSelector = '.audience, .resource, .community-card, .explore-card, .logic-card, .value-card, .collaboration-item, .partner-card, .event-card, .past-card, .cis-card, .feature, .fellow-card, .candidate-card, .skill-card, .submission-copy, .spotlight-card, .step, .story:not(.lead), .lesson, .case, .tool-row, .paper, .preview-card';
+  const seen = new WeakSet();
+
+  function press(card) {
+    if (reduce || !card) return;
+    card.classList.remove('is-pressed');
+    void card.offsetWidth;
+    card.classList.add('is-pressed');
+    window.setTimeout(function () { card.classList.remove('is-pressed'); }, 460);
+  }
+
+  document.addEventListener('click', function (event) {
+    press(event.target.closest(cardSelector));
+  });
+
+  if (skipPage || reduce || !('IntersectionObserver' in window)) return;
+
+  const headingSelector = 'main h1, main h2, #app h1, #app h2';
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: window.matchMedia('(max-width: 640px)').matches ? 0.08 : 0.16, rootMargin: '0px 0px -4% 0px' });
+
+  function arm(node) {
+    if (!node || node.nodeType !== 1 || seen.has(node)) return;
+    if (node.closest('.lab-header, .lab-site-footer')) return;
+    if (node.matches('h1, h2') && node.closest(cardSelector)) return;
+    seen.add(node);
+    node.classList.add('lab-reveal');
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) node.classList.add('is-in');
+    else observer.observe(node);
+  }
+
+  function scan(root) {
+    const scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll(headingSelector).forEach(function (heading) {
+      if (heading.closest(cardSelector)) return;
+      arm(heading);
+    });
+    scope.querySelectorAll(cardSelector).forEach(arm);
+  }
+
+  scan(document);
+  document.documentElement.classList.add('lab-motion');
+  const changes = new MutationObserver(function (records) {
+    records.forEach(function (record) {
+      record.addedNodes.forEach(function (node) {
+        if (!node || node.nodeType !== 1) return;
+        if (node.matches && (node.matches(cardSelector) || node.matches(headingSelector))) arm(node);
+        if (node.querySelectorAll) scan(node);
+      });
+    });
+  });
+  const app = document.getElementById('app') || document.body;
+  changes.observe(app, { childList: true, subtree: true });
+})();
+
 // function openSpanishTranslation() {
 //   const translatedPage =
 //     "https://translate.google.com/translate?sl=en&tl=es&u=" +
