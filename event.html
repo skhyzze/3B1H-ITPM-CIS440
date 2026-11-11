@@ -212,7 +212,7 @@
   async function load(){
     grid.setAttribute('aria-busy','true');message('Loading upcoming events…');
     try{
-      const response=await fetch('https://script.google.com/macros/s/AKfycbxZixQOq57BZBvfvjQVc7lc4xLZqdPXbo6Yt6WeaPNTKB3l1Kv-Yr8lGNJTQFg-CJAP/exec?feed=events',{cache:'no-store',credentials:'omit',signal:AbortSignal.timeout(20000)});
+      const response=await fetch('https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-events.json?v=' + Date.now(),{cache:'no-store',credentials:'omit',signal:AbortSignal.timeout(20000)});
       if(!response.ok)throw Error();const data=await response.json();if(data.error||!Array.isArray(data.events))throw Error();
       const items=data.events.filter(e=>e&&typeof e.title==='string'&&e.title.trim());
       if(items.length)grid.replaceChildren(...items.map(cardFor));else message('No upcoming events published yet. Check back soon.');

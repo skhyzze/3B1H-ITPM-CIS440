@@ -1,0 +1,99 @@
+name: Publish Microsoft Lists content
+
+on:
+  repository_dispatch:
+    types: [lab-content-sync]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: microsoft-lists-content
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - name: Validate public content and update its snapshot
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, datetime, urllib.parse, math
+          event = json.loads(pathlib.Path(os.environ['GITHUB_EVENT_PATH']).read_text())
+          payload = event.get('client_payload', {})
+          feed = payload.get('feed')
+          fields = {
+              'projects': {'category','title','description','image','url','displayOrder'},
+              'fellows': {'name','initials','role','bio','projectLabel','projectTitle','projectDescription','url','linkLabel','displayOrder'},
+              'events': {'category','title','dateTime','location','summary','details','contact','image','url','linkLabel','displayOrder','sample'},
+          }
+          if feed not in fields or not isinstance(payload.get('records'), list):
+              raise ValueError('Invalid public snapshot')
+          stamp = payload.get('generatedAt', '')
+          def timestamp(value):
+              result = datetime.datetime.fromisoformat(value.replace('Z', '+00:00'))
+              if result.tzinfo is None:
+                  raise ValueError('Snapshot timestamp must include timezone')
+              return result
+          incoming = timestamp(stamp)
+          records = payload['records']
+          if len(records) > 500:
+              raise ValueError('Snapshot exceeds content limit')
+          categories = {'Project Spotlight':'spotlight','CIS 267 Student Outcomes':'cis267','People in Focus':'people','Faculty in Focus':'faculty','Lab Highlights':'highlights'}
+          def public_url(value):
+              value = str(value or '').strip()
+              parsed = urllib.parse.urlsplit(value)
+              return value if parsed.scheme == 'https' and parsed.hostname and not parsed.username and not parsed.password and not any(ord(c) <= 32 for c in value) else ''
+          clean = []
+          for record in records:
+              if not isinstance(record, dict) or set(record) - fields[feed]:
+                  raise ValueError('Unexpected fields in public snapshot')
+              row = {}
+              for key in fields[feed]:
+                  value = record.get(key)
+                  if key == 'displayOrder':
+                      try: value = float(value)
+                      except (TypeError, ValueError): value = 999999
+                      row[key] = value if math.isfinite(value) and value > 0 else 999999
+                  elif key == 'sample':
+                      row[key] = value is True or str(value).lower() == 'true'
+                  elif key in ('image', 'url'):
+                      row[key] = public_url(value)
+                  else:
+                      row[key] = str(value or '').strip()[:10000]
+              if feed == 'projects':
+                  row['category'] = categories.get(row['category'], row['category'])
+                  if row['category'] not in categories.values():
+                      raise ValueError('Unknown outcome category')
+              if row.get('name' if feed == 'fellows' else 'title'):
+                  clean.append(row)
+          clean.sort(key=lambda row: row['displayOrder'])
+          if feed == 'projects':
+              counts, capped = {}, []
+              for row in clean:
+                  category = row['category']
+                  counts[category] = counts.get(category, 0) + 1
+                  if counts[category] <= 8: capped.append(row)
+              clean = capped
+          path = pathlib.Path('data') / ('cms-' + feed + '.json')
+          if path.exists():
+              previous = json.loads(path.read_text())
+              if previous.get('updatedAt') and timestamp(previous['updatedAt']) >= incoming:
+                  print('Ignored older snapshot')
+                  raise SystemExit(0)
+          path.parent.mkdir(exist_ok=True)
+          path.write_text(json.dumps({feed: clean, 'updatedAt': stamp, 'source': 'Microsoft Lists'}, ensure_ascii=False, indent=2) + '\n')
+          print('Validated public ' + feed + ' snapshot')
+          PY
+      - name: Commit public snapshot
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- data/cms-*.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Update approved Microsoft Lists content'
+          git push
