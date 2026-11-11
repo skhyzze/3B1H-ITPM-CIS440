@@ -1,0 +1,1743 @@
+/* BENTO CIRCUIT REVAMP
+   Undo this prompt by deleting css/bento-circuit.css and removing
+   <link rel="stylesheet" href="css/bento-circuit.css"> from:
+   index.html, industry.html, 404.html, fellowship.html, event.html,
+   studentoutcomes.html, ai-insights.html.
+   Also revert the prompt-scoped reveal additions in js/site.js and
+   js/ai-insights.js, restore their prior script query versions, and remove
+   the page-404 body class from 404.html.
+   Card HTML, carousel content, images, and CMS data were not changed.
+   Light mode uses smoked glass over a cool steel field; dark mode keeps the same navy and oxblood system.
+   Dark mode uses a matching dark bar. The black logo is inverted to white there.
+   Oxanium is the squared geometric face that most closely matches the AAI wordmark.
+   The same orbit, trace, node, icon-draw, and button-sheen motion is kept. */
+
+:root {
+  --circuit-ink: #10262f;
+  --circuit-navy: #17495a;
+  --circuit-crimson: #7d3542;
+  --circuit-muted: #405761;
+  --circuit-paper: #d6e0e3;
+  --circuit-card: #e9eff0;
+  --circuit-line: rgba(16, 38, 47, 0.18);
+  --circuit-soft: #c5d2d6;
+}
+
+body.dark {
+  --circuit-ink: #f3f6fa;
+  --circuit-navy: #d5e2f0;
+  --circuit-crimson: #f0c9d0;
+  --circuit-muted: #c5d0dc;
+  --circuit-paper: #0e1622;
+  --circuit-card: #172433;
+  --circuit-line: rgba(213, 226, 240, 0.18);
+  --circuit-soft: #1e2c3d;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) {
+  --blend-night: var(--circuit-ink);
+  --blend-navy: var(--circuit-navy);
+  --blend-indigo: #24557a;
+  --blend-violet: var(--circuit-crimson);
+  --blend-teal: var(--circuit-crimson);
+  --blend-amber: var(--circuit-crimson);
+  --blend-ink: var(--circuit-ink);
+  --blend-muted: var(--circuit-muted);
+  --blend-paper: var(--circuit-card);
+  --blend-soft: var(--circuit-paper);
+  --blend-indigo-soft: var(--circuit-soft);
+  --blend-line: var(--circuit-line);
+  --blend-accent-text: var(--circuit-crimson);
+  --home-red: var(--circuit-crimson);
+  --home-blue: var(--circuit-navy);
+  --home-muted: var(--circuit-muted);
+  --home-line: var(--circuit-line);
+  --home-sand: var(--circuit-soft);
+  --home-paper: var(--circuit-card);
+  background-color: var(--circuit-paper) !important;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(23, 73, 90, 0.13), transparent 30%),
+    radial-gradient(circle at 88% 18%, rgba(125, 53, 66, 0.09), transparent 28%),
+    linear-gradient(rgba(23, 73, 90, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 73, 90, 0.075) 1px, transparent 1px) !important;
+  background-size: 32px 32px !important;
+  color: var(--circuit-ink) !important;
+  font-family: "Space Grotesk", Arial, sans-serif !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) {
+  background-image:
+    linear-gradient(rgba(213, 226, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(213, 226, 240, 0.045) 1px, transparent 1px) !important;
+}
+
+body.page-home :is(h1, h2),
+body.page-industry :is(h1, h2),
+body.page-fellowship :is(h1, h2),
+body.page-events :is(h1, h2),
+body.page-outcomes :is(h1, h2),
+body.page-ai-brief :is(h1, h2) {
+  font-family: "Oxanium", sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.045em !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  :is(h3, h4, h5, a, button, label, .brand, .kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .tag, .resource-num, .card-index, .preview-type) {
+  font-family: "Oxanium", "Space Grotesk", sans-serif !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  :is(p, li, input, textarea, select) {
+  font-family: "Space Grotesk", Arial, sans-serif !important;
+}
+
+/* Sections run edge to edge. No framed tile between them. */
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main {
+  display: block;
+  padding: 0;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main > section {
+  width: 100%;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible;
+  box-shadow: none !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  :is(.wrap, .container, .lab-nav, .lab-footer-inner) {
+  width: min(1280px, calc(100% - 96px)) !important;
+  max-width: 1280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+body.page-home:not(.dark),
+body.page-industry:not(.dark),
+body.page-fellowship:not(.dark),
+body.page-events:not(.dark),
+body.page-outcomes:not(.dark),
+body.page-ai-brief:not(.dark) {
+  background-color: var(--circuit-paper) !important;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(23, 73, 90, 0.13), transparent 30%),
+    radial-gradient(circle at 88% 18%, rgba(125, 53, 66, 0.09), transparent 28%),
+    linear-gradient(rgba(23, 73, 90, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 73, 90, 0.075) 1px, transparent 1px) !important;
+}
+
+body.dark.page-home,
+body.dark.page-industry,
+body.dark.page-fellowship,
+body.dark.page-events,
+body.dark.page-outcomes,
+body.dark.page-ai-brief {
+  background-color: #0e1622 !important;
+  background-image:
+    linear-gradient(rgba(213, 226, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(213, 226, 240, 0.045) 1px, transparent 1px) !important;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) :is(
+  .hero,
+  #lab,
+  .purpose,
+  .people,
+  .opportunities,
+  #resources,
+  .explore,
+  .benefits,
+  .collaboration,
+  #current-partners,
+  .spotlight,
+  .pathway,
+  .cta,
+  .page-hero,
+  .events-hero,
+  .event-section,
+  .past-section,
+  .about-fellowship,
+  .ideal-candidates,
+  .fellow-skills,
+  .fellows-section,
+  .details-section,
+  .how-to-become,
+  .cis-showcase,
+  #work,
+  #people,
+  #highlights,
+  #contribute
+) {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #102033 !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) :is(
+  .hero,
+  #lab,
+  .purpose,
+  .people,
+  .opportunities,
+  #resources,
+  .explore,
+  .benefits,
+  .collaboration,
+  #current-partners,
+  .spotlight,
+  .pathway,
+  .cta,
+  .page-hero,
+  .events-hero,
+  .event-section,
+  .past-section,
+  .about-fellowship,
+  .ideal-candidates,
+  .fellow-skills,
+  .fellows-section,
+  .details-section,
+  .how-to-become,
+  .cis-showcase,
+  #work,
+  #people,
+  #highlights,
+  #contribute
+) {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #f3f6fa !important;
+}
+
+/* Former navy bands keep readable ink once they become light tiles. */
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship) :is(
+  .purpose,
+  .spotlight,
+  .cta,
+  .details-section,
+  .how-to-become
+) :is(h1, h2, h3, h4, h5, p, .section-copy, .section-aside, .program-intro, .pending-status) {
+  color: #143b63 !important;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship) :is(
+  .purpose,
+  .spotlight,
+  .cta,
+  .details-section,
+  .how-to-become
+) :is(p, .section-copy, .section-aside, .program-intro, .pending-status) {
+  color: #3d4e60 !important;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .tag) {
+  color: #8e2433 !important;
+}
+
+body.page-fellowship:not(.dark) :is(.path-step, .detail-card) {
+  border-color: rgba(20, 59, 99, 0.16) !important;
+  background: var(--circuit-card) !important;
+  color: #102033 !important;
+}
+
+body.page-fellowship:not(.dark) .detail-card h3,
+body.page-fellowship:not(.dark) .path-step {
+  color: #143b63 !important;
+}
+
+body.page-home:not(.dark) .purpose .logic-card {
+  background: var(--circuit-card) !important;
+  color: #102033 !important;
+  border: 1px solid rgba(20, 59, 99, 0.14) !important;
+}
+
+body.page-home:not(.dark) .purpose .logic-card :is(h2, h3) { color: #143b63 !important; }
+body.page-home:not(.dark) .purpose .logic-card p { color: #3d4e60 !important; }
+
+body.page-home .logic-grid,
+body.page-home.dark .logic-grid {
+  gap: 12px !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+/* Information cards stay intact. Only the frame, gap, and span change. */
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
+  :is(
+    .preview-card,
+    .logic-card,
+    .audience,
+    .resource,
+    .explore-card,
+    .community-card,
+    .value-card,
+    .collaboration-item,
+    .partner-card,
+    .spotlight-card,
+    .fellow-card,
+    .candidate-card,
+    .skill-card,
+    .event-card,
+    .past-card,
+    .feature,
+    .cis-card,
+    .cta-box,
+    .step,
+    .path-step,
+    .detail-card
+  ) {
+  border-radius: 14px !important;
+  border-color: var(--circuit-line) !important;
+  box-shadow: none !important;
+}
+
+body.page-home .community-grid,
+body.page-home .audience-grid,
+body.page-home .logic-grid {
+  gap: 12px;
+}
+
+@media (min-width: 901px) {
+  body.page-home #resources .resources-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) !important;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  body.page-home #resources .resources-grid > .resource:first-child {
+    grid-row: span 2;
+  }
+}
+
+body.page-home #resources .resource:is(:hover, :focus-visible),
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) {
+  transform: translateY(-2px) !important;
+  border-color: rgba(142, 36, 51, 0.45) !important;
+  background: #f0f4f4 !important;
+  color: #102033 !important;
+  box-shadow: 0 10px 24px rgba(16, 32, 51, 0.08) !important;
+}
+
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) :is(h3, p) {
+  color: #143b63 !important;
+}
+
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) :is(.resource-num, .arrow),
+body.page-home #resources .resource:is(:hover, :focus-visible) .resource-num {
+  color: #8e2433 !important;
+}
+
+body.page-home #resources .resource:is(:hover, :focus-visible) .card-icon {
+  color: #8e2433;
+  border-color: rgba(142, 36, 51, 0.4);
+  background: rgba(142, 36, 51, 0.06);
+}
+
+body.page-home.dark #resources .resource:is(:hover, :focus-visible) {
+  background: #1e2c3d !important;
+  color: #f3f6fa !important;
+  border-color: rgba(213, 226, 240, 0.55) !important;
+}
+
+body.page-home.dark #resources .resource:is(:hover, :focus-visible) :is(h3, p, .arrow) {
+  color: #f3f6fa !important;
+}
+
+body.page-home.dark #resources .resource:is(:hover, :focus-visible) .resource-num {
+  color: #f0c9d0 !important;
+}
+
+body.page-home .community-card:hover,
+html.reveal-ready body.page-home .community-card.reveal.is-in:hover {
+  transform: translateY(-3px);
+  border-color: rgba(142, 36, 51, 0.35);
+  box-shadow: 0 12px 28px rgba(16, 32, 51, 0.08);
+}
+
+/* Same motion, logo colors instead of bright green and hot pink. */
+.lab-orbit-one,
+body.page-home .hero-orbit-one {
+  border-top-color: rgba(20, 59, 99, 0.55);
+  border-right-color: rgba(142, 36, 51, 0.45);
+}
+
+.lab-orbit-two,
+body.page-home .hero-orbit-two {
+  border-bottom-color: rgba(20, 59, 99, 0.4);
+  border-left-color: rgba(142, 36, 51, 0.35);
+}
+
+body.dark .lab-orbit-one,
+body.page-home.dark .hero-orbit-one {
+  border-top-color: rgba(213, 226, 240, 0.55);
+  border-right-color: rgba(231, 196, 164, 0.7);
+}
+
+body.dark .lab-orbit-two,
+body.page-home.dark .hero-orbit-two {
+  border-bottom-color: rgba(213, 226, 240, 0.4);
+  border-left-color: rgba(231, 196, 164, 0.5);
+}
+
+.lab-ico,
+.lab-circuit,
+body.page-home .circuit-field,
+body.page-home .circuit-decor {
+  color: #143b63;
+}
+
+body.dark .lab-ico,
+body.dark .lab-circuit,
+body.page-home.dark .circuit-field,
+body.page-home.dark .circuit-decor {
+  color: #d5e2f0;
+}
+
+.lab-node-hot,
+.circuit-node-hot {
+  fill: #8e2433 !important;
+}
+
+body.dark .lab-node-hot,
+body.dark .circuit-node-hot {
+  fill: #f0c9d0 !important;
+}
+
+:is(a.btn, a.button, button.button, button.btn, a.lab-nav-cta, a.circuit-join, a.footer-circuit, .scroll-button, .pill-btn) {
+  box-shadow: inset 0 -2px 0 rgba(16, 32, 51, 0.28);
+}
+
+:is(a.btn, a.button, button.button, button.btn, .scroll-button)::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+}
+
+:is(a.btn, a.button, button.button, button.btn, a.lab-nav-cta, a.circuit-join, a.footer-circuit, .scroll-button, .pill-btn):hover {
+  box-shadow: inset 0 -2px 0 rgba(16, 32, 51, 0.28), 0 10px 18px rgba(16, 32, 51, 0.12);
+}
+
+body.dark :is(
+  .preview-card,
+  .logic-card,
+  .audience,
+  .resource,
+  .explore-card,
+  .community-card,
+  .person,
+  .value-card,
+  .partner-card,
+  .collaboration-item,
+  .step,
+  .fellow-card,
+  .candidate-card,
+  .skill-card,
+  .event-card,
+  .past-card,
+  .feature,
+  .cis-card,
+  .permanent-card,
+  .demo-notice,
+  .submission-copy,
+  .feed-message,
+  .story:not(.lead),
+  .lesson,
+  .tool-hero,
+  .tool-row,
+  .vid,
+  .case,
+  .paper,
+  .empty-state,
+  .frame
+) {
+  border-top: 2px solid rgba(213, 226, 240, 0.72) !important;
+  background: #1e2c3d !important;
+  color: #f3f6fa !important;
+}
+
+body:not(.dark) :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon) {
+  color: #8e2433 !important;
+}
+
+body.dark :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .step::before),
+body.dark.page-fellowship p.section-kicker span,
+body.page-fellowship.dark :is(.fellow-role, .fellow-project a, .contact-arrow),
+body.page-industry.dark .spotlight-row strong,
+body.page-industry.dark .eyebrow {
+  color: #f0c9d0 !important;
+}
+
+body:not(.dark) .hero h1,
+body:not(.dark) .page-hero h1,
+body:not(.dark) .events-hero h1 {
+  color: #102033 !important;
+}
+
+body:not(.dark) :is(.page-home, .page-industry) h1 span {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1.5px #143b63 !important;
+}
+
+body.dark:is(.page-home, .page-industry) .hero h1 span,
+body.page-industry.dark .hero h1 span {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1.5px #d5e2f0 !important;
+}
+
+.lab-nav-cta,
+body.page-outcomes .button,
+.page-ai-brief .pill-btn.dark,
+body.page-home .btn-dark,
+body.page-industry .button-primary,
+body.page-fellowship .button-primary,
+body.page-events .button-primary,
+body.page-fellowship.dark .button-primary,
+body.page-events.dark .button-primary,
+body.page-ai-brief.dark .btn.primary,
+body.page-ai-brief.dark .pill-btn.dark {
+  border-color: #143b63 !important;
+  background: #143b63 !important;
+  color: #ffffff !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+.lab-nav-cta:is(:hover, :focus-visible),
+body.page-outcomes .button:is(:hover, :focus-visible),
+body.page-home .btn-dark:is(:hover, :focus-visible),
+body.page-industry .button-primary:is(:hover, :focus-visible),
+body.page-fellowship .button-primary:is(:hover, :focus-visible),
+body.page-events .button-primary:is(:hover, :focus-visible) {
+  border-color: #6e1c2a !important;
+  background: #6e1c2a !important;
+  color: #ffffff !important;
+}
+
+.lab-header .lab-nav-links > a.circuit-join,
+.lab-site-footer a.footer-circuit {
+  background: #6e1c2a !important;
+  border-color: #6e1c2a !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+}
+
+body:not(.dark) .lab-header,
+body.page-outcomes:not(.dark) > header,
+body.page-ai-brief:not(.dark) .nav {
+  background: rgba(214, 224, 227, 0.95) !important;
+  color: #102033 !important;
+  border-bottom: 1px solid rgba(16, 32, 51, 0.12) !important;
+}
+
+body.page-home.dark .lab-header,
+body.page-industry.dark .lab-header,
+body.page-fellowship.dark .lab-header,
+body.page-events.dark .lab-header,
+body.page-outcomes.dark .lab-header,
+body.page-ai-brief.dark .lab-header,
+body.page-outcomes.dark > header,
+body.page-ai-brief.dark .nav {
+  background: rgba(14, 22, 34, 0.96) !important;
+  color: #f3f6fa !important;
+  border-bottom: 1px solid rgba(213, 226, 240, 0.16) !important;
+}
+
+body.dark .lab-brand-image {
+  filter: invert(1) !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) .lab-nav-links > a:not(.lab-nav-cta),
+body.dark :is(.lab-theme-toggle, .lab-menu-toggle) {
+  color: #f3f6fa !important;
+  border-color: rgba(213, 226, 240, 0.4) !important;
+  background: transparent !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) .lab-site-footer {
+  background: #102033 !important;
+  color: #d5e2f0 !important;
+  border-top-color: rgba(213, 226, 240, 0.16) !important;
+}
+
+body.dark .lab-site-footer a:not(.footer-circuit) {
+  color: #d5e2f0 !important;
+}
+
+.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top):focus-visible {
+  outline-color: #f0c9d0;
+}
+
+.lab-footer-top span { color: #f0c9d0; }
+
+body.page-home.dark .progress-dot.active {
+  background-color: #f0c9d0 !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link {
+  border-color: #f0c9d0 !important;
+}
+
+body.page-home.dark .image-slot-frame:not(.preview-image) {
+  border-color: rgba(213, 226, 240, 0.28);
+  background-color: #172433;
+  background-image:
+    linear-gradient(rgba(213, 226, 240, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(213, 226, 240, 0.08) 1px, transparent 1px);
+  color: #f3f6fa;
+}
+
+/* AI Insights uses the same tokens. Newsletter content is left as published. */
+body.page-ai-brief {
+  --bg: var(--circuit-paper);
+  --surface: var(--circuit-card);
+  --ink: var(--circuit-ink);
+  --ink-2: var(--circuit-navy);
+  --muted: var(--circuit-muted);
+  --line: var(--circuit-line);
+  --indigo: var(--circuit-navy);
+  --violet: var(--circuit-crimson);
+  --teal: var(--circuit-navy);
+  --night: var(--circuit-ink);
+  --blue: var(--circuit-navy);
+  --red: var(--circuit-crimson);
+}
+
+body.page-ai-brief.dark {
+  --bg: #0e1622;
+  --surface: #172433;
+  --ink: #f3f6fa;
+  --ink-2: #d5e2f0;
+  --muted: #b4c0cb;
+  --line: rgba(213, 226, 240, 0.2);
+  --indigo: #d5e2f0;
+  --violet: #f0c9d0;
+  --teal: #f0c9d0;
+  --night: #102033;
+}
+
+body.page-ai-brief:not(.dark) .spotlight {
+  background: #132d3c !important;
+  color: #f3f6fa !important;
+}
+
+body.page-ai-brief:not(.dark) .ticker,
+body.page-ai-brief:not(.dark) .ticker .label {
+  background: #0c202b !important;
+  color: #f3f6fa !important;
+  border-color: rgba(213, 226, 240, 0.2) !important;
+}
+
+body.page-ai-brief:not(.dark) .ticker .track a {
+  color: #d5e2f0 !important;
+}
+
+body.page-ai-brief:not(.dark) .spotlight :is(h1, h2, h3, h4, h5, .spot-meta b) {
+  color: #f3f6fa !important;
+}
+
+body.page-ai-brief:not(.dark) .spotlight :is(.spot-body p, .spot-meta, .spot-label .week) {
+  color: #c7d5dc !important;
+}
+
+body.page-ai-brief:not(.dark) .spotlight .chip.glass {
+  background: rgba(213, 226, 240, 0.12) !important;
+  border-color: rgba(213, 226, 240, 0.35) !important;
+  color: #f3f6fa !important;
+}
+
+body.page-ai-brief #subscribe .sub-card .tag {
+  background: rgba(7, 18, 31, 0.5) !important;
+  border-color: rgba(240, 201, 208, 0.5) !important;
+  color: #f4d9de !important;
+}
+
+body.page-ai-brief #ai-tools .kicker,
+body.page-ai-brief.dark #ai-tools .kicker {
+  color: var(--circuit-crimson) !important;
+}
+
+.page-ai-brief .brand .mark,
+.page-ai-brief .btn.primary,
+body.page-ai-brief #ai-tools .tool-ctas .btn {
+  background: #143b63 !important;
+  border-color: #143b63 !important;
+}
+
+.lab-chat-launcher::before,
+.lab-chat-status::before {
+  background: #8e2433;
+  box-shadow: 0 0 0 4px rgba(142, 36, 51, 0.14);
+}
+
+.lab-chat-suggestion:hover {
+  border-color: #8e2433;
+  color: #6e1c2a;
+}
+
+body.dark .lab-chat-suggestion:hover,
+body.dark .lab-chat-bubble a {
+  color: #f0c9d0 !important;
+}
+
+body.dark .lab-chat-launcher::before,
+body.dark .lab-chat-status::before {
+  background: #f0c9d0;
+}
+
+/* Alignment already chosen for these regions stays in place. */
+body.page-home #lab .home-split,
+body.page-home #contact .home-split {
+  align-items: stretch;
+}
+
+body.page-home #lab .image-slot,
+body.page-home #contact .image-slot {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+
+body.page-outcomes #highlights .section-head {
+  align-items: flex-end;
+  text-align: right;
+}
+
+body.page-outcomes #highlights .section-head > p {
+  margin-left: auto;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  body.page-home #lab .image-slot,
+  body.page-home #contact .image-slot {
+    display: block;
+    height: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  body.page-outcomes #highlights .section-head {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  body.page-outcomes #highlights .section-head > p {
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+/* Later rules in the shared theme use equal or higher specificity.
+   These repeats keep the logo palette and let each bento tile fit its content. */
+body.page-home:not(.dark) .hero,
+body.page-industry:not(.dark) .hero,
+body.page-outcomes:not(.dark) .hero,
+body.page-fellowship:not(.dark) .page-hero,
+body.page-events:not(.dark) .events-hero,
+body.page-ai-brief:not(.dark) .hero {
+  min-height: 0 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #102033 !important;
+}
+
+body.page-home .hero {
+  display: block !important;
+  padding-top: 36px !important;
+  padding-bottom: 28px !important;
+}
+
+body.page-home:not(.dark) .hero::after,
+body.page-industry:not(.dark) .hero::after,
+body.page-events:not(.dark) .events-hero::after {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body.page-home:not(.dark) h1 span,
+body.page-fellowship:not(.dark) .page-hero h1 em,
+body.page-events:not(.dark) h1 em {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1.5px #143b63 !important;
+}
+
+/* The industry message must stay immediately readable over the circuit grid. */
+body.page-industry:not(.dark) .hero h1 span {
+  color: #102033 !important;
+  -webkit-text-fill-color: #102033 !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) :is(
+  .kicker,
+  .eyebrow,
+  .section-kicker,
+  .section-label,
+  .hero-eyebrow,
+  .fellow-role,
+  .fellow-project a,
+  .value-icon,
+  .collaboration-item > span,
+  .step::before,
+  .preview-type,
+  .resource-num
+) {
+  color: #f0c9d0 !important;
+}
+
+body.page-home.dark #resources .resource:is(:hover, :focus-visible) :is(.resource-num, .arrow) {
+  color: #f0c9d0 !important;
+}
+
+body.dark.page-industry .hero h1 span {
+  color: #f3f6fa !important;
+  -webkit-text-fill-color: #f3f6fa !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Keep the compact error page anchored between the shared header and footer. */
+body.page-404 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.page-404 main {
+  display: flex !important;
+  flex: 1 0 auto;
+}
+
+body.page-404 main > .hero {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+    :is(.wrap, .container, .lab-nav, .lab-footer-inner) {
+    width: calc(100% - 40px) !important;
+  }
+
+  body.page-outcomes :is(#people, #highlights) .wrap {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body.page-outcomes :is(#people, #highlights) .wrap > * {
+    min-width: 0;
+  }
+
+  body.page-outcomes :is(#people, #highlights) .outcomes-shot-frame {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  :is(
+    .preview-card,
+    .audience,
+    .resource,
+    .explore-card,
+    .person,
+    .value-card,
+    .partner-card,
+    .collaboration-item,
+    .step,
+    .fellow-card,
+    .candidate-card,
+    .skill-card,
+    .event-card,
+    .past-card,
+    .demo-notice,
+    .feature,
+    .cis-card,
+    .permanent-card,
+    .submission-copy,
+    .feed-message,
+    .story:not(.lead),
+    .lesson,
+    .tool-hero,
+    .tool-row,
+    .vid,
+    .case,
+    .paper,
+    .empty-state,
+    .logic-card,
+    .community-card
+  ) {
+  background-color: var(--circuit-card) !important;
+  border-top-color: var(--circuit-navy) !important;
+  box-shadow: none !important;
+}
+
+/* Quiet tonal bands keep long pages dimensional without introducing harsh contrast. */
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-outcomes)
+  :is(
+    #lab,
+    .people,
+    #resources,
+    .benefits,
+    #current-partners,
+    .about-fellowship,
+    .fellow-skills,
+    #work,
+    #highlights
+  ) {
+  background-color: rgba(23, 73, 90, 0.055) !important;
+}
+
+/* The Fellowship application path switches from dark-mode pastels to accessible light-mode ink. */
+body.page-fellowship:not(.dark) .how-to-become :is(.program-intro, .path-panel, .contact-strip p, .image-slot figcaption) {
+  color: #405761 !important;
+}
+
+body.page-fellowship:not(.dark) .how-to-become .path-facts li {
+  color: #6d2937 !important;
+}
+
+body.page-fellowship:not(.dark) .how-to-become .image-slot-on-navy .image-slot-frame {
+  background-color: #a8b6bb !important;
+  border-color: rgba(109, 41, 55, 0.55) !important;
+  color: #6d2937 !important;
+}
+
+/* Keep the Fellowship application callout readable on the dark canvas. */
+body.dark.page-fellowship .how-to-become .contact-strip {
+  background: #172b3a !important;
+  border-left-color: #ff8295 !important;
+  color: #edf3f8 !important;
+}
+
+body.dark.page-fellowship .how-to-become .contact-strip p {
+  color: #edf3f8 !important;
+}
+
+body.dark.page-fellowship .how-to-become .contact-strip .path-apply,
+body.dark.page-fellowship .how-to-become .contact-strip .path-apply:disabled,
+body.dark.page-fellowship .how-to-become .contact-strip .path-apply:disabled:hover {
+  border-color: #6f8796 !important;
+  background: #263f4f !important;
+  color: #e4ebef !important;
+  opacity: 1 !important;
+}
+
+body.page-home:not(.dark) .preview-card {
+  box-shadow: 0 16px 34px rgba(16, 32, 51, 0.08) !important;
+}
+
+.lab-site-footer::after {
+  background: #8e2433;
+}
+
+.lab-footer-brand span {
+  border-left-color: rgba(142, 36, 51, 0.45);
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) {
+  --blend-night: #102033;
+  --blend-navy: #d5e2f0;
+  --blend-ink: #f3f6fa;
+  --blend-muted: #c5d0dc;
+  --blend-paper: #172433;
+  --blend-soft: #0e1622;
+  --blend-accent-text: #f0c9d0;
+}
+
+@keyframes circuit-fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+body:is(.page-outcomes, .page-events, .page-ai-brief) :is(.hero, .events-hero) :is(h1, .eyebrow, .lead, .intro, .intro-copy) {
+  animation: circuit-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+body:is(.page-outcomes, .page-events, .page-ai-brief) :is(.hero, .events-hero) :is(.lead, .intro, .intro-copy) {
+  animation-delay: 0.12s;
+}
+body:is(.page-outcomes, .page-events) :is(.hero, .events-hero) .hero-actions,
+body.page-ai-brief .hero-ctas,
+body.page-ai-brief .stats {
+  animation: circuit-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) 0.22s both;
+}
+body.page-ai-brief .collage {
+  animation: circuit-fade-up 0.9s ease 0.16s both;
+}
+
+html.lab-motion body:not(.page-home):not(.page-fellowship) :is(
+  .event-grid,
+  .cis-grid,
+  .feature-grid
+) > .lab-reveal:nth-child(2) { transition-delay: 0.08s; }
+html.lab-motion body:not(.page-home):not(.page-fellowship) :is(
+  .event-grid,
+  .cis-grid,
+  .feature-grid
+) > .lab-reveal:nth-child(3) { transition-delay: 0.16s; }
+html.lab-motion body:not(.page-home):not(.page-fellowship) :is(
+  .event-grid,
+  .cis-grid,
+  .feature-grid
+) > .lab-reveal:nth-child(4) { transition-delay: 0.24s; }
+
+body.page-events :is(.event-card, .past-card, .placeholder) {
+  overflow: hidden !important;
+}
+body.page-events.dark .event-card .category,
+body.page-events.dark .past-card > .category {
+  background: #143b63 !important;
+  color: #ffffff !important;
+}
+body.page-events.dark .event-card:nth-child(2) .category {
+  background: #8e2433 !important;
+}
+body.page-events.dark .event-card:nth-child(3) .category {
+  background: #102033 !important;
+  color: #f3f6fa !important;
+}
+
+html.lab-motion body:not(.page-home):not(.page-fellowship) :is(
+  .audience,
+  .resource,
+  .community-card,
+  .explore-card,
+  .logic-card,
+  .value-card,
+  .collaboration-item,
+  .partner-card,
+  .event-card,
+  .past-card,
+  .cis-card,
+  .feature,
+  .candidate-card,
+  .skill-card,
+  .submission-copy,
+  .spotlight-card,
+  .step,
+  .story:not(.lead),
+  .lesson,
+  .tool-row,
+  .tool-hero,
+  .case,
+  .paper,
+  .vid,
+  .sub-card,
+  .person,
+  .demo-notice,
+  .permanent-card,
+  .preview-card
+).lab-reveal.is-in {
+  transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+html.lab-motion body:not(.page-home):not(.page-fellowship) :is(
+  .audience,
+  .resource,
+  .community-card,
+  .explore-card,
+  .logic-card,
+  .value-card,
+  .collaboration-item,
+  .partner-card,
+  .event-card,
+  .past-card,
+  .cis-card,
+  .feature,
+  .candidate-card,
+  .skill-card,
+  .submission-copy,
+  .spotlight-card,
+  .step,
+  .story:not(.lead),
+  .lesson,
+  .tool-row,
+  .tool-hero,
+  .case,
+  .paper,
+  .vid,
+  .sub-card,
+  .person,
+  .demo-notice,
+  .permanent-card,
+  .preview-card
+).lab-reveal.is-in:hover {
+  transform: translateY(-6px);
+  border-color: rgba(142, 36, 51, 0.45) !important;
+  box-shadow: 8px 8px 0 #e6ebf1;
+}
+html.lab-motion body.dark:not(.page-home):not(.page-fellowship) :is(
+  .audience,
+  .resource,
+  .community-card,
+  .explore-card,
+  .logic-card,
+  .value-card,
+  .collaboration-item,
+  .partner-card,
+  .event-card,
+  .past-card,
+  .cis-card,
+  .feature,
+  .candidate-card,
+  .skill-card,
+  .submission-copy,
+  .spotlight-card,
+  .step,
+  .story:not(.lead),
+  .lesson,
+  .tool-row,
+  .tool-hero,
+  .case,
+  .paper,
+  .vid,
+  .sub-card,
+  .person,
+  .demo-notice,
+  .permanent-card,
+  .preview-card
+).lab-reveal.is-in:hover {
+  box-shadow: 8px 8px 0 rgba(14, 22, 34, 0.65);
+}
+
+@property --frame-turn {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes home-frame-turn { to { --frame-turn: 360deg; } }
+
+body.page-outcomes .outcomes-shot-frame {
+  position: relative;
+  overflow: hidden;
+}
+body.page-outcomes .outcomes-shot-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: conic-gradient(from var(--frame-turn, 0deg), transparent 0 68%, #8e2433 80%, #143b63 90%, transparent 100%);
+  animation: home-frame-turn 4.8s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+/* Varied section fields: circuit nodes, diagonal traces, and quiet geometric drafting marks. */
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
+  main > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 1) {
+  background-color: #d7e4e6 !important;
+  background-image:
+    radial-gradient(circle at 12% 24%, transparent 0 17px, rgba(23, 73, 90, 0.2) 18px 20px, transparent 21px),
+    radial-gradient(circle at 88% 72%, transparent 0 25px, rgba(125, 53, 66, 0.16) 26px 28px, transparent 29px),
+    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.12) 0 1px, transparent 1px 42px),
+    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.1) 0 1px, transparent 1px 42px) !important;
+  background-size: auto, auto, 42px 42px, 42px 42px !important;
+  animation: circuit-field-drift 28s linear infinite alternate;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
+  main > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 2) {
+  background-color: #b7c9ce !important;
+  background-image:
+    radial-gradient(circle at 16% 68%, transparent 0 20px, rgba(23, 73, 90, 0.22) 21px 23px, transparent 24px),
+    radial-gradient(circle at 82% 22%, transparent 0 30px, rgba(125, 53, 66, 0.15) 31px 33px, transparent 34px),
+    linear-gradient(135deg, transparent 0 42%, rgba(23, 73, 90, 0.09) 42% 42.4%, transparent 42.4% 100%),
+    radial-gradient(circle, rgba(23, 73, 90, 0.13) 0 1.5px, transparent 1.7px),
+    radial-gradient(circle at 80% 18%, rgba(125, 53, 66, 0.09), transparent 22%) !important;
+  background-size: auto, auto, 240px 240px, 28px 28px, auto !important;
+  animation: circuit-field-drift 32s linear infinite alternate-reverse;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
+  main > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n) {
+  background-color: #c9d4cf !important;
+  background-image:
+    radial-gradient(circle at 11% 30%, transparent 0 24px, rgba(23, 73, 90, 0.18) 25px 27px, transparent 28px),
+    radial-gradient(circle at 90% 76%, transparent 0 15px, rgba(125, 53, 66, 0.16) 16px 18px, transparent 19px),
+    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.12) 0 1px, transparent 1px 56px),
+    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.1) 0 1px, transparent 1px 56px) !important;
+  background-size: auto, auto, 56px 56px, 56px 56px !important;
+  animation: circuit-field-drift 36s linear infinite alternate;
+}
+
+/* The Circuit uses clean tonal panels with a quiet animated circuit grid instead of the triangular field. */
+body.page-ai-brief:not(.dark) #app > section.section {
+  background-color: #bccbce !important;
+  background-image:
+    radial-gradient(circle at 12% 26%, transparent 0 19px, rgba(23, 73, 90, 0.18) 20px 22px, transparent 23px),
+    radial-gradient(circle at 88% 72%, transparent 0 27px, rgba(125, 53, 66, 0.14) 28px 30px, transparent 31px),
+    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.052) 0 1px, transparent 1px 52px),
+    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.045) 0 1px, transparent 1px 52px) !important;
+  background-size: auto, auto, 52px 52px, 52px 52px !important;
+  animation: circuit-field-drift 30s linear infinite alternate !important;
+}
+
+body.page-ai-brief:not(.dark) #app > section.section:nth-of-type(3n + 2) {
+  background-color: #aebfc4 !important;
+}
+
+body.page-ai-brief:not(.dark) #app > section.section:nth-of-type(3n) {
+  background-color: #c5cbc7 !important;
+}
+
+/* Events already has dense cards and date information, so its canvas stays deliberately calm. */
+body.page-events:not(.dark) {
+  background-color: #dbe3e4 !important;
+  background-image:
+    radial-gradient(circle at 84% 12%, rgba(23, 73, 90, 0.065), transparent 26%),
+    linear-gradient(rgba(23, 73, 90, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 73, 90, 0.035) 1px, transparent 1px) !important;
+  background-size: auto, 64px 64px, 64px 64px !important;
+}
+
+body.page-events:not(.dark) .events-hero {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Dark sections gain faint moving traces and additional pulsing circuit rings. */
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
+  main > section:not(.hero):not(.page-hero):not(.events-hero),
+body.dark.page-ai-brief #app > section.section {
+  background-image:
+    radial-gradient(circle at 10% 24%, transparent 0 18px, rgba(213, 226, 240, 0.13) 19px 21px, transparent 22px),
+    radial-gradient(circle at 90% 74%, transparent 0 27px, rgba(240, 201, 208, 0.14) 28px 30px, transparent 31px),
+    repeating-linear-gradient(90deg, rgba(213, 226, 240, 0.035) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(0deg, rgba(213, 226, 240, 0.028) 0 1px, transparent 1px 48px) !important;
+  background-size: auto, auto, 48px 48px, 48px 48px !important;
+  animation: circuit-field-drift 34s linear infinite alternate;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-outcomes)
+  main > section:not(.hero):not(.page-hero):nth-of-type(3n + 1),
+body.dark.page-ai-brief #app > section.section:nth-of-type(3n + 1) {
+  background-color: #0c1722 !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-outcomes)
+  main > section:not(.hero):not(.page-hero):nth-of-type(3n + 2),
+body.dark.page-ai-brief #app > section.section:nth-of-type(3n + 2) {
+  background-color: #132433 !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-outcomes)
+  main > section:not(.hero):not(.page-hero):nth-of-type(3n),
+body.dark.page-ai-brief #app > section.section:nth-of-type(3n) {
+  background-color: #192b39 !important;
+}
+
+body.dark.page-home main > .hero > .wrap,
+body.dark.page-industry main > .hero > .container,
+body.dark.page-fellowship main > .page-hero > .container,
+body.dark.page-events main > .events-hero > .container,
+body.dark.page-outcomes main > .hero > .wrap,
+body.dark.page-ai-brief #app > .hero > .wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+body.dark.page-home main > .hero > .wrap::before,
+body.dark.page-home main > .hero > .wrap::after,
+body.dark.page-industry main > .hero > .container::before,
+body.dark.page-industry main > .hero > .container::after,
+body.dark.page-fellowship main > .page-hero > .container::before,
+body.dark.page-fellowship main > .page-hero > .container::after,
+body.dark.page-events main > .events-hero > .container::before,
+body.dark.page-events main > .events-hero > .container::after,
+body.dark.page-outcomes main > .hero > .wrap::before,
+body.dark.page-outcomes main > .hero > .wrap::after,
+body.dark.page-ai-brief #app > .hero > .wrap::before,
+body.dark.page-ai-brief #app > .hero > .wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+}
+
+body.dark.page-home main > .hero > .wrap::before,
+body.dark.page-industry main > .hero > .container::before,
+body.dark.page-fellowship main > .page-hero > .container::before,
+body.dark.page-events main > .events-hero > .container::before,
+body.dark.page-outcomes main > .hero > .wrap::before,
+body.dark.page-ai-brief #app > .hero > .wrap::before {
+  opacity: 0.11;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23d5e2f0' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='32' cy='32' r='14'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3Cpath d='M32 4v12M32 48v12M4 32h12M48 32h12M12 12l9 9M43 43l9 9M52 12l-9 9M21 43l-9 9'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23f0c9d0' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='32' cy='32' r='14'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3Cpath d='M32 4v12M32 48v12M4 32h12M48 32h12M12 12l9 9M43 43l9 9M52 12l-9 9M21 43l-9 9'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: 3.5% 22%, 95% 70%;
+  background-size: 82px 82px, 58px 58px;
+  animation: dark-gears-float 16s ease-in-out infinite alternate;
+}
+
+body.dark.page-home main > .hero > .wrap::after,
+body.dark.page-industry main > .hero > .container::after,
+body.dark.page-fellowship main > .page-hero > .container::after,
+body.dark.page-events main > .events-hero > .container::after,
+body.dark.page-outcomes main > .hero > .wrap::after,
+body.dark.page-ai-brief #app > .hero > .wrap::after {
+  opacity: 0.12;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23d5e2f0' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M48 7a15 15 0 0 0-17 19L9 48a5 5 0 1 0 7 7l22-22A15 15 0 0 0 57 14l-9 9-8-8z'/%3E%3Ccircle cx='13' cy='51' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: 91% 38%;
+  background-size: 94px 94px;
+  animation: dark-wrench-float 10s ease-in-out infinite alternate;
+}
+
+@keyframes circuit-field-drift {
+  to { background-position: 28px 18px, -22px 14px, 36px 20px, -18px 30px; }
+}
+
+@keyframes dark-gears-float {
+  from { transform: translate3d(0, -8px, 0) rotate(-2deg); }
+  to { transform: translate3d(0, 16px, 0) rotate(4deg); }
+}
+
+@keyframes dark-wrench-float {
+  from { transform: translate3d(-8px, 8px, 0) rotate(-7deg); }
+  to { transform: translate3d(10px, -14px, 0) rotate(7deg); }
+}
+
+@media (max-width: 700px) {
+  body.dark.page-home main > .hero > .wrap::before,
+  body.dark.page-industry main > .hero > .container::before,
+  body.dark.page-fellowship main > .page-hero > .container::before,
+  body.dark.page-events main > .events-hero > .container::before,
+  body.dark.page-outcomes main > .hero > .wrap::before,
+  body.dark.page-ai-brief #app > .hero > .wrap::before {
+    opacity: 0.08;
+    background-position: -18px 24%, calc(100% + 14px) 72%;
+    background-size: 62px 62px, 48px 48px;
+  }
+
+  body.dark.page-home main > .hero > .wrap::after,
+  body.dark.page-industry main > .hero > .container::after,
+  body.dark.page-fellowship main > .page-hero > .container::after,
+  body.dark.page-events main > .events-hero > .container::after,
+  body.dark.page-outcomes main > .hero > .wrap::after,
+  body.dark.page-ai-brief #app > .hero > .wrap::after {
+    opacity: 0.08;
+    background-position: calc(100% + 20px) 42%;
+    background-size: 72px 72px;
+  }
+}
+
+.js .page-ai-brief .hero .reveal:nth-child(2),
+.js .page-ai-brief .sec-head.reveal { transition-delay: 0.08s; }
+.js .page-ai-brief .hero .reveal:nth-child(3) { transition-delay: 0.16s; }
+.js .page-ai-brief .hero .reveal:nth-child(4) { transition-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  body.dark.page-home main > .hero > .wrap::before,
+  body.dark.page-home main > .hero > .wrap::after,
+  body.dark.page-industry main > .hero > .container::before,
+  body.dark.page-industry main > .hero > .container::after,
+  body.dark.page-fellowship main > .page-hero > .container::before,
+  body.dark.page-fellowship main > .page-hero > .container::after,
+  body.dark.page-events main > .events-hero > .container::before,
+  body.dark.page-events main > .events-hero > .container::after,
+  body.dark.page-outcomes main > .hero > .wrap::before,
+  body.dark.page-outcomes main > .hero > .wrap::after,
+  body.dark.page-ai-brief #app > .hero > .wrap::before,
+  body.dark.page-ai-brief #app > .hero > .wrap::after,
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) main > section,
+  body.page-ai-brief #app > section {
+    animation: none !important;
+  }
+
+  body:is(.page-outcomes, .page-events, .page-ai-brief) :is(.hero, .events-hero) :is(h1, .eyebrow, .lead, .intro, .intro-copy),
+  body:is(.page-outcomes, .page-events) :is(.hero, .events-hero) .hero-actions,
+  body.page-ai-brief :is(.hero-ctas, .stats, .collage),
+  body:is(.page-outcomes, .page-events) :is(.outcomes-shot-frame, .placeholder, .image-slot-frame)::before {
+    animation: none !important;
+  }
+  body:is(.page-outcomes, .page-events, .page-ai-brief) :is(.cis-card, .feature, .event-card, .past-card, .story, .lesson, .tool-row, .case, .paper, .vid):hover {
+    transform: none;
+  }
+}
+
+/* Shared hero title: one color and one size on every public page. */
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief):not(.dark) :is(.hero, .page-hero, .events-hero) h1,
+body.page-home:not(.dark) .hero h1 span,
+body.page-industry:not(.dark) .hero h1 span,
+body.page-fellowship:not(.dark) .page-hero h1 em,
+body.page-events:not(.dark) .events-hero h1 em,
+body.page-ai-brief:not(.dark) .hero h1 .grad {
+  color: #102033 !important;
+  -webkit-text-fill-color: #102033 !important;
+  -webkit-text-stroke: 0 transparent !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief).dark :is(.hero, .page-hero, .events-hero) h1,
+body.page-home.dark .hero h1 span,
+body.page-industry.dark .hero h1 span,
+body.page-fellowship.dark .page-hero h1 em,
+body.page-events.dark .events-hero h1 em,
+body.page-ai-brief.dark .hero h1 .grad {
+  color: #f3f6fa !important;
+  -webkit-text-fill-color: #f3f6fa !important;
+  -webkit-text-stroke: 0 transparent !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) :is(.hero, .page-hero, .events-hero) h1 {
+  font-size: clamp(3rem, 7vw, 6rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.055em !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) :is(.hero, .page-hero, .events-hero) h1 :is(span, em, .grad) {
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+/* Labels above headings share one color, size, and tracking. */
+body.page-home:not(.dark) .purpose .eyebrow,
+body.page-home:not(.dark) #direction .eyebrow,
+body.page-industry:not(.dark) .spotlight .eyebrow,
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) :is(.kicker, .eyebrow, .section-kicker, .section-kicker span, .section-label, .hero-eyebrow) {
+  color: #8e2433 !important;
+  font-family: "Oxanium", "Space Grotesk", sans-serif !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) :is(.kicker, .eyebrow, .section-kicker, .section-kicker span, .section-label, .hero-eyebrow),
+body.page-home.dark #direction .eyebrow,
+body.page-industry.dark .spotlight .eyebrow {
+  color: #f0c9d0 !important;
+  font-family: "Oxanium", "Space Grotesk", sans-serif !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+}
+
+body.page-ai-brief .hero .eyebrow .live {
+  color: #f3f6fa !important;
+  background: #102033 !important;
+  letter-spacing: 0.08em !important;
+}
+
+body.page-ai-brief.dark .hero .eyebrow .live {
+  color: #102033 !important;
+  background: #f0c9d0 !important;
+}
+
+/* Mission circuit mark uses the same ink as the other section traces. */
+body.page-home:not(.dark) #direction .circuit-decor {
+  color: #143b63 !important;
+  opacity: 0.55 !important;
+}
+
+body.page-home.dark #direction .circuit-decor {
+  color: #d5e2f0 !important;
+  opacity: 0.7 !important;
+}
+
+/* A gear, wrench, or circuit mark in the outer gutter tells sections apart. */
+body:is(.page-home, .page-industry, .page-events, .page-outcomes) main > section:not(.hero):not(.page-hero):not(.events-hero),
+body.page-ai-brief #app > section.section,
+body.page-fellowship #fellows {
+  position: relative;
+}
+
+body:is(.page-home, .page-industry, .page-events, .page-outcomes) main > section:not(.hero):not(.page-hero):not(.events-hero)::before,
+body.page-ai-brief #app > section.section::before,
+body.page-fellowship #fellows::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: auto;
+  bottom: 22px;
+  left: 22px;
+  width: 52px;
+  height: 52px;
+  pointer-events: none;
+  opacity: 0.72;
+  background-color: #143b63;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+body.page-fellowship #fellows::after {
+  left: auto;
+  right: 22px;
+  bottom: 22px;
+}
+
+body:is(.page-home, .page-industry, .page-events, .page-outcomes) main > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 1)::before,
+body.page-ai-brief #app > section.section:nth-of-type(3n + 1)::before,
+body.page-fellowship #fellows::after {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='32' cy='32' r='11'/%3E%3Ccircle cx='32' cy='32' r='3.5'/%3E%3Cpath d='M32 5v9M32 50v9M5 32h9M50 32h9M12 12l7 7M45 45l7 7M52 12l-7 7M19 45l-7 7'/%3E%3C/g%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='32' cy='32' r='11'/%3E%3Ccircle cx='32' cy='32' r='3.5'/%3E%3Cpath d='M32 5v9M32 50v9M5 32h9M50 32h9M12 12l7 7M45 45l7 7M52 12l-7 7M19 45l-7 7'/%3E%3C/g%3E%3C/svg%3E");
+  animation: section-gear-spin 16s linear infinite;
+}
+
+body:is(.page-home, .page-industry, .page-events, .page-outcomes) main > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 2)::before,
+body.page-ai-brief #app > section.section:nth-of-type(3n + 2)::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M48 8a14 14 0 0 0-16 18L10 48a5 5 0 1 0 7 7l22-22A14 14 0 0 0 56 16l-8 8-8-8z'/%3E%3C/g%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M48 8a14 14 0 0 0-16 18L10 48a5 5 0 1 0 7 7l22-22A14 14 0 0 0 56 16l-8 8-8-8z'/%3E%3C/g%3E%3C/svg%3E");
+  animation: section-wrench-rock 5.5s ease-in-out infinite alternate;
+}
+
+body:is(.page-home, .page-industry, .page-events, .page-outcomes) main > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n)::before,
+body.page-ai-brief #app > section.section:nth-of-type(3n)::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M8 40H24V16H40V46H56'/%3E%3Ccircle cx='24' cy='16' r='3.2' fill='%23000'/%3E%3Ccircle cx='40' cy='46' r='3.2' fill='%23000'/%3E%3Ccircle cx='56' cy='46' r='3.2' fill='%23000'/%3E%3C/g%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M8 40H24V16H40V46H56'/%3E%3Ccircle cx='24' cy='16' r='3.2' fill='%23000'/%3E%3Ccircle cx='40' cy='46' r='3.2' fill='%23000'/%3E%3Ccircle cx='56' cy='46' r='3.2' fill='%23000'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+body.dark:is(.page-home, .page-industry, .page-events, .page-outcomes) main > section:not(.hero):not(.page-hero):not(.events-hero)::before,
+body.dark.page-ai-brief #app > section.section::before,
+body.dark.page-fellowship #fellows::after {
+  background-color: #d5e2f0;
+  opacity: 0.5;
+}
+
+@keyframes section-gear-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes section-wrench-rock {
+  from { transform: rotate(-16deg); }
+  to { transform: rotate(14deg); }
+}
+
+/* Loading states stay visible while a feed is still coming in. */
+@keyframes lab-load-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes lab-load-pulse {
+  50% { opacity: 0.55; }
+}
+
+[aria-busy="true"] > .feed-message,
+.page-events .event-grid[aria-busy="true"] .event-content,
+#fellowTrack[aria-busy="true"] {
+  border: 1px solid rgba(20, 59, 99, 0.22) !important;
+  border-left: 4px solid #8e2433 !important;
+  background: #e9eff0 !important;
+}
+
+[aria-busy="true"] .feed-message p[role="status"],
+.page-events .event-grid[aria-busy="true"] p[role="status"],
+#fellowTrack[aria-busy="true"]::after {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: #102033 !important;
+  font-family: "Oxanium", "Space Grotesk", sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+  animation: lab-load-pulse 1.3s ease-in-out infinite;
+}
+
+[aria-busy="true"] .feed-message p[role="status"]::before,
+.page-events .event-grid[aria-busy="true"] p[role="status"]::before,
+#fellowTrack[aria-busy="true"]::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(16, 38, 47, 0.22);
+  border-top-color: #8e2433;
+  border-radius: 50%;
+  animation: lab-load-spin 0.7s linear infinite;
+}
+
+.page-events .event-grid[aria-busy="true"] {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.page-events .event-grid[aria-busy="true"] .event-content {
+  min-height: 120px;
+  padding: 28px;
+}
+
+#fellowTrack[aria-busy="true"] {
+  display: flex !important;
+  align-items: center;
+  gap: 14px;
+  min-height: 140px !important;
+  height: auto !important;
+  padding: 28px 32px !important;
+}
+
+#fellowTrack[aria-busy="true"]::after {
+  content: "Loading student fellows…";
+}
+
+.page-events .event-grid:empty {
+  display: flex !important;
+  align-items: center;
+  gap: 14px;
+  min-height: 120px;
+  padding: 28px;
+  border: 1px solid rgba(20, 59, 99, 0.22);
+  border-left: 4px solid #8e2433;
+  background: #e9eff0;
+}
+
+.page-events .event-grid:empty::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(16, 38, 47, 0.22);
+  border-top-color: #8e2433;
+  border-radius: 50%;
+  animation: lab-load-spin 0.7s linear infinite;
+}
+
+.page-events .event-grid:empty::after {
+  content: "Loading upcoming events…";
+  color: #102033;
+  font-family: "Oxanium", "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  animation: lab-load-pulse 1.3s ease-in-out infinite;
+}
+
+body.dark .page-events .event-grid:empty {
+  border-color: rgba(213, 226, 240, 0.28);
+  border-left-color: #f0c9d0;
+  background: #1e2c3d;
+}
+
+body.dark .page-events .event-grid:empty::after {
+  color: #f3f6fa;
+}
+
+body.dark .page-events .event-grid:empty::before {
+  border-color: rgba(213, 226, 240, 0.28);
+  border-top-color: #f0c9d0;
+}
+
+body.dark [aria-busy="true"] > .feed-message,
+body.dark .page-events .event-grid[aria-busy="true"] .event-content,
+body.dark #fellowTrack[aria-busy="true"] {
+  border-color: rgba(213, 226, 240, 0.28) !important;
+  border-left-color: #f0c9d0 !important;
+  background: #1e2c3d !important;
+}
+
+body.dark [aria-busy="true"] .feed-message p[role="status"],
+body.dark .page-events .event-grid[aria-busy="true"] p[role="status"],
+body.dark #fellowTrack[aria-busy="true"]::after {
+  color: #f3f6fa !important;
+}
+
+body.dark [aria-busy="true"] .feed-message p[role="status"]::before,
+body.dark .page-events .event-grid[aria-busy="true"] p[role="status"]::before,
+body.dark #fellowTrack[aria-busy="true"]::before {
+  border-color: rgba(213, 226, 240, 0.28);
+  border-top-color: #f0c9d0;
+}
+
+@media (max-width: 760px) {
+  body:is(.page-home, .page-industry, .page-events, .page-outcomes) main > section:not(.hero):not(.page-hero):not(.events-hero)::before,
+  body.page-ai-brief #app > section.section::before,
+  body.page-fellowship #fellows::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:is(.page-home, .page-industry, .page-events, .page-outcomes) main > section:not(.hero):not(.page-hero):not(.events-hero)::before,
+  body.page-ai-brief #app > section.section::before,
+  body.page-fellowship #fellows::after,
+  [aria-busy="true"] .feed-message p[role="status"],
+  .page-events .event-grid[aria-busy="true"] p[role="status"],
+  #fellowTrack[aria-busy="true"]::before,
+  #fellowTrack[aria-busy="true"]::after,
+  [aria-busy="true"] .feed-message p[role="status"]::before,
+  .page-events .event-grid[aria-busy="true"] p[role="status"]::before {
+    animation: none !important;
+  }
+}
+
+/* Section bands have to outrank the shared transparent rule, which inherits an id. */
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 1) {
+  background-color: #d7e4e6 !important;
+  background-image:
+    radial-gradient(circle at 12% 24%, transparent 0 17px, rgba(23, 73, 90, 0.2) 18px 20px, transparent 21px),
+    radial-gradient(circle at 88% 72%, transparent 0 25px, rgba(125, 53, 66, 0.16) 26px 28px, transparent 29px),
+    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.12) 0 1px, transparent 1px 42px),
+    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.1) 0 1px, transparent 1px 42px) !important;
+  background-size: auto, auto, 42px 42px, 42px 42px !important;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 2) {
+  background-color: #b7c9ce !important;
+  background-image:
+    radial-gradient(circle at 16% 68%, transparent 0 20px, rgba(23, 73, 90, 0.22) 21px 23px, transparent 24px),
+    radial-gradient(circle at 82% 22%, transparent 0 30px, rgba(125, 53, 66, 0.15) 31px 33px, transparent 34px),
+    linear-gradient(135deg, transparent 0 42%, rgba(23, 73, 90, 0.14) 42% 42.5%, transparent 42.5% 100%),
+    radial-gradient(circle, rgba(23, 73, 90, 0.16) 0 1.5px, transparent 1.7px) !important;
+  background-size: auto, auto, 240px 240px, 28px 28px !important;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n) {
+  background-color: #c9d4cf !important;
+  background-image:
+    radial-gradient(circle at 11% 30%, transparent 0 24px, rgba(23, 73, 90, 0.18) 25px 27px, transparent 28px),
+    radial-gradient(circle at 90% 76%, transparent 0 15px, rgba(125, 53, 66, 0.16) 16px 18px, transparent 19px),
+    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.12) 0 1px, transparent 1px 56px),
+    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.1) 0 1px, transparent 1px 56px) !important;
+  background-size: auto, auto, 56px 56px, 56px 56px !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 1) {
+  background-color: #0c1722 !important;
+  background-image:
+    radial-gradient(circle at 10% 24%, transparent 0 18px, rgba(213, 226, 240, 0.16) 19px 21px, transparent 22px),
+    repeating-linear-gradient(90deg, rgba(213, 226, 240, 0.06) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(0deg, rgba(213, 226, 240, 0.05) 0 1px, transparent 1px 48px) !important;
+  background-size: auto, 48px 48px, 48px 48px !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 2) {
+  background-color: #132433 !important;
+  background-image:
+    radial-gradient(circle at 88% 20%, transparent 0 26px, rgba(240, 201, 208, 0.16) 27px 29px, transparent 30px),
+    linear-gradient(135deg, transparent 0 46%, rgba(213, 226, 240, 0.08) 46% 46.4%, transparent 46.4% 100%) !important;
+  background-size: auto, 220px 220px !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n) {
+  background-color: #192b39 !important;
+  background-image:
+    radial-gradient(circle at 14% 70%, transparent 0 16px, rgba(213, 226, 240, 0.16) 17px 19px, transparent 20px),
+    repeating-linear-gradient(90deg, rgba(213, 226, 240, 0.055) 0 1px, transparent 1px 52px),
+    repeating-linear-gradient(0deg, rgba(213, 226, 240, 0.045) 0 1px, transparent 1px 52px) !important;
+  background-size: auto, 52px 52px, 52px 52px !important;
+}

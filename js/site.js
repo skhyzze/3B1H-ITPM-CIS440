@@ -162,7 +162,7 @@
 (function () {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const skipPage = document.body.classList.contains('page-home') || document.body.classList.contains('page-fellowship');
-  const cardSelector = '.audience, .resource, .community-card, .explore-card, .logic-card, .value-card, .collaboration-item, .partner-card, .event-card, .past-card, .cis-card, .feature, .fellow-card, .candidate-card, .skill-card, .submission-copy, .spotlight-card, .step, .story:not(.lead), .lesson, .case, .tool-row, .paper, .preview-card';
+  const cardSelector = '.audience, .resource, .community-card, .explore-card, .logic-card, .value-card, .collaboration-item, .partner-card, .event-card, .past-card, .cis-card, .feature, .fellow-card, .candidate-card, .skill-card, .submission-copy, .spotlight-card, .step, .story:not(.lead), .lesson, .case, .tool-row, .tool-hero, .paper, .vid, .sub-card, .person, .demo-notice, .permanent-card, .preview-card';
   const seen = new WeakSet();
 
   function press(card) {
@@ -180,6 +180,7 @@
   if (skipPage || reduce || !('IntersectionObserver' in window)) return;
 
   const headingSelector = 'main h1, main h2, #app h1, #app h2';
+  const extraSelector = '.eyebrow, .kicker, .section-kicker, .section-label, .lead, .intro-copy, .hero-copy, .section-lead, .outcomes-shot, .editor-note, .stats, .stat, .feed-message, .spotlight-controls, .hero-actions, .sec-head, .sub-card, .spot-grid, .tool-hero, .collage';
   const observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
@@ -191,6 +192,7 @@
   function arm(node) {
     if (!node || node.nodeType !== 1 || seen.has(node)) return;
     if (node.closest('.lab-header, .lab-site-footer')) return;
+    if (node.closest(cardSelector) && !node.matches(cardSelector)) return;
     if (node.matches('h1, h2') && node.closest(cardSelector)) return;
     seen.add(node);
     node.classList.add('lab-reveal');
@@ -206,6 +208,7 @@
       arm(heading);
     });
     scope.querySelectorAll(cardSelector).forEach(arm);
+    scope.querySelectorAll(extraSelector).forEach(arm);
   }
 
   scan(document);
@@ -214,7 +217,7 @@
     records.forEach(function (record) {
       record.addedNodes.forEach(function (node) {
         if (!node || node.nodeType !== 1) return;
-        if (node.matches && (node.matches(cardSelector) || node.matches(headingSelector))) arm(node);
+        if (node.matches && (node.matches(cardSelector) || node.matches(headingSelector) || node.matches(extraSelector))) arm(node);
         if (node.querySelectorAll) scan(node);
       });
     });

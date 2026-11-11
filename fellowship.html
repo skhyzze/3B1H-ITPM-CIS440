@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/blended-theme.css">
   <link rel="stylesheet" href="css/chatbot.css">
   <link rel="stylesheet" href="css/lab-accents.css">
+  <link rel="stylesheet" href="css/bento-circuit.css">
 </head>
 <body class="page-fellowship" id="top">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -261,8 +262,7 @@
 
         <div class="carousel" role="region" aria-roledescription="carousel" aria-labelledby="fellows-title" tabindex="0">
           <div class="carousel-viewport">
-            <div class="fellow-track" id="fellowTrack">
-            </div>
+            <div class="fellow-track" id="fellowTrack" aria-busy="true"></div>
           </div>
           <div class="carousel-controls">
             <button class="carousel-button" id="fellowPrev" type="button" aria-label="Show previous student fellow">←</button>
@@ -392,12 +392,13 @@
   </div>
 </footer>
 
-  <script src="js/site.js?v=2" defer></script>
+  <script src="js/site.js?v=4" defer></script>
   <script>
 window.LAB_FELLOWS_READY=(async function(){
   const track=document.getElementById('fellowTrack');
   const status=document.getElementById('fellowStatus');
   track.replaceChildren();
+  track.setAttribute('aria-busy','true');
   status.textContent='Loading student fellows…';
   const url='https://script.google.com/macros/s/AKfycbxZixQOq57BZBvfvjQVc7lc4xLZqdPXbo6Yt6WeaPNTKB3l1Kv-Yr8lGNJTQFg-CJAP/exec?feed=fellows';
   function node(tag,cls,text){const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;}
@@ -422,12 +423,15 @@ window.LAB_FELLOWS_READY=(async function(){
       }
       track.append(card);
     });
-    if(!track.children.length){status.textContent='No published student fellows yet.';const p=node('p','','No published student fellows yet.');track.append(p);return false;}
+    if(!track.children.length){status.textContent='No published student fellows yet.';const p=node('p','','No published student fellows yet.');track.append(p);track.setAttribute('aria-busy','false');return false;}
+    track.setAttribute('aria-busy','false');
     return true;
   } catch(error){
     const message=node('p','','Student fellows are temporarily unavailable. Please reload to try again.');message.setAttribute('role','status');track.append(message);
     document.getElementById('fellowPrev').disabled=true;document.getElementById('fellowNext').disabled=true;
-    status.textContent='Student fellows are temporarily unavailable.';return false;
+    status.textContent='Student fellows are temporarily unavailable.';
+    track.setAttribute('aria-busy','false');
+    return false;
   }
 })();
 

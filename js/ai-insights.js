@@ -135,20 +135,20 @@ function heroHtml(d) {
   return '<header class="hero" id="top">' +
     '<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>' +
     '<div class="wrap"><div>' +
-      '<span class="eyebrow"><span class="live"><span class="dot"></span>NEW</span>Weekly Edition · Week of ' + esc(d.weekOf) + '</span>' +
-      '<h1><span class="grad">THE CIRCUIT</span></h1>' +
-      '<p class="intro">' + esc(d.intro) + '</p>' +
-      '<div class="hero-ctas">' +
+      '<span class="eyebrow reveal"><span class="live"><span class="dot"></span>NEW</span>Weekly Edition · Week of ' + esc(d.weekOf) + '</span>' +
+      '<h1 class="reveal"><span class="grad">THE CIRCUIT</span></h1>' +
+      '<p class="intro reveal">' + esc(d.intro) + '</p>' +
+      '<div class="hero-ctas reveal">' +
         (d.spotlight ? '<a class="btn primary" href="#spotlight" data-jump="spotlight">' + icon("sparkle", 18) + ' See the Spotlight</a>' : '') +
         '<a class="btn ghost" href="#explore" data-jump="explore">Browse this week ' + icon("arrow", 16) + '</a>' +
       '</div>' +
-      '<div class="stats">' +
+      '<div class="stats reveal">' +
         '<div class="stat"><b data-count="' + all.length + '">0</b><span>hand-picked resources</span></div>' +
         '<div class="stat"><b data-count="' + sources + '">0</b><span>trusted sources</span></div>' +
         '<div class="stat"><b data-count="' + d.sections.length + '">0</b><span>topics this week</span></div>' +
       '</div>' +
     '</div>' +
-    '<div class="collage" aria-hidden="true">' + frames + '</div>' +
+    '<div class="collage reveal" aria-hidden="true">' + frames + '</div>' +
     '</div></header>';
 }
 
@@ -159,7 +159,7 @@ function tickerHtml(d) {
   const links = all.map(function (item) {
     return '<a data-c="' + esc(item.sectionId) + '" ' + linkAttrs(item) + '><i></i>' + esc(item.title) + '</a>';
   }).join("");
-  return '<div class="ticker" aria-label="Headlines this week"><div class="row">' +
+  return '<div class="ticker reveal" aria-label="Headlines this week"><div class="row">' +
     '<div class="label"><span class="dot"></span>THIS WEEK</div>' +
     '<div class="track">' + links + links + '</div></div></div>';
 }
