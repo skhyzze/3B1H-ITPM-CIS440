@@ -8,7 +8,6 @@ alwaysApply: true
 Follow these on every change:
 
 - Do NOT modify, rename, move, re-encode, resize, or remove any image files, `<img>` tags, `src`/`srcset` attributes, logo files, existing text content, or the base64 image in `studentoutcomes.html`. Assume all images exist.
-- Do not change the color palette, fonts, or layout unless the task says so.
 - Keep changes minimal and limited to the files named in the task.
 - Do not delete code unless the task says "delete".
 - After each task, list the files changed and what you verified.
