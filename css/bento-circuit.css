@@ -57,18 +57,16 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   background-color: var(--circuit-paper) !important;
   background-image:
     radial-gradient(circle at 12% 8%, rgba(23, 73, 90, 0.13), transparent 30%),
-    radial-gradient(circle at 88% 18%, rgba(125, 53, 66, 0.09), transparent 28%),
-    linear-gradient(rgba(23, 73, 90, 0.075) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 73, 90, 0.075) 1px, transparent 1px) !important;
-  background-size: 32px 32px !important;
+    radial-gradient(circle at 88% 18%, rgba(125, 53, 66, 0.09), transparent 28%) !important;
+  background-size: auto !important;
   color: var(--circuit-ink) !important;
   font-family: "Space Grotesk", Arial, sans-serif !important;
 }
 
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) {
   background-image:
-    linear-gradient(rgba(213, 226, 240, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(213, 226, 240, 0.045) 1px, transparent 1px) !important;
+    radial-gradient(circle at 10% 12%, rgba(213, 226, 240, 0.06), transparent 28%),
+    radial-gradient(circle at 90% 22%, rgba(240, 201, 208, 0.045), transparent 26%) !important;
 }
 
 body.page-home :is(h1, h2),
@@ -124,9 +122,7 @@ body.page-ai-brief:not(.dark) {
   background-color: var(--circuit-paper) !important;
   background-image:
     radial-gradient(circle at 12% 8%, rgba(23, 73, 90, 0.13), transparent 30%),
-    radial-gradient(circle at 88% 18%, rgba(125, 53, 66, 0.09), transparent 28%),
-    linear-gradient(rgba(23, 73, 90, 0.075) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 73, 90, 0.075) 1px, transparent 1px) !important;
+    radial-gradient(circle at 88% 18%, rgba(125, 53, 66, 0.09), transparent 28%) !important;
 }
 
 body.dark.page-home,
@@ -137,8 +133,8 @@ body.dark.page-outcomes,
 body.dark.page-ai-brief {
   background-color: #0e1622 !important;
   background-image:
-    linear-gradient(rgba(213, 226, 240, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(213, 226, 240, 0.045) 1px, transparent 1px) !important;
+    radial-gradient(circle at 10% 12%, rgba(213, 226, 240, 0.06), transparent 28%),
+    radial-gradient(circle at 90% 22%, rgba(240, 201, 208, 0.045), transparent 26%) !important;
 }
 
 body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) :is(
@@ -892,19 +888,54 @@ body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-outcomes)
   background-color: rgba(23, 73, 90, 0.055) !important;
 }
 
-/* The Fellowship application path switches from dark-mode pastels to accessible light-mode ink. */
+/* Fellowship light mode uses one accessible burgundy for every red text accent. */
+body.page-fellowship:not(.dark) {
+  --red: #8e2433;
+}
+
+body.page-fellowship main > section[id] {
+  scroll-margin-top: 88px;
+}
+
 body.page-fellowship:not(.dark) .how-to-become :is(.program-intro, .path-panel, .contact-strip p, .image-slot figcaption) {
   color: #405761 !important;
 }
 
-body.page-fellowship:not(.dark) .how-to-become .path-facts li {
-  color: #6d2937 !important;
+body.page-fellowship:not(.dark) :is(
+  .section-kicker,
+  .candidate-label,
+  .skill-number,
+  .signal-row strong,
+  .fellow-role,
+  .fellow-project a,
+  .contact-arrow,
+  .path-number,
+  .path-facts li,
+  .image-slot-label,
+  .program-support .ico,
+  .card-icon
+) {
+  color: #8e2433 !important;
+}
+
+body.page-fellowship:not(.dark) .how-to-become .circuit-decor {
+  color: #8e2433 !important;
 }
 
 body.page-fellowship:not(.dark) .how-to-become .image-slot-on-navy .image-slot-frame {
   background-color: #a8b6bb !important;
-  border-color: rgba(109, 41, 55, 0.55) !important;
-  color: #6d2937 !important;
+  border-color: rgba(142, 36, 51, 0.55) !important;
+  color: #8e2433 !important;
+}
+
+body.page-fellowship:not(.dark) .how-to-become :is(.path-step.is-selected, .path-panel, .contact-strip) {
+  border-color: #8e2433 !important;
+}
+
+@media (max-width: 700px) {
+  body.page-fellowship main > section[id] {
+    scroll-margin-top: 72px;
+  }
 }
 
 /* Keep the Fellowship application callout readable on the dark canvas. */
@@ -1129,16 +1160,15 @@ body.page-outcomes .outcomes-shot-frame::before {
   mask-composite: exclude;
 }
 
-/* Varied section fields: circuit nodes, diagonal traces, and quiet geometric drafting marks. */
+/* Varied tonal fields use only sparse animated circuit rings and nodes. */
 body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
   main > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 1) {
   background-color: #d7e4e6 !important;
   background-image:
     radial-gradient(circle at 12% 24%, transparent 0 17px, rgba(23, 73, 90, 0.2) 18px 20px, transparent 21px),
     radial-gradient(circle at 88% 72%, transparent 0 25px, rgba(125, 53, 66, 0.16) 26px 28px, transparent 29px),
-    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.12) 0 1px, transparent 1px 42px),
-    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.1) 0 1px, transparent 1px 42px) !important;
-  background-size: auto, auto, 42px 42px, 42px 42px !important;
+    radial-gradient(circle at 48% 42%, rgba(23, 73, 90, 0.2) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto !important;
   animation: circuit-field-drift 28s linear infinite alternate;
 }
 
@@ -1148,34 +1178,30 @@ body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .
   background-image:
     radial-gradient(circle at 16% 68%, transparent 0 20px, rgba(23, 73, 90, 0.22) 21px 23px, transparent 24px),
     radial-gradient(circle at 82% 22%, transparent 0 30px, rgba(125, 53, 66, 0.15) 31px 33px, transparent 34px),
-    linear-gradient(135deg, transparent 0 42%, rgba(23, 73, 90, 0.09) 42% 42.4%, transparent 42.4% 100%),
-    radial-gradient(circle, rgba(23, 73, 90, 0.13) 0 1.5px, transparent 1.7px),
-    radial-gradient(circle at 80% 18%, rgba(125, 53, 66, 0.09), transparent 22%) !important;
-  background-size: auto, auto, 240px 240px, 28px 28px, auto !important;
+    radial-gradient(circle at 56% 78%, rgba(125, 53, 66, 0.18) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto !important;
   animation: circuit-field-drift 32s linear infinite alternate-reverse;
 }
 
 body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
   main > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n) {
-  background-color: #c9d4cf !important;
+  background-color: #a9c1c7 !important;
   background-image:
     radial-gradient(circle at 11% 30%, transparent 0 24px, rgba(23, 73, 90, 0.18) 25px 27px, transparent 28px),
     radial-gradient(circle at 90% 76%, transparent 0 15px, rgba(125, 53, 66, 0.16) 16px 18px, transparent 19px),
-    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.12) 0 1px, transparent 1px 56px),
-    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.1) 0 1px, transparent 1px 56px) !important;
-  background-size: auto, auto, 56px 56px, 56px 56px !important;
+    radial-gradient(circle at 42% 18%, rgba(23, 73, 90, 0.18) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto !important;
   animation: circuit-field-drift 36s linear infinite alternate;
 }
 
-/* The Circuit uses clean tonal panels with a quiet animated circuit grid instead of the triangular field. */
+/* The Circuit uses clean tonal panels with sparse animated circuit accents. */
 body.page-ai-brief:not(.dark) #app > section.section {
   background-color: #bccbce !important;
   background-image:
     radial-gradient(circle at 12% 26%, transparent 0 19px, rgba(23, 73, 90, 0.18) 20px 22px, transparent 23px),
     radial-gradient(circle at 88% 72%, transparent 0 27px, rgba(125, 53, 66, 0.14) 28px 30px, transparent 31px),
-    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.052) 0 1px, transparent 1px 52px),
-    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.045) 0 1px, transparent 1px 52px) !important;
-  background-size: auto, auto, 52px 52px, 52px 52px !important;
+    radial-gradient(circle at 52% 20%, rgba(23, 73, 90, 0.18) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto !important;
   animation: circuit-field-drift 30s linear infinite alternate !important;
 }
 
@@ -1184,17 +1210,18 @@ body.page-ai-brief:not(.dark) #app > section.section:nth-of-type(3n + 2) {
 }
 
 body.page-ai-brief:not(.dark) #app > section.section:nth-of-type(3n) {
-  background-color: #c5cbc7 !important;
+  background-color: #a9c1c7 !important;
 }
 
 /* Events already has dense cards and date information, so its canvas stays deliberately calm. */
 body.page-events:not(.dark) {
   background-color: #dbe3e4 !important;
   background-image:
-    radial-gradient(circle at 84% 12%, rgba(23, 73, 90, 0.065), transparent 26%),
-    linear-gradient(rgba(23, 73, 90, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 73, 90, 0.035) 1px, transparent 1px) !important;
-  background-size: auto, 64px 64px, 64px 64px !important;
+    radial-gradient(circle at 84% 12%, transparent 0 30px, rgba(23, 73, 90, 0.08) 31px 33px, transparent 34px),
+    radial-gradient(circle at 18% 76%, transparent 0 18px, rgba(125, 53, 66, 0.07) 19px 21px, transparent 22px),
+    radial-gradient(circle at 58% 42%, rgba(23, 73, 90, 0.09) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto !important;
+  animation: circuit-field-drift 42s linear infinite alternate;
 }
 
 body.page-events:not(.dark) .events-hero {
@@ -1209,9 +1236,8 @@ body.dark.page-ai-brief #app > section.section {
   background-image:
     radial-gradient(circle at 10% 24%, transparent 0 18px, rgba(213, 226, 240, 0.13) 19px 21px, transparent 22px),
     radial-gradient(circle at 90% 74%, transparent 0 27px, rgba(240, 201, 208, 0.14) 28px 30px, transparent 31px),
-    repeating-linear-gradient(90deg, rgba(213, 226, 240, 0.035) 0 1px, transparent 1px 48px),
-    repeating-linear-gradient(0deg, rgba(213, 226, 240, 0.028) 0 1px, transparent 1px 48px) !important;
-  background-size: auto, auto, 48px 48px, 48px 48px !important;
+    radial-gradient(circle at 52% 18%, rgba(213, 226, 240, 0.14) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto !important;
   animation: circuit-field-drift 34s linear infinite alternate;
 }
 
@@ -1294,7 +1320,7 @@ body.dark.page-ai-brief #app > .hero > .wrap::after {
 }
 
 @keyframes circuit-field-drift {
-  to { background-position: 28px 18px, -22px 14px, 36px 20px, -18px 30px; }
+  to { background-position: 28px 18px, -22px 14px, 18px -12px; }
 }
 
 @keyframes dark-gears-float {
@@ -1469,7 +1495,8 @@ body.page-fellowship #fellows::after {
   z-index: 0;
   top: auto;
   bottom: 22px;
-  left: 22px;
+  left: auto;
+  right: 22px;
   width: 52px;
   height: 52px;
   pointer-events: none;
@@ -1689,55 +1716,271 @@ body.dark #fellowTrack[aria-busy="true"]::before {
 body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 1) {
   background-color: #d7e4e6 !important;
   background-image:
-    radial-gradient(circle at 12% 24%, transparent 0 17px, rgba(23, 73, 90, 0.2) 18px 20px, transparent 21px),
-    radial-gradient(circle at 88% 72%, transparent 0 25px, rgba(125, 53, 66, 0.16) 26px 28px, transparent 29px),
-    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.12) 0 1px, transparent 1px 42px),
-    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.1) 0 1px, transparent 1px 42px) !important;
-  background-size: auto, auto, 42px 42px, 42px 42px !important;
+    radial-gradient(circle at 3% 93%, transparent 0 17px, rgba(23, 73, 90, 0.13) 18px 20px, transparent 21px),
+    radial-gradient(circle at 97% 91%, transparent 0 25px, rgba(23, 73, 90, 0.1) 26px 28px, transparent 29px),
+    radial-gradient(circle at 97% 15%, transparent 0 11px, rgba(23, 73, 90, 0.12) 12px 14px, transparent 15px),
+    radial-gradient(circle at 2% 46%, rgba(23, 73, 90, 0.16) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto, auto !important;
 }
 
 body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 2) {
   background-color: #b7c9ce !important;
   background-image:
-    radial-gradient(circle at 16% 68%, transparent 0 20px, rgba(23, 73, 90, 0.22) 21px 23px, transparent 24px),
-    radial-gradient(circle at 82% 22%, transparent 0 30px, rgba(125, 53, 66, 0.15) 31px 33px, transparent 34px),
-    linear-gradient(135deg, transparent 0 42%, rgba(23, 73, 90, 0.14) 42% 42.5%, transparent 42.5% 100%),
-    radial-gradient(circle, rgba(23, 73, 90, 0.16) 0 1.5px, transparent 1.7px) !important;
-  background-size: auto, auto, 240px 240px, 28px 28px !important;
+    radial-gradient(circle at 3% 91%, transparent 0 20px, rgba(23, 73, 90, 0.14) 21px 23px, transparent 24px),
+    radial-gradient(circle at 97% 93%, transparent 0 27px, rgba(23, 73, 90, 0.11) 28px 30px, transparent 31px),
+    radial-gradient(circle at 97% 18%, transparent 0 14px, rgba(23, 73, 90, 0.13) 15px 17px, transparent 18px),
+    radial-gradient(circle at 2% 52%, rgba(23, 73, 90, 0.17) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto, auto !important;
 }
 
 body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n) {
-  background-color: #c9d4cf !important;
+  background-color: #a9c1c7 !important;
   background-image:
-    radial-gradient(circle at 11% 30%, transparent 0 24px, rgba(23, 73, 90, 0.18) 25px 27px, transparent 28px),
-    radial-gradient(circle at 90% 76%, transparent 0 15px, rgba(125, 53, 66, 0.16) 16px 18px, transparent 19px),
-    repeating-linear-gradient(90deg, rgba(23, 73, 90, 0.12) 0 1px, transparent 1px 56px),
-    repeating-linear-gradient(0deg, rgba(23, 73, 90, 0.1) 0 1px, transparent 1px 56px) !important;
-  background-size: auto, auto, 56px 56px, 56px 56px !important;
+    radial-gradient(circle at 3% 92%, transparent 0 22px, rgba(23, 73, 90, 0.13) 23px 25px, transparent 26px),
+    radial-gradient(circle at 97% 90%, transparent 0 15px, rgba(23, 73, 90, 0.11) 16px 18px, transparent 19px),
+    radial-gradient(circle at 97% 16%, transparent 0 12px, rgba(23, 73, 90, 0.13) 13px 15px, transparent 16px),
+    radial-gradient(circle at 2% 48%, rgba(23, 73, 90, 0.17) 0 3px, transparent 4px),
+    linear-gradient(rgba(23, 73, 90, 0.16), rgba(23, 73, 90, 0.16)) !important;
+  background-repeat: no-repeat !important;
+  background-position: center, center, center, center, calc(100% - 30px) calc(100% - 30px) !important;
+  background-size: auto, auto, auto, auto, 110px 1px !important;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
+  main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n)
+  :is(.section-lead, .section-copy > p, .intro-text, .program-intro, .section-aside, .pending-note),
+body.page-ai-brief:not(.dark) #app > section.section:nth-of-type(3n) .sec-head p {
+  color: #2f4652 !important;
 }
 
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 1) {
   background-color: #0c1722 !important;
   background-image:
-    radial-gradient(circle at 10% 24%, transparent 0 18px, rgba(213, 226, 240, 0.16) 19px 21px, transparent 22px),
-    repeating-linear-gradient(90deg, rgba(213, 226, 240, 0.06) 0 1px, transparent 1px 48px),
-    repeating-linear-gradient(0deg, rgba(213, 226, 240, 0.05) 0 1px, transparent 1px 48px) !important;
-  background-size: auto, 48px 48px, 48px 48px !important;
+    radial-gradient(circle at 3% 93%, transparent 0 18px, rgba(213, 226, 240, 0.1) 19px 21px, transparent 22px),
+    radial-gradient(circle at 97% 91%, transparent 0 25px, rgba(213, 226, 240, 0.08) 26px 28px, transparent 29px),
+    radial-gradient(circle at 97% 15%, transparent 0 11px, rgba(213, 226, 240, 0.1) 12px 14px, transparent 15px),
+    radial-gradient(circle at 2% 46%, rgba(213, 226, 240, 0.13) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto, auto !important;
 }
 
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n + 2) {
   background-color: #132433 !important;
   background-image:
-    radial-gradient(circle at 88% 20%, transparent 0 26px, rgba(240, 201, 208, 0.16) 27px 29px, transparent 30px),
-    linear-gradient(135deg, transparent 0 46%, rgba(213, 226, 240, 0.08) 46% 46.4%, transparent 46.4% 100%) !important;
-  background-size: auto, 220px 220px !important;
+    radial-gradient(circle at 97% 93%, transparent 0 26px, rgba(213, 226, 240, 0.1) 27px 29px, transparent 30px),
+    radial-gradient(circle at 3% 91%, transparent 0 16px, rgba(213, 226, 240, 0.08) 17px 19px, transparent 20px),
+    radial-gradient(circle at 97% 18%, transparent 0 14px, rgba(213, 226, 240, 0.1) 15px 17px, transparent 18px),
+    radial-gradient(circle at 2% 52%, rgba(213, 226, 240, 0.13) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto, auto !important;
 }
 
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main:is(#top, #main-content, #main) > section:not(.hero):not(.page-hero):not(.events-hero):nth-of-type(3n) {
   background-color: #192b39 !important;
   background-image:
-    radial-gradient(circle at 14% 70%, transparent 0 16px, rgba(213, 226, 240, 0.16) 17px 19px, transparent 20px),
-    repeating-linear-gradient(90deg, rgba(213, 226, 240, 0.055) 0 1px, transparent 1px 52px),
-    repeating-linear-gradient(0deg, rgba(213, 226, 240, 0.045) 0 1px, transparent 1px 52px) !important;
-  background-size: auto, 52px 52px, 52px 52px !important;
+    radial-gradient(circle at 3% 92%, transparent 0 16px, rgba(213, 226, 240, 0.1) 17px 19px, transparent 20px),
+    radial-gradient(circle at 97% 90%, transparent 0 23px, rgba(213, 226, 240, 0.08) 24px 26px, transparent 27px),
+    radial-gradient(circle at 97% 16%, transparent 0 12px, rgba(213, 226, 240, 0.1) 13px 15px, transparent 16px),
+    radial-gradient(circle at 2% 48%, rgba(213, 226, 240, 0.13) 0 3px, transparent 4px),
+    linear-gradient(rgba(213, 226, 240, 0.13), rgba(213, 226, 240, 0.13)) !important;
+  background-repeat: no-repeat !important;
+  background-position: center, center, center, center, calc(100% - 30px) calc(100% - 30px) !important;
+  background-size: auto, auto, auto, auto, 110px 1px !important;
+}
+
+/* The Circuit receives the same edge-safe accent density in both themes. */
+body.page-ai-brief:not(.dark) #app > section.section {
+  background-image:
+    radial-gradient(circle at 3% 92%, transparent 0 18px, rgba(23, 73, 90, 0.13) 19px 21px, transparent 22px),
+    radial-gradient(circle at 97% 91%, transparent 0 25px, rgba(23, 73, 90, 0.1) 26px 28px, transparent 29px),
+    radial-gradient(circle at 97% 16%, transparent 0 12px, rgba(23, 73, 90, 0.12) 13px 15px, transparent 16px),
+    radial-gradient(circle at 2% 48%, rgba(23, 73, 90, 0.16) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto, auto !important;
+  animation: none !important;
+}
+
+body.page-ai-brief.dark #app > section.section {
+  background-image:
+    radial-gradient(circle at 3% 92%, transparent 0 18px, rgba(213, 226, 240, 0.1) 19px 21px, transparent 22px),
+    radial-gradient(circle at 97% 91%, transparent 0 25px, rgba(213, 226, 240, 0.08) 26px 28px, transparent 29px),
+    radial-gradient(circle at 97% 16%, transparent 0 12px, rgba(213, 226, 240, 0.1) 13px 15px, transparent 16px),
+    radial-gradient(circle at 2% 48%, rgba(213, 226, 240, 0.13) 0 3px, transparent 4px) !important;
+  background-size: auto, auto, auto, auto !important;
+  animation: none !important;
+}
+
+/* Theme changes must not alter the document's vertical geometry. */
+html {
+  scrollbar-gutter: stable;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) main > :is(.hero, .page-hero, .events-hero),
+body.page-ai-brief #app > .hero {
+  min-height: 0 !important;
+}
+
+/* Keep page-level content inside comfortable gutters from phones through wide displays. */
+@media (max-width: 420px) {
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+    :is(.wrap, .container, .lab-nav, .lab-footer-inner) {
+    width: calc(100% - 28px) !important;
+  }
+}
+
+/* One compact footer system across every public and hidden route. */
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer,
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-top: 1px solid rgba(213, 226, 240, 0.16) !important;
+  background: #102033 !important;
+  color: #d5e2f0 !important;
+  font-size: 0.82rem !important;
+  line-height: 1.4 !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer .lab-footer-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 20px 36px !important;
+  min-height: 0 !important;
+  padding-top: 28px !important;
+  padding-bottom: 28px !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer .lab-footer-brand {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 10px 22px !important;
+  min-width: 0 !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer .lab-footer-brand strong {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font: 600 0.95rem "Oxanium", "Space Grotesk", sans-serif !important;
+  letter-spacing: -0.015em !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer .lab-footer-brand span {
+  margin: 0 !important;
+  padding-left: 22px !important;
+  border-left: 1px solid rgba(142, 36, 51, 0.45) !important;
+  color: #aebdca !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.04em !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer :is(a.footer-circuit, a.lab-footer-top) {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  text-decoration: none !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer a.footer-circuit {
+  display: inline-flex !important;
+  align-self: center !important;
+  padding: 10px 18px !important;
+  border-radius: 10px !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer .lab-footer-nav {
+  display: none !important;
+}
+
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+  footer.lab-site-footer a.lab-footer-top {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  margin-right: 140px !important;
+  color: #d5e2f0 !important;
+  font-size: 0.79rem !important;
+  font-weight: 650 !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 900px) {
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+    footer.lab-site-footer .lab-footer-inner {
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+    footer.lab-site-footer .lab-footer-brand {
+    flex-basis: 100% !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+    footer.lab-site-footer .lab-footer-brand span {
+    padding-left: 0 !important;
+    border-left: 0 !important;
+  }
+
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+    footer.lab-site-footer a.lab-footer-top {
+    margin-right: 0 !important;
+  }
+}
+
+/* Community heading and media stay quiet enough to read as one balanced composition. */
+body.page-home #community .section-heading h2 {
+  max-width: none;
+  font-size: clamp(2.4rem, 3.25vw, 3.65rem) !important;
+  line-height: 1.04;
+}
+
+body.page-home:not(.dark) #community {
+  background-image:
+    radial-gradient(circle at 4% 82%, transparent 0 18px, rgba(23, 73, 90, 0.12) 19px 21px, transparent 22px),
+    radial-gradient(circle at 96% 14%, transparent 0 24px, rgba(23, 73, 90, 0.1) 25px 27px, transparent 28px),
+    radial-gradient(circle at 2% 44%, rgba(23, 73, 90, 0.15) 0 3px, transparent 4px),
+    radial-gradient(circle at 97% 88%, transparent 0 10px, rgba(23, 73, 90, 0.11) 11px 13px, transparent 14px) !important;
+}
+
+body.page-home #community .image-slot-frame {
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(23, 73, 90, 0.045), transparent 30%),
+    radial-gradient(circle at 86% 82%, rgba(125, 53, 66, 0.04), transparent 28%) !important;
+}
+
+body.page-home.dark #community .image-slot-frame {
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(213, 226, 240, 0.045), transparent 30%),
+    radial-gradient(circle at 86% 82%, rgba(240, 201, 208, 0.04), transparent 28%) !important;
+}
+
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .image-slot-frame {
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(23, 73, 90, 0.045), transparent 30%),
+    radial-gradient(circle at 86% 82%, rgba(125, 53, 66, 0.04), transparent 28%) !important;
+}
+
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .image-slot-frame {
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(213, 226, 240, 0.045), transparent 30%),
+    radial-gradient(circle at 86% 82%, rgba(240, 201, 208, 0.04), transparent 28%) !important;
+}
+
+@media (max-width: 760px) {
+  body.page-home #community .section-heading h2 {
+    max-width: none;
+    font-size: clamp(2.2rem, 10vw, 3.3rem) !important;
+  }
 }
