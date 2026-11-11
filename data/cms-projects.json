@@ -1,30 +1,30 @@
 {
   "projects": [
     {
-      "title": "Kat's Professional Portifolio",
-      "description": "An interactive, multi-page professional portfolio showcasing academic accomplishments, technical projects, and leadership experiences. Prototyped with Lovable and iteratively refined using ChatGPT and Cursor to improve design, functionality, and user experience.",
-      "url": "https://katherinec0115.github.io/katherineC0115/",
+      "image": "https://lh3.googleusercontent.com/d/1cLFWecClUdgQu_w53xlhI-whk_RUnJOR",
       "displayOrder": 1.0,
       "category": "spotlight",
-      "image": "https://lh3.googleusercontent.com/d/1cLFWecClUdgQu_w53xlhI-whk_RUnJOR"
+      "description": "An interactive, multi-page professional portfolio showcasing academic accomplishments, technical projects, and leadership experiences. Prototyped with Lovable and iteratively refined using ChatGPT and Cursor to improve design, functionality, and user experience.",
+      "title": "Kat's Professional Portifolio",
+      "url": "https://katherinec0115.github.io/katherineC0115/"
     },
     {
-      "title": "Jacob's Portfolio Website",
-      "description": "The personal website of Jacob McCurry, one of the lab's fellows. It showcases his resume, past projects, and ways to get in touch. The site was originally created as part of CIS267.",
-      "url": "https://jtmccurry.github.io/",
+      "image": "https://lh3.googleusercontent.com/d/11UUVPVuBuTX47Wl2U77H5Ja-sB4PprDi",
       "displayOrder": 2.0,
       "category": "spotlight",
-      "image": "https://lh3.googleusercontent.com/d/11UUVPVuBuTX47Wl2U77H5Ja-sB4PprDi"
+      "description": "The personal website of Jacob McCurry, one of the lab's fellows. It showcases his resume, past projects, and ways to get in touch. The site was originally created as part of CIS267.",
+      "title": "Jacob's Portfolio Website",
+      "url": "https://jtmccurry.github.io/"
     },
     {
-      "title": "Coginchaug Benchwarmers Website",
-      "description": "A responsive website for the RSD13 booster club, showcasing its community fundraising, scholarship opportunities and recipients, and organizational history. Designed with clear navigation and light/dark viewing modes.",
-      "url": "https://coginchaugbenchwarmers.com",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1cnSu4FDXmpO79ITTGrJRYsFjMaruumIJH0yKsWuuw&s=10",
       "displayOrder": 3.0,
       "category": "spotlight",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1cnSu4FDXmpO79ITTGrJRYsFjMaruumIJH0yKsWuuw&s=10"
+      "description": "A responsive website for the RSD13 booster club, showcasing its community fundraising, scholarship opportunities and recipients, and organizational history. Designed with clear navigation and light/dark viewing modes.",
+      "title": "Coginchaug Benchwarmers Website",
+      "url": "https://coginchaugbenchwarmers.com"
     }
   ],
-  "updatedAt": "2026-11-10T23:16:01.9742567Z",
+  "updatedAt": "2026-11-11T00:00:49.3277108Z",
   "source": "Microsoft Lists"
 }
