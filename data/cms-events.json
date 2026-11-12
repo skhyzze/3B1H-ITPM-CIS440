@@ -1,62 +1,48 @@
 {
   "events": [
     {
-      "category": "Other",
-      "sample": false,
-      "dateTime": "TBA",
-      "location": "TBA",
-      "details": "",
-      "image": "https://quinnipiacuniversity-my.sharepoint.com/personal/hjbugai_quinnipiac_edu/_layouts/15/download.aspx?share=IQDh5O8Ct5NNQpGp9xCkQPLBAdcNYLZbTzpN294zpO25N7w",
-      "url": "",
-      "summary": "Temporary sample event used to verify Microsoft image publishing.",
-      "title": "CMS event image publishing test",
-      "displayOrder": 1.0,
-      "contact": "",
-      "linkLabel": "Event details ↗"
-    },
-    {
+      "linkLabel": "Event link ↗",
       "category": "Workshop",
-      "sample": true,
-      "dateTime": "To be announced",
-      "location": "To be confirmed",
-      "details": "An introduction to the Applied AI Lab, including hands-on exercises, discussions, and Q&A. No prior experience required.",
-      "image": "",
-      "url": "",
-      "summary": "Explore practical AI tools through a guided, beginner-friendly session.",
-      "title": "Getting started with applied AI",
+      "contact": "To be confirmed",
       "displayOrder": 1.0,
-      "contact": "To be confirmed",
-      "linkLabel": "Event link ↗"
+      "title": "Getting started with applied AI",
+      "image": "",
+      "sample": true,
+      "dateTime": "To be announced",
+      "details": "An introduction to the Applied AI Lab, including hands-on exercises, discussions, and Q&A. No prior experience required.",
+      "summary": "Explore practical AI tools through a guided, beginner-friendly session.",
+      "url": "",
+      "location": "To be confirmed"
     },
     {
+      "linkLabel": "Event link ↗",
       "category": "Research",
+      "contact": "To be confirmed",
+      "displayOrder": 2.0,
+      "title": "Research & Discussion",
+      "image": "",
       "sample": true,
       "dateTime": "To be announced",
-      "location": "To be confirmed",
       "details": "Project introductions, open discussion, and opportunities to connect with students and faculty.",
-      "image": "",
-      "url": "",
       "summary": "Meet fellow researchers and discuss how analytics can support your next project.",
-      "title": "Research & Discussion",
-      "displayOrder": 2.0,
-      "contact": "To be confirmed",
-      "linkLabel": "Event link ↗"
+      "url": "",
+      "location": "To be confirmed"
     },
     {
+      "linkLabel": "Event link ↗",
       "category": "Idea Lab",
+      "contact": "To be confirmed",
+      "displayOrder": 3.0,
+      "title": "From idea to first prototype",
+      "image": "",
       "sample": true,
       "dateTime": "To be announced",
-      "location": "To be confirmed",
       "details": "Brainstorming and feedback! Bring a notebook or laptop.",
-      "image": "",
-      "url": "",
       "summary": "Bring a question or a rough idea and explore what you could build with the lab.",
-      "title": "From idea to first prototype",
-      "displayOrder": 3.0,
-      "contact": "To be confirmed",
-      "linkLabel": "Event link ↗"
+      "url": "",
+      "location": "To be confirmed"
     }
   ],
-  "updatedAt": "2026-11-12T03:34:03.9020995Z",
+  "updatedAt": "2026-11-12T03:35:23.3816300Z",
   "source": "Microsoft Lists"
 }
