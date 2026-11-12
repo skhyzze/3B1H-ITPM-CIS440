@@ -1,38 +1,30 @@
 {
   "projects": [
     {
-      "description": "Temporary sample image used to verify approved website image publishing and safe copy replacement.",
-      "image": "https://quinnipiacuniversity-my.sharepoint.com/personal/hjbugai_quinnipiac_edu/_layouts/15/download.aspx?share=IQANm11TkIKOTb9lRVVLyf5EAe20rvw1Fs2sZbaHIVKa1Hk",
-      "title": "CMS image publishing test",
-      "url": "",
-      "category": "highlights",
-      "displayOrder": 1.0
-    },
-    {
-      "description": "An interactive, multi-page professional portfolio showcasing academic accomplishments, technical projects, and leadership experiences. Prototyped with Lovable and iteratively refined using ChatGPT and Cursor to improve design, functionality, and user experience.",
       "image": "https://lh3.googleusercontent.com/d/1cLFWecClUdgQu_w53xlhI-whk_RUnJOR",
+      "displayOrder": 1.0,
       "title": "Kat's Professional Portifolio",
-      "url": "https://katherinec0115.github.io/katherineC0115/",
       "category": "spotlight",
-      "displayOrder": 1.0
+      "description": "An interactive, multi-page professional portfolio showcasing academic accomplishments, technical projects, and leadership experiences. Prototyped with Lovable and iteratively refined using ChatGPT and Cursor to improve design, functionality, and user experience.",
+      "url": "https://katherinec0115.github.io/katherineC0115/"
     },
     {
-      "description": "The personal website of Jacob McCurry, one of the lab's fellows. It showcases his resume, past projects, and ways to get in touch. The site was originally created as part of CIS267.",
       "image": "https://lh3.googleusercontent.com/d/11UUVPVuBuTX47Wl2U77H5Ja-sB4PprDi",
+      "displayOrder": 2.0,
       "title": "Jacob's Portfolio Website",
-      "url": "https://jtmccurry.github.io/",
       "category": "spotlight",
-      "displayOrder": 2.0
+      "description": "The personal website of Jacob McCurry, one of the lab's fellows. It showcases his resume, past projects, and ways to get in touch. The site was originally created as part of CIS267.",
+      "url": "https://jtmccurry.github.io/"
     },
     {
-      "description": "A responsive website for the RSD13 booster club, showcasing its community fundraising, scholarship opportunities and recipients, and organizational history. Designed with clear navigation and light/dark viewing modes.",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1cnSu4FDXmpO79ITTGrJRYsFjMaruumIJH0yKsWuuw&s=10",
+      "displayOrder": 3.0,
       "title": "Coginchaug Benchwarmers Website",
-      "url": "https://coginchaugbenchwarmers.com",
       "category": "spotlight",
-      "displayOrder": 3.0
+      "description": "A responsive website for the RSD13 booster club, showcasing its community fundraising, scholarship opportunities and recipients, and organizational history. Designed with clear navigation and light/dark viewing modes.",
+      "url": "https://coginchaugbenchwarmers.com"
     }
   ],
-  "updatedAt": "2026-11-12T03:34:22.6611804Z",
+  "updatedAt": "2026-11-12T03:35:32.2788684Z",
   "source": "Microsoft Lists"
 }
