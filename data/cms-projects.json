@@ -1,38 +1,38 @@
 {
   "projects": [
     {
-      "image": "https://quinnipiacuniversity-my.sharepoint.com/personal/hjbugai_quinnipiac_edu/_layouts/15/download.aspx?share=IQA1Ao0ti9twQrUUUAuyl05DAXYZVbg6svZ6MLs8NGYQxo8",
-      "displayOrder": 1.0,
       "category": "highlights",
-      "url": "",
+      "description": "Temporary sample image used to verify approved website image publishing.",
       "title": "CMS image publishing test",
-      "description": "Temporary sample image used to verify approved website image publishing."
+      "image": "https://quinnipiacuniversity-my.sharepoint.com/personal/hjbugai_quinnipiac_edu/_layouts/15/download.aspx?share=IQA1Ao0ti9twQrUUUAuyl05DAXYZVbg6svZ6MLs8NGYQxo8",
+      "url": "",
+      "displayOrder": 1.0
     },
     {
-      "image": "https://lh3.googleusercontent.com/d/1cLFWecClUdgQu_w53xlhI-whk_RUnJOR",
-      "displayOrder": 1.0,
       "category": "spotlight",
-      "url": "https://katherinec0115.github.io/katherineC0115/",
+      "description": "An interactive, multi-page professional portfolio showcasing academic accomplishments, technical projects, and leadership experiences. Prototyped with Lovable and iteratively refined using ChatGPT and Cursor to improve design, functionality, and user experience.",
       "title": "Kat's Professional Portifolio",
-      "description": "An interactive, multi-page professional portfolio showcasing academic accomplishments, technical projects, and leadership experiences. Prototyped with Lovable and iteratively refined using ChatGPT and Cursor to improve design, functionality, and user experience."
+      "image": "https://lh3.googleusercontent.com/d/1cLFWecClUdgQu_w53xlhI-whk_RUnJOR",
+      "url": "https://katherinec0115.github.io/katherineC0115/",
+      "displayOrder": 1.0
     },
     {
-      "image": "https://lh3.googleusercontent.com/d/11UUVPVuBuTX47Wl2U77H5Ja-sB4PprDi",
-      "displayOrder": 2.0,
       "category": "spotlight",
-      "url": "https://jtmccurry.github.io/",
+      "description": "The personal website of Jacob McCurry, one of the lab's fellows. It showcases his resume, past projects, and ways to get in touch. The site was originally created as part of CIS267.",
       "title": "Jacob's Portfolio Website",
-      "description": "The personal website of Jacob McCurry, one of the lab's fellows. It showcases his resume, past projects, and ways to get in touch. The site was originally created as part of CIS267."
+      "image": "https://lh3.googleusercontent.com/d/11UUVPVuBuTX47Wl2U77H5Ja-sB4PprDi",
+      "url": "https://jtmccurry.github.io/",
+      "displayOrder": 2.0
     },
     {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1cnSu4FDXmpO79ITTGrJRYsFjMaruumIJH0yKsWuuw&s=10",
-      "displayOrder": 3.0,
       "category": "spotlight",
-      "url": "https://coginchaugbenchwarmers.com",
+      "description": "A responsive website for the RSD13 booster club, showcasing its community fundraising, scholarship opportunities and recipients, and organizational history. Designed with clear navigation and light/dark viewing modes.",
       "title": "Coginchaug Benchwarmers Website",
-      "description": "A responsive website for the RSD13 booster club, showcasing its community fundraising, scholarship opportunities and recipients, and organizational history. Designed with clear navigation and light/dark viewing modes."
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1cnSu4FDXmpO79ITTGrJRYsFjMaruumIJH0yKsWuuw&s=10",
+      "url": "https://coginchaugbenchwarmers.com",
+      "displayOrder": 3.0
     }
   ],
-  "updatedAt": "2026-11-12T03:18:02.5111816Z",
+  "updatedAt": "2026-11-12T03:24:02.3735646Z",
   "source": "Microsoft Lists"
 }
