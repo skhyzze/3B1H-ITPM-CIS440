@@ -64,7 +64,7 @@
   const root = document.createElement('div');
   root.dataset.labChat = '';
   root.innerHTML = [
-    '<button class="lab-chat-launcher" type="button" aria-expanded="false" aria-controls="labChatPanel">Ask the Lab</button>',
+    '<button class="lab-chat-launcher" type="button" aria-label="Ask the Lab" aria-expanded="false" aria-controls="labChatPanel">Ask the Lab</button>',
     '<div class="lab-chat-panel" id="labChatPanel" role="dialog" aria-modal="false" aria-labelledby="labChatTitle" hidden>',
     '  <div class="lab-chat-header">',
     '    <div class="lab-chat-title">',
@@ -89,6 +89,11 @@
   const messages = root.querySelector('.lab-chat-messages');
   const form = root.querySelector('.lab-chat-form');
   const input = root.querySelector('.lab-chat-input');
+  input.addEventListener('focus', function () {
+    window.setTimeout(function () {
+      input.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }, 300);
+  });
   const sendButton = root.querySelector('.lab-chat-send');
   let initialized = false;
   let busy = false;

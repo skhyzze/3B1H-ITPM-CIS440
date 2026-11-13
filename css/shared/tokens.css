@@ -52,6 +52,8 @@
   --radius-control: 10px;
   --radius-card: 18px;
   --header-height: 73px;
+  --container-max: 1360px;
+  --container: min(var(--container-max), calc(100% - clamp(1.25rem, 4vw, 6rem)));
 }
 
 body.dark {

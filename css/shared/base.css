@@ -1131,11 +1131,6 @@ body.dark.page-industry .hero h1 span{
   -webkit-text-stroke-color: #ff8295;
 }
 
-#themeToggle{
-  position: relative;
-  left: 10px;
-}
-
 /* Phone navigation: a menu button replaces the sideways-scrolling link strip. */
 .lab-menu-toggle{
   display: none;
