@@ -4,7 +4,7 @@ Static website for the Quinnipiac Applied AI Lab. The pages are HTML, CSS, and v
 
 ## Pages
 
-HTML stays at the repo root so the public URLs do not change.
+Page HTML stays at the repo root so the public URLs do not change. The shared header and footer live once, in `src/partials/header.html` and `src/partials/footer.html`. Each page pulls them in with `<!-- @include header -->` and `<!-- @include footer -->`. The header marker can name the current page, for example `<!-- @include header current=fellowship -->`, which sets `aria-current="page"` and the logo link.
 
 | Page | HTML | Page CSS | Scripts and content |
 | --- | --- | --- | --- |
@@ -29,28 +29,31 @@ Student Outcomes has no page stylesheet, so it loads the three shared files. `40
 
 ## Run locally
 
-Any static file server works. From the repo root:
+Preview the built site. The pages at the repo root still contain the include markers, so a server pointed at the raw files will not show the header or footer.
 
 ```bash
-py -3 -m http.server 8765
+npm run dev
 ```
 
-Then open `http://127.0.0.1:8765/`.
+That builds `dist/` and serves it at `http://127.0.0.1:8765/`. It rebuilds when a source file changes. If port 8765 is taken, set `PORT` to a free port.
 
-The VS Code Live Server setting in `.vscode/settings.json` uses port **5501**. That file is local and is not committed.
+The VS Code Live Server setting in `.vscode/settings.json` uses port **5501**. That file is local and is not committed. Point it at `dist/` after `npm run build`, not at the repo root.
 
 The newsletter tool has its own steps in `ai_brief/README.md`.
 
 ## Deployment
 
-The repo does not name a public host or base URL. The GitHub Action in `.github/workflows/lab-content-sync.yml` only commits approved Microsoft Lists snapshots into `data/cms-*.json`. It does not publish the HTML.
+Publish the `dist/` directory, not the repo root. The root HTML is the source. It still has include markers, and the minified CSS and JavaScript exist only after the build.
 
-Local preview serves the readable files at the repo root. `npm run build` writes a minified copy to `dist/`, with content-hashed CSS and JavaScript names. `.github/workflows/build.yml` runs that build and uploads `dist` as an artifact. When a host is chosen, publish the `dist` folder.
+- Publish directory: `dist/`
+- Build command: `npm run build`
+- Local preview: `npm run dev`
+- Public URL: TODO
+- Host: TODO
 
-Host and base URL still need to be filled in:
+`npm run build` writes minified, content-hashed CSS and JavaScript into `dist/` and stitches the header and footer into each page. `.github/workflows/build.yml` runs that build, checks that every built page has a header and footer and no leftover include marker, and uploads `dist` as an artifact. Nothing in the repo deploys that artifact yet.
 
-- Host:
-- Base URL:
+The GitHub Action in `.github/workflows/lab-content-sync.yml` only commits approved Microsoft Lists snapshots into `data/cms-*.json`. It does not publish the HTML.
 
 ## Updating content
 
