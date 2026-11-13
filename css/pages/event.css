@@ -12,7 +12,7 @@ and Industry. */
   --muted: #56616d;
   --line: rgba(7, 18, 31, 0.14);
   --surface: #f7f4f1;
-  --display: "Orbitron", "Arial Black", sans-serif;
+  --display: var(--font-display);
   --body: "Space Grotesk", Arial, sans-serif;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
@@ -238,7 +238,6 @@ and Industry. */
 
 .page-events .event-section{
   padding-top: 88px;
-  scroll-margin-top: 96px;
 }
 
 .page-events .section-heading{

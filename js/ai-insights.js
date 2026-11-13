@@ -602,7 +602,9 @@ document.addEventListener("keydown", function (e) {
 function syncHeaderOffset() {
   const header = document.querySelector(".lab-header");
   if (!header) return;
-  document.documentElement.style.setProperty("--header-offset", header.offsetHeight + "px");
+  const height = header.offsetHeight + "px";
+  document.documentElement.style.setProperty("--header-offset", height);
+  document.documentElement.style.setProperty("--header-height", height);
 }
 document.addEventListener("DOMContentLoaded", syncHeaderOffset);
 window.addEventListener("load", syncHeaderOffset);

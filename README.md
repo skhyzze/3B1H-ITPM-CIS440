@@ -8,7 +8,7 @@ HTML stays at the repo root so the public URLs do not change.
 
 | Page | HTML | Page CSS | Scripts and content |
 | --- | --- | --- | --- |
-| Home | `index.html` | `css/pages/index.css`, `css/pages/home-motion.css` | `js/site.js`, `js/index.js`, `js/chatbot.js` |
+| Home | `index.html` | `css/pages/index.css` | `js/site.js`, `js/index.js`, `js/chatbot.js` |
 | Fellowship Pathway | `fellowship.html` | `css/pages/fellowship.css` | `js/fellowship.js`. Fellows load from `data/cms-fellows.json`. |
 | Industry Partners | `industry.html` | `css/pages/industry.css` | Shared scripts only. |
 | Events | `event.html` | `css/pages/event.css` | Events load from `data/cms-events.json`. |
@@ -16,13 +16,14 @@ HTML stays at the repo root so the public URLs do not change.
 | AI Insights (The Circuit) | `ai-insights.html` | `css/pages/ai-insights.css` | `js/ai-insights.js` and `ai_brief/static-newsletter-data.js`. |
 | Page not found | `404.html` | `css/pages/industry.css` | Same industry stylesheet as Industry Partners. |
 
-Shared CSS, used across pages:
+Each page loads at most four stylesheets:
 
-- `css/shared/site.css` — base layout, header, and footer
-- `css/shared/blended-theme.css` — shared theme
-- `css/shared/lab-accents.css` — shared accents
-- `css/shared/bento-circuit.css` — circuit theme
-- `css/shared/chatbot.css` — chatbot
+- `css/shared/tokens.css` — palette, type, spacing, dark-mode variables, print
+- `css/shared/base.css` — reset, header, footer, buttons, and shared cards
+- one file in `css/pages/`
+- `css/shared/theme.css` — circuit theme, home motion, and the chatbot
+
+Student Outcomes has no page stylesheet, so it loads the three shared files. `404.html` uses `css/pages/industry.css`.
 
 `js/config.js` loads before the page scripts and holds the chatbot and newsletter endpoint URLs. `fonts/` and `images_icons/` stay at the repo root.
 

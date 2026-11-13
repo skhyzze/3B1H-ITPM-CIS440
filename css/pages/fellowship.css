@@ -8,13 +8,13 @@
   --muted: #56616d;
   --line: rgba(7, 18, 31, 0.14);
   --surface: #f7f4f1;
-  --display: "Orbitron", "Arial Black", sans-serif;
+  --display: var(--font-display);
   --body: "Space Grotesk", Arial, sans-serif;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 *{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; scroll-padding-top: 96px; }
+html{ scroll-behavior: smooth; }
 body.page-fellowship{ margin: 0; overflow-x: hidden; background: var(--white); color: var(--ink); font-family: var(--body); }
 .page-fellowship h1,
 .page-fellowship h2{ font-family: var(--display); }

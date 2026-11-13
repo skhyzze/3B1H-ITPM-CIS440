@@ -4,10 +4,10 @@
   --bg: #F8F8F6; --surface: #FFFFFF; --ink: #080808; --ink-2: #444444; --muted: #666666;
   --line: #D8D8D4; --indigo: #123A63; --violet: #A11B2E; --teal: #123A63;
   --night: #080808; --radius: 0px;
-  --display: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display: var(--font-display);
   --blue: #123A63; --red: #A11B2E; --warm: #E6DED8;
   --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-  --body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --body: var(--font-body);
 }
 *{ box-sizing: border-box; }
 /* The page scrolls inside #app so its sticky navigation and filters retain
