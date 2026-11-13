@@ -1,5 +1,5 @@
 /* Shared bridge between the team's technical navy system and the AI Brief. */
-@font-face {
+@font-face{
   font-family: "Space Grotesk";
   src: url("../fonts/space-grotesk/SpaceGrotesk-Variable.ttf") format("truetype");
   font-style: normal;
@@ -23,7 +23,7 @@
   font-display: swap;
 }
 
-:root {
+:root{
   /* Minimal lab palette: black, steel blue, white, and a precise red accent. */
   --blend-night: #0c1114;
   --blend-navy: #13364d;
@@ -43,7 +43,7 @@
   --blend-shadow-hover: 0 20px 42px rgba(12, 17, 20, 0.14);
 }
 
-body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief){
   color: var(--blend-ink);
   background: var(--blend-soft);
   font-family: "Space Grotesk", Arial, sans-serif !important;
@@ -51,22 +51,17 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
-  :is(h1, h2, h3, h4, h5, p, a, button, input, textarea, select) {
+  :is(h1, h2, h3, h4, h5, p, a, button, input, textarea, select){
   font-family: "Space Grotesk", Arial, sans-serif !important;
 }
 
-body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
-  :is(h1, h2, h3, h4, h5, .brand, .lab-brand) {
-  font-family: "Oxanium", "Space Grotesk", sans-serif !important;
-}
-
 body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
-  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .tag, .resource-num, .card-index) {
+  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .tag, .resource-num, .card-index){
   font-family: "Oxanium", "Space Grotesk", sans-serif !important;
   letter-spacing: 0.08em;
 }
 
-body:is(.page-home, .page-industry, .page-fellowship, .page-events) {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events){
   --site-navy: var(--blend-navy);
   --site-navy-deep: var(--blend-night);
   --site-navy-soft: #3c4c58;
@@ -88,7 +83,7 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events) {
 }
 
 /* Map each legacy page palette onto the shared cyber-lab colors. */
-body.page-home {
+body.page-home{
   --black: var(--blend-ink);
   --white: var(--blend-paper);
   --blue: var(--blend-indigo);
@@ -99,7 +94,7 @@ body.page-home {
   --panel: var(--blend-paper);
 }
 
-body.page-industry {
+body.page-industry{
   --ink: var(--blend-ink);
   --paper: var(--blend-paper);
   --blue: var(--blend-indigo);
@@ -115,7 +110,7 @@ body.page-industry {
 }
 
 body.page-fellowship,
-body.page-events {
+body.page-events{
   --navy: var(--blend-night);
   --blue: var(--blend-indigo);
   --red: var(--blend-teal);
@@ -129,8 +124,7 @@ body.page-events {
 
 /* Shared chrome */
 .lab-header,
-body.page-outcomes > header,
-.page-ai-brief .nav {
+body.page-outcomes > header{
   border-bottom: 1px solid rgba(29, 78, 216, 0.14) !important;
   background: rgba(255, 255, 255, 0.88) !important;
   box-shadow: 0 10px 30px -26px rgba(6, 17, 31, 0.72);
@@ -138,15 +132,14 @@ body.page-outcomes > header,
   -webkit-backdrop-filter: saturate(150%) blur(16px);
 }
 
-.lab-nav-links > a:not(.lab-nav-cta)::after {
+.lab-nav-links > a:not(.lab-nav-cta)::after{
   height: 3px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--blend-indigo), var(--blend-teal)) !important;
 }
 
 .lab-nav-cta,
-body.page-outcomes .button,
-.page-ai-brief .pill-btn.dark {
+body.page-outcomes .button{
   border-color: transparent !important;
   border-radius: 12px !important;
   background: linear-gradient(135deg, var(--blend-indigo), var(--blend-violet)) !important;
@@ -154,28 +147,27 @@ body.page-outcomes .button,
   box-shadow: 0 10px 22px -14px rgba(29, 78, 216, 0.82);
 }
 
-.site-theme-toggle,
 .lab-theme-toggle,
-body.page-outcomes .theme {
+body.page-outcomes .theme{
   border-color: var(--blend-line) !important;
   border-radius: 12px !important;
   background: var(--blend-soft) !important;
   color: var(--blend-navy) !important;
 }
 
-body:is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-brand {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-brand{
   color: var(--blend-night) !important;
   font-family: "Orbitron", "Space Grotesk", sans-serif !important;
 }
 
 /* Core pages */
-body:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(h1, h2) {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events) :is(h1, h2){
   font-family: "Space Grotesk", Arial, sans-serif !important;
   font-weight: 650 !important;
   letter-spacing: -0.052em !important;
 }
 
-body:is(.page-home, .page-industry) .hero {
+body:is(.page-home, .page-industry) .hero{
   background:
     radial-gradient(circle at 83% 18%, rgba(14, 116, 144, 0.32), transparent 26%),
     radial-gradient(circle at 65% 0%, rgba(109, 40, 217, 0.22), transparent 34%),
@@ -183,7 +175,7 @@ body:is(.page-home, .page-industry) .hero {
 }
 
 body.page-home:not(.dark) .hero,
-body.page-industry:not(.dark) .hero {
+body.page-industry:not(.dark) .hero{
   color: var(--blend-ink) !important;
   background:
     radial-gradient(circle at 82% 18%, rgba(14, 116, 144, 0.15), transparent 25%),
@@ -192,19 +184,20 @@ body.page-industry:not(.dark) .hero {
 }
 
 body.page-home:not(.dark) .hero h1,
-body.page-industry:not(.dark) .hero h1 { color: var(--blend-night) !important; }
+body.page-industry:not(.dark) .hero h1{ color: var(--blend-night) !important; }
 
 body.page-home:not(.dark) h1 span,
-body.page-industry:not(.dark) .hero h1 span {
+body.page-industry:not(.dark) .hero h1 span{
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
   -webkit-text-stroke: 1.5px var(--blend-indigo) !important;
 }
 
-/* Fellowship and Events use light, grid-led heroes. Keep that page-level
+/* Fellowship and Events use light,
+grid-led heroes. Keep that page-level
    composition instead of forcing the dark homepage treatment onto them. */
 body.page-fellowship:not(.dark) .page-hero,
-body.page-events:not(.dark) .events-hero {
+body.page-events:not(.dark) .events-hero{
   color: var(--blend-night) !important;
   background:
     radial-gradient(circle at 88% 15%, rgba(14, 116, 144, 0.13), transparent 27%),
@@ -212,28 +205,28 @@ body.page-events:not(.dark) .events-hero {
 }
 
 body.page-fellowship:not(.dark) .page-hero h1,
-body.page-events:not(.dark) .events-hero h1 {
+body.page-events:not(.dark) .events-hero h1{
   color: var(--blend-night) !important;
 }
 
 body.page-fellowship:not(.dark) .page-hero :is(.lead, .button-ghost),
-body.page-events:not(.dark) .events-hero :is(.intro-copy, .button-ghost) {
+body.page-events:not(.dark) .events-hero :is(.intro-copy, .button-ghost){
   color: var(--blend-muted) !important;
 }
 
 body.page-fellowship:not(.dark) .page-hero .button-ghost,
-body.page-events:not(.dark) .events-hero .button-ghost {
+body.page-events:not(.dark) .events-hero .button-ghost{
   border-color: var(--blend-night) !important;
 }
 
 body.page-fellowship:not(.dark) .page-hero .button-ghost:hover,
-body.page-events:not(.dark) .events-hero .button-ghost:hover {
+body.page-events:not(.dark) .events-hero .button-ghost:hover{
   background: var(--blend-night) !important;
   color: #ffffff !important;
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events)
-  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .collaboration-item > span, .step::before) {
+  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .collaboration-item > span, .step::before){
   color: var(--blend-accent-text) !important;
 }
 
@@ -241,22 +234,20 @@ body.page-home .purpose
   :is(.eyebrow, .section-kicker, .section-label, .preview-type, .resource-num),
 body.page-industry :is(.spotlight, .cta)
   :is(.eyebrow, .section-kicker, .section-label, .preview-type, .resource-num),
-body.page-fellowship :is(.details-section, .site-footer)
-  :is(.eyebrow, .section-kicker, .section-label, .preview-type, .resource-num),
 body.page-events :is(.past-section, .footer)
-  :is(.eyebrow, .section-kicker, .section-label, .preview-type, .resource-num) {
+  :is(.eyebrow, .section-kicker, .section-label, .preview-type, .resource-num){
   color: #67e8f9 !important;
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events)
-  :is(.preview-card, .logic-card, .audience, .resource, .explore-card, .value-card, .collaboration-item, .partner-card, .spotlight-card, .fellow-card, .event-card, .past-card, .cta-box) {
+  :is(.preview-card, .logic-card, .audience, .resource, .explore-card, .value-card, .collaboration-item, .partner-card, .spotlight-card, .fellow-card, .event-card, .past-card, .cta-box){
   border-color: var(--blend-line) !important;
   border-radius: var(--blend-radius) !important;
   box-shadow: var(--blend-shadow) !important;
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events)
-  :is(.resource, .partner-card, .value-card, .collaboration-item, .fellow-card, .event-card, .past-card):is(:hover, :focus-within) {
+  :is(.resource, .partner-card, .value-card, .collaboration-item, .fellow-card, .event-card, .past-card):is(:hover, :focus-within){
   border-color: rgba(29, 78, 216, 0.38) !important;
   box-shadow: var(--blend-shadow-hover) !important;
 }
@@ -264,7 +255,7 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events)
 body.page-home:not(.dark) .purpose,
 body.page-industry:not(.dark) :is(.spotlight, .cta),
 body.page-fellowship .details-section,
-body.page-events .past-section {
+body.page-events .past-section{
   background:
     radial-gradient(circle at 85% 15%, rgba(14, 116, 144, 0.26), transparent 30%),
     linear-gradient(135deg, var(--blend-night), var(--blend-navy)) !important;
@@ -274,22 +265,22 @@ body.page-home:not(.dark) .opportunities,
 body.page-home:not(.dark) .explore,
 body.page-industry:not(.dark) :is(.benefits, #current-partners, .pathway),
 body.page-fellowship:not(.dark) :is(.overview-section, .fellows-section),
-body.page-events:not(.dark) .event-section:not(.past-section) {
+body.page-events:not(.dark) .event-section:not(.past-section){
   background: var(--blend-soft) !important;
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events)
-  :is(.btn, .button, .carousel-button, .scroll-button) { border-radius: 12px !important; }
+  :is(.btn, .button, .carousel-button, .scroll-button){ border-radius: 12px !important; }
 
 body.page-home:not(.dark) .btn-dark,
 body.page-industry:not(.dark) .button-primary,
-body.page-fellowship:not(.dark) .button-primary {
+body.page-fellowship:not(.dark) .button-primary{
   border-color: transparent !important;
   background: linear-gradient(135deg, var(--blend-indigo), var(--blend-violet)) !important;
   color: #fff !important;
 }
 
-body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) {
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible){
   border-color: var(--blend-indigo) !important;
   background: linear-gradient(145deg, var(--blend-indigo), var(--blend-violet)) !important;
   color: #fff !important;
@@ -297,7 +288,7 @@ body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) {
 }
 
 /* Student Outcomes */
-body.page-outcomes {
+body.page-outcomes{
   --bg: var(--blend-paper);
   --text: var(--blend-ink);
   --muted: var(--blend-muted);
@@ -306,7 +297,7 @@ body.page-outcomes {
   --accent: var(--blend-indigo);
 }
 
-body.page-outcomes .hero {
+body.page-outcomes .hero{
   position: relative;
   overflow: hidden;
   background:
@@ -315,22 +306,22 @@ body.page-outcomes .hero {
 }
 
 body.page-outcomes h1,
-body.page-outcomes h2 { font-weight: 650; letter-spacing: -0.06em; }
+body.page-outcomes h2{ font-weight: 650; letter-spacing: -0.06em; }
 
-body.page-outcomes :is(.feature, .cis-card, .submission-copy, .feed-message) {
+body.page-outcomes :is(.feature, .cis-card, .submission-copy, .feed-message){
   border-color: var(--blend-line) !important;
   border-radius: var(--blend-radius) !important;
   box-shadow: var(--blend-shadow);
 }
 
-body.page-outcomes :is(.scroll-button, .theme) { border-radius: 12px !important; }
+body.page-outcomes :is(.scroll-button, .theme){ border-radius: 12px !important; }
 
 body.page-outcomes .light-panel,
 body.page-outcomes #work,
-body.page-outcomes #highlights { background: var(--blend-soft) !important; }
+body.page-outcomes #highlights{ background: var(--blend-soft) !important; }
 
 /* Static AI Brief */
-body.page-ai-brief {
+body.page-ai-brief{
   --bg: var(--blend-soft);
   --surface: var(--blend-paper);
   --ink: var(--blend-ink);
@@ -344,12 +335,7 @@ body.page-ai-brief {
   --radius: var(--blend-radius);
 }
 
-.page-ai-brief .brand .mark {
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--blend-navy), var(--blend-indigo) 58%, var(--blend-teal));
-}
-
-.page-ai-brief .hero {
+.page-ai-brief .hero{
   background:
     linear-gradient(rgba(29, 78, 216, 0.055) 1px, transparent 1px),
     linear-gradient(90deg, rgba(29, 78, 216, 0.055) 1px, transparent 1px),
@@ -357,25 +343,21 @@ body.page-ai-brief {
   background-size: 52px 52px;
 }
 
-.page-ai-brief :is(.spot-grid, .story, .lesson, .tool-hero, .tool-row, .vid, .case, .paper, .sub-card) {
+.page-ai-brief :is(.spot-grid, .story, .lesson, .tool-hero, .tool-row, .vid, .case, .paper, .sub-card){
   border-color: var(--blend-line) !important;
   border-radius: var(--blend-radius) !important;
   box-shadow: var(--blend-shadow);
 }
 
-.page-ai-brief .spotlight {
+.page-ai-brief .spotlight{
   background:
     radial-gradient(circle at 82% 12%, rgba(14, 116, 144, 0.28), transparent 30%),
     linear-gradient(135deg, var(--blend-night), var(--blend-navy));
 }
 
-.page-ai-brief :is(.btn, .fchip, .save, .pill-btn, .sub-form input, .sub-form button) {
-  border-radius: 12px !important;
-}
+.page-ai-brief footer{ background: var(--blend-night); }
 
-.page-ai-brief footer { background: var(--blend-night); }
-
-body.page-ai-brief.dark {
+body.page-ai-brief.dark{
   --bg: #06111f;
   --surface: #0e2238;
   --ink: #f8fafc;
@@ -390,47 +372,19 @@ body.page-ai-brief.dark {
   color: var(--ink);
 }
 
-body.page-ai-brief.dark .nav {
-  border-bottom-color: rgba(103, 232, 249, 0.18) !important;
-  background: rgba(6, 17, 31, 0.92) !important;
-}
-
-body.page-ai-brief.dark .nav-links a:hover {
-  color: var(--ink);
-  background: #16314f;
-}
-
-body.page-ai-brief.dark :is(
-  .pill-btn:not(.dark),
-  .eyebrow,
-  .btn.ghost,
-  .frame,
-  .fchip,
-  .search,
-  .arrow-btn,
-  .story:not(.lead),
-  .lesson,
-  .case,
-  .papers
-) {
-  border-color: var(--line) !important;
-  background: var(--surface) !important;
-  color: var(--ink) !important;
-}
-
-body.page-ai-brief.dark :is(.tool-row, .paper, .feed-message) {
+body.page-ai-brief.dark :is(.tool-row, .paper, .feed-message){
   border-color: var(--line) !important;
 }
 
-body.page-ai-brief.dark :is(.desc, .meta, .sec-head p, .stat span, footer, footer .wrap) {
+body.page-ai-brief.dark :is(.desc, .meta, .sec-head p, .stat span, footer, footer .wrap){
   color: var(--muted) !important;
 }
 
-body.page-ai-brief.dark .band {
+body.page-ai-brief.dark .band{
   background: #0a1b2d !important;
 }
 
-body.page-ai-brief.dark .hero {
+body.page-ai-brief.dark .hero{
   background:
     linear-gradient(rgba(103, 232, 249, 0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(103, 232, 249, 0.07) 1px, transparent 1px),
@@ -438,21 +392,17 @@ body.page-ai-brief.dark .hero {
   background-size: 52px 52px, 52px 52px, auto !important;
 }
 
-body.page-ai-brief.dark .blob.b1 { background: #2563eb; opacity: 0.28; }
-body.page-ai-brief.dark .blob.b2 { background: #0891b2; opacity: 0.24; }
-body.page-ai-brief.dark .blob.b3 { background: #6d28d9; opacity: 0.22; }
-
-body.page-ai-brief.dark .stats {
+body.page-ai-brief.dark .stats{
   border-top-color: rgba(148, 200, 223, 0.28);
 }
 
-body.page-ai-brief.dark footer {
+body.page-ai-brief.dark footer{
   border-top-color: var(--line);
   background: var(--night);
 }
 
 /* Existing dark-mode controls retain their behavior with the blended palette. */
-body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) {
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes){
   --blend-ink: #f8fafc;
   --blend-muted: #cbd5e1;
   --blend-paper: #0a1828;
@@ -463,7 +413,7 @@ body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-o
   color: #f8fafc !important;
 }
 
-body.dark.page-home {
+body.dark.page-home{
   --black: var(--blend-ink);
   --white: var(--blend-paper);
   --blue: #60a5fa;
@@ -474,7 +424,7 @@ body.dark.page-home {
   --panel: #102a44;
 }
 
-body.dark.page-industry {
+body.dark.page-industry{
   --ink: var(--blend-ink);
   --paper: var(--blend-paper);
   --blue: #60a5fa;
@@ -490,7 +440,7 @@ body.dark.page-industry {
 }
 
 body.dark.page-fellowship,
-body.dark.page-events {
+body.dark.page-events{
   --navy: var(--blend-night);
   --blue: #60a5fa;
   --red: #67e8f9;
@@ -503,29 +453,29 @@ body.dark.page-events {
 }
 
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events)
-  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .collaboration-item > span, .step::before) {
+  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .collaboration-item > span, .step::before){
   color: var(--blend-accent-text) !important;
 }
 
 body.dark .lab-header,
-body.dark.page-outcomes > header {
+body.dark.page-outcomes > header{
   border-bottom-color: rgba(103, 232, 249, 0.18) !important;
   background: rgba(6, 17, 31, 0.92) !important;
 }
 
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-brand,
-body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-nav-links > a:not(.lab-nav-cta) {
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-nav-links > a:not(.lab-nav-cta){
   color: #f8fafc !important;
 }
 
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
-  :is(.preview-card, .logic-card, .audience, .resource, .explore-card, .value-card, .collaboration-item, .partner-card, .fellow-card, .event-card, .past-card, .feature, .cis-card) {
+  :is(.preview-card, .logic-card, .audience, .resource, .explore-card, .value-card, .collaboration-item, .partner-card, .fellow-card, .event-card, .past-card, .feature, .cis-card){
   border-color: var(--blend-line) !important;
   background: #102a44 !important;
   color: #f8fafc !important;
 }
 
-body.dark.page-outcomes {
+body.dark.page-outcomes{
   --bg: var(--blend-night);
   --text: #f8fafc;
   --muted: #cbd5e1;
@@ -534,14 +484,14 @@ body.dark.page-outcomes {
   --accent: #67e8f9;
 }
 
-body.dark.page-outcomes .hero {
+body.dark.page-outcomes .hero{
   background:
     radial-gradient(circle at 82% 18%, rgba(14, 116, 144, 0.3), transparent 28%),
     linear-gradient(135deg, var(--blend-night), var(--blend-navy)) !important;
 }
 
 /* Retire older page-specific accent overrides so every page shares the tech palette. */
-body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) {
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events){
   --unified-dark-ink: #06111f;
   --unified-dark-blue: #0b2340;
   --unified-dark-card: #102a44;
@@ -550,81 +500,73 @@ body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) {
   --unified-dark-line: rgba(148, 200, 223, 0.28);
 }
 
-body.page-home.dark .progress-dot.active {
+body.page-home.dark .progress-dot.active{
   background-color: #67e8f9 !important;
 }
 
 body.page-fellowship.dark :is(.fellow-role, .fellow-project a, .contact-arrow),
-body.page-industry.dark .spotlight-row strong {
+body.page-industry.dark .spotlight-row strong{
   color: #67e8f9 !important;
 }
 
-body.page-fellowship p.section-kicker span {
+body.page-fellowship p.section-kicker span{
   color: #6d28d9 !important;
 }
 
-body.dark.page-fellowship p.section-kicker span {
+body.dark.page-fellowship p.section-kicker span{
   color: #67e8f9 !important;
 }
 
-body.page-fellowship.dark .button-primary {
+body.page-fellowship.dark .button-primary{
   border-color: #60a5fa !important;
   background: linear-gradient(135deg, #2563eb, #6d28d9) !important;
   color: #fff !important;
 }
 
-body.page-industry .hero h1 span {
+body.page-industry .hero h1 span{
   -webkit-text-stroke-color: #1d4ed8 !important;
 }
 
-body.page-industry.dark .hero h1 span {
+body.page-industry.dark .hero h1 span{
   -webkit-text-stroke-color: #67e8f9 !important;
 }
 
-body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link{
   border-color: #1d4ed8 !important;
 }
 
-body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link {
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link{
   border-color: #67e8f9 !important;
 }
 
-body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
-  :is(footer, .industry-footer, .site-footer, .events-footer) {
-  background: var(--blend-night) !important;
-  color: #b8c6d4 !important;
-}
-
 /* Minimal black / blue / white / red direction inspired by the supplied boards. */
-body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief){
   --display: "Oxanium", "Space Grotesk", sans-serif;
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
-  :is(h1, h2, h3, h4, h5) {
+  :is(h1, h2, h3, h4, h5){
   font-family: "Oxanium", "Space Grotesk", sans-serif !important;
   font-weight: 600 !important;
   letter-spacing: -0.035em !important;
 }
 
 .lab-header,
-body.page-outcomes > header,
-.page-ai-brief .nav {
+body.page-outcomes > header{
   border-bottom-color: rgba(19, 54, 77, 0.18) !important;
   background: rgba(255, 255, 255, 0.94) !important;
   box-shadow: 0 8px 24px -24px rgba(12, 17, 20, 0.8);
 }
 
-.lab-nav-links > a:not(.lab-nav-cta)::after {
+.lab-nav-links > a:not(.lab-nav-cta)::after{
   background: #a30b16 !important;
 }
 
 .lab-nav-cta,
 body.page-outcomes .button,
-.page-ai-brief .pill-btn.dark,
 body.page-home:not(.dark) .btn-dark,
 body.page-industry:not(.dark) .button-primary,
-body.page-fellowship:not(.dark) .button-primary {
+body.page-fellowship:not(.dark) .button-primary{
   border-color: #13364d !important;
   background: #13364d !important;
   color: #fff !important;
@@ -633,17 +575,16 @@ body.page-fellowship:not(.dark) .button-primary {
 
 .lab-nav-cta:is(:hover, :focus-visible),
 body.page-outcomes .button:is(:hover, :focus-visible),
-.page-ai-brief .pill-btn.dark:is(:hover, :focus-visible),
 body.page-home:not(.dark) .btn-dark:is(:hover, :focus-visible),
 body.page-industry:not(.dark) .button-primary:is(:hover, :focus-visible),
-body.page-fellowship:not(.dark) .button-primary:is(:hover, :focus-visible) {
+body.page-fellowship:not(.dark) .button-primary:is(:hover, :focus-visible){
   border-color: #a30b16 !important;
   background: #a30b16 !important;
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events)
   :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .collaboration-item > span, .step::before),
-body.page-fellowship p.section-kicker span {
+body.page-fellowship p.section-kicker span{
   color: #a30b16 !important;
 }
 
@@ -653,7 +594,7 @@ body.page-industry:not(.dark) .hero,
 body.page-fellowship:not(.dark) .page-hero,
 body.page-events:not(.dark) .events-hero,
 body.page-outcomes .hero,
-.page-ai-brief .hero {
+.page-ai-brief .hero{
   background:
     linear-gradient(rgba(19, 54, 77, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(19, 54, 77, 0.045) 1px, transparent 1px),
@@ -662,7 +603,7 @@ body.page-outcomes .hero,
 }
 
 body.page-home:not(.dark) h1 span,
-body.page-industry:not(.dark) .hero h1 span {
+body.page-industry:not(.dark) .hero h1 span{
   -webkit-text-stroke-color: #13364d !important;
 }
 
@@ -670,35 +611,27 @@ body.page-home:not(.dark) .purpose,
 body.page-industry:not(.dark) :is(.spotlight, .cta),
 body.page-fellowship .details-section,
 body.page-events .past-section,
-.page-ai-brief .spotlight {
+.page-ai-brief .spotlight{
   background: #13364d !important;
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events)
   :is(.preview-card, .logic-card, .audience, .resource, .explore-card, .value-card, .collaboration-item, .partner-card, .spotlight-card, .fellow-card, .event-card, .past-card, .cta-box),
 body.page-outcomes :is(.feature, .cis-card, .submission-copy, .feed-message),
-.page-ai-brief :is(.spot-grid, .story, .lesson, .tool-hero, .tool-row, .vid, .case, .paper, .sub-card) {
+.page-ai-brief :is(.spot-grid, .story, .lesson, .tool-hero, .tool-row, .vid, .case, .paper, .sub-card){
   border-color: #cbd4dc !important;
   border-radius: 14px !important;
   box-shadow: 0 12px 30px rgba(12, 17, 20, 0.08) !important;
 }
 
-.page-ai-brief .brand .mark {
-  background: #13364d !important;
-}
-
-.page-ai-brief .blob {
-  display: none;
-}
-
 .page-ai-brief .btn.primary,
-.page-ai-brief .sub-card {
+.page-ai-brief .sub-card{
   background: #13364d !important;
 }
 
 /* Dark mode follows the misty slate reference while retaining strong contrast. */
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes),
-body.page-ai-brief.dark {
+body.page-ai-brief.dark{
   --blend-night: #14171d;
   --blend-navy: #2f363e;
   --blend-ink: #f8fafc;
@@ -711,14 +644,14 @@ body.page-ai-brief.dark {
   color: #f8fafc !important;
 }
 
-body.dark.page-home {
+body.dark.page-home{
   --blue: #7a8c9b;
   --red: #ff6b78;
   --warm: #2f363e;
   --panel: #2f363e;
 }
 
-body.dark.page-industry {
+body.dark.page-industry{
   --blue: #7a8c9b;
   --crimson: #ff6b78;
   --warm: #2f363e;
@@ -730,7 +663,7 @@ body.dark.page-industry {
 }
 
 body.dark.page-fellowship,
-body.dark.page-events {
+body.dark.page-events{
   --navy: #14171d;
   --blue: #7a8c9b;
   --red: #ff6b78;
@@ -738,7 +671,7 @@ body.dark.page-events {
   --surface: #20262d;
 }
 
-body.page-ai-brief.dark {
+body.page-ai-brief.dark{
   --bg: #14171d;
   --surface: #2f363e;
   --ink: #f8fafc;
@@ -752,8 +685,7 @@ body.page-ai-brief.dark {
 }
 
 body.dark .lab-header,
-body.dark.page-outcomes > header,
-body.page-ai-brief.dark .nav {
+body.dark.page-outcomes > header{
   border-bottom-color: rgba(185, 200, 212, 0.24) !important;
   background: rgba(20, 23, 29, 0.95) !important;
 }
@@ -762,7 +694,7 @@ body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events)
   :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .collaboration-item > span, .step::before),
 body.dark.page-fellowship p.section-kicker span,
 body.page-fellowship.dark :is(.fellow-role, .fellow-project a, .contact-arrow),
-body.page-industry.dark .spotlight-row strong {
+body.page-industry.dark .spotlight-row strong{
   color: #ff6b78 !important;
 }
 
@@ -770,7 +702,7 @@ body.dark:is(.page-home, .page-industry) .hero,
 body.dark.page-fellowship .page-hero,
 body.dark.page-events .events-hero,
 body.dark.page-outcomes .hero,
-body.page-ai-brief.dark .hero {
+body.page-ai-brief.dark .hero{
   background:
     linear-gradient(rgba(185, 200, 212, 0.055) 1px, transparent 1px),
     linear-gradient(90deg, rgba(185, 200, 212, 0.055) 1px, transparent 1px),
@@ -780,20 +712,20 @@ body.page-ai-brief.dark .hero {
 
 body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
   :is(.preview-card, .logic-card, .audience, .resource, .explore-card, .value-card, .collaboration-item, .partner-card, .fellow-card, .event-card, .past-card, .feature, .cis-card),
-body.page-ai-brief.dark :is(.frame, .story:not(.lead), .lesson, .case, .papers, .tool-row, .paper) {
+body.page-ai-brief.dark :is(.frame, .story:not(.lead), .lesson, .case, .papers, .tool-row, .paper){
   border-color: rgba(185, 200, 212, 0.28) !important;
   background: #2f363e !important;
   color: #f8fafc !important;
   box-shadow: none !important;
 }
 
-body.dark.page-outcomes {
+body.dark.page-outcomes{
   --panel: #2f363e;
   --border: rgba(185, 200, 212, 0.28);
   --accent: #ff6b78;
 }
 
-body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) {
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events){
   --unified-dark-ink: #14171d;
   --unified-dark-blue: #2f363e;
   --unified-dark-card: #2f363e;
@@ -802,35 +734,34 @@ body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events) {
   --unified-dark-line: rgba(185, 200, 212, 0.28);
 }
 
-body.page-home.dark .progress-dot.active {
+body.page-home.dark .progress-dot.active{
   background-color: #d62e3f !important;
 }
 
 body.page-fellowship.dark .button-primary,
 body.page-events.dark .button-primary,
-body.page-ai-brief.dark .btn.primary,
-body.page-ai-brief.dark .pill-btn.dark {
+body.page-ai-brief.dark .btn.primary{
   border-color: #a30b16 !important;
   background: #a30b16 !important;
   color: #fff !important;
   box-shadow: none !important;
 }
 
-body.page-industry.dark .hero h1 span {
+body.page-industry.dark .hero h1 span{
   -webkit-text-stroke-color: #b9c8d4 !important;
 }
 
-body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link {
+body.dark:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .skip-link{
   border-color: #ff6b78 !important;
 }
 
 /* Keep the homepage resource interaction noticeable without breaking the
    restrained palette. The red stays as a small detail instead of a full wash. */
-body.page-home #resources .resource:is(:hover, :focus-visible) {
+body.page-home #resources .resource:is(:hover, :focus-visible){
   transform: translateY(-2px) !important;
 }
 
-body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) {
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible){
   border-color: #29495f !important;
   background: linear-gradient(135deg, #13364d, #29495f) !important;
   color: #ffffff !important;
@@ -838,16 +769,16 @@ body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) {
 }
 
 body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible)
-  :is(h3, p, .resource-num, .arrow) {
+  :is(h3, p, .resource-num, .arrow){
   color: #ffffff !important;
 }
 
 body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible)
-  :is(.resource-num, .arrow) {
+  :is(.resource-num, .arrow){
   color: #ffadb5 !important;
 }
 
-body.page-home.dark #resources .resource:is(:hover, :focus-visible) {
+body.page-home.dark #resources .resource:is(:hover, :focus-visible){
   border-color: rgba(185, 200, 212, 0.38) !important;
   background: linear-gradient(135deg, #2f363e, #3c4c58) !important;
   color: #f8fafc !important;
@@ -855,21 +786,21 @@ body.page-home.dark #resources .resource:is(:hover, :focus-visible) {
 }
 
 body.page-home.dark #resources .resource:is(:hover, :focus-visible)
-  :is(h3, p, .resource-num, .arrow) {
+  :is(h3, p, .resource-num, .arrow){
   color: #f8fafc !important;
 }
 
 body.page-home.dark #resources .resource:is(:hover, :focus-visible)
-  :is(.resource-num, .arrow) {
+  :is(.resource-num, .arrow){
   color: #ff6b78 !important;
 }
 
-body.page-home #resources .resource h3 {
+body.page-home #resources .resource h3{
   margin-top: 0 !important;
 }
 
 /* One footer system across the main public pages. */
-body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .lab-site-footer {
+body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes) .lab-site-footer{
   margin: 0 !important;
   padding: 0 !important;
   border-top: 1px solid #2f363e !important;
@@ -877,7 +808,7 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   color: #b9c8d4 !important;
 }
 
-.lab-footer-inner {
+.lab-footer-inner{
   width: min(calc(100% - 48px), 1180px);
   min-height: 138px;
   margin: 0 auto;
@@ -887,26 +818,26 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   gap: 36px;
 }
 
-.lab-footer-brand {
+.lab-footer-brand{
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.lab-footer-brand strong {
+.lab-footer-brand strong{
   color: #f8fafc !important;
   font: 600 1.05rem "Oxanium", "Space Grotesk", sans-serif !important;
   letter-spacing: -0.015em;
 }
 
-.lab-footer-brand span {
+.lab-footer-brand span{
   color: #7a8c9b;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
 }
 
-.lab-footer-nav {
+.lab-footer-nav{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -914,7 +845,7 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   gap: 8px 22px;
 }
 
-.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top) {
+.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top){
   position: relative;
   color: #b9c8d4 !important;
   font-size: 0.79rem;
@@ -923,26 +854,26 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   white-space: nowrap;
 }
 
-.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top):is(:hover, :focus-visible) {
+.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top):is(:hover, :focus-visible){
   color: #ffffff !important;
 }
 
-.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top):focus-visible {
+.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top):focus-visible{
   outline: 2px solid #ff6b78;
   outline-offset: 5px;
 }
 
-.lab-footer-top {
+.lab-footer-top{
   justify-self: end;
 }
 
-.lab-footer-top span {
+.lab-footer-top span{
   margin-left: 6px;
   color: #ff6b78;
 }
 
 @media (max-width: 900px) {
-  .lab-footer-inner {
+  .lab-footer-inner{
     min-height: 0;
     grid-template-columns: 1fr;
     align-items: start;
@@ -950,37 +881,36 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
     padding: 42px 0;
   }
 
-  .lab-footer-nav {
+  .lab-footer-nav{
     justify-content: flex-start;
   }
 
-  .lab-footer-top {
+  .lab-footer-top{
     justify-self: start;
   }
 }
 
 @media (max-width: 900px) {
   .lab-header,
-  body.page-outcomes > header,
-  .page-ai-brief .nav {
+  body.page-outcomes > header{
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
 
   body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes)
-    :is(.preview-card, .logic-card, .audience, .resource, .explore-card, .value-card, .collaboration-item, .partner-card, .spotlight-card, .fellow-card, .event-card, .past-card, .feature, .cis-card) {
+    :is(.preview-card, .logic-card, .audience, .resource, .explore-card, .value-card, .collaboration-item, .partner-card, .spotlight-card, .fellow-card, .event-card, .past-card, .feature, .cis-card){
     box-shadow: 0 12px 34px rgba(6, 17, 31, 0.1) !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) * {
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) *{
     scroll-behavior: auto !important;
   }
 }
 
 /* Join The Circuit: consistent on every page */
-.lab-header .lab-nav-links > a.circuit-join {
+.lab-header .lab-nav-links > a.circuit-join{
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1000,28 +930,28 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.lab-header .lab-nav-links > a.circuit-join:hover {
+.lab-header .lab-nav-links > a.circuit-join:hover{
   transform: translateY(-3px);
   box-shadow: 0 6px 14px rgba(161, 27, 46, 0.22) !important;
 }
 
-.lab-header .lab-nav-links > a.circuit-join:active {
+.lab-header .lab-nav-links > a.circuit-join:active{
   transform: translateY(0);
   box-shadow: none !important;
 }
 
-.lab-header .lab-nav-links > a.circuit-join::after {
+.lab-header .lab-nav-links > a.circuit-join::after{
   display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lab-header .lab-nav-links > a.circuit-join {
+  .lab-header .lab-nav-links > a.circuit-join{
     transition: none;
     transform: none;
   }
 }
 
-.lab-site-footer a.footer-circuit {
+.lab-site-footer a.footer-circuit{
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1041,13 +971,13 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
 
 /*  for ai newletter page  */
 /* AI Tools section */
-body.page-ai-brief #ai-tools {
+body.page-ai-brief #ai-tools{
   background: var(--bg);
   padding-block: 48px;
 }
 
 /* Featured tool */
-body.page-ai-brief #ai-tools .tool-hero {
+body.page-ai-brief #ai-tools .tool-hero{
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 32px;
   padding: 24px;
@@ -1057,7 +987,7 @@ body.page-ai-brief #ai-tools .tool-hero {
   box-shadow: 0 8px 24px rgba(19, 54, 77, 0.06) !important;
 }
 
-body.page-ai-brief #ai-tools .tool-shot {
+body.page-ai-brief #ai-tools .tool-shot{
   min-width: 0;
   border: 0;
   border-radius: 16px !important;
@@ -1066,37 +996,37 @@ body.page-ai-brief #ai-tools .tool-shot {
   box-shadow: none;
 }
 
-body.page-ai-brief #ai-tools .tool-hero:hover .tool-shot {
+body.page-ai-brief #ai-tools .tool-hero:hover .tool-shot{
   transform: none;
 }
 
-body.page-ai-brief #ai-tools .tool-info {
+body.page-ai-brief #ai-tools .tool-info{
   min-width: 0;
 }
 
-body.page-ai-brief #ai-tools .kicker {
+body.page-ai-brief #ai-tools .kicker{
   color: #A11B2E;
   font-size: 11px;
   letter-spacing: 0.08em;
 }
 
-body.page-ai-brief #ai-tools .tool-info h4 {
+body.page-ai-brief #ai-tools .tool-info h4{
   font-size: clamp(24px, 3vw, 34px);
   line-height: 1.2;
   margin: 14px 0;
 }
 
-body.page-ai-brief #ai-tools .tool-info .desc {
+body.page-ai-brief #ai-tools .tool-info .desc{
   font-size: 15px;
   line-height: 1.7;
 }
 
-body.page-ai-brief #ai-tools .tool-ctas {
+body.page-ai-brief #ai-tools .tool-ctas{
   flex-wrap: wrap;
   margin-top: 20px;
 }
 
-body.page-ai-brief #ai-tools .tool-ctas .btn {
+body.page-ai-brief #ai-tools .tool-ctas .btn{
   background: #13364d !important;
   color: #fff !important;
   border-radius: 12px !important;
@@ -1104,13 +1034,13 @@ body.page-ai-brief #ai-tools .tool-ctas .btn {
 }
 
 /* Additional tools */
-body.page-ai-brief #ai-tools .tool-shelf {
+body.page-ai-brief #ai-tools .tool-shelf{
   margin-top: 24px;
   gap: 20px;
   border-top: 0;
 }
 
-body.page-ai-brief #ai-tools .tool-row {
+body.page-ai-brief #ai-tools .tool-row{
   grid-template-columns: 72px minmax(0, 1fr) auto;
   gap: 16px;
   padding: 18px;
@@ -1120,58 +1050,58 @@ body.page-ai-brief #ai-tools .tool-row {
   box-shadow: none !important;
 }
 
-body.page-ai-brief #ai-tools .tool-row .media {
+body.page-ai-brief #ai-tools .tool-row .media{
   width: 72px;
   height: 72px;
   border-radius: 12px !important;
 }
 
-body.page-ai-brief #ai-tools .tool-row > div {
+body.page-ai-brief #ai-tools .tool-row > div{
   min-width: 0;
 }
 
 /* Keep smaller cards from becoming crowded */
-body.page-ai-brief #ai-tools .tool-row .go {
+body.page-ai-brief #ai-tools .tool-row .go{
   display: none;
 }
 
-body.page-ai-brief #ai-tools .save {
+body.page-ai-brief #ai-tools .save{
   border-radius: 50% !important;
 }
 
 /* Dark-mode accent */
-body.page-ai-brief.dark #ai-tools .kicker {
+body.page-ai-brief.dark #ai-tools .kicker{
   color: #ffadb5;
 }
 
 /* Stack comfortably on smaller screens */
 @media (max-width: 1020px) {
   body.page-ai-brief #ai-tools .tool-hero,
-  body.page-ai-brief #ai-tools .tool-shelf {
+  body.page-ai-brief #ai-tools .tool-shelf{
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 680px) {
-  body.page-ai-brief #ai-tools .tool-hero {
+  body.page-ai-brief #ai-tools .tool-hero{
     padding: 16px;
     gap: 22px;
   }
 
-  body.page-ai-brief #ai-tools .tool-row {
+  body.page-ai-brief #ai-tools .tool-row{
     grid-template-columns: 52px minmax(0, 1fr) auto;
     padding: 14px;
     gap: 10px;
   }
 
-  body.page-ai-brief #ai-tools .tool-row .media {
+  body.page-ai-brief #ai-tools .tool-row .media{
     width: 52px;
     height: 52px;
   }
 }
 
 /* ===== Research: individual rounded cards ===== */
-body.page-ai-brief #research-spotlight .papers {
+body.page-ai-brief #research-spotlight .papers{
   display: grid;
   gap: 16px;
   overflow: visible;
@@ -1180,7 +1110,7 @@ body.page-ai-brief #research-spotlight .papers {
   box-shadow: none !important;
 }
 
-body.page-ai-brief #research-spotlight .paper {
+body.page-ai-brief #research-spotlight .paper{
   grid-template-columns: 40px 110px minmax(0, 1fr) auto;
   gap: 20px;
   padding: 22px;
@@ -1192,48 +1122,47 @@ body.page-ai-brief #research-spotlight .paper {
               box-shadow 0.2s ease;
 }
 
-body.page-ai-brief #research-spotlight .paper:hover {
+body.page-ai-brief #research-spotlight .paper:hover{
   box-shadow: 0 10px 26px rgba(19, 54, 77, 0.12) !important;
 }
 
-body.page-ai-brief #research-spotlight .paper > div {
+body.page-ai-brief #research-spotlight .paper > div{
   min-width: 0;
 }
 
-body.page-ai-brief #research-spotlight .paper .n {
+body.page-ai-brief #research-spotlight .paper .n{
   font-size: 25px;
   color: var(--muted);
   -webkit-text-stroke: 0;
 }
 
-body.page-ai-brief #research-spotlight .paper .media {
+body.page-ai-brief #research-spotlight .paper .media{
   width: 110px;
   border-radius: 12px !important;
   overflow: hidden;
 }
 
-body.page-ai-brief #research-spotlight .paper h4 {
+body.page-ai-brief #research-spotlight .paper h4{
   font-size: 18px;
   line-height: 1.4;
   margin-bottom: 8px;
 }
 
-body.page-ai-brief #research-spotlight .paper .desc {
+body.page-ai-brief #research-spotlight .paper .desc{
   line-height: 1.65;
 }
 
-body.page-ai-brief #research-spotlight .save {
+body.page-ai-brief #research-spotlight .save{
   border-radius: 50% !important;
 }
 
-
 /* ===== Subscribe: navy panel and red action ===== */
-body.page-ai-brief #subscribe {
+body.page-ai-brief #subscribe{
   margin-top: 64px;
   margin-bottom: 48px;
 }
 
-body.page-ai-brief #subscribe .sub-card {
+body.page-ai-brief #subscribe .sub-card{
   padding: 40px;
   gap: 32px;
   background: #13364d !important;
@@ -1244,30 +1173,30 @@ body.page-ai-brief #subscribe .sub-card {
 }
 
 /* Remove the old decorative overlay */
-body.page-ai-brief #subscribe .sub-card::before {
+body.page-ai-brief #subscribe .sub-card::before{
   display: none;
 }
 
-body.page-ai-brief #subscribe .tag {
+body.page-ai-brief #subscribe .tag{
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.25);
   border-radius: 999px;
   color: #fff;
 }
 
-body.page-ai-brief #subscribe h3 {
+body.page-ai-brief #subscribe h3{
   font-size: clamp(26px, 3vw, 36px);
   line-height: 1.2;
   color: #fff;
 }
 
-body.page-ai-brief #subscribe p {
+body.page-ai-brief #subscribe p{
   color: #d4dfe7;
   font-size: 15px;
   line-height: 1.7;
 }
 
-body.page-ai-brief #subscribe .sub-form {
+body.page-ai-brief #subscribe .sub-form{
   padding: 6px;
   gap: 6px;
   background: #fff;
@@ -1275,22 +1204,22 @@ body.page-ai-brief #subscribe .sub-form {
   border-radius: 16px;
 }
 
-body.page-ai-brief #subscribe .sub-form input {
+body.page-ai-brief #subscribe .sub-form input{
   background: transparent;
   color: #13364d;
   padding: 12px;
 }
 
-body.page-ai-brief #subscribe input::placeholder {
+body.page-ai-brief #subscribe input::placeholder{
   color: #647380;
 }
 
-body.page-ai-brief #subscribe input:focus-visible {
+body.page-ai-brief #subscribe input:focus-visible{
   outline: 2px solid #13364d;
   outline-offset: -2px;
 }
 
-body.page-ai-brief #subscribe .sub-form button {
+body.page-ai-brief #subscribe .sub-form button{
   background: #A11B2E !important;
   color: #fff !important;
   border-radius: 12px !important;
@@ -1299,70 +1228,70 @@ body.page-ai-brief #subscribe .sub-form button {
   transition: background-color 0.2s ease;
 }
 
-body.page-ai-brief #subscribe .sub-form button:hover {
+body.page-ai-brief #subscribe .sub-form button:hover{
   background: #801525 !important;
 }
 
-body.page-ai-brief #subscribe .sub-note {
+body.page-ai-brief #subscribe .sub-note{
   color: #d4dfe7;
   font-size: 12px;
   line-height: 1.6;
 }
 
-
 /* ===== Smaller screens ===== */
 @media (max-width: 1020px) {
-  body.page-ai-brief #subscribe .sub-card {
+  body.page-ai-brief #subscribe .sub-card{
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 680px) {
-  body.page-ai-brief #research-spotlight .paper {
+  body.page-ai-brief #research-spotlight .paper{
     grid-template-columns: minmax(0, 1fr) auto;
     padding: 18px;
     gap: 12px;
   }
 
   body.page-ai-brief #research-spotlight .paper .n,
-  body.page-ai-brief #research-spotlight .paper > a {
+  body.page-ai-brief #research-spotlight .paper > a{
     display: none;
   }
 
-  body.page-ai-brief #subscribe .sub-card {
+  body.page-ai-brief #subscribe .sub-card{
     padding: 26px 20px;
     gap: 24px;
   }
 
-  body.page-ai-brief #subscribe .sub-form {
+  body.page-ai-brief #subscribe .sub-form{
     flex-direction: column;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   body.page-ai-brief #research-spotlight .paper,
-  body.page-ai-brief #subscribe .sub-form button {
+  body.page-ai-brief #subscribe .sub-form button{
     transition: none;
   }
 }
 /* Round the three picture cards at the top */
-body.page-ai-brief .collage .frame {
+body.page-ai-brief .collage .frame{
   border-radius: 22px !important;
   overflow: hidden;
 }
 
 /* Round the pictures inside each card */
-body.page-ai-brief .collage .frame .media {
+body.page-ai-brief .collage .frame .media{
   border-radius: 16px !important;
   overflow: hidden;
 }
 
 /* Get involed button */
-/* Always red, including hover and click */
+/* Always red,
+including hover and click */
 body a.get-involved-btn,
 body a.get-involved-btn:hover,
 body a.get-involved-btn:focus,
-body a.get-involved-btn:active {
+body a.get-involved-btn:active{
   background: #A11B2E !important;
   border: 1px solid #A11B2E !important;
   color: #fff !important;
@@ -1372,7 +1301,7 @@ body a.get-involved-btn:active {
 }
 
 /* Keeps the theme button's existing shape and size. */
-.lab-header #languageToggle {
+.lab-header #languageToggle{
   background: #f5f0ff;
   color: #6935a5;
   border-color: #cbb5e8;
@@ -1387,39 +1316,42 @@ body a.get-involved-btn:active {
               box-shadow 0.25s ease;
 }
 
-.lab-header #languageToggle:hover {
+.lab-header #languageToggle:hover{
   background: #ede2ff;
   border-color: #9460d3;
   box-shadow: 0 0 18px rgba(124, 58, 237, 0.35);
 }
 
-body.dark .lab-header #languageToggle {
+body.dark .lab-header #languageToggle{
   background: #251d36;
   color: #d8bcff;
   border-color: #79569f;
   box-shadow: 0 0 12px rgba(185, 132, 255, 0.2);
 }
 
-body.dark .lab-header #languageToggle:hover {
+body.dark .lab-header #languageToggle:hover{
   background: #352447;
   border-color: #c69aff;
   box-shadow: 0 0 20px rgba(185, 132, 255, 0.4);
 }
 
-.lab-header #languageToggle:focus-visible {
+.lab-header #languageToggle:focus-visible{
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lab-header #languageToggle {
+  .lab-header #languageToggle{
     transition: none;
   }
 }
 
-/* Light mode keeps the earlier navy, white, and red palette, with a small green accent.
+/* Light mode keeps the earlier navy,
+white,
+and red palette,
+with a small green accent.
    Dark mode rules above are left unchanged. */
-body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) {
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief){
   --palette-red: #A11B2E;
   --palette-paper: #f4f6f8;
   --palette-white: #ffffff;
@@ -1455,7 +1387,7 @@ body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .
   color: #0c1114 !important;
 }
 
-body.page-home:not(.dark) {
+body.page-home:not(.dark){
   --black: #0c1114;
   --white: #f4f6f8;
   --blue: #24557a;
@@ -1466,7 +1398,7 @@ body.page-home:not(.dark) {
   --panel: #ffffff;
 }
 
-body.page-industry:not(.dark) {
+body.page-industry:not(.dark){
   --ink: #0c1114;
   --paper: #ffffff;
   --blue: #24557a;
@@ -1484,7 +1416,7 @@ body.page-industry:not(.dark) {
 }
 
 body.page-fellowship:not(.dark),
-body.page-events:not(.dark) {
+body.page-events:not(.dark){
   --navy: #13364d;
   --blue: #24557a;
   --red: #A11B2E;
@@ -1496,7 +1428,7 @@ body.page-events:not(.dark) {
   --surface: #f4f6f8;
 }
 
-body.page-outcomes:not(.dark) {
+body.page-outcomes:not(.dark){
   --bg: #ffffff;
   --text: #0c1114;
   --muted: #52616d;
@@ -1505,7 +1437,7 @@ body.page-outcomes:not(.dark) {
   --accent: #A11B2E;
 }
 
-body.page-ai-brief:not(.dark) {
+body.page-ai-brief:not(.dark){
   --bg: #f4f6f8;
   --surface: #ffffff;
   --ink: #0c1114;
@@ -1521,90 +1453,76 @@ body.page-ai-brief:not(.dark) {
   --warm: #e5e9ed;
 }
 
-body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) :is(h1, h2, h3, h4, h5) {
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) :is(h1, h2, h3, h4, h5){
   color: #13364d;
 }
 
-body:not(.dark) :is(.details-section, .spotlight, .purpose, .cta, .system-panel, .lab-site-footer, .ticker, .workshop-art, .idea-art, .sub-card, .story.lead) :is(h1, h2, h3, h4, h5) {
+body:not(.dark) :is(.details-section, .spotlight, .purpose, .cta, .system-panel, .lab-site-footer, .ticker, .workshop-art, .idea-art, .sub-card, .story.lead) :is(h1, h2, h3, h4, h5){
   color: #f4f6f8 !important;
 }
 
 body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
-  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .tag) {
+  :is(.kicker, .eyebrow, .section-kicker, .section-label, .hero-eyebrow, .preview-type, .resource-num, .value-icon, .tag){
   color: #A11B2E !important;
 }
 
 body:not(.dark) :is(.details-section, .spotlight, .purpose, .cta, .ticker, .lab-site-footer, .sub-card)
-  :is(.kicker, .eyebrow, .section-kicker, .section-kicker span, .section-label) {
+  :is(.kicker, .eyebrow, .section-kicker, .section-kicker span, .section-label){
   color: #c9d6e0 !important;
 }
 
 body:not(.dark) .lab-header,
-body.page-outcomes:not(.dark) > header,
-body.page-ai-brief:not(.dark) .nav {
+body.page-outcomes:not(.dark) > header{
   background: rgba(244, 246, 248, 0.94) !important;
   border-bottom: 1px solid rgba(19, 54, 77, 0.14) !important;
   box-shadow: 0 10px 28px -24px rgba(19, 54, 77, 0.7) !important;
 }
 
 body:not(.dark) .lab-nav-links > a:not(.lab-nav-cta),
-body:not(.dark) .lab-theme-toggle {
+body:not(.dark) .lab-theme-toggle{
   color: #13364d !important;
 }
 
-body:not(.dark) .lab-nav-links > a:not(.lab-nav-cta)::after {
+body:not(.dark) .lab-nav-links > a:not(.lab-nav-cta)::after{
   background: #A11B2E !important;
 }
 
 body:not(.dark) .lab-nav-links > a:not(.lab-nav-cta):is(:hover, :focus-visible),
-body:not(.dark) .lab-theme-toggle:hover {
+body:not(.dark) .lab-theme-toggle:hover{
   background: #e5e9ed !important;
   color: #13364d !important;
 }
 
 body:not(.dark) .lab-theme-toggle,
-body:not(.dark) .lab-menu-toggle {
+body:not(.dark) .lab-menu-toggle{
   border-color: #13364d !important;
   background: #f4f6f8 !important;
   color: #13364d !important;
 }
 
-body:not(.dark) .lab-header #languageToggle {
+body:not(.dark) .lab-header #languageToggle{
   background: #f4f6f8 !important;
   color: #13364d !important;
   border-color: #24557a !important;
   box-shadow: none !important;
 }
 
-body:not(.dark) .lab-header #languageToggle:hover {
+body:not(.dark) .lab-header #languageToggle:hover{
   background: #e5e9ed !important;
   border-color: #13364d !important;
   box-shadow: none !important;
 }
 
-body:not(.dark) :is(.btn-dark, .button-primary, .lab-nav-cta, .pill-btn.dark) {
-  background: #13364d !important;
-  border-color: #13364d !important;
-  color: #ffffff !important;
-  box-shadow: none !important;
-}
-
-body:not(.dark) :is(.btn-dark, .button-primary, .lab-nav-cta, .pill-btn.dark):is(:hover, :focus-visible) {
-  background: #A11B2E !important;
-  border-color: #A11B2E !important;
-  color: #ffffff !important;
-}
-
 body:not(.dark) .lab-header .lab-nav-links > a.circuit-join,
 body:not(.dark) .lab-site-footer a.footer-circuit,
-body:not(.dark) a.get-involved-btn {
+body:not(.dark) a.get-involved-btn{
   background: #A11B2E !important;
   border-color: #A11B2E !important;
   color: #ffffff !important;
 }
 
 body:not(.dark) .lab-header .lab-nav-links > a.circuit-join:is(:hover, :focus-visible),
-body:not(.dark) .lab-site-footer a.footer-circuit:is(:hover, :focus-visible) {
+body:not(.dark) .lab-site-footer a.footer-circuit:is(:hover, :focus-visible){
   background: #13364d !important;
   border-color: #13364d !important;
 }
@@ -1612,7 +1530,7 @@ body:not(.dark) .lab-site-footer a.footer-circuit:is(:hover, :focus-visible) {
 body.page-home:not(.dark) .btn-light,
 body.page-industry:not(.dark) .button-outline,
 body.page-fellowship:not(.dark) .button-ghost,
-body.page-events:not(.dark) .button-ghost {
+body.page-events:not(.dark) .button-ghost{
   background: transparent !important;
   border-color: #13364d !important;
   color: #13364d !important;
@@ -1621,14 +1539,14 @@ body.page-events:not(.dark) .button-ghost {
 body.page-home:not(.dark) .btn-light:is(:hover, :focus-visible),
 body.page-industry:not(.dark) .button-outline:is(:hover, :focus-visible),
 body.page-fellowship:not(.dark) .button-ghost:is(:hover, :focus-visible),
-body.page-events:not(.dark) .button-ghost:is(:hover, :focus-visible) {
+body.page-events:not(.dark) .button-ghost:is(:hover, :focus-visible){
   background: #13364d !important;
   color: #ffffff !important;
 }
 
 body:not(.dark):is(.page-home, .page-industry) .hero,
 body.page-outcomes:not(.dark) .hero,
-body.page-ai-brief:not(.dark) .hero {
+body.page-ai-brief:not(.dark) .hero{
   background-color: #ffffff !important;
   background-image:
     linear-gradient(rgba(47, 125, 79, 0.08) 1px, transparent 1px),
@@ -1638,14 +1556,14 @@ body.page-ai-brief:not(.dark) .hero {
 }
 
 body.page-fellowship:not(.dark) .page-hero,
-body.page-events:not(.dark) .events-hero {
+body.page-events:not(.dark) .events-hero{
   background: #ffffff !important;
   color: #13364d !important;
 }
 
 body.page-home:not(.dark) .hero::after,
 body.page-industry:not(.dark) .hero::after,
-body.page-events:not(.dark) .events-hero::after {
+body.page-events:not(.dark) .events-hero::after{
   border-color: rgba(47, 125, 79, 0.28);
   box-shadow: 0 0 0 34px rgba(47, 125, 79, 0.08);
 }
@@ -1653,7 +1571,7 @@ body.page-events:not(.dark) .events-hero::after {
 body.page-home:not(.dark) h1 span,
 body.page-industry:not(.dark) .hero h1 span,
 body.page-fellowship:not(.dark) .page-hero h1 em,
-body.page-events:not(.dark) h1 em {
+body.page-events:not(.dark) h1 em{
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
   -webkit-text-stroke: 1.5px #24557a !important;
@@ -1665,7 +1583,7 @@ body.page-home:not(.dark) #resources,
 body.page-industry:not(.dark) :is(.benefits, #current-partners, .pathway),
 body.page-fellowship:not(.dark) :is(.about-fellowship, .fellow-skills),
 body.page-outcomes:not(.dark) :is(.cis-showcase, #people, #signature-projects),
-body.page-ai-brief:not(.dark) .section.band {
+body.page-ai-brief:not(.dark) .section.band{
   background: #e5e9ed !important;
   color: #111111 !important;
 }
@@ -1673,24 +1591,24 @@ body.page-ai-brief:not(.dark) .section.band {
 body.page-home:not(.dark) :is(.opportunities, .explore),
 body.page-industry:not(.dark) .collaboration,
 body.page-fellowship:not(.dark) :is(.ideal-candidates, .fellows-section),
-body.page-outcomes:not(.dark) :is(#work, #highlights) {
+body.page-outcomes:not(.dark) :is(#work, #highlights){
   background: #ffffff !important;
 }
 
-body.page-outcomes:not(.dark) #contribute {
+body.page-outcomes:not(.dark) #contribute{
   background: #e5e9ed !important;
 }
 
-body.page-events:not(.dark) {
+body.page-events:not(.dark){
   background: #e5e9ed !important;
 }
 
-body.page-events:not(.dark) .events-hero {
+body.page-events:not(.dark) .events-hero{
   background: #ffffff !important;
 }
 
 body.page-events:not(.dark) .past-section,
-body.page-events:not(.dark) .event-section {
+body.page-events:not(.dark) .event-section{
   background: transparent !important;
   color: #111111 !important;
 }
@@ -1699,53 +1617,53 @@ body.page-home:not(.dark) .purpose,
 body.page-industry:not(.dark) :is(.spotlight, .cta),
 body.page-fellowship:not(.dark) .details-section,
 body.page-ai-brief:not(.dark) .spotlight,
-body.page-ai-brief:not(.dark) .ticker {
+body.page-ai-brief:not(.dark) .ticker{
   background: #13364d !important;
   color: #f4f6f8 !important;
 }
 
-body.page-home:not(.dark) .system-panel {
+body.page-home:not(.dark) .system-panel{
   background: #13364d !important;
   border-color: #13364d !important;
   color: #f4f6f8 !important;
 }
 
 body.page-home:not(.dark) .system-head,
-body.page-home:not(.dark) .system-row {
+body.page-home:not(.dark) .system-row{
   border-color: rgba(255, 255, 255, 0.22) !important;
 }
 
-body.page-home:not(.dark) .purpose .logic-grid {
+body.page-home:not(.dark) .purpose .logic-grid{
   gap: 14px !important;
   background: transparent !important;
   border: 0 !important;
 }
 
-body.page-home:not(.dark) .purpose .logic-card {
+body.page-home:not(.dark) .purpose .logic-card{
   background: #f4f6f8 !important;
   color: #111111 !important;
   border-radius: 18px !important;
 }
 
-body.page-home:not(.dark) .purpose .logic-card :is(h2, h3) {
+body.page-home:not(.dark) .purpose .logic-card :is(h2, h3){
   color: #13364d !important;
 }
 
-body.page-home:not(.dark) .purpose .logic-card p {
+body.page-home:not(.dark) .purpose .logic-card p{
   color: #52616d !important;
 }
 
-body.page-home:not(.dark) .purpose .section-copy {
+body.page-home:not(.dark) .purpose .section-copy{
   color: #d5e1ea !important;
 }
 
-body.page-home:not(.dark) .purpose .logic-card .letter {
+body.page-home:not(.dark) .purpose .logic-card .letter{
   color: #A11B2E !important;
   border-color: #A11B2E !important;
 }
 
 body.page-home:not(.dark) .people-grid,
-body.page-industry:not(.dark) .value-grid {
+body.page-industry:not(.dark) .value-grid{
   gap: 14px !important;
   border: 0 !important;
   background: transparent !important;
@@ -1781,7 +1699,7 @@ body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .
     .case,
     .paper,
     .empty-state
-  ) {
+  ){
   background: #ffffff !important;
   border: 1px solid rgba(19, 54, 77, 0.14) !important;
   border-top: 3px solid #2F7D4F !important;
@@ -1790,22 +1708,22 @@ body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .
   color: #111111 !important;
 }
 
-body.page-home:not(.dark) .preview-card {
+body.page-home:not(.dark) .preview-card{
   box-shadow: 12px 12px 0 #e5e9ed !important;
 }
 
-body.page-fellowship:not(.dark) .hero-console {
+body.page-fellowship:not(.dark) .hero-console{
   background: #13364d !important;
   border-color: rgba(47, 125, 79, 0.45) !important;
   box-shadow: 14px 14px 0 #e5e9ed !important;
 }
 
-body.page-fellowship:not(.dark) .fellow-card.is-active {
+body.page-fellowship:not(.dark) .fellow-card.is-active{
   border-color: #24557a !important;
   box-shadow: 10px 10px 0 #e5e9ed !important;
 }
 
-body.page-industry:not(.dark) .spotlight-card {
+body.page-industry:not(.dark) .spotlight-card{
   background: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.28) !important;
   border-radius: 18px !important;
@@ -1813,131 +1731,131 @@ body.page-industry:not(.dark) .spotlight-card {
   box-shadow: none !important;
 }
 
-body.page-industry:not(.dark) .spotlight-row strong {
+body.page-industry:not(.dark) .spotlight-row strong{
   color: #c9d6e0 !important;
 }
 
 body.page-industry:not(.dark) .spotlight-row span,
-body.page-industry:not(.dark) .cta :is(h2, p, .pending-status) {
+body.page-industry:not(.dark) .cta :is(h2, p, .pending-status){
   color: #f4f6f8 !important;
 }
 
-body.page-fellowship:not(.dark) .contact-strip {
+body.page-fellowship:not(.dark) .contact-strip{
   background: #f4f6f8 !important;
   color: #13364d !important;
   border-radius: 18px !important;
   border-left: 4px solid #A11B2E !important;
 }
 
-body.page-fellowship:not(.dark) .contact-strip :is(h2, h3, strong) {
+body.page-fellowship:not(.dark) .contact-strip :is(h2, h3, strong){
   color: #13364d !important;
 }
 
 body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events) .lab-site-footer,
 body.page-outcomes:not(.dark) .lab-site-footer,
-body.page-ai-brief:not(.dark) :is(footer, .lab-site-footer) {
+body.page-ai-brief:not(.dark) :is(footer, .lab-site-footer){
   background: #0c1114 !important;
   color: #b9c8d4 !important;
   border-top-color: rgba(47, 125, 79, 0.45) !important;
 }
 
 body:not(.dark) .lab-footer-brand strong,
-body:not(.dark) .lab-site-footer :is(.lab-footer-nav a, .lab-footer-top) {
+body:not(.dark) .lab-site-footer :is(.lab-footer-nav a, .lab-footer-top){
   color: #f4f6f8 !important;
 }
 
 body:not(.dark) .lab-footer-brand span,
-body:not(.dark) .lab-footer-top span {
+body:not(.dark) .lab-footer-top span{
   color: #c9d6e0 !important;
 }
 
-body:not(.dark) .skip-link {
+body:not(.dark) .skip-link{
   background: #f4f6f8 !important;
   color: #13364d !important;
   border-color: #A11B2E !important;
 }
 
-body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) {
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible){
   background: #13364d !important;
   border-color: #13364d !important;
   color: #f4f6f8 !important;
   box-shadow: 8px 8px 0 #e5e9ed !important;
 }
 
-body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) :is(h3, p, .resource-num, .arrow) {
+body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) :is(h3, p, .resource-num, .arrow){
   color: #f4f6f8 !important;
 }
 
-body.page-ai-brief:not(.dark) [data-c] {
+body.page-ai-brief:not(.dark) [data-c]{
   --c: #24557a;
   --c-soft: #e5e9ed;
 }
 
-body.page-ai-brief:not(.dark) :is([data-c="tutorials-learning"], [data-c="videos"], [data-c="research-spotlight"]) {
+body.page-ai-brief:not(.dark) :is([data-c="tutorials-learning"], [data-c="videos"], [data-c="research-spotlight"]){
   --c: #A11B2E;
   --c-soft: #f4f6f8;
 }
 
 body.page-ai-brief:not(.dark) #subscribe .sub-card,
 body.page-ai-brief:not(.dark) .btn.primary,
-body.page-ai-brief:not(.dark) #ai-tools .tool-ctas .btn {
+body.page-ai-brief:not(.dark) #ai-tools .tool-ctas .btn{
   background: #13364d !important;
   border-color: #13364d !important;
   color: #f4f6f8 !important;
 }
 
-body.page-ai-brief:not(.dark) #subscribe .sub-form {
+body.page-ai-brief:not(.dark) #subscribe .sub-form{
   background: #ffffff !important;
   border-color: #ffffff !important;
 }
 
-body.page-ai-brief:not(.dark) #subscribe .sub-form input {
+body.page-ai-brief:not(.dark) #subscribe .sub-form input{
   color: #13364d !important;
 }
 
-body.page-ai-brief:not(.dark) #subscribe .sub-form button {
+body.page-ai-brief:not(.dark) #subscribe .sub-form button{
   background: #A11B2E !important;
   color: #ffffff !important;
 }
 
-body.page-ai-brief:not(.dark) #subscribe .sub-form button:hover {
+body.page-ai-brief:not(.dark) #subscribe .sub-form button:hover{
   background: #24557a !important;
 }
 
-body.page-ai-brief:not(.dark) :is(#subscribe p, #subscribe .sub-note) {
+body.page-ai-brief:not(.dark) :is(#subscribe p, #subscribe .sub-note){
   color: #d5e1ea !important;
 }
 
 body.page-outcomes:not(.dark) #contribute .button,
-body.page-outcomes:not(.dark) .scroll-button {
+body.page-outcomes:not(.dark) .scroll-button{
   border-radius: 12px !important;
 }
 
-body.page-outcomes:not(.dark) #contribute .button {
+body.page-outcomes:not(.dark) #contribute .button{
   background: #13364d !important;
   border-color: #13364d !important;
   color: #ffffff !important;
 }
 
-body.page-outcomes:not(.dark) .scroll-button {
+body.page-outcomes:not(.dark) .scroll-button{
   background: #ffffff !important;
   border-color: #24557a !important;
   color: #13364d !important;
 }
 
-body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) ::selection {
+body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief) ::selection{
   background: #dceadf;
   color: #13364d;
 }
 
 @media (max-width: 900px) {
-  body:not(.dark) .lab-header .lab-nav-links.is-open {
+  body:not(.dark) .lab-header .lab-nav-links.is-open{
     background: #f4f6f8 !important;
     border-bottom-color: rgba(19, 54, 77, 0.16) !important;
   }
 
   body:not(.dark) .lab-theme-toggle:not(#languageToggle),
-  body:not(.dark) .lab-menu-toggle {
+  body:not(.dark) .lab-menu-toggle{
     width: 44px !important;
     height: 44px !important;
     flex-basis: 44px !important;
@@ -1946,41 +1864,22 @@ body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .
 
 @media (max-width: 720px) {
   body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
-    :is(
-      .preview-card,
-      .audience,
-      .resource,
-      .explore-card,
-      .person,
-      .value-card,
-      .partner-card,
-      .collaboration-item,
-      .step,
-      .fellow-card,
-      .candidate-card,
-      .skill-card,
-      .event-card,
-      .past-card,
-      .feature,
-      .cis-card,
-      .permanent-card,
-      .logic-card
-    ) {
+    :is(.preview-card, .audience, .resource, .explore-card, .person, .value-card, .partner-card, .collaboration-item, .step, .fellow-card, .candidate-card, .skill-card, .event-card, .past-card, .feature, .cis-card, .permanent-card, .logic-card){
     border-radius: 14px !important;
     box-shadow: 0 8px 18px rgba(19, 54, 77, 0.08) !important;
   }
 
   body.page-fellowship:not(.dark) .hero-console,
-  body.page-home:not(.dark) .preview-card {
+  body.page-home:not(.dark) .preview-card{
     box-shadow: 0 10px 22px rgba(19, 54, 77, 0.12) !important;
   }
 
-  body.page-outcomes:not(.dark) h1 {
+  body.page-outcomes:not(.dark) h1{
     font-size: clamp(2.45rem, 12vw, 3.5rem) !important;
     letter-spacing: -0.04em !important;
   }
 
-  body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events) :is(.hero-actions, .section-links) :is(.btn, .button) {
+  body:not(.dark):is(.page-home, .page-industry, .page-fellowship, .page-events) :is(.hero-actions, .section-links) :is(.btn, .button){
     max-width: 100%;
   }
 }

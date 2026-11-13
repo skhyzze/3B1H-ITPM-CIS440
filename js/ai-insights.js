@@ -23,7 +23,6 @@ const ICONS = {
   "research-spotlight": '<path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/>',
   star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
-  left: '<path d="M19 12H5M11 6l-6 6 6 6"/>',
   play: '<path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/>',
   heart: '<path d="M12 20s-7-4.4-9.2-8.6C1.3 8.4 3 5 6.4 5c2 0 3.3 1.1 3.9 2.2l1.7 2 1.7-2C14.3 6.1 15.6 5 17.6 5 21 5 22.7 8.4 21.2 11.4 19 15.6 12 20 12 20z"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
@@ -103,20 +102,6 @@ let ITEMS = [];
 const LABELS = { "latest-ai-news": "News", "tutorials-learning": "Tutorials", "ai-tools": "Tools",
   "videos": "Videos", "applied-ai-use-cases": "Use Cases", "research-spotlight": "Research" };
 
-// Builds the navigation bar.
-function navHtml(d) {
-  const links = d.sections.slice(0, 6).map(function (s) {
-    return '<a href="#' + esc(s.id) + '" data-jump="' + esc(s.id) + '">' + esc(LABELS[s.id] || s.name) + '</a>';
-  }).join("");
-  return '<nav class="nav" id="nav"><div class="wrap">' +
-    '<a class="brand" href="#top" data-jump="top"><span class="mark">' + icon("logo", 20) + '</span>' + esc(d.lab) + '</a>' +
-    '<div class="nav-links">' + links + '</div>' +
-    '<div class="nav-actions">' +
-      '<button class="pill-btn brief-theme-toggle" type="button" id="brief-theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>' +
-      '<button class="pill-btn" type="button" id="saved-btn">' + icon("heart", 16) + ' Liked <span class="count" id="saved-count">0</span></button>' +
-      '<a class="pill-btn dark sub-link" href="#subscribe" data-jump="subscribe">' + icon("mail", 16) + ' Subscribe</a>' +
-    '</div></div></nav>';
-}
 
 // Builds the introduction and image collage.
 function heroHtml(d) {
@@ -133,7 +118,6 @@ function heroHtml(d) {
       '<div class="cap"><i></i><span>' + esc(item.title) + '</span></div></a>';
   }).join("");
   return '<header class="hero" id="top">' +
-    '<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>' +
     '<div class="wrap"><div>' +
       '<span class="eyebrow reveal"><span class="live"><span class="dot"></span>NEW</span>Weekly Edition · Week of ' + esc(d.weekOf) + '</span>' +
       '<h1 class="reveal"><span class="grad">THE CIRCUIT</span></h1>' +
@@ -468,14 +452,6 @@ function reveal() {
 // Connects the controls to their actions.
 function wireUp() {
   refreshSaved(); applyFilters(); countUp(); reveal();
-  const themeToggle = document.getElementById("brief-theme-toggle");
-  if (themeToggle) {
-    updateBriefThemeButton(themeToggle);
-    themeToggle.addEventListener("click", function () {
-      setBriefTheme(!document.body.classList.contains("dark"), true);
-      updateBriefThemeButton(themeToggle);
-    });
-  }
   const nav = document.getElementById("nav");
   const scroller = document.getElementById("app");
   let backToTop = document.getElementById("back-to-top");
@@ -599,7 +575,6 @@ document.addEventListener("click", function (e) {
   if (video) { e.preventDefault(); openVideo(+video.dataset.video); return; }
   const chip = e.target.closest("[data-filter]");
   if (chip) { setTopic(chip.dataset.filter); return; }
-  if (e.target.closest("#saved-btn")) { setTopic("saved"); jumpTo("explore"); return; }
   const jump = e.target.closest("[data-jump]");
   if (jump) {
     e.preventDefault();
@@ -623,26 +598,6 @@ document.addEventListener("keydown", function (e) {
   if (vid && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openVideo(+vid.dataset.video); }
 });
 
-const BRIEF_THEME_KEY = "lab-theme";
-// Reads the theme saved in this browser.
-function readBriefTheme() {
-  try { return localStorage.getItem(BRIEF_THEME_KEY); } catch (e) { return null; }
-}
-// Switches the theme and optionally remembers it.
-function setBriefTheme(dark, persist) {
-  document.body.classList.toggle("dark", dark);
-  if (persist) {
-    try { localStorage.setItem(BRIEF_THEME_KEY, dark ? "dark" : "light"); } catch (e) { /* private mode */ }
-  }
-}
-// Updates the theme button symbol and label.
-function updateBriefThemeButton(button) {
-  const dark = document.body.classList.contains("dark");
-  button.textContent = dark ? "☀" : "☾";
-  button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-  button.setAttribute("aria-pressed", String(dark));
-}
-
 // Matches the scrolling area to the real site header height.
 function syncHeaderOffset() {
   const header = document.querySelector(".lab-header");
@@ -654,8 +609,4 @@ window.addEventListener("load", syncHeaderOffset);
 window.addEventListener("resize", syncHeaderOffset);
 syncHeaderOffset();
 
-// Applies the preferred theme, then builds the page from the data file.
-const savedBriefTheme = readBriefTheme();
-const prefersBriefDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-setBriefTheme(savedBriefTheme ? savedBriefTheme === "dark" : prefersBriefDark, false);
 render(STATIC_NEWSLETTER_DATA);

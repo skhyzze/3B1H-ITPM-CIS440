@@ -1,4 +1,46 @@
-(function () {
+window.LAB_FELLOWS_READY=(async function(){
+  const track=document.getElementById('fellowTrack');
+  const status=document.getElementById('fellowStatus');
+  track.replaceChildren();
+  track.setAttribute('aria-busy','true');
+  status.textContent='Loading student fellows…';
+  const url='https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-fellows.json?v=' + Date.now();
+  function node(tag,cls,text){const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;}
+  function safeUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}}
+  try {
+    const response=await fetch(url,{cache:'no-store',credentials:'omit',signal:AbortSignal.timeout(20000)});
+    if(!response.ok)throw Error();
+    const data=await response.json();if(data.error||!Array.isArray(data.fellows))throw Error();
+    data.fellows.forEach((f,i)=>{
+      if(!f || typeof f.name!=='string' || !f.name.trim())return;
+      const card=node('article','fellow-card','');
+      const initials=node('div','initials',f.initials||f.name.split(/\s+/).map(n=>n[0]).join('').slice(0,2));initials.setAttribute('aria-hidden','true');
+      card.append(node('div','card-index',String(i+1).padStart(2,'0')),initials,node('h3','',f.name),node('p','fellow-role',f.role));
+      if(f.bio)card.append(node('p','fellow-focus',f.bio));
+      if(f.projectLabel||f.projectTitle||f.projectDescription||f.url){
+        const project=node('p','fellow-project','');
+        if(f.projectLabel)project.append(node('span','',f.projectLabel));
+        if(f.projectTitle)project.append(node('strong','',f.projectTitle));
+        project.append(document.createTextNode(' '+(f.projectDescription||'')+' '));
+        const href=safeUrl(f.url);if(href){const link=node('a','',f.linkLabel||'View project ↗');link.href=href;link.target='_blank';link.rel='noopener noreferrer';link.setAttribute('aria-label',link.textContent+': '+f.name);project.append(link);}
+        card.append(project);
+      }
+      track.append(card);
+    });
+    if(!track.children.length){status.textContent='No published student fellows yet.';const p=node('p','','No published student fellows yet.');track.append(p);track.setAttribute('aria-busy','false');return false;}
+    track.setAttribute('aria-busy','false');
+    return true;
+  } catch(error){
+    const message=node('p','','Student fellows are temporarily unavailable. Please reload to try again.');message.setAttribute('role','status');track.append(message);
+    document.getElementById('fellowPrev').disabled=true;document.getElementById('fellowNext').disabled=true;
+    status.textContent='Student fellows are temporarily unavailable.';
+    track.setAttribute('aria-busy','false');
+    return false;
+  }
+})();
+
+(async function () {
+  if(!await window.LAB_FELLOWS_READY) return;
   const carousel = document.querySelector('.carousel');
   const track = document.getElementById('fellowTrack');
   if (!carousel || !track) return;
@@ -187,23 +229,6 @@
   });
 })();
 
-(function () {
-  const signalButtons = Array.from(document.querySelectorAll('.signal-item'));
-  const detail = document.getElementById('signalDetail');
-  const detailTitle = detail && detail.querySelector('strong');
-  if (!signalButtons.length || !detailTitle) return;
-
-  signalButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      signalButtons.forEach(function (item) {
-        const active = item === button;
-        item.classList.toggle('is-active', active);
-        item.setAttribute('aria-expanded', String(active));
-      });
-      detailTitle.textContent = button.dataset.signalTitle;
-    });
-  });
-})();
 
 (function () {
   const steps = Array.from(document.querySelectorAll('.path-step'));
