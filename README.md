@@ -45,6 +45,8 @@ The newsletter tool has its own steps in `ai_brief/README.md`.
 
 The repo does not name a public host or base URL. The GitHub Action in `.github/workflows/lab-content-sync.yml` only commits approved Microsoft Lists snapshots into `data/cms-*.json`. It does not publish the HTML.
 
+Local preview serves the readable files at the repo root. `npm run build` writes a minified copy to `dist/`, with content-hashed CSS and JavaScript names. `.github/workflows/build.yml` runs that build and uploads `dist` as an artifact. When a host is chosen, publish the `dist` folder.
+
 Host and base URL still need to be filled in:
 
 - Host:
@@ -52,7 +54,7 @@ Host and base URL still need to be filled in:
 
 ## Updating content
 
-- Events, fellows, and student outcomes come from `data/cms-events.json`, `data/cms-fellows.json`, and `data/cms-projects.json`. The Microsoft Lists sync workflow writes those files. The pages also read the copies published from the GitHub account named in Accounts and handoff.
+- Events, fellows, and student outcomes come from `data/cms-events.json`, `data/cms-fellows.json`, and `data/cms-projects.json`. The Microsoft Lists sync workflow writes those files, and the pages fetch them from the same site.
 - The newsletter comes from the tool in `ai_brief/`. `collect_news.py` gathers items, the Streamlit review desk approves them, and `ai_brief/static-newsletter-data.js` is what AI Insights shows.
 
 ## Accounts and handoff
@@ -62,7 +64,7 @@ These accounts are personal or unnamed. Move them to lab-owned accounts before t
 | What | Account | Where it is used |
 | --- | --- | --- |
 | Site chatbot | Personal Cloudflare Workers hostname `tan-gurpinar.workers.dev` | `js/config.js` (`chatEndpoint`). `js/chatbot.js` reads it. |
-| Fellows, events, and outcomes feeds | Personal GitHub account `skhyzze`, repo `3B1H-ITPM-CIS440` | Fetch URLs in `js/fellowship.js`, `event.html`, and `studentoutcomes.html`. Not moved. |
+| Fellows, events, and outcomes feeds | This repo, `data/cms-*.json` | `js/fellowship.js`, `event.html`, and `studentoutcomes.html` |
 | Circuit subscribe form | Google Apps Script. The Google account is not named in the repo. | `js/config.js` (`newsletterSubscribeUrl`) |
 | Circuit likes | Google Apps Script. The Google account is not named in the repo. | `js/config.js` (`newsletterLikesUrl`) |
 | Outcomes submission form | Quinnipiac SharePoint user `hjbugai_quinnipiac_edu` | `studentoutcomes.html` |

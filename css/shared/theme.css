@@ -5665,6 +5665,11 @@ body.page-outcomes .outcomes-shot-frame span {
   body.dark.page-ai-brief #app > .hero > .wrap::after {
     animation: none !important;
   }
+
+  .lab-ico :is(path, circle, rect, line) {
+    stroke-dashoffset: 0;
+    animation: none !important;
+  }
 }
 
 body.page-home:not(.dark) .hero,
@@ -5684,6 +5689,55 @@ body.dark.page-home .hero {
   body.page-home:not(.dark) .hero,
   body.dark.page-home .hero {
     min-height: auto !important;
+  }
+}
+
+/* Continuous decoration pauses off-screen and stops on small screens. */
+.is-anim-paused,
+.is-anim-paused::before,
+.is-anim-paused::after,
+.is-anim-paused :is(.circuit-trace, .circuit-node, .lab-trace, .lab-node, .hero-orbit, .lab-orbit, img, svg, path, circle, rect, line) {
+  animation-play-state: paused !important;
+}
+
+@media (max-width: 900px) {
+  .hero-orbit,
+  .circuit-field,
+  .circuit-trace,
+  .circuit-node,
+  .circuit-decor,
+  .lab-orbit,
+  .lab-trace,
+  .lab-node,
+  .lab-site-footer::after,
+  .fellows-section::before,
+  .page-fellowship .fellow-card.is-active::after,
+  .page-fellowship .carousel-progress span::after,
+  body.page-home :is(.image-slot-frame, .preview-image)::before,
+  body.page-home :is(.image-slot-frame, .preview-image)::after,
+  body.page-outcomes .cis-image::after,
+  body.page-events .placeholder::after,
+  body.page-outcomes .outcomes-shot-frame::before,
+  .spot-media-wrap .media img,
+  .spot-label .tag svg,
+  body.dark.page-home main > .hero > .wrap::before,
+  body.dark.page-industry main > .hero > .container::before,
+  body.dark.page-fellowship main > .page-hero > .container::before,
+  body.dark.page-events main > .events-hero > .container::before,
+  body.dark.page-outcomes main > .hero > .wrap::before,
+  body.dark.page-ai-brief #app > .hero > .wrap::before,
+  body.dark.page-home main > .hero > .wrap::after,
+  body.dark.page-industry main > .hero > .container::after,
+  body.dark.page-fellowship main > .page-hero > .container::after,
+  body.dark.page-events main > .events-hero > .container::after,
+  body.dark.page-outcomes main > .hero > .wrap::after,
+  body.dark.page-ai-brief #app > .hero > .wrap::after {
+    animation: none !important;
+  }
+
+  .lab-ico :is(path, circle, rect, line) {
+    stroke-dashoffset: 0;
+    animation: none !important;
   }
 }
 

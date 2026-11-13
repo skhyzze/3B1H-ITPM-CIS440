@@ -10,6 +10,8 @@
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="images_icons/AAI-Logo-Black-Animated-Match.png" type="image/png">
   <meta name="theme-color" content="#f4f6f8">
+  <link rel="preload" href="fonts/oxanium/oxanium-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/space-grotesk/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <title>Events | Applied AI Lab</title>
 
   <link rel="stylesheet" href="css/shared/tokens.css">
@@ -19,6 +21,9 @@
 </head>
 
 <body class="page-events">
+<script>
+(function(){try{var saved=localStorage.getItem("lab-theme");if(saved==="dark"||(!saved&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();
+</script>
   <a class="skip-link" href="#main">Skip to events</a>
 
   <header class="lab-header">
@@ -177,7 +182,7 @@
 
   <!-- Reuse the existing site-wide theme controls. -->
   <script src="js/config.js" defer></script>
-  <script src="js/site.js?v=4" defer></script>
+  <script src="js/site.js" defer></script>
   <script>
 (async function(){
   const section=document.getElementById('upcoming'),grid=section.querySelector('.event-grid'),note=section.querySelector('.section-note');
@@ -197,7 +202,7 @@
     const image=node('div','event-image placeholder '+art,'');image.setAttribute('role','img');image.setAttribute('aria-label',event.title+' image placeholder');
     image.append(node('span','image-caption','Event image placeholder'));
     const artLabel=node('span','art-label',category==='Research'?'ASK QUESTIONS.':category==='Idea Lab'?'WHAT IF?':'BUILD SOMETHING.');artLabel.setAttribute('aria-hidden','true');image.append(artLabel);
-    const src=safe(event.image);if(src){const img=document.createElement('img');img.src=src;img.alt=event.title;img.loading='lazy';img.referrerPolicy='no-referrer';img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1';img.addEventListener('load',()=>{image.removeAttribute('role');image.removeAttribute('aria-label');image.replaceChildren(img);});image.append(img);img.addEventListener('error',()=>img.remove(),{once:true});}
+    const src=safe(event.image);if(src){const img=document.createElement('img');img.src=src;img.alt=event.title;img.loading=event._eager?'eager':'lazy';img.referrerPolicy='no-referrer';img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1';img.addEventListener('load',()=>{image.removeAttribute('role');image.removeAttribute('aria-label');image.replaceChildren(img);});image.append(img);img.addEventListener('error',()=>img.remove(),{once:true});}
     const content=node('div','event-content',''),top=node('div','event-topline','');top.append(node('span','category',category));if(event.sample)top.append(node('span','sample-label','Demo'));
     const meta=node('dl','event-meta','');for(const [label,value] of [['Date & time',event.dateTime||'To be announced'],['Location',event.location||'To be confirmed']]){const group=node('div','','');group.append(node('dt','',label),node('dd','',value));meta.append(group);}
     content.append(top,node('h3','',event.title),meta,node('p','event-summary',event.summary));
@@ -211,10 +216,15 @@
   async function load(){
     grid.setAttribute('aria-busy','true');message('Loading upcoming events…');
     try{
-      const response=await fetch('https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-events.json?v=' + Date.now(),{cache:'no-store',credentials:'omit',signal:AbortSignal.timeout(20000)});
+      const controller=new AbortController();
+      const timer=setTimeout(()=>controller.abort(),20000);
+      let response;
+      try{
+        response=await fetch('data/cms-events.json',{credentials:'omit',signal:controller.signal});
+      }finally{clearTimeout(timer);}
       if(!response.ok)throw Error();const data=await response.json();if(data.error||!Array.isArray(data.events))throw Error();
       const items=data.events.filter(e=>e&&typeof e.title==='string'&&e.title.trim());
-      if(items.length)grid.replaceChildren(...items.map(cardFor));else message('No upcoming events published yet. Check back soon.');
+      if(items.length){items[0]._eager=true;grid.replaceChildren(...items.map(cardFor));}else message('No upcoming events published yet. Check back soon.');
       note.textContent=items.length&&items.every(e=>e.sample)?'Sample listings':'Upcoming listings';
     }catch(error){message('Upcoming events are temporarily unavailable. Please try again.',true);}finally{grid.removeAttribute('aria-busy');}
   }
@@ -222,6 +232,5 @@
 })();
 
 </script>
-  <script src="js/chatbot.js" defer></script>
 </body>
 </html>

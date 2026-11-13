@@ -4,18 +4,22 @@
 
 @font-face {
   font-family: "Space Grotesk";
-  src: url("../../fonts/space-grotesk/SpaceGrotesk-Variable.ttf") format("truetype");
+  src: url("../../fonts/space-grotesk/space-grotesk-latin.woff2") format("woff2"),
+       url("../../fonts/space-grotesk/SpaceGrotesk-Variable.ttf") format("truetype");
   font-style: normal;
   font-weight: 300 700;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2197, U+2212, U+FEFF;
 }
 
 @font-face {
   font-family: "Oxanium";
-  src: url("../../fonts/oxanium/Oxanium-Variable.ttf") format("truetype");
+  src: url("../../fonts/oxanium/oxanium-latin.woff2") format("woff2"),
+       url("../../fonts/oxanium/Oxanium-Variable.ttf") format("truetype");
   font-style: normal;
   font-weight: 200 800;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2197, U+2212, U+FEFF;
 }
 
 :root {

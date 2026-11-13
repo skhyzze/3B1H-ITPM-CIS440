@@ -16,12 +16,12 @@
     }
   }
 
-  function setTheme(dark) {
+  function applyTheme(dark) {
     document.body.classList.toggle('dark', dark);
 
     const themeColor = document.querySelector('meta[name="theme-color"]');
     if (themeColor) {
-      themeColor.setAttribute('content', dark ? '#07121f' : '#f8f8f6');
+      themeColor.setAttribute('content', dark ? '#07121f' : '#f4f6f8');
     }
 
     if (themeButton) {
@@ -29,13 +29,22 @@
       themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
       themeButton.setAttribute('aria-pressed', String(dark));
     }
+  }
 
+  function setTheme(dark) {
+    applyTheme(dark);
     saveTheme(dark ? 'dark' : 'light');
   }
 
   const savedTheme = readSavedTheme();
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  setTheme(savedTheme ? savedTheme === 'dark' : prefersDark);
+  const colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  applyTheme(savedTheme ? savedTheme === 'dark' : colorScheme.matches);
+
+  if (!savedTheme) {
+    colorScheme.addEventListener('change', function (event) {
+      if (!readSavedTheme()) applyTheme(event.matches);
+    });
+  }
 
   if (themeButton) {
     themeButton.addEventListener('click', function () {
@@ -224,6 +233,86 @@
   });
   const app = document.getElementById('app') || document.body;
   changes.observe(app, { childList: true, subtree: true });
+})();
+
+(function () {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const narrow = window.matchMedia('(max-width: 900px)').matches;
+  if (reduce || narrow || !('IntersectionObserver' in window)) return;
+
+  const selector = [
+    '.hero-orbit',
+    '.circuit-field',
+    '.circuit-decor',
+    '.lab-orbit',
+    '.lab-circuit',
+    '.lab-site-footer',
+    '.image-slot-frame',
+    '.preview-image',
+    '.outcomes-shot-frame',
+    '.cis-image',
+    '.placeholder',
+    '.lab-ico',
+    '.fellows-section',
+    '.spot-media-wrap'
+  ].join(',');
+  const nodes = Array.prototype.slice.call(document.querySelectorAll(selector));
+  if (!nodes.length) return;
+
+  const visible = new Set();
+  const maxRunning = 12;
+
+  function apply() {
+    const ranked = nodes.filter(function (el) { return visible.has(el); });
+    ranked.sort(function (a, b) {
+      return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+    });
+    const keep = new Set(ranked.slice(0, maxRunning));
+    nodes.forEach(function (el) {
+      el.classList.toggle('is-anim-paused', !keep.has(el));
+    });
+  }
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) visible.add(entry.target);
+      else visible.delete(entry.target);
+    });
+    apply();
+  }, { rootMargin: '40px 0px' });
+
+  nodes.forEach(function (el) { observer.observe(el); });
+
+  const watch = new MutationObserver(function (records) {
+    records.forEach(function (record) {
+      Array.prototype.forEach.call(record.addedNodes, function (node) {
+        if (!node || node.nodeType !== 1) return;
+        const found = [];
+        if (node.matches && node.matches(selector)) found.push(node);
+        if (node.querySelectorAll) node.querySelectorAll(selector).forEach(function (el) { found.push(el); });
+        found.forEach(function (el) {
+          if (nodes.indexOf(el) !== -1) return;
+          nodes.push(el);
+          observer.observe(el);
+        });
+      });
+    });
+  });
+  watch.observe(document.body, { childList: true, subtree: true });
+})();
+
+(function () {
+  function loadChatbot() {
+    if (document.querySelector('script[data-chat-loader]')) return;
+    const script = document.createElement('script');
+    script.src = 'js/chatbot.js';
+    script.defer = true;
+    script.dataset.chatLoader = 'true';
+    document.body.appendChild(script);
+  }
+
+  if ('requestIdleCallback' in window) window.requestIdleCallback(loadChatbot, { timeout: 2000 });
+  else window.setTimeout(loadChatbot, 1);
 })();
 
 // function openSpanishTranslation() {

@@ -4,11 +4,13 @@ window.LAB_FELLOWS_READY=(async function(){
   track.replaceChildren();
   track.setAttribute('aria-busy','true');
   status.textContent='Loading student fellows…';
-  const url='https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-fellows.json?v=' + Date.now();
+  const url='data/cms-fellows.json';
   function node(tag,cls,text){const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;}
   function safeUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}}
+  const controller=new AbortController();
+  const timer=setTimeout(function(){controller.abort();},20000);
   try {
-    const response=await fetch(url,{cache:'no-store',credentials:'omit',signal:AbortSignal.timeout(20000)});
+    const response=await fetch(url,{credentials:'omit',signal:controller.signal});
     if(!response.ok)throw Error();
     const data=await response.json();if(data.error||!Array.isArray(data.fellows))throw Error();
     data.fellows.forEach((f,i)=>{
@@ -27,10 +29,12 @@ window.LAB_FELLOWS_READY=(async function(){
       }
       track.append(card);
     });
-    if(!track.children.length){status.textContent='No published student fellows yet.';const p=node('p','','No published student fellows yet.');track.append(p);track.setAttribute('aria-busy','false');return false;}
+    if(!track.children.length){clearTimeout(timer);status.textContent='No published student fellows yet.';const p=node('p','','No published student fellows yet.');track.append(p);track.setAttribute('aria-busy','false');return false;}
+    clearTimeout(timer);
     track.setAttribute('aria-busy','false');
     return true;
   } catch(error){
+    clearTimeout(timer);
     const message=node('p','','Student fellows are temporarily unavailable. Please reload to try again.');message.setAttribute('role','status');track.append(message);
     document.getElementById('fellowPrev').disabled=true;document.getElementById('fellowNext').disabled=true;
     status.textContent='Student fellows are temporarily unavailable.';

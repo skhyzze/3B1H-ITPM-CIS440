@@ -12,6 +12,13 @@ function esc(text) {
 }
 // Allows web links starting with http:// or https://.
 function safeUrl(url) { return /^https?:\/\//i.test(url || "") ? esc(url) : "#"; }
+function fetchWithTimeout(url, options, ms) {
+  const controller = new AbortController();
+  const timer = setTimeout(function () { controller.abort(); }, ms || 8000);
+  return fetch(url, Object.assign({}, options, { signal: controller.signal })).finally(function () {
+    clearTimeout(timer);
+  });
+}
 
 // Stores the drawing instructions for each icon.
 const ICONS = {
@@ -47,9 +54,9 @@ function art(item, size) {
   return '<div class="art"><div class="art-in">' + icon(item.sectionId, size || 42) + '<div class="art-src">' + esc(item.source) + '</div></div></div>';
 }
 // Shows the picture or a placeholder.
-function media(item, extraClass, artSize) {
+function media(item, extraClass, artSize, eager) {
   const inner = item.image
-    ? '<img src="' + safeUrl(item.image) + '" alt="" loading="lazy" referrerpolicy="no-referrer" data-art-size="' + (artSize || 42) + '">'
+    ? '<img src="' + safeUrl(item.image) + '" alt="" loading="' + (eager ? "eager" : "lazy") + '" referrerpolicy="no-referrer" data-art-size="' + (artSize || 42) + '">'
     : art(item, artSize);
   return '<div class="media ' + (extraClass || "") + '" data-c="' + esc(item.sectionId) + '">' + inner + '</div>';
 }
@@ -160,8 +167,8 @@ function spotlightHtml(d) {
     '<div class="spot-label reveal"><span class="tag">' + icon("star", 16) + ' THIS WEEK\'S SPOTLIGHT</span><span class="rule"></span><span class="week">Editor\'s pick · ' + esc(d.weekOf) + '</span></div>' +
     '<div class="spot-grid">' +
       '<div class="spot-media-wrap reveal" data-index="-1">' +
-        (isVideo ? '<div style="position:relative">' + media(s, "", 80) + '<button class="play-big" type="button" data-video="-1" aria-label="Play video">' + icon("play", 34) + '</button></div>'
-                 : '<a ' + linkAttrs(s) + '>' + media(s, "", 80) + '</a>') +
+        (isVideo ? '<div style="position:relative">' + media(s, "", 80, true) + '<button class="play-big" type="button" data-video="-1" aria-label="Play video">' + icon("play", 34) + '</button></div>'
+                 : '<a ' + linkAttrs(s) + '>' + media(s, "", 80, true) + '</a>') +
       '</div>' +
       '<div class="spot-body reveal">' +
         '<div class="chips"><span class="chip glass">' + esc(s.section) + '</span><span class="chip glass">' + esc(s.type) + '</span></div>' +
@@ -498,13 +505,14 @@ function wireUp() {
     note.textContent = "Sending…";
 
     try {
-      await fetch(
+      await fetchWithTimeout(
         (window.LAB_CONFIG && window.LAB_CONFIG.newsletterSubscribeUrl) || "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
         {
           method: "POST",
           mode: "no-cors",
           body: new URLSearchParams({ email: email })
-        }
+        },
+        8000
       );
       note.textContent = "Thanks for joining The Circuit! You're on the list.";
       form.reset();
@@ -539,7 +547,7 @@ function sendLikeToSheet(url) {
   }
 
   // Send the title, URL, and current heart selection.
-  fetch(LIKES_URL, {
+  fetchWithTimeout(LIKES_URL, {
     method: "POST",
     mode: "no-cors",
     body: new URLSearchParams({
@@ -548,8 +556,8 @@ function sendLikeToSheet(url) {
       url: url,
       liked: String(saved.has(url))
     })
-  }).catch(function (error) {
-    console.error("Could not send the like:", error);
+  }, 8000).catch(function () {
+    toast("Could not save that like. Please try again.");
   });
 }
 
