@@ -987,7 +987,7 @@ body.page-ai-brief #ai-tools .kicker{
   letter-spacing: 0.08em;
 }
 
-body.page-ai-brief #ai-tools .tool-info h4{
+body.page-ai-brief #ai-tools .tool-info h3{
   font-size: clamp(24px, 3vw, 34px);
   line-height: 1.2;
   margin: 14px 0;
@@ -1119,7 +1119,7 @@ body.page-ai-brief #research-spotlight .paper .media{
   overflow: hidden;
 }
 
-body.page-ai-brief #research-spotlight .paper h4{
+body.page-ai-brief #research-spotlight .paper h3{
   font-size: 18px;
   line-height: 1.4;
   margin-bottom: 8px;
@@ -1161,7 +1161,7 @@ body.page-ai-brief #subscribe .tag{
   color: #fff;
 }
 
-body.page-ai-brief #subscribe h3{
+body.page-ai-brief #subscribe h2{
   font-size: clamp(26px, 3vw, 36px);
   line-height: 1.2;
   color: #fff;
@@ -1262,7 +1262,7 @@ body.page-ai-brief .collage .frame .media{
   overflow: hidden;
 }
 
-/* Get involed button */
+/* Get involved button */
 /* Always red,
 including hover and click */
 body a.get-involved-btn,
@@ -1279,37 +1279,24 @@ body a.get-involved-btn:active{
 
 /* Keeps the theme button's existing shape and size. */
 .lab-header #languageToggle{
-  background: #f5f0ff;
-  color: #6935a5;
-  border-color: #cbb5e8;
+  background: transparent;
+  color: inherit;
+  border-color: currentColor;
   font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
-
-  box-shadow: 0 0 10px rgba(124, 58, 237, 0.15);
-
-  transition: background-color 0.25s ease,
-              border-color 0.25s ease,
-              box-shadow 0.25s ease;
+  box-shadow: none;
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
-.lab-header #languageToggle:hover{
-  background: #ede2ff;
-  border-color: #9460d3;
-  box-shadow: 0 0 18px rgba(124, 58, 237, 0.35);
-}
-
-body.dark .lab-header #languageToggle{
-  background: #251d36;
-  color: #d8bcff;
-  border-color: #79569f;
-  box-shadow: 0 0 12px rgba(185, 132, 255, 0.2);
-}
-
+.lab-header #languageToggle:hover,
+body.dark .lab-header #languageToggle,
 body.dark .lab-header #languageToggle:hover{
-  background: #352447;
-  border-color: #c69aff;
-  box-shadow: 0 0 20px rgba(185, 132, 255, 0.4);
+  background: transparent;
+  color: inherit;
+  border-color: currentColor;
+  box-shadow: none;
 }
 
 .lab-header #languageToggle:focus-visible{
@@ -1477,17 +1464,14 @@ body:not(.dark) .lab-menu-toggle{
   color: #13364d !important;
 }
 
-body:not(.dark) .lab-header #languageToggle{
+body:not(.dark) .lab-header #languageToggle,
+body:not(.dark) .lab-header #languageToggle:hover{
   background: #f4f6f8 !important;
   color: #13364d !important;
   border-color: #24557a !important;
   box-shadow: none !important;
-}
-
-body:not(.dark) .lab-header #languageToggle:hover{
-  background: #e5e9ed !important;
-  border-color: #13364d !important;
-  box-shadow: none !important;
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 body:not(.dark) .lab-header .lab-nav-links > a.circuit-join,
@@ -2274,8 +2258,6 @@ body.page-home .explore-card .coming-soon-label {
   color: var(--home-red);
 }
 body.page-home #resources .resources-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-/* Hidden the same way as the Industry Partners navigation link. */
-body.page-home #resources .resource[href="industry.html"] { display: none !important; }
 
 @media (max-width: 900px) {
   body.page-home .home-split,
@@ -3395,7 +3377,10 @@ body.page-events.dark .event-section:not(.past-section) {
   border-left: 1px solid rgba(47, 125, 79, 0.55);
 }
 .lab-footer-top {
-  margin-right: 140px;
+  margin-right: 0;
+}
+.lab-footer-inner {
+  padding-inline-end: 11rem;
 }
 body.page-ai-brief .back-to-top {
   bottom: 136px;
@@ -3581,6 +3566,12 @@ body.page-outcomes :is(h1, h2),
 body.page-ai-brief :is(h1, h2) {
   font-family: var(--font-display) !important;
   font-weight: 700 !important;
+  letter-spacing: -0.045em !important;
+}
+
+body.page-ai-brief :is(.sec-title h2, .sub-card h2) {
+  font-family: var(--font-ui) !important;
+  font-weight: 900 !important;
   letter-spacing: -0.045em !important;
 }
 
@@ -5420,7 +5411,7 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   display: inline-flex !important;
   flex: 0 0 auto !important;
   align-items: center !important;
-  margin-right: 140px !important;
+  margin-right: 0 !important;
   color: #d5e2f0 !important;
   font-size: 0.79rem !important;
   font-weight: 650 !important;
@@ -5447,6 +5438,11 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
     footer.lab-site-footer .lab-footer-brand span {
     padding-left: 0 !important;
     border-left: 0 !important;
+  }
+
+  body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
+    footer.lab-site-footer .lab-footer-inner {
+    padding-inline-end: 0 !important;
   }
 
   body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
@@ -5743,4 +5739,22 @@ body.dark.page-home .hero {
 
 h1, h2, h3, p, li, dd, dt, a, button {
   overflow-wrap: break-word;
+}
+
+/* Unfinished copy stays off the published pages.
+   Add data-show-unfinished to <html> to preview it while the team fills it in. */
+html:not([data-show-unfinished]) :is(
+  .content-pending,
+  .pending-note,
+  .pending-status,
+  .coming-soon,
+  .coming-soon-label,
+  .demo-notice,
+  .sample-label,
+  .cis-pending,
+  .image-slot-label,
+  .skill-card:has(.content-pending),
+  [data-unfinished]
+) {
+  display: none !important;
 }

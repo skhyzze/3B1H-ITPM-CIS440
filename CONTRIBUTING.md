@@ -22,6 +22,14 @@ Use a short imperative message that says why the change exists.
 
 Recent messages in this repo look like: `Update approved Microsoft Lists content`
 
+## Unfinished copy
+
+Placeholder text is marked with `data-unfinished` or an existing pending class (`.content-pending`, `.coming-soon`, `.demo-notice`, and the image-slot labels). Those stay hidden. To preview them while writing the real copy, add `data-show-unfinished` to the `<html>` tag of that page. Remove the attribute before publishing.
+
+## Industry Partners
+
+`showIndustryPartners` in `js/config.js` is the switch. While it is `false`, `npm run build` leaves Industry Partners out of the header, footer, and home cards. `industry.html` stays reachable by its URL. The chatbot also drops that link. Set the flag to `true` and rebuild to show the links again.
+
 ## Editing the site
 
 Edit page content in the HTML files at the repo root. Edit the shared header and footer in `src/partials/header.html` and `src/partials/footer.html`. Do not paste a new copy of either into a page. A page includes them with:

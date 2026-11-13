@@ -6,6 +6,8 @@ window.LAB_FELLOWS_READY=(async function(){
   status.textContent='Loading student fellows…';
   const url='data/cms-fellows.json';
   function node(tag,cls,text){const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;}
+  function unfinishedCopy(text){return typeof text==='string'&&(/^\s*\[/.test(text)||/add a short, student-approved/i.test(text)||/^add the project title/i.test(text));}
+  function pending(el,text){if(unfinishedCopy(text))el.setAttribute('data-unfinished','');return el;}
   function safeUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}}
   const controller=new AbortController();
   const timer=setTimeout(function(){controller.abort();},20000);
@@ -18,12 +20,13 @@ window.LAB_FELLOWS_READY=(async function(){
       const card=node('article','fellow-card','');
       const initials=node('div','initials',f.initials||f.name.split(/\s+/).map(n=>n[0]).join('').slice(0,2));initials.setAttribute('aria-hidden','true');
       card.append(node('div','card-index',String(i+1).padStart(2,'0')),initials,node('h3','',f.name),node('p','fellow-role',f.role));
-      if(f.bio)card.append(node('p','fellow-focus',f.bio));
+      if(f.bio)card.append(pending(node('p','fellow-focus',f.bio),f.bio));
       if(f.projectLabel||f.projectTitle||f.projectDescription||f.url){
         const project=node('p','fellow-project','');
         if(f.projectLabel)project.append(node('span','',f.projectLabel));
         if(f.projectTitle)project.append(node('strong','',f.projectTitle));
         project.append(document.createTextNode(' '+(f.projectDescription||'')+' '));
+        if(unfinishedCopy(f.projectDescription)||unfinishedCopy(f.projectTitle))project.setAttribute('data-unfinished','');
         const href=safeUrl(f.url);if(href){const link=node('a','',f.linkLabel||'View project ↗');link.href=href;link.target='_blank';link.rel='noopener noreferrer';link.setAttribute('aria-label',link.textContent+': '+f.name);project.append(link);}
         card.append(project);
       }

@@ -10,6 +10,7 @@
     requestTimeout: Number(externalConfig.requestTimeout) || 12000
   };
 
+  const showIndustry = labConfig.showIndustryPartners === true;
   const pageLinks = {
     home: 'index.html',
     fellowship: 'fellowship.html',
@@ -69,7 +70,7 @@
     '  <div class="lab-chat-header">',
     '    <div class="lab-chat-title">',
     '      <strong id="labChatTitle">Ask the Lab</strong>',
-    '      <span class="lab-chat-status">' + (config.endpoint ? 'Connected' : 'Demo mode - approved site content') + '</span>',
+      '      <span class="lab-chat-status"></span>',
     '    </div>',
     '    <button class="lab-chat-close" type="button" aria-label="Close chat">&times;</button>',
     '  </div>',
@@ -83,6 +84,7 @@
   ].join('');
   document.body.appendChild(root);
 
+  const status = root.querySelector('.lab-chat-status');
   const launcher = root.querySelector('.lab-chat-launcher');
   const panel = root.querySelector('.lab-chat-panel');
   const closeButton = root.querySelector('.lab-chat-close');
@@ -152,12 +154,7 @@
   function initializeChat() {
     if (initialized) return;
     initialized = true;
-    addMessage(
-      'assistant',
-      config.endpoint
-        ? 'Welcome! Ask me a question about the Applied AI Lab'
-        : 'Welcome! This chatbot is now active.'
-    );
+    addMessage('assistant', 'Welcome! Ask me a question about the Applied AI Lab.');
     addSuggestions();
   }
 
@@ -178,13 +175,16 @@
 
   function getMockAnswer(question) {
     const match = mockAnswers.find(function (item) {
+      if (!showIndustry && item.link && item.link.href === pageLinks.industry) return false;
       return item.pattern.test(question);
     });
 
     if (match) return match;
 
     return {
-      answer: 'I can only answer questions supported by the current Applied AI Lab website. Try asking about the Lab, fellowships, events, student projects, industry partners, or ways to get involved.'
+      answer: showIndustry
+        ? 'I can only answer questions supported by the current Applied AI Lab website. Try asking about the Lab, fellowships, events, student projects, industry partners, or ways to get involved.'
+        : 'I can only answer questions supported by the current Applied AI Lab website. Try asking about the Lab, fellowships, events, student projects, or ways to get involved.'
     };
   }
 
@@ -234,17 +234,21 @@
     try {
       let reply;
       if (config.endpoint) {
-        reply = await getConnectedAnswer(question);
+        try {
+          reply = await getConnectedAnswer(question);
+          status.textContent = 'Connected';
+        } catch (error) {
+          reply = getMockAnswer(question);
+          if (!status.textContent) status.textContent = 'Using site answers';
+        }
       } else {
         await new Promise(function (resolve) { window.setTimeout(resolve, 280); });
         reply = getMockAnswer(question);
+        status.textContent = 'Using site answers';
       }
 
       typing.remove();
       addMessage('assistant', reply.answer, reply.link);
-    } catch (error) {
-      typing.remove();
-      addMessage('assistant', 'The Lab assistant is temporarily unavailable. You can still use the website navigation to explore the Lab.');
     } finally {
       busy = false;
       input.disabled = false;

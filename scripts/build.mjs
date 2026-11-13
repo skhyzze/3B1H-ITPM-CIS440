@@ -10,6 +10,9 @@ const skipDirs = new Set([".git", ".github", ".cursor", "node_modules", "dist", 
 const headerTemplate = fs.readFileSync(path.join(root, "src", "partials", "header.html"), "utf8").trim();
 const footerTemplate = fs.readFileSync(path.join(root, "src", "partials", "footer.html"), "utf8").trim();
 const headerPages = new Set(["home", "industry", "fellowship", "outcomes", "events", "insights"]);
+const showIndustryPartners = /showIndustryPartners:\s*true/.test(
+  fs.readFileSync(path.join(root, "js", "config.js"), "utf8")
+);
 
 function rel(file) {
   return path.relative(root, file).replaceAll("\\", "/");
@@ -67,6 +70,11 @@ function applyIncludes(html, file) {
   return next;
 }
 
+function stripHiddenIndustry(html) {
+  if (showIndustryPartners) return html;
+  return html.replace(/<a\b[^>]*\bdata-industry-link\b[^>]*>[\s\S]*?<\/a>\s*/g, "");
+}
+
 const files = walk(root);
 const assets = files
   .map(rel)
@@ -107,7 +115,8 @@ for (const file of files) {
   const target = path.join(dist, name);
   fs.mkdirSync(path.dirname(target), { recursive: true });
   if (name.endsWith(".html") && !name.includes("/")) {
-    fs.writeFileSync(target, rewrite(applyIncludes(fs.readFileSync(file, "utf8"), name), allPairs));
+    const page = stripHiddenIndustry(applyIncludes(fs.readFileSync(file, "utf8"), name));
+    fs.writeFileSync(target, rewrite(page, allPairs));
   } else {
     fs.copyFileSync(file, target);
   }

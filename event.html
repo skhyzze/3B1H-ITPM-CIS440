@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="css/shared/theme.css">
 </head>
 
-<body class="page-events">
+<body class="page-events" id="top">
 <script>
 (function(){try{var saved=localStorage.getItem("lab-theme");if(saved==="dark"||(!saved&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();
 </script>
@@ -65,7 +65,7 @@
 
     <div class="events-body">
     <!-- Replace sample listings with confirmed events before publishing. -->
-    <aside class="demo-notice">
+    <aside class="demo-notice" data-unfinished>
       <strong>Design preview.</strong>
       Listings marked Demo are samples. Their dates, locations, images, and faculty contacts still need confirmation.
     </aside>
@@ -99,7 +99,7 @@
         </div>
       </div>
 
-      <article class="past-card">
+      <article class="past-card" data-unfinished>
         <span class="category"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="6" width="16" height="13" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 4v4M16 4v4M4 10h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Event</span>
 
         <div>
@@ -152,10 +152,10 @@
       If there is no URL, the colored frame and caption remain.
     */
     const image=node('div','event-image placeholder '+art,'');image.setAttribute('role','img');image.setAttribute('aria-label',event.title+' image placeholder');
-    image.append(node('span','image-caption','Event image placeholder'));
+    const caption=node('span','image-caption','Event image placeholder');caption.setAttribute('data-unfinished','');image.append(caption);
     const artLabel=node('span','art-label',category==='Research'?'ASK QUESTIONS.':category==='Idea Lab'?'WHAT IF?':'BUILD SOMETHING.');artLabel.setAttribute('aria-hidden','true');image.append(artLabel);
     const src=safe(event.image);if(src){const img=document.createElement('img');img.src=src;img.alt=event.title;img.loading=event._eager?'eager':'lazy';img.referrerPolicy='no-referrer';img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1';img.addEventListener('load',()=>{image.removeAttribute('role');image.removeAttribute('aria-label');image.replaceChildren(img);});image.append(img);img.addEventListener('error',()=>img.remove(),{once:true});}
-    const content=node('div','event-content',''),top=node('div','event-topline','');top.append(node('span','category',category));if(event.sample)top.append(node('span','sample-label','Demo'));
+    const content=node('div','event-content',''),top=node('div','event-topline','');top.append(node('span','category',category));if(event.sample){top.append(node('span','sample-label','Demo'));card.setAttribute('data-unfinished','');}
     const meta=node('dl','event-meta','');for(const [label,value] of [['Date & time',event.dateTime||'To be announced'],['Location',event.location||'To be confirmed']]){const group=node('div','','');group.append(node('dt','',label),node('dd','',value));meta.append(group);}
     content.append(top,node('h3','',event.title),meta,node('p','event-summary',event.summary));
     const details=node('details','',''),copy=node('div','detail-copy','');details.append(node('summary','','Event details'));
@@ -177,7 +177,9 @@
       if(!response.ok)throw Error();const data=await response.json();if(data.error||!Array.isArray(data.events))throw Error();
       const items=data.events.filter(e=>e&&typeof e.title==='string'&&e.title.trim());
       if(items.length){items[0]._eager=true;grid.replaceChildren(...items.map(cardFor));}else message('No upcoming events published yet. Check back soon.');
-      note.textContent=items.length&&items.every(e=>e.sample)?'Sample listings':'Upcoming listings';
+      const samplesOnly=items.length&&items.every(e=>e.sample);
+      note.textContent=samplesOnly?'Sample listings':'Upcoming listings';
+      if(samplesOnly)note.setAttribute('data-unfinished','');else note.removeAttribute('data-unfinished');
     }catch(error){message('Upcoming events are temporarily unavailable. Please try again.',true);}finally{grid.removeAttribute('aria-busy');}
   }
   await load();

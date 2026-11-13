@@ -202,7 +202,7 @@ function storyCard(item, i, section, lead) {
     media(item, "", lead ? 70 : 40) + saveBtn(item) +
     '<div class="body">' +
       '<div><span class="chip">' + esc(item.type) + '</span></div>' +
-      '<h4 class="clamp3">' + esc(item.title) + '</h4>' +
+      '<h3 class="clamp3">' + esc(item.title) + '</h3>' +
       descriptionHtml(item, lead ? 'clamp2' : 'clamp3') +
       '<div class="foot">' + meta(item) + '<span class="go">' + esc(section.button) + ' ' + icon("arrow", 15) + '</span></div>' +
     '</div></a>';
@@ -217,7 +217,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<a class="item lesson reveal" ' + itemAttrs(item, x.i) + ' ' + linkAttrs(item) + '>' + media(item, "", 40) + saveBtn(item) +
         '<div class="body"><span class="num">LESSON ' + String(n + 1).padStart(2, "0") + ' · ' + esc(item.type.toUpperCase()) + '</span>' +
-        '<h4 class="clamp2">' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp3') +
+        '<h3 class="clamp2">' + esc(item.title) + '</h3>' + descriptionHtml(item, 'clamp3') +
         '<div class="foot">' + meta(item) + '<span class="go">' + esc(s.button) + ' ' + icon("arrow", 15) + '</span></div></div></a>';
     }).join("") + '</div>';
   },
@@ -226,13 +226,13 @@ const LAYOUTS = {
     let html = '<div class="item tool-hero" ' + itemAttrs(top, list[0].i) + '>' +
       '<a class="tool-shot reveal" ' + linkAttrs(top) + '>' + media(top, "", 72) + '</a>' +
       '<div class="tool-info reveal"><span class="kicker">' + icon("sparkle", 16) + ' TOOL OF THE WEEK</span>' +
-      '<h4>' + esc(top.title) + '</h4>' + descriptionHtml(top, 'clamp4') + meta(top) +
+      '<h3>' + esc(top.title) + '</h3>' + descriptionHtml(top, 'clamp4') + meta(top) +
       '<div class="tool-ctas"><a class="btn" ' + linkAttrs(top) + '>' + toolAction(top) + ' ' + icon("arrow", 16) + '</a>' + saveBtn(top) + '</div></div></div>';
     if (list.length > 1) {
       html += '<div class="tool-shelf">' + list.slice(1).map(function (x) {
         const item = x.item;
         return '<a class="item tool-row reveal" ' + itemAttrs(item, x.i) + ' ' + linkAttrs(item) + '>' + media(item, "", 28) +
-          '<div><h5 class="clamp2">' + esc(item.title) + '</h5>' + descriptionHtml(item, 'clamp2') + meta(item) + '</div>' +
+          '<div><h4 class="clamp2">' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp2') + meta(item) + '</div>' +
           '<div style="display:flex;align-items:center;gap:12px"><span class="go">' + toolAction(item) + ' ' + icon("arrow", 15) + '</span>' + saveBtn(item) + '</div></a>';
       }).join("") + '</div>';
     }
@@ -245,7 +245,7 @@ const LAYOUTS = {
       const tag = item.videoId ? 'div' : 'a';
       return '<' + tag + ' class="item vid reveal" ' + itemAttrs(item, x.i) + ' ' + open + '>' +
         '<div class="thumb">' + media(item, "", 48) + saveBtn(item) + '<span class="play">' + icon("play", 26) + '</span><span class="src-tag">' + esc(item.source) + '</span></div>' +
-        '<h4 class="clamp2">' + esc(item.title) + '</h4>' + meta(item) + '</' + tag + '>';
+        '<h3 class="clamp2">' + esc(item.title) + '</h3>' + meta(item) + '</' + tag + '>';
     }).join("") + '</div>';
   },
   "applied-ai-use-cases": function (list, s) {
@@ -253,7 +253,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<div class="item case reveal" ' + itemAttrs(item, x.i) + '>' + '<a ' + linkAttrs(item) + ' class="media-link" style="display:contents">' + media(item, "", 64) + '</a>' +
         '<div class="body"><span class="kicker">CASE ' + String(n + 1).padStart(2, "0") + ' · ' + esc(item.source.toUpperCase()) + '</span>' +
-        '<h4>' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp3') + meta(item) +
+        '<h3>' + esc(item.title) + '</h3>' + descriptionHtml(item, 'clamp3') + meta(item) +
         '<div style="display:flex;gap:10px;align-items:center"><a class="btn" ' + linkAttrs(item) + '>' + esc(s.button) + ' ' + icon("arrow", 15) + '</a>' +
         saveBtn(item).replace('class="save"', 'class="save" style="position:static"') + '</div></div></div>';
     }).join("") + '</div>';
@@ -263,7 +263,7 @@ const LAYOUTS = {
       const item = x.item;
       return '<div class="item paper reveal" ' + itemAttrs(item, x.i) + '><span class="n">' + String(n + 1).padStart(2, "0") + '</span>' +
         '<a ' + linkAttrs(item) + '>' + media(item, "", 26) + '</a>' +
-        '<div><a ' + linkAttrs(item) + '><h4 class="clamp2">' + esc(item.title) + '</h4></a>' + descriptionHtml(item, 'clamp2') +
+        '<div><a ' + linkAttrs(item) + '><h3 class="clamp2">' + esc(item.title) + '</h3></a>' + descriptionHtml(item, 'clamp2') +
         '<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">' + meta(item) + '<a class="go" ' + linkAttrs(item) + '>' + esc(s.button) + ' ' + icon("arrow", 15) + '</a></div></div>' +
         saveBtn(item) + '</div>';
     }).join("") + '</div>';
@@ -277,15 +277,15 @@ function sectionHtml(section, list) {
   const band = section.id === "ai-tools" ? " band" : "";
   return '<section class="section' + band + '" id="' + esc(section.id) + '" data-c="' + esc(section.id) + '" data-sec="' + esc(section.id) + '"><div class="wrap">' +
     '<div class="sec-head reveal"><div class="sec-title"><span class="sec-icon">' + icon(section.id, 24) + '</span>' +
-    '<div><h3>' + esc(section.name) + '</h3><p>' + esc(section.subtitle) + '</p></div></div>' + side + '</div>' +
+    '<div><h2>' + esc(section.name) + '</h2><p>' + esc(section.subtitle) + '</p></div></div>' + side + '</div>' +
     layout(list, section) + '</div></section>';
 }
 
 // Builds the signup preview; emails are not saved.
 function subscribeHtml(d) {
   return '<section class="subscribe" id="subscribe"><div class="wrap"><div class="sub-card reveal">' +
-    '<div><span class="tag">' + icon("sparkle", 14) + 'NEW</span>' +
-    '<h3>Subscribe to the ' + esc(d.lab) + ' Newsletter</h3>' +
+    '<div><span class="tag">' + icon("sparkle", 14) + ' NEW</span>' +
+    '<h2>Subscribe to the ' + esc(d.lab) + ' Newsletter</h2>' +
     '<p>Get The Circuit in your inbox every week: one spotlight, the best of the rest, zero noise.</p></div>' +
     '<div><form class="sub-form" id="sub-form"><input type="email" placeholder="you@university.edu" aria-label="Email address" required>' +
     '<input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">' +
@@ -493,14 +493,14 @@ function wireUp() {
     const trap = form.querySelector('input[name="company"]');
     if (trap && trap.value) return;
 
-    let already = false;
-    try { already = localStorage.getItem(SUBSCRIBED_KEY) === "1"; } catch (err) { already = false; }
-    if (already) {
-      note.textContent = "You're already subscribed on this device.";
+    const email = input.value.trim().toLowerCase();
+    let sentFor = "";
+    try { sentFor = localStorage.getItem(SUBSCRIBED_KEY) || ""; } catch (err) { sentFor = ""; }
+    if (sentFor === email) {
+      note.textContent = "This browser already sent a request for that address. Enter a different email to add someone else.";
       return;
     }
 
-    const email = input.value.trim().toLowerCase();
     button.disabled = true;
     note.textContent = "Sending…";
 
@@ -514,9 +514,9 @@ function wireUp() {
         },
         8000
       );
-      note.textContent = "Thanks for joining The Circuit! You're on the list.";
+      note.textContent = "Request sent. This page can't confirm the signup, so check your inbox for The Circuit.";
       form.reset();
-      try { localStorage.setItem(SUBSCRIBED_KEY, "1"); } catch (err) { /* private mode */ }
+      try { localStorage.setItem(SUBSCRIBED_KEY, email); } catch (err) { /* private mode */ }
     } catch (error) {
       note.textContent = "Could not send. Please try again.";
     } finally {
@@ -561,13 +561,24 @@ function sendLikeToSheet(url) {
   });
 }
 
+const likeTimers = new Map();
+
+function scheduleLike(url) {
+  clearTimeout(likeTimers.get(url));
+  likeTimers.set(url, setTimeout(function () {
+    likeTimers.delete(url);
+    try { sendLikeToSheet(url); } catch (err) { toast("Could not save that like. Please try again."); }
+  }, 400));
+}
+
 // Toggles a heart and keeps the surrounding article link from opening.
 function toggleLike(button) {
   const url = button.dataset.save;
-  if (saved.has(url)) { saved.delete(url); toast("Removed from Liked Feedback"); }
-  else { saved.add(url); toast("♥ LIKED! Thanks for you feedback!"); }
+  if (!url) return;
+  if (saved.has(url)) { saved.delete(url); toast("Removed from Liked."); }
+  else { saved.add(url); toast("Thanks for your feedback!"); }
   persistSaved(); refreshSaved();
-  sendLikeToSheet(url);
+  scheduleLike(url);
   if (filterState.topic === "saved") applyFilters();
 }
 

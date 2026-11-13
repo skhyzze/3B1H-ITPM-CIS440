@@ -50,6 +50,7 @@ Publish the `dist/` directory, not the repo root. The root HTML is the source. I
 - Local preview: `npm run dev`
 - Public URL: TODO
 - Host: TODO
+- `og:image`: TODO. Each page already has `og:title` and `og:description`. Add `og:image` when a share image path is available.
 
 `npm run build` writes minified, content-hashed CSS and JavaScript into `dist/` and stitches the header and footer into each page. `.github/workflows/build.yml` runs that build, checks that every built page has a header and footer and no leftover include marker, and uploads `dist` as an artifact. Nothing in the repo deploys that artifact yet.
 

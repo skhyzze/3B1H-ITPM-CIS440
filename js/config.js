@@ -3,6 +3,11 @@
    Account owners are also listed in the root README, under Accounts and handoff.
 */
 window.LAB_CONFIG = {
+  /* One switch for Industry Partners in the header, footer, home cards, and chatbot.
+     false removes those links from the built site. industry.html stays reachable by its URL.
+     Run npm run build after changing this. */
+  showIndustryPartners: false,
+
   /* Cloudflare Worker that answers the site chatbot.
      Personal account: the Workers subdomain tan-gurpinar.workers.dev.
      This is not a lab-owned hostname. */
