@@ -4,8 +4,9 @@
   if (document.querySelector('[data-lab-chat]')) return;
 
   const externalConfig = window.LAB_CHAT_CONFIG || {};
+  const labConfig = window.LAB_CONFIG || {};
   const config = {
-    endpoint: typeof externalConfig.endpoint === 'string' ? externalConfig.endpoint : 'https://lab-chat.tan-gurpinar.workers.dev',
+    endpoint: typeof externalConfig.endpoint === 'string' ? externalConfig.endpoint : (typeof labConfig.chatEndpoint === 'string' ? labConfig.chatEndpoint : 'https://lab-chat.tan-gurpinar.workers.dev'),
     requestTimeout: Number(externalConfig.requestTimeout) || 12000
   };
 

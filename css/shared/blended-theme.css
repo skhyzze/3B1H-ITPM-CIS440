@@ -1,7 +1,7 @@
 /* Shared bridge between the team's technical navy system and the AI Brief. */
 @font-face{
   font-family: "Space Grotesk";
-  src: url("../fonts/space-grotesk/SpaceGrotesk-Variable.ttf") format("truetype");
+  src: url("../../fonts/space-grotesk/SpaceGrotesk-Variable.ttf") format("truetype");
   font-style: normal;
   font-weight: 300 700;
   font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: "Orbitron";
-  src: url("../fonts/orbitron/Orbitron-Variable.ttf") format("truetype");
+  src: url("../../fonts/orbitron/Orbitron-Variable.ttf") format("truetype");
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: "Oxanium";
-  src: url("../fonts/oxanium/Oxanium-Variable.ttf") format("truetype");
+  src: url("../../fonts/oxanium/Oxanium-Variable.ttf") format("truetype");
   font-style: normal;
   font-weight: 200 800;
   font-display: swap;

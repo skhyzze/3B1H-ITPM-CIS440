@@ -1,6 +1,6 @@
 /* BENTO CIRCUIT REVAMP
-   Undo this prompt by deleting css/bento-circuit.css and removing
-   <link rel="stylesheet" href="css/bento-circuit.css"> from:
+   Undo this prompt by deleting css/shared/bento-circuit.css and removing
+   <link rel="stylesheet" href="css/shared/bento-circuit.css"> from:
    index.html, industry.html, 404.html, fellowship.html, event.html,
    studentoutcomes.html, ai-insights.html.
    Also revert the prompt-scoped reveal additions in js/site.js and

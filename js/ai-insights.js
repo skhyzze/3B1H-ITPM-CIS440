@@ -499,7 +499,7 @@ function wireUp() {
 
     try {
       await fetch(
-        "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
+        (window.LAB_CONFIG && window.LAB_CONFIG.newsletterSubscribeUrl) || "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
         {
           method: "POST",
           mode: "no-cors",
@@ -517,7 +517,7 @@ function wireUp() {
   });
 }
 
-const LIKES_URL = "https://script.google.com/macros/s/AKfycbzAKsbaQZBCjk2Nvy41X4u76dRuA36ayQN5ZEl5NDW-0K_3rMHmaBNNqFPy4SYAdeq4sA/exec";
+const LIKES_URL = (window.LAB_CONFIG && window.LAB_CONFIG.newsletterLikesUrl) || "https://script.google.com/macros/s/AKfycbzAKsbaQZBCjk2Nvy41X4u76dRuA36ayQN5ZEl5NDW-0K_3rMHmaBNNqFPy4SYAdeq4sA/exec";
 
 function sendLikeToSheet(url) {
   const item =

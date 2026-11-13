@@ -9,8 +9,19 @@ Sprint 1 was the foundation of the site.
 - Lab Mission: Henry
 - Events page: Skhy
 
-## Git
+## Branching
+
+- Start from `main` and use a branch named `feature/short-name`.
+- Open a pull request into `main`.
+- At least one teammate reviews the pull request.
+- Tell the team before merging, so they can review the work before it lands on `main`.
+
+## Commits
+
+Use a short imperative message that says why the change exists.
+
+Recent messages in this repo look like: `Update approved Microsoft Lists content`
+
+## Git help
 
 If you need help with Git, ask before you push.
-
-When your assigned work is ready, tell your teammates so they can review it before it is merged into the main branch.
