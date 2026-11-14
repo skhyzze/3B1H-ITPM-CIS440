@@ -24,7 +24,7 @@ Recent messages in this repo look like: `Update approved Microsoft Lists content
 
 ## Unfinished copy
 
-Placeholder text is marked with `data-unfinished` or an existing pending class (`.content-pending`, `.coming-soon`, `.demo-notice`, and the image-slot labels). Those stay hidden. To preview them while writing the real copy, add `data-show-unfinished` to the `<html>` tag of that page. Remove the attribute before publishing.
+Placeholder text is marked with `data-unfinished` or an existing pending class (`.content-pending`, `.coming-soon`, `.demo-notice`, and the image-slot labels). A whole section can carry `data-unfinished` too, which hides its heading along with the copy. Those stay hidden. To preview them while writing the real copy, add `data-show-unfinished` to the `<html>` tag of that page. Remove the attribute before publishing.
 
 ## Industry Partners
 

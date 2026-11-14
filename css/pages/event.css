@@ -270,6 +270,11 @@ and Industry. */
   gap: 16px;
 }
 
+.page-events .event-grid > .event-content{
+  grid-column: 1 / -1;
+  max-width: 40rem;
+}
+
 .page-events .event-card,
 .page-events .past-card{
   min-width: 0;

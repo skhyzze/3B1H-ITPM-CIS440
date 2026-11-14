@@ -13,6 +13,46 @@ const headerPages = new Set(["home", "industry", "fellowship", "outcomes", "even
 const showIndustryPartners = /showIndustryPartners:\s*true/.test(
   fs.readFileSync(path.join(root, "js", "config.js"), "utf8")
 );
+const siteUrl = readSiteUrl(process.env.SITE_URL);
+
+function readSiteUrl(value) {
+  const raw = (value || "").trim();
+  if (!raw) return null;
+  let url;
+  try {
+    url = new URL(raw);
+  } catch {
+    throw new Error("SITE_URL must be an absolute URL, or left empty");
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    throw new Error("SITE_URL must start with http:// or https://");
+  }
+  const prefix = url.pathname.replace(/\/+$/, "");
+  return { prefix, root: `${url.origin}${prefix}` };
+}
+
+function pageUrl(file) {
+  return file === "index.html" ? `${siteUrl.root}/` : `${siteUrl.root}/${file}`;
+}
+
+function isNoindex(html) {
+  return /<meta\b[^>]*\bname\s*=\s*["']robots["'][^>]*\bcontent\s*=\s*["'][^"']*noindex/i.test(html)
+    || /<meta\b[^>]*\bcontent\s*=\s*["'][^"']*noindex[^"']*["'][^>]*\bname\s*=\s*["']robots["']/i.test(html);
+}
+
+function rootRelative404(html) {
+  return html.replace(/(\s(?:href|src|data-logo-animated)\s*=\s*["'])(?![a-z]+:|\/\/|#|\/)([^"']+)/gi, "$1/$2");
+}
+
+function prefixRootPaths(html) {
+  if (!siteUrl.prefix) return html;
+  return html.replace(/(\s(?:href|src|data-logo-animated)\s*=\s*["'])\/(?!\/)/gi, `$1${siteUrl.prefix}/`);
+}
+
+function insertCanonical(html, file) {
+  if (/<link\b[^>]*\brel\s*=\s*["']canonical["']/i.test(html)) return html;
+  return html.replace("</head>", `  <link rel="canonical" href="${pageUrl(file)}">\n</head>`);
+}
 
 function rel(file) {
   return path.relative(root, file).replaceAll("\\", "/");
@@ -98,15 +138,17 @@ for (const [file, code] of minified) {
 }
 
 const pairs = [...map.entries()].sort((a, b) => b[0].length - a[0].length);
-const site = rewrite(minified.get("js/site.js"), pairs);
-minified.set("js/site.js", site);
-map.set("js/site.js", hashedName("js/site.js", site));
+const bundledSite = rewrite(minified.get("js/site.js"), pairs);
+minified.set("js/site.js", bundledSite);
+map.set("js/site.js", hashedName("js/site.js", bundledSite));
 const allPairs = [...map.entries()].sort((a, b) => b[0].length - a[0].length);
 
 fs.mkdirSync(dist, { recursive: true });
 for (const entry of fs.readdirSync(dist)) {
   fs.rmSync(path.join(dist, entry), { recursive: true, force: true });
 }
+
+const publicPages = [];
 
 for (const file of files) {
   const name = rel(file);
@@ -115,11 +157,24 @@ for (const file of files) {
   const target = path.join(dist, name);
   fs.mkdirSync(path.dirname(target), { recursive: true });
   if (name.endsWith(".html") && !name.includes("/")) {
-    const page = stripHiddenIndustry(applyIncludes(fs.readFileSync(file, "utf8"), name));
-    fs.writeFileSync(target, rewrite(page, allPairs));
+    let page = rewrite(stripHiddenIndustry(applyIncludes(fs.readFileSync(file, "utf8"), name)), allPairs);
+    if (siteUrl) {
+      if (name === "404.html") page = rootRelative404(page);
+      page = prefixRootPaths(page);
+      page = insertCanonical(page, name);
+      const hiddenIndustry = name === "industry.html" && !showIndustryPartners;
+      if (name !== "404.html" && !hiddenIndustry && !isNoindex(page)) publicPages.push(name);
+    }
+    fs.writeFileSync(target, page);
   } else {
     fs.copyFileSync(file, target);
   }
+}
+
+if (siteUrl) {
+  const locs = publicPages.sort().map((file) => `  <url><loc>${pageUrl(file)}</loc></url>`).join("\n");
+  fs.writeFileSync(path.join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${locs}\n</urlset>\n`);
+  fs.writeFileSync(path.join(dist, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl.root}/sitemap.xml\n`);
 }
 
 for (const [file, code] of minified) {

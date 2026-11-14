@@ -81,7 +81,7 @@
           <h2 id="upcoming-title">Upcoming events</h2>
         </div>
 
-        <span class="section-note">Sample listings</span>
+        <span class="section-note" data-unfinished>Sample listings</span>
       </div>
 
       <div class="event-grid" aria-busy="true"></div>
@@ -98,6 +98,9 @@
           <h2 id="past-title">Past events</h2>
         </div>
       </div>
+
+      <!-- Remove this line when a confirmed past event is added. -->
+      <p class="event-soon">Past events will be posted here soon.</p>
 
       <article class="past-card" data-unfinished>
         <span class="category"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="6" width="16" height="13" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 4v4M16 4v4M4 10h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Event</span>
@@ -176,8 +179,11 @@
       }finally{clearTimeout(timer);}
       if(!response.ok)throw Error();const data=await response.json();if(data.error||!Array.isArray(data.events))throw Error();
       const items=data.events.filter(e=>e&&typeof e.title==='string'&&e.title.trim());
-      if(items.length){items[0]._eager=true;grid.replaceChildren(...items.map(cardFor));}else message('No upcoming events published yet. Check back soon.');
-      const samplesOnly=items.length&&items.every(e=>e.sample);
+      const samplesOnly=items.length>0&&items.every(e=>e.sample);
+      const showUnfinished=document.documentElement.hasAttribute('data-show-unfinished');
+      if(samplesOnly&&!showUnfinished){message('Upcoming events will be posted here soon.');}
+      else if(items.length){items[0]._eager=true;grid.replaceChildren(...items.map(cardFor));}
+      else message('No upcoming events published yet. Check back soon.');
       note.textContent=samplesOnly?'Sample listings':'Upcoming listings';
       if(samplesOnly)note.setAttribute('data-unfinished','');else note.removeAttribute('data-unfinished');
     }catch(error){message('Upcoming events are temporarily unavailable. Please try again.',true);}finally{grid.removeAttribute('aria-busy');}

@@ -814,15 +814,7 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   letter-spacing: 0.04em;
 }
 
-.lab-footer-nav{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 8px 22px;
-}
-
-.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top){
+.lab-site-footer .lab-footer-top{
   position: relative;
   color: #b9c8d4 !important;
   font-size: 0.79rem;
@@ -831,11 +823,11 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
   white-space: nowrap;
 }
 
-.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top):is(:hover, :focus-visible){
+.lab-site-footer .lab-footer-top:is(:hover, :focus-visible){
   color: #ffffff !important;
 }
 
-.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top):focus-visible{
+.lab-site-footer .lab-footer-top:focus-visible{
   outline: 2px solid #ff6b78;
   outline-offset: 5px;
 }
@@ -856,10 +848,6 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
     align-items: start;
     gap: 24px;
     padding: 42px 0;
-  }
-
-  .lab-footer-nav{
-    justify-content: flex-start;
   }
 
   .lab-footer-top{
@@ -1721,7 +1709,7 @@ body.page-ai-brief:not(.dark) :is(footer, .lab-site-footer){
 }
 
 body:not(.dark) .lab-footer-brand strong,
-body:not(.dark) .lab-site-footer :is(.lab-footer-nav a, .lab-footer-top){
+body:not(.dark) .lab-site-footer .lab-footer-top{
   color: #f4f6f8 !important;
 }
 
@@ -2257,12 +2245,13 @@ body.page-home .explore-card .coming-soon-label {
   text-transform: uppercase;
   color: var(--home-red);
 }
-body.page-home #resources .resources-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+body.page-home #resources .resources-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
 
 @media (max-width: 900px) {
   body.page-home .home-split,
-  body.page-home .community-grid,
-  body.page-home #resources .resources-grid { grid-template-columns: 1fr; }
+  body.page-home .community-grid { grid-template-columns: 1fr; }
   body.page-home #lab .image-slot,
   body.page-home #contact .image-slot { display: block; height: auto; }
   body.page-home #lab .image-slot-frame:not(.preview-image),
@@ -3354,10 +3343,7 @@ body.page-events.dark .event-section:not(.past-section) {
   background-image: none !important;
 }
 
-/* Footer keeps the lab line and the two actions. Page links stay in the header. */
-.lab-footer-nav {
-  display: none !important;
-}
+/* Footer keeps the lab line, Join The Circuit, and Back to top. */
 .lab-footer-inner {
   display: flex !important;
   align-items: center;
@@ -3791,15 +3777,14 @@ body.page-home .logic-grid {
   gap: 12px;
 }
 
+@media (max-width: 640px) {
+  body.page-home #resources .resources-grid { grid-template-columns: 1fr; }
+}
+
 @media (min-width: 901px) {
   body.page-home #resources .resources-grid {
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) !important;
     gap: 12px;
     align-items: stretch;
-  }
-
-  body.page-home #resources .resources-grid > .resource:first-child {
-    grid-row: span 2;
   }
 }
 
@@ -4057,7 +4042,7 @@ body.dark .lab-site-footer a:not(.footer-circuit) {
   color: #d5e2f0 !important;
 }
 
-.lab-site-footer :is(.lab-footer-nav a, .lab-footer-top):focus-visible {
+.lab-site-footer .lab-footer-top:focus-visible {
   outline-color: #f0c9d0;
 }
 
@@ -5402,11 +5387,6 @@ body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcom
 }
 
 body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
-  footer.lab-site-footer .lab-footer-nav {
-  display: none !important;
-}
-
-body:is(.page-home, .page-industry, .page-fellowship, .page-events, .page-outcomes, .page-ai-brief)
   footer.lab-site-footer a.lab-footer-top {
   display: inline-flex !important;
   flex: 0 0 auto !important;
@@ -5547,8 +5527,7 @@ body.page-outcomes .outcomes-shot-frame span {
     margin-left: auto;
   }
 
-  .carousel-controls,
-  .lab-footer-nav {
+  .carousel-controls {
     gap: 8px 12px;
   }
 
@@ -5558,7 +5537,7 @@ body.page-outcomes .outcomes-shot-frame span {
     min-height: 44px;
   }
 
-  .lab-site-footer :is(.lab-footer-nav a, .lab-footer-top) {
+  .lab-site-footer .lab-footer-top {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
@@ -5756,5 +5735,9 @@ html:not([data-show-unfinished]) :is(
   .skill-card:has(.content-pending),
   [data-unfinished]
 ) {
+  display: none !important;
+}
+
+html[data-show-unfinished] .event-soon {
   display: none !important;
 }

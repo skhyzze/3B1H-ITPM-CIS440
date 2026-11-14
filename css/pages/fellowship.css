@@ -421,7 +421,6 @@ html.reveal-ready .skill-card.reveal:nth-child(6){ transition-delay: .4s; }
 button.console-line:active{ background: rgba(161,27,46,.28); }
 .page-fellowship .button:active:not(:disabled){ transform: translateY(0) scale(.97); }
 .page-fellowship .lab-nav-links > a:active,
-.page-fellowship .lab-footer-nav a:active,
 .page-fellowship .footer-circuit:active,
 .page-fellowship .lab-footer-top:active{ transform: translateY(1px) scale(.98); }
 .page-fellowship .lab-theme-toggle:active{ transform: scale(.9) rotate(-14deg); }

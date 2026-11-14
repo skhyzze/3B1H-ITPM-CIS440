@@ -48,13 +48,45 @@ Publish the `dist/` directory, not the repo root. The root HTML is the source. I
 - Publish directory: `dist/`
 - Build command: `npm run build`
 - Local preview: `npm run dev`
-- Public URL: TODO
+- Public URL: TODO. Set `SITE_URL` when this is known. See below.
 - Host: TODO
 - `og:image`: TODO. Each page already has `og:title` and `og:description`. Add `og:image` when a share image path is available.
 
 `npm run build` writes minified, content-hashed CSS and JavaScript into `dist/` and stitches the header and footer into each page. `.github/workflows/build.yml` runs that build, checks that every built page has a header and footer and no leftover include marker, and uploads `dist` as an artifact. Nothing in the repo deploys that artifact yet.
 
 The GitHub Action in `.github/workflows/lab-content-sync.yml` only commits approved Microsoft Lists snapshots into `data/cms-*.json`. It does not publish the HTML.
+
+### Site URL
+
+`SITE_URL` is an environment variable. Leave it empty for local preview. Set it for a publish build.
+
+- Custom domain at the host root: `SITE_URL=https://lab.example.edu`
+- Site under a repository path, such as a GitHub project site: `SITE_URL=https://user.github.io/3B1H-ITPM-CIS440`
+
+When `SITE_URL` is set, the build adds a canonical link on each page, writes `dist/sitemap.xml` and `dist/robots.txt`, and rewrites `404.html` asset and page links to root-relative paths. The sitemap lists public pages only. It skips `404.html`, any page with `noindex`, and Industry Partners while `showIndustryPartners` is false. If `SITE_URL` includes a path after the host, that path is prefixed onto every root-relative link, including the 404 assets.
+
+There is no `CNAME` file. The workflows do not configure GitHub Pages. `build.yml` only uploads `dist` as an artifact named `site`.
+
+Crawlers read `robots.txt` from the host root. On a project site the file is served under the repository path, so it does not control `github.io`. A custom domain does use the file the build writes.
+
+### Before launch
+
+- Remove `noindex` on Fellowship (`fellowship.html`, next to the comment `remove when client copy is confirmed`) once the client copy is in.
+- Fill or remove the placeholders listed below. Add `data-show-unfinished` to `<html>` to preview them, and remove that attribute before publishing.
+- Turn on `showIndustryPartners` in `js/config.js` if Industry Partners should appear in the nav, and rebuild.
+- Set `SITE_URL` to the real public address.
+- Add `og:image` when a share image path is available.
+- Ask the Worker owner to allow the production domain and to set rate limits. The Worker source is not in this repo.
+- Replace the newsletter subscribe endpoint with an Apps Script URL that returns JSON and sends CORS headers. The current request uses `mode: 'no-cors'`, so the page cannot tell whether a signup succeeded.
+
+Placeholder copy, with the current file and line:
+
+- `fellowship.html` 52 hero lead; 54 Become a Fellow (the pathway section is hidden); 62, 64, 65 console lines for the hidden sections; 66 pending confirmation; 74 the about section; 125 and 140 candidate intro and caption; 144 and 160 eligibility and commitment cards; 169 pending note; 173 the skills section; 262 the pathway section.
+- `industry.html` 71–76 collaboration descriptions; 82 the partners section; 104 the spotlight; 122–126 pathway descriptions; 132 the partner call to action.
+- `event.html` 68 design preview; 84 sample-listings note; 103 past-events message (remove when a real past event is added); 105 past sample card. Upcoming sample cards are built in the page script and stay hidden unless `data-show-unfinished` is set.
+- `index.html` 326 Computing Resources; 385 the public email and phone sentence; the contact frame caption that tells the team a photograph can replace the frame; image-slot labels in the hero, lab, community, and contact frames.
+- `studentoutcomes.html` 163, 164, and 166 frame labels; 265 and 274 `IMAGE COMING SOON`; the “coming soon” project links use `.cis-pending`.
+- `data/cms-fellows.json` 23 and 25, Vivian Etim’s project line and bio. The fellowship script hides those two when it draws her card.
 
 ## Updating content
 

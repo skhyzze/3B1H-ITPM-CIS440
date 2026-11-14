@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- remove when client copy is confirmed -->
   <meta name="robots" content="noindex">
   <meta name="description" content="Learn how students join the Applied AI Lab Fellowship Pathway and take a deeper role in research, projects, and the Lab community.">
   <meta property="og:title" content="Fellowship Pathway | Applied AI Lab">
@@ -50,7 +51,7 @@
           <h1 id="hero-title">Build what’s <em>next.</em></h1>
           <p class="lead content-pending">[One or two sentences introducing the Fellowship to prospective students. Confirm with the client.]</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#how-to-become">Become a Fellow <span aria-hidden="true">↘</span></a>
+            <a class="button button-primary" href="#how-to-become" data-unfinished>Become a Fellow <span aria-hidden="true">↘</span></a>
             <a class="button button-ghost" href="#fellows">Meet the fellows</a>
           </div>
         </div>
@@ -58,10 +59,10 @@
         <div class="hero-console" aria-label="Fellowship pathway overview">
           <div class="console-bar"><span></span><span></span><span></span><p>fellowship_pathway.json</p></div>
           <div class="console-body">
-            <button class="console-line is-active" type="button" data-pathway-target="#about-fellowship" aria-current="step"><span>01</span><code>WHAT</code><small>What the Fellowship is</small></button>
-            <button class="console-line" type="button" data-pathway-target="#ideal-candidates"><span>02</span><code>WHO</code><small>Who can be a Fellow</small></button>
-            <button class="console-line" type="button" data-pathway-target="#fellow-skills"><span>03</span><code>SKILLS</code><small>What you’ll develop</small></button>
-            <button class="console-line" type="button" data-pathway-target="#how-to-become"><span>04</span><code>APPLY</code><small>How to become a Fellow</small></button>
+            <button class="console-line" type="button" data-pathway-target="#about-fellowship" data-unfinished><span>01</span><code>WHAT</code><small>What the Fellowship is</small></button>
+            <button class="console-line is-active" type="button" data-pathway-target="#ideal-candidates" aria-current="step"><span>02</span><code>WHO</code><small>Who can be a Fellow</small></button>
+            <button class="console-line" type="button" data-pathway-target="#fellow-skills" data-unfinished><span>03</span><code>SKILLS</code><small>What you’ll develop</small></button>
+            <button class="console-line" type="button" data-pathway-target="#how-to-become" data-unfinished><span>04</span><code>APPLY</code><small>How to become a Fellow</small></button>
             <p class="console-line console-status" data-unfinished><span aria-hidden="true">●</span><code>DETAILS</code><small>Pending client confirmation</small></p>
             <p class="console-instruction">Select a stage to explore the pathway.</p>
           </div>
@@ -70,7 +71,7 @@
       <div class="hero-index" aria-hidden="true">FEL / 001</div>
     </section>
 
-    <section class="section about-fellowship" id="about-fellowship" aria-labelledby="about-fellowship-title">
+    <section class="section about-fellowship" id="about-fellowship" data-unfinished aria-labelledby="about-fellowship-title">
       <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
         <path class="circuit-trace" d="M8 48H48V18H110V48H172" stroke="currentColor" stroke-width="1.4"/>
         <circle class="circuit-node" cx="48" cy="18" r="3" fill="currentColor"/>
@@ -140,7 +141,7 @@
           </figure>
         </div>
         <div class="candidate-grid">
-          <article class="candidate-card reveal">
+          <article class="candidate-card reveal" data-unfinished>
             <div class="card-icon-row">
               <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M12 3l7 3v6c0 4.5-3 7.2-7 8.5C8 19.2 5 16.5 5 12V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <p class="candidate-label">Eligibility</p>
@@ -156,7 +157,7 @@
             <h3>Interests and qualities</h3>
             <p>A specific major is not required. A strong interest in the Fellowship matters most, together with curiosity, initiative, and a collaborative mindset.</p>
           </article>
-          <article class="candidate-card reveal">
+          <article class="candidate-card reveal" data-unfinished>
             <div class="card-icon-row">
               <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4.5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <p class="candidate-label">Commitment</p>
@@ -169,7 +170,7 @@
       </div>
     </section>
 
-    <section class="section fellow-skills" id="fellow-skills" aria-labelledby="fellow-skills-title">
+    <section class="section fellow-skills" id="fellow-skills" data-unfinished aria-labelledby="fellow-skills-title">
       <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
         <path class="circuit-trace" d="M8 36H46V14H96V52H140V28H172" stroke="currentColor" stroke-width="1.4"/>
         <circle class="circuit-node" cx="46" cy="14" r="3" fill="currentColor"/>
@@ -258,7 +259,7 @@
       </div>
     </section>
 
-    <section class="section details-section how-to-become" id="how-to-become" aria-labelledby="how-to-become-title">
+    <section class="section details-section how-to-become" id="how-to-become" data-unfinished aria-labelledby="how-to-become-title">
       <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
         <path class="circuit-trace" d="M8 50H60V16H118V50H172" stroke="currentColor" stroke-width="1.4"/>
         <circle class="circuit-node" cx="60" cy="16" r="3" fill="currentColor"/>
