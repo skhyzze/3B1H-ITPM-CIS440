@@ -295,6 +295,8 @@
       color:#555;
     }
     .preview-link{
+      display:block;
+      margin-top:2rem;
       font:800 .72rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
       text-transform:uppercase;
       letter-spacing:.08em;

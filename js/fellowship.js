@@ -1,9 +1,9 @@
 window.LAB_FELLOWS_READY=(async function(){
   const track=document.getElementById('fellowTrack');
   const status=document.getElementById('fellowStatus');
-  track.replaceChildren();
+  const parked=Array.from(track.querySelectorAll('article.fellow-card'));
   track.setAttribute('aria-busy','true');
-  status.textContent='Loading student fellows…';
+  if(!parked.length) status.textContent='Loading student fellows…';
   const url='data/cms-fellows.json';
   function node(tag,cls,text){const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;}
   function unfinishedCopy(text){return typeof text==='string'&&(/^\s*\[/.test(text)||/add a short, student-approved/i.test(text)||/^add the project title/i.test(text));}
@@ -15,6 +15,7 @@ window.LAB_FELLOWS_READY=(async function(){
     const response=await fetch(url,{credentials:'omit',signal:controller.signal});
     if(!response.ok)throw Error();
     const data=await response.json();if(data.error||!Array.isArray(data.fellows))throw Error();
+    track.replaceChildren();
     data.fellows.forEach((f,i)=>{
       if(!f || typeof f.name!=='string' || !f.name.trim())return;
       const card=node('article','fellow-card','');
@@ -32,12 +33,13 @@ window.LAB_FELLOWS_READY=(async function(){
       }
       track.append(card);
     });
-    if(!track.children.length){clearTimeout(timer);status.textContent='No published student fellows yet.';const p=node('p','','No published student fellows yet.');track.append(p);track.setAttribute('aria-busy','false');return false;}
+    if(!track.children.length){clearTimeout(timer);if(parked.length){track.replaceChildren(...parked);track.setAttribute('aria-busy','false');return true;}status.textContent='No published student fellows yet.';const p=node('p','','No published student fellows yet.');track.append(p);track.setAttribute('aria-busy','false');return false;}
     clearTimeout(timer);
     track.setAttribute('aria-busy','false');
     return true;
   } catch(error){
     clearTimeout(timer);
+    if(parked.length){track.replaceChildren(...parked);track.setAttribute('aria-busy','false');status.textContent='';return true;}
     const message=node('p','','Student fellows are temporarily unavailable. Please reload to try again.');message.setAttribute('role','status');track.append(message);
     document.getElementById('fellowPrev').disabled=true;document.getElementById('fellowNext').disabled=true;
     status.textContent='Student fellows are temporarily unavailable.';
