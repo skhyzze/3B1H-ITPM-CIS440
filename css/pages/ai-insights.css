@@ -550,3 +550,18 @@ body.dark .back-to-top{
   color: var(--ink);
   border-color: var(--line);
 }
+
+/* Phones scroll the window. The inner scroller stays on wider screens. */
+@media (max-width: 900px) {
+  html,
+  body {
+    height: auto;
+    overflow: visible;
+  }
+  #app {
+    position: static;
+    inset: auto;
+    height: auto;
+    overflow: visible;
+  }
+}

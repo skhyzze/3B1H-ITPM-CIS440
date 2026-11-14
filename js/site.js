@@ -308,10 +308,11 @@
 })();
 
 (function () {
+  const here = document.currentScript && document.currentScript.src;
   function loadChatbot() {
     if (document.querySelector('script[data-chat-loader]')) return;
     const script = document.createElement('script');
-    script.src = 'js/chatbot.js';
+    script.src = here ? new URL('chatbot.js', here).href : 'js/chatbot.js';
     script.defer = true;
     script.dataset.chatLoader = 'true';
     document.body.appendChild(script);

@@ -460,7 +460,8 @@ function reveal() {
 function wireUp() {
   refreshSaved(); applyFilters(); countUp(); reveal();
   const nav = document.getElementById("nav");
-  const scroller = document.getElementById("app");
+  const app = document.getElementById("app");
+  const desktopScroll = window.matchMedia("(min-width: 901px)");
   let backToTop = document.getElementById("back-to-top");
   if (!backToTop) {
     backToTop = document.createElement("button");
@@ -472,15 +473,22 @@ function wireUp() {
     backToTop.innerHTML = '<span aria-hidden="true">↑</span>';
     document.body.appendChild(backToTop);
   }
+  function scrollRoot() {
+    return desktopScroll.matches ? app : document.scrollingElement;
+  }
+  function onScroll() {
+    const top = scrollRoot().scrollTop || 0;
+    nav.classList.toggle("scrolled", top > 8);
+    backToTop.hidden = top <= 800;
+  }
   backToTop.onclick = function () {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    scroller.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    scrollRoot().scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
   };
-  scroller.onscroll = function () {
-    nav.classList.toggle("scrolled", scroller.scrollTop > 8);
-    backToTop.hidden = scroller.scrollTop <= 800;
-  };
-  scroller.onscroll();
+  app.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
+  desktopScroll.addEventListener("change", onScroll);
+  onScroll();
   const search = document.getElementById("search");
   if (search) search.addEventListener("input", function () { filterState.query = search.value; applyFilters(); });
   const form = document.getElementById("sub-form");
