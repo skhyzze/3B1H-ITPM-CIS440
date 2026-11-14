@@ -4,7 +4,7 @@ Static website for the Quinnipiac Applied AI Lab. The pages are HTML, CSS, and v
 
 ## Pages
 
-Page HTML stays at the repo root so the public URLs do not change. The shared header and footer live once, in `src/partials/header.html` and `src/partials/footer.html`. Each page pulls them in with `<!-- @include header -->` and `<!-- @include footer -->`. The header marker can name the current page, for example `<!-- @include header current=fellowship -->`, which sets `aria-current="page"` and the logo link.
+Page HTML stays at the repo root so the public URLs do not change. The shared header and footer live once, in `src/partials/header.html` and `src/partials/footer.html`. Each page also contains that markup so a browser pointed at the repo root can show it. The header carries `data-nav-current` (`home`, `industry`, `fellowship`, `outcomes`, `events`, `insights`, or empty on the 404 page). The build reads that and refreshes the header and footer from the partials.
 
 | Page | HTML | Page CSS | Scripts and content |
 | --- | --- | --- | --- |
@@ -29,7 +29,7 @@ Student Outcomes has no page stylesheet, so it loads the three shared files. `40
 
 ## Run locally
 
-Preview the built site. The pages at the repo root still contain the include markers, so a server pointed at the raw files will not show the header or footer.
+Preview the built site with `npm run dev`, or open the pages at the repo root. Both include the shared header and footer.
 
 ```bash
 npm run dev
@@ -43,7 +43,7 @@ The newsletter tool has its own steps in `ai_brief/README.md`.
 
 ## Deployment
 
-Publish the `dist/` directory, not the repo root. The root HTML is the source. It still has include markers, and the minified CSS and JavaScript exist only after the build.
+Publish the `dist/` directory, not the repo root. The root HTML is the source. The minified CSS and JavaScript exist only after the build.
 
 - Publish directory: `dist/`
 - Build command: `npm run build`

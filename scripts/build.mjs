@@ -87,25 +87,29 @@ function renderHeader(current) {
   }
   let html = headerTemplate;
   html = html.replaceAll("{{logo-href}}", current === "home" ? "#top" : "index.html");
-  html = html.replaceAll("{{header-attrs}}", current === "insights" ? ' id="nav"' : "");
+  html = html.replaceAll("{{header-attrs}}", `${current === "insights" ? ' id="nav"' : ""} data-nav-current="${current}"`);
   html = html.replace(/\{\{current:([a-z]+)\}\}/g, (_match, key) => (key === current ? ' aria-current="page"' : ""));
   if (html.includes("{{")) throw new Error("Header partial has an unresolved token");
   return html;
 }
 
 function applyIncludes(html, file) {
-  let header = false;
-  let footer = false;
-  const next = html.replace(/<!--\s*@include\s+(header|footer)([^>]*)-->/g, (_full, name, rest) => {
-    if (name === "footer") {
-      footer = true;
-      return footerTemplate;
-    }
-    header = true;
-    const current = /current\s*=\s*([a-z]+)/.exec(rest);
-    return renderHeader(current ? current[1] : "");
-  });
-  if (!header || !footer) throw new Error(`${file} is missing a header or footer include`);
+  const marker = /<!--\s*@include\s+header([^>]*)-->/.exec(html);
+  let current = "";
+  if (marker) {
+    const named = /current\s*=\s*([a-z]+)/.exec(marker[1]);
+    current = named ? named[1] : "";
+  } else {
+    const named = /<header class="lab-header"[^>]*\bdata-nav-current="([a-z]*)"/.exec(html);
+    if (!named) throw new Error(`${file} is missing a header`);
+    current = named[1];
+  }
+  const header = renderHeader(current);
+  let next = html.replace(/<!--\s*@include\s+(header|footer)[^>]*-->\s*/g, "");
+  if (!/<header class="lab-header"/.test(next)) throw new Error(`${file} is missing a header`);
+  if (!/<footer class="lab-site-footer"/.test(next)) throw new Error(`${file} is missing a footer`);
+  next = next.replace(/<header class="lab-header"[\s\S]*?<\/header>/, header);
+  next = next.replace(/<footer class="lab-site-footer"[\s\S]*?<\/footer>/, footerTemplate);
   if (next.includes("@include")) throw new Error(`${file} has an unresolved include`);
   return next;
 }

@@ -27,6 +27,9 @@ export function checkDist(dist) {
     const text = fs.readFileSync(path.join(dist, name), "utf8");
     if (!text.includes('<header class="lab-header')) errors.push(`${name} is missing the header`);
     if (!text.includes('<footer class="lab-site-footer')) errors.push(`${name} is missing the footer`);
+    const nav = text.match(/<div class="lab-nav-links">([\s\S]*?)<\/div>/);
+    const links = nav ? (nav[1].match(/<a\b/g) || []).length : 0;
+    if (links < 6) errors.push(`${name} has ${links} links in .lab-nav-links`);
   }
 
   if (errors.length) {

@@ -21,7 +21,8 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-      - run: npm run check
+      - name: Fail if a built page has no header or fewer than 6 nav links
+        run: npm run check
 
       - uses: actions/upload-artifact@v4
         with:

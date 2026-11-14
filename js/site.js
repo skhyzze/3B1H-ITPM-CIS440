@@ -54,6 +54,12 @@
 
   const navLinks = document.querySelector('.lab-nav-links');
 
+  if (!(window.labConfig && window.labConfig.showIndustryPartners === true)) {
+    document.querySelectorAll('[data-industry-link]').forEach(function (link) {
+      link.remove();
+    });
+  }
+
   if (navLinks && themeButton) {
     if (!navLinks.id) navLinks.id = 'lab-nav-links';
 
