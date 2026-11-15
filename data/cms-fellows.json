@@ -1,78 +1,78 @@
 {
   "fellows": [
     {
-      "linkLabel": "View prototype ↗",
-      "displayOrder": 1.0,
+      "projectTitle": "IB Launchpad",
       "role": "School of Business · Finance",
       "url": "https://celadon-treacle-ba824a.netlify.app/#top",
-      "bio": "Frank is exploring how AI can help students practice the technical skills they may need before beginning an analyst role.",
-      "name": "Frank Mousa",
+      "initials": "FM",
       "projectDescription": "An AI-supported training experience for financial modeling, credit analysis, and investment-committee preparation.",
-      "projectTitle": "IB Launchpad",
+      "name": "Frank Mousa",
       "projectLabel": "Featured project · Prototype",
-      "initials": "FM"
+      "displayOrder": 1.0,
+      "bio": "Frank is exploring how AI can help students practice the technical skills they may need before beginning an analyst role.",
+      "linkLabel": "View prototype ↗"
     },
     {
-      "linkLabel": "View project ↗",
-      "displayOrder": 2.0,
+      "projectTitle": "",
       "role": "School of Business · Master's of Business Analytics and AI",
       "url": "",
-      "bio": "Add a short, student-approved description or quote.",
-      "name": "Vivian Etim",
+      "initials": "VE",
       "projectDescription": "Add the project title and a concise explanation of the student’s work.",
-      "projectTitle": "",
+      "name": "Vivian Etim",
       "projectLabel": "Featured project",
-      "initials": "VE"
+      "displayOrder": 2.0,
+      "bio": "Add a short, student-approved description or quote.",
+      "linkLabel": "View project ↗"
     },
     {
-      "linkLabel": "View project ↗",
-      "displayOrder": 3.0,
+      "projectTitle": "Coginchaug Benchwarmers",
       "role": "School of Business · Business Analytics + Computer Information Systems",
       "url": "https://coginchaugbenchwarmers.com/",
-      "bio": "",
-      "name": "Henry Bugai",
+      "initials": "HB",
       "projectDescription": "A website showcasing a booster club supporting student-athletes in Regional School District 13. It highlights the club's Durham Fair food booth fundraising tradition and explains how funds are allocated to support student athletics.",
-      "projectTitle": "Coginchaug Benchwarmers",
+      "name": "Henry Bugai",
       "projectLabel": "Featured project",
-      "initials": "HB"
+      "displayOrder": 3.0,
+      "bio": "",
+      "linkLabel": "View project ↗"
     },
     {
-      "linkLabel": "View portfolio ↗",
-      "displayOrder": 4.0,
+      "projectTitle": "Personal Portfolio",
       "role": "School of Business · Computer Information Systems + Finance",
       "url": "https://katherinec0115.github.io/katherineC0115/",
-      "bio": "",
-      "name": "Katherine Contreras",
+      "initials": "KC",
       "projectDescription": "An interactive portfolio highlighting academic coursework, honors, projects, student organizations, and credentials. It features numbered sections, a light-mode toggle, and a contact form.",
-      "projectTitle": "Personal Portfolio",
+      "name": "Katherine Contreras",
       "projectLabel": "Featured project",
-      "initials": "KC"
+      "displayOrder": 4.0,
+      "bio": "",
+      "linkLabel": "View portfolio ↗"
     },
     {
-      "linkLabel": "View portfolio ↗",
-      "displayOrder": 5.0,
+      "projectTitle": "Personal Portfolio",
       "role": "School of Business · Computer Information Systems",
       "url": "https://jtmccurry.github.io/",
-      "bio": "",
-      "name": "Jacob McCurry",
+      "initials": "JM",
       "projectDescription": "A personal portfolio showcasing academic and technical projects, including the Applied AI Lab website and a proposed Maintenance Tracking System. The portfolio also offers a downloadable résumé.",
-      "projectTitle": "Personal Portfolio",
+      "name": "Jacob McCurry",
       "projectLabel": "Featured project",
-      "initials": "JM"
+      "displayOrder": 5.0,
+      "bio": "",
+      "linkLabel": "View portfolio ↗"
     },
     {
-      "linkLabel": "View project ↗",
-      "displayOrder": 7.0,
+      "projectTitle": "Applied AI & Analytics Lab Website",
       "role": "School of Business · Computer Information Systems",
       "url": "",
-      "bio": "",
-      "name": "Skhy Morris",
+      "initials": "SM",
       "projectDescription": "As Scrum Master and team leader, Skhy leads the team building the Applied AI & Analytics Lab website—the site you are viewing now.",
-      "projectTitle": "Applied AI & Analytics Lab Website",
+      "name": "Skhy Morris",
       "projectLabel": "Featured project · Scrum Master",
-      "initials": "SM"
+      "displayOrder": 6.0,
+      "bio": "",
+      "linkLabel": "View project ↗"
     }
   ],
-  "updatedAt": "2026-11-15T04:23:37.1246087Z",
+  "updatedAt": "2026-11-15T04:24:09.7075717Z",
   "source": "Microsoft Lists"
 }
