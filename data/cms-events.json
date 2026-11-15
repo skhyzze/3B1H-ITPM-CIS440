@@ -1,48 +1,48 @@
 {
   "events": [
     {
+      "sample": true,
       "title": "Getting started with applied AI",
-      "contact": "To be confirmed",
       "summary": "Explore practical AI tools through a guided, beginner-friendly session.",
-      "sample": true,
-      "category": "Workshop",
+      "location": "To be confirmed",
       "displayOrder": 1.0,
-      "details": "An introduction to the Applied AI Lab, including hands-on exercises, discussions, and Q&A. No prior experience required.",
-      "dateTime": "To be announced",
       "linkLabel": "Event link ↗",
-      "location": "To be confirmed",
+      "dateTime": "To be announced",
+      "url": "",
+      "category": "Workshop",
       "image": "",
-      "url": ""
+      "contact": "To be confirmed",
+      "details": "An introduction to the Applied AI Lab, including hands-on exercises, discussions, and Q&A. No prior experience required."
     },
     {
+      "sample": true,
       "title": "Research & Discussion",
-      "contact": "To be confirmed",
       "summary": "Meet fellow researchers and discuss how analytics can support your next project.",
-      "sample": true,
-      "category": "Research",
-      "displayOrder": 2.0,
-      "details": "Project introductions, open discussion, and opportunities to connect with students and faculty.",
-      "dateTime": "To be announced",
-      "linkLabel": "Event link ↗",
       "location": "To be confirmed",
+      "displayOrder": 2.0,
+      "linkLabel": "Event link ↗",
+      "dateTime": "To be announced",
+      "url": "",
+      "category": "Research",
       "image": "",
-      "url": ""
+      "contact": "To be confirmed",
+      "details": "Project introductions, open discussion, and opportunities to connect with students and faculty."
     },
     {
-      "title": "From idea to first prototype",
-      "contact": "To be confirmed",
-      "summary": "Bring a question or a rough idea and explore what you could build with the lab.",
       "sample": true,
-      "category": "Idea Lab",
-      "displayOrder": 3.0,
-      "details": "Brainstorming and feedback! Bring a notebook or laptop.",
-      "dateTime": "To be announced",
-      "linkLabel": "Event link ↗",
+      "title": "From idea to first prototype",
+      "summary": "Bring a question or a rough idea and explore what you could build with the lab.",
       "location": "To be confirmed",
+      "displayOrder": 3.0,
+      "linkLabel": "Event link ↗",
+      "dateTime": "To be announced",
+      "url": "",
+      "category": "Idea Lab",
       "image": "",
-      "url": ""
+      "contact": "To be confirmed",
+      "details": "Brainstorming and feedback! Bring a notebook or laptop."
     }
   ],
-  "updatedAt": "2026-11-15T04:23:22.8787451Z",
+  "updatedAt": "2026-11-15T04:23:53.5849938Z",
   "source": "Microsoft Lists"
 }
