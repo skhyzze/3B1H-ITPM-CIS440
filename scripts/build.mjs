@@ -120,9 +120,10 @@ function stripHiddenIndustry(html) {
 }
 
 const files = walk(root);
+const copyAsIs = new Set(["js/ai-insights.js", "css/pages/ai-insights.css"]);
 const assets = files
   .map(rel)
-  .filter((file) => /^(css|js)\//.test(file) && /\.(css|js)$/.test(file));
+  .filter((file) => /^(css|js)\//.test(file) && /\.(css|js)$/.test(file) && !copyAsIs.has(file));
 
 const minified = new Map();
 for (const file of assets) {
@@ -160,6 +161,10 @@ for (const file of files) {
   if (name === "package.json" || name === "package-lock.json") continue;
   const target = path.join(dist, name);
   fs.mkdirSync(path.dirname(target), { recursive: true });
+  if (name === "ai-insights.html" || name.startsWith("ai_brief/")) {
+    fs.copyFileSync(file, target);
+    continue;
+  }
   if (name.endsWith(".html") && !name.includes("/")) {
     let page = rewrite(stripHiddenIndustry(applyIncludes(fs.readFileSync(file, "utf8"), name)), allPairs);
     if (siteUrl) {
@@ -185,6 +190,25 @@ for (const [file, code] of minified) {
   const target = path.join(dist, map.get(file));
   fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.writeFileSync(target, code);
+}
+
+const unchangedAssets = [
+  "ai-insights.html",
+  "js/ai-insights.js",
+  "css/pages/ai-insights.css",
+  "css/shared/tokens.css",
+  "css/shared/base.css",
+  "css/shared/theme.css",
+  "js/config.js",
+  "js/site.js",
+  "js/chatbot.js"
+];
+for (const file of unchangedAssets) {
+  const from = path.join(root, file);
+  if (!fs.existsSync(from)) continue;
+  const target = path.join(dist, file);
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.copyFileSync(from, target);
 }
 
 checkDist(dist);

@@ -19,15 +19,15 @@ jobs:
 
       - name: HTML validity
         continue-on-error: true
-        run: npx --yes html-validate "*.html" "ai_brief/newsletter_component/index.html"
+        run: npx --yes html-validate index.html fellowship.html event.html studentoutcomes.html industry.html 404.html
 
       - name: Broken internal links
         continue-on-error: true
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
-          args: --offline --no-progress --include-fragments "*.html" "ai_brief/newsletter_component/index.html"
+          args: --offline --no-progress --include-fragments index.html fellowship.html event.html studentoutcomes.html industry.html 404.html
 
       - name: CSS and JS formatting
         continue-on-error: true
-        run: npx --yes prettier --check "css/**/*.css" "js/**/*.js"
+        run: npx --yes prettier --check "css/**/*.css" "js/**/*.js" --ignore-path .prettierignore

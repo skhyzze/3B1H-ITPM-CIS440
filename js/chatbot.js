@@ -162,9 +162,9 @@
     initializeChat();
     panel.hidden = false;
     launcher.setAttribute('aria-expanded', 'true');
-    window.requestAnimationFrame(function () {
-      input.focus();
-    });
+    window.setTimeout(function () {
+      if (!panel.hidden) input.focus();
+    }, 0);
   }
 
   function closeChat() {

@@ -73,9 +73,20 @@
     themeButton.parentNode.insertBefore(menuButton, themeButton);
 
     function setMenuOpen(open) {
+      const wasOpen = menuButton.getAttribute('aria-expanded') === 'true';
       navLinks.classList.toggle('is-open', open);
       menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
       menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (open) {
+        const first = navLinks.querySelector('a');
+        if (first) {
+          window.setTimeout(function () {
+            if (menuButton.getAttribute('aria-expanded') === 'true') first.focus();
+          }, 0);
+        }
+      } else if (wasOpen && (document.activeElement === menuButton || navLinks.contains(document.activeElement))) {
+        menuButton.focus();
+      }
     }
 
     menuButton.addEventListener('click', function () {

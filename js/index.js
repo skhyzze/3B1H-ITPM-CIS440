@@ -49,6 +49,7 @@
   function setPauseButton(paused){
     if (!pauseButton) return;
     pauseButton.classList.toggle('is-paused', paused);
+    pauseButton.setAttribute('aria-pressed', String(paused));
     pauseButton.setAttribute('aria-label', paused ? 'Play carousel' : 'Pause carousel');
   }
 
