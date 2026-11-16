@@ -5,9 +5,12 @@ alwaysApply: true
 
 # Project change rules
 
-Follow these on every change:
+Context: Applied AI Lab static website (HTML, CSS, vanilla JS), plus a Python newsletter tool in ai_brief/. Work through the tasks I paste next, one at a time.
 
-- Do NOT modify, rename, move, re-encode, resize, or remove any image files, `<img>` tags, `src`/`srcset` attributes, logo files, existing text content, or the base64 image in `studentoutcomes.html`. Assume all images exist.
-- Keep changes minimal and limited to the files named in the task.
-- Do not delete code unless the task says "delete".
-- After each task, list the files changed and what you verified.
+Rules for every task:
+- Do NOT modify, rename, move, resize, recompress or re-reference any image, logo, GIF or the images_icons/ folder, and don't change any <img> markup or image URLs in data files. Assume all images exist.
+- Create a branch first (audit/cleanup). Make one commit per task with a clear message.
+- Before deleting or renaming any file, search the whole repo (HTML, CSS, JS, JSON, README) for references to it, and list what you found.
+- Before and after each task, check these pages at 360px, 768px, 1024px and 1440px wide, in BOTH light and dark mode: index, fellowship, event, ai-insights, industry, 404. Report any visual difference you did not intend.
+- Do not change visible design or copy unless the task says to. If something is ambiguous, stop and ask me.
+- At the end of each task, give me a short list of what changed and anything you chose not to do.

@@ -10,42 +10,44 @@
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="images_icons/AAI-Logo-Black-Animated-Match.png" type="image/png">
   <meta name="theme-color" content="#f4f6f8">
+  <link rel="preload" href="fonts/oxanium/oxanium-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/space-grotesk/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <title>Applied AI Lab</title>
   
 
 
 
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/blended-theme.css">
-  <link rel="stylesheet" href="css/home-motion.css">
-  <link rel="stylesheet" href="css/chatbot.css">
-  <link rel="stylesheet" href="css/lab-accents.css">
-  <link rel="stylesheet" href="css/bento-circuit.css">
+  <link rel="stylesheet" href="css/shared/tokens.css">
+  <link rel="stylesheet" href="css/pages/index.css">
+  <link rel="stylesheet" href="css/shared/base.css">
+  <link rel="stylesheet" href="css/shared/theme.css">
 </head>
 <body class="page-home">
+<script>
+(function(){try{var saved=localStorage.getItem("lab-theme");if(saved==="dark"||(!saved&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();
+</script>
 <a class="skip-link" href="#top">Skip to main content</a>
-<header class="lab-header">
-    <nav class="lab-nav" aria-label="Main navigation">
-      <a class="lab-brand" href="#top" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
-        <span class="lab-brand-logo" aria-hidden="true">
-          <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
-          <img class="lab-brand-image lab-brand-image-animated" alt="">
-        </span>
-      </a>
-      <div class="lab-nav-links">
-        <a href="index.html" aria-current="page">Home</a>
-        <a href="industry.html">Industry Partners</a>
-        <a href="fellowship.html">Fellowship Pathway</a>
-        <a href="studentoutcomes.html">Student Outcomes</a>
-        <a href="event.html">Events</a>
-        <a href="ai-insights.html">AI Insights</a>
-        <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
-        <a class=" lab-nav-cta circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
-      </div>
-      <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
-      <button class="lab-theme-toggle lab-language-toggle"  id="languageToggle" type="button" aria-label="English / Español — translation coming soon" title="English / Español — coming soon"> EN/ES</button>
-    </nav>
+<header class="lab-header" data-nav-current="home">
+  <nav class="lab-nav" aria-label="Main navigation">
+    <a class="lab-brand" href="#top" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
+      <span class="lab-brand-logo" aria-hidden="true">
+        <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
+        <img class="lab-brand-image lab-brand-image-animated" alt="">
+      </span>
+    </a>
+    <div class="lab-nav-links">
+      <a href="index.html" aria-current="page">Home</a>
+      <a data-industry-link href="industry.html">Industry Partners</a>
+      <a href="fellowship.html">Fellowship Pathway</a>
+      <a href="studentoutcomes.html">Student Outcomes</a>
+      <a href="event.html">Events</a>
+      <a href="ai-insights.html">AI Insights</a>
+      <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
+      <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
+    </div>
+    <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
+    <button class="lab-theme-toggle lab-language-toggle" id="languageToggle" type="button" disabled aria-disabled="true" aria-label="English / Español. Coming soon." title="Coming soon"> EN/ES</button>
+  </nav>
 </header>
 
 <main id="top">
@@ -99,7 +101,7 @@
             <span class="preview-link">Explore Events ↗</span>
           </a>
 
-          <a class="preview-card next" href="industry.html" data-index="1" hidden>
+          <a class="preview-card next" data-industry-link href="industry.html" data-index="1" hidden>
             <span class="preview-type">02 / INDUSTRY</span>
             <div class="preview-image image-slot-frame" role="img" aria-label="Image placeholder for industry partners">
               <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
@@ -149,7 +151,7 @@
           <input class="carousel-scroll" id="carouselScroll" type="range"
              min="0" max="2" step="1" value="0"
              aria-label="Choose carousel preview">
-          <button class="carousel-pause" type="button" aria-label="Pause carousel">
+          <button class="carousel-pause" type="button" aria-label="Pause carousel" aria-pressed="false">
             <span class="carousel-pause-icon" aria-hidden="true"></span>
           </button>
         </div>
@@ -369,7 +371,7 @@
           <p>Learn about AI tools, methods, and news you can apply in your own field of study.</p>
           <span class="arrow">↗</span>
         </a>
-        <a class="resource reveal" href="industry.html">
+        <a class="resource reveal" data-industry-link href="industry.html">
           <div class="card-icon-row">
             <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M4 20V6l8-3v17M12 20V9l8 3v8M4 20h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 10h.5M8 13h.5M8 16h.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
             <span class="resource-num">04</span>
@@ -400,7 +402,8 @@
               <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
             </div>
             <h3>Reach the People in Charge</h3>
-            <p>Connect with the faculty and staff who run the Lab. A confirmed public email and phone number will be added here.</p>
+            <p>Connect with the faculty and staff who run the Lab.</p>
+            <p data-unfinished>A confirmed public email and phone number will be added here.</p>
             <span class="coming-soon-label">Contact details coming soon</span>
           </article>
         </div>
@@ -418,47 +421,33 @@
             <svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>
             <span class="image-slot-label">Lab image</span>
           </div>
-          <figcaption>A photograph of the people who direct the Lab can replace this frame.</figcaption>
+          <figcaption data-unfinished>A photograph of the people who direct the Lab can replace this frame.</figcaption>
         </figure>
       </div>
     </div>
   </section>
 </main>
 
- <footer class="lab-site-footer" id="site-footer">
+<footer class="lab-site-footer" id="site-footer">
   <div class="lab-footer-inner">
-
     <div class="lab-footer-brand">
       <strong>Applied AI Lab</strong>
       <span>Experiment. Build. Question. Apply.</span>
-
       <a class="footer-circuit" href="ai-insights.html#subscribe">
         Join The Circuit →
       </a>
     </div>
-
-    <nav class="lab-footer-nav" aria-label="Footer navigation">
-      <a href="index.html">Home</a>
-      <a href="industry.html">Industry Partners</a>
-      <a href="fellowship.html">Fellowship</a>
-      <a href="studentoutcomes.html">Student Outcomes</a>
-      <a href="event.html">Events</a>
-      <a href="ai-insights.html">AI Insights</a>
-      
-    </nav>
-
     <a class="lab-footer-top" href="#top">
       Back to top <span aria-hidden="true">↑</span>
     </a>
-
   </div>
 </footer>
 
 
 
 
-  <script src="js/site.js?v=4" defer></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/site.js" defer></script>
   <script src="js/index.js" defer></script>
-  <script src="js/chatbot.js" defer></script>
 </body>
 </html>

@@ -12,38 +12,41 @@
   <link rel="icon" href="images_icons/AAI-Logo-Black-Animated-Match.png" type="image/png">
   <title>Industry Partners | Applied AI Lab</title>
   <meta name="theme-color" content="#f4f6f8">
-  <link rel="stylesheet" href="css/industry.css">
-  <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/blended-theme.css">
-  <link rel="stylesheet" href="css/chatbot.css">
-  <link rel="stylesheet" href="css/lab-accents.css">
-  <link rel="stylesheet" href="css/bento-circuit.css">
+  <link rel="preload" href="fonts/oxanium/oxanium-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/space-grotesk/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/shared/tokens.css">
+  <link rel="stylesheet" href="css/pages/industry.css">
+  <link rel="stylesheet" href="css/shared/base.css">
+  <link rel="stylesheet" href="css/shared/theme.css">
 </head>
 <body class="page-industry" id="top">
+<script>
+(function(){try{var saved=localStorage.getItem("lab-theme");if(saved==="dark"||(!saved&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();
+</script>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header class="lab-header">
-      <nav class="lab-nav" aria-label="Main navigation">
-        <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
-          <span class="lab-brand-logo" aria-hidden="true">
-            <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
-            <img class="lab-brand-image lab-brand-image-animated" alt="">
-          </span>
-        </a>
-        <div class="lab-nav-links">
-          <a href="index.html">Home</a>
-          <a href="industry.html" aria-current="page">Industry Partners</a>
-          <a href="fellowship.html">Fellowship Pathway</a>
-          <a href="studentoutcomes.html">Student Outcomes</a>
-          <a href="event.html">Events</a>
-           <a href="ai-insights.html">AI Insights</a>
-          <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
-          <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
-        </div>
-        <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
-         <button class="lab-theme-toggle lab-language-toggle"  id="languageToggle" type="button" aria-label="English / Español — translation coming soon" title="English / Español — coming soon"> EN/ES</button>
-      </nav>
-  </header>
+<header class="lab-header" data-nav-current="industry">
+  <nav class="lab-nav" aria-label="Main navigation">
+    <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
+      <span class="lab-brand-logo" aria-hidden="true">
+        <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
+        <img class="lab-brand-image lab-brand-image-animated" alt="">
+      </span>
+    </a>
+    <div class="lab-nav-links">
+      <a href="index.html">Home</a>
+      <a data-industry-link href="industry.html" aria-current="page">Industry Partners</a>
+      <a href="fellowship.html">Fellowship Pathway</a>
+      <a href="studentoutcomes.html">Student Outcomes</a>
+      <a href="event.html">Events</a>
+      <a href="ai-insights.html">AI Insights</a>
+      <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
+      <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
+    </div>
+    <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
+    <button class="lab-theme-toggle lab-language-toggle" id="languageToggle" type="button" disabled aria-disabled="true" aria-label="English / Español. Coming soon." title="Coming soon"> EN/ES</button>
+  </nav>
+</header>
 
   <main id="main-content">
     <!-- Introduction: edit the headline, copy, and partnership links here. -->
@@ -61,8 +64,8 @@
         <h1 id="hero-title">Industry insight meets <span>student potential.</span></h1>
         <p class="hero-copy">Organizations can engage with the Lab through projects, mentorship, events, and conversations about real-world AI.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#partner">Become a Partner →</a>
-          <a class="button button-outline" href="#current-partners">Explore Partners</a>
+          <a class="button button-primary" href="#partner" data-unfinished>Become a Partner →</a>
+          <a class="button button-outline" href="#current-partners" data-unfinished>Explore Partners</a>
         </div>
       </div>
     </section>
@@ -86,18 +89,18 @@
         <p class="eyebrow">Ways to collaborate</p>
         <h2 id="collaboration-title">Choose the right kind of engagement.</h2>
         <div class="collaboration-grid">
-          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h14v11H5z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 7V5h6v2M8 12h8M8 15h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>PROJECTS</span><h3>Applied challenges</h3><p>[Sponsored projects or business questions students could explore.]</p></article>
-          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 19v-1.2A4 4 0 0 1 10 13.8h4a4 4 0 0 1 4 4V19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>MENTORSHIP</span><h3>Professional guidance</h3><p>[Mentoring, feedback, portfolio reviews, or career conversations.]</p></article>
-          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14v9H5z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 8V6h8v2M9 13h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>EVENTS</span><h3>Talks and workshops</h3><p>[Guest presentations, demonstrations, panels, or company visits.]</p></article>
-          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 3.5V6M15 3.5V6M9 18v2.5M15 18v2.5M3.5 9H6M3.5 15H6M18 9h2.5M18 15h2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>TECHNOLOGY</span><h3>Tools and resources</h3><p>[Technology, datasets, expertise, or other approved resources.]</p></article>
-          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2M6 6l1.6 1.6M16.4 16.4 18 18M18 6l-1.6 1.6M7.6 16.4 6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>RESEARCH</span><h3>Faculty collaboration</h3><p>[Potential research or interdisciplinary collaboration.]</p></article>
-          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 16l5-5 3 3 8-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>CAREERS</span><h3>Student opportunities</h3><p>[Internships, experiential learning, or career exploration.]</p></article>
+          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h14v11H5z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 7V5h6v2M8 12h8M8 15h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>PROJECTS</span><h3>Applied challenges</h3><p data-unfinished>[Sponsored projects or business questions students could explore.]</p></article>
+          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 19v-1.2A4 4 0 0 1 10 13.8h4a4 4 0 0 1 4 4V19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>MENTORSHIP</span><h3>Professional guidance</h3><p data-unfinished>[Mentoring, feedback, portfolio reviews, or career conversations.]</p></article>
+          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14v9H5z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 8V6h8v2M9 13h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>EVENTS</span><h3>Talks and workshops</h3><p data-unfinished>[Guest presentations, demonstrations, panels, or company visits.]</p></article>
+          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 3.5V6M15 3.5V6M9 18v2.5M15 18v2.5M3.5 9H6M3.5 15H6M18 9h2.5M18 15h2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>TECHNOLOGY</span><h3>Tools and resources</h3><p data-unfinished>[Technology, datasets, expertise, or other approved resources.]</p></article>
+          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2M6 6l1.6 1.6M16.4 16.4 18 18M18 6l-1.6 1.6M7.6 16.4 6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>RESEARCH</span><h3>Faculty collaboration</h3><p data-unfinished>[Potential research or interdisciplinary collaboration.]</p></article>
+          <article class="collaboration-item"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 16l5-5 3 3 8-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>CAREERS</span><h3>Student opportunities</h3><p data-unfinished>[Internships, experiential learning, or career exploration.]</p></article>
         </div>
       </div>
     </section>
 
     <!-- Approved partner logos, names, and descriptions belong here. -->
-    <section id="current-partners" aria-labelledby="partners-title">
+    <section id="current-partners" data-unfinished aria-labelledby="partners-title">
       <div class="container">
         <div class="partners-heading">
           <div><p class="eyebrow">Current partners</p><h2 id="partners-title">Organizations working with the Lab.</h2></div>
@@ -111,22 +114,22 @@
           Keep the card, the name, and the description around that image.
         -->
         <div class="partner-grid">
-          <article class="partner-card"><div class="partner-logo">[Approved logo]</div><h3>[Partner name]</h3><p class="partner-industry">[Industry]</p><p>[Placeholder. Will be description of the organization.]</p></article>
-          <article class="partner-card"><div class="partner-logo">[Approved logo]</div><h3>[Partner name]</h3><p class="partner-industry">[Industry]</p><p>[Placeholder. Will be description of the organization.]</p></article>
-          <article class="partner-card"><div class="partner-logo">[Approved logo]</div><h3>[Partner name]</h3><p class="partner-industry">[Industry]</p><p>[Placeholder. Will be description of the organization.]</p></article>
+          <article class="partner-card" data-unfinished><div class="partner-logo" data-unfinished>[Approved logo]</div><h3>[Partner name]</h3><p class="partner-industry">[Industry]</p><p data-unfinished>[Placeholder. Will be description of the organization.]</p></article>
+          <article class="partner-card" data-unfinished><div class="partner-logo" data-unfinished>[Approved logo]</div><h3>[Partner name]</h3><p class="partner-industry">[Industry]</p><p data-unfinished>[Placeholder. Will be description of the organization.]</p></article>
+          <article class="partner-card" data-unfinished><div class="partner-logo" data-unfinished>[Approved logo]</div><h3>[Partner name]</h3><p class="partner-industry">[Industry]</p><p data-unfinished>[Placeholder. Will be description of the organization.]</p></article>
         </div>
       </div>
     </section>
 
     <!-- Partnership case study. -->
-    <section class="spotlight" aria-labelledby="spotlight-title">
+    <section class="spotlight" data-unfinished aria-labelledby="spotlight-title">
       <div class="container spotlight-grid">
         <div><p class="eyebrow">Collaboration spotlight</p><h2 id="spotlight-title">Here's what a partnership can accomplish.</h2></div>
-        <article class="spotlight-card">
-          <div class="spotlight-row"><strong>Partner</strong><span>[Company or organization name]</span></div>
-          <div class="spotlight-row"><strong>Challenge</strong><span>[What question, opportunity, or problem was explored?]</span></div>
-          <div class="spotlight-row"><strong>Participants</strong><span>[Students, fellows, faculty, courses, or company representatives involved]</span></div>
-          <div class="spotlight-row"><strong>Outcome</strong><span>[Result, lesson, presentation, prototype, or other approved outcome]</span></div>
+        <article class="spotlight-card" data-unfinished>
+          <div class="spotlight-row"><strong>Partner</strong><span data-unfinished>[Company or organization name]</span></div>
+          <div class="spotlight-row"><strong>Challenge</strong><span data-unfinished>[What question, opportunity, or problem was explored?]</span></div>
+          <div class="spotlight-row"><strong>Participants</strong><span data-unfinished>[Students, fellows, faculty, courses, or company representatives involved]</span></div>
+          <div class="spotlight-row"><strong>Outcome</strong><span data-unfinished>[Result, lesson, presentation, prototype, or other approved outcome]</span></div>
         </article>
       </div>
     </section>
@@ -137,57 +140,43 @@
         <p class="eyebrow">Partnership pathway</p>
         <h2 id="process-title">How to get started.</h2>
         <div class="steps">
-          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16v10H7l-3 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><h3>Start a conversation</h3><p>[How does an organization contact the Lab?]</p></article>
-          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Identify an opportunity</h3><p>[How are shared interests or challenges discussed?]</p></article>
-          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h8M7 8h10M6 12h12v8H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><h3>Plan the work</h3><p>[Who determines the scope, schedule, and participants?]</p></article>
-          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="7" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 18v-1a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v1M13.5 18v-1a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Collaborate</h3><p>[What does participation normally involve?]</p></article>
-          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 16l4-4 3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 8h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Share the outcome</h3><p>[How are results or lessons communicated?]</p></article>
+          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16v10H7l-3 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><h3>Start a conversation</h3><p data-unfinished>[How does an organization contact the Lab?]</p></article>
+          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Identify an opportunity</h3><p data-unfinished>[How are shared interests or challenges discussed?]</p></article>
+          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h8M7 8h10M6 12h12v8H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><h3>Plan the work</h3><p data-unfinished>[Who determines the scope, schedule, and participants?]</p></article>
+          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="7" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 18v-1a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v1M13.5 18v-1a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Collaborate</h3><p data-unfinished>[What does participation normally involve?]</p></article>
+          <article class="step"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 16l4-4 3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 8h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Share the outcome</h3><p data-unfinished>[How are results or lessons communicated?]</p></article>
         </div>
       </div>
     </section>
 
     <!-- Replace the pending status with a confirmed contact link when ready. -->
-    <section class="cta" id="partner" aria-labelledby="partner-title">
+    <section class="cta" id="partner" data-unfinished aria-labelledby="partner-title">
       <div class="container">
         <div class="cta-box">
           <h2 id="partner-title">Interested in partnering with the Lab?</h2>
-          <p>[Placeholder. Will explain contact information, etc.]</p>
+          <p data-unfinished>[Placeholder. Will explain contact information, etc.]</p>
           <p class="pending-status">Partnership information coming soon <span aria-hidden="true">↗</span></p>
         </div>
       </div>
     </section>
   </main>
 
- <footer class="lab-site-footer" id="site-footer">
+<footer class="lab-site-footer" id="site-footer">
   <div class="lab-footer-inner">
-
     <div class="lab-footer-brand">
       <strong>Applied AI Lab</strong>
       <span>Experiment. Build. Question. Apply.</span>
-
       <a class="footer-circuit" href="ai-insights.html#subscribe">
         Join The Circuit →
       </a>
     </div>
-
-    <nav class="lab-footer-nav" aria-label="Footer navigation">
-      <a href="index.html">Home</a>
-      <a href="industry.html">Industry Partners</a>
-      <a href="fellowship.html">Fellowship</a>
-      <a href="studentoutcomes.html">Student Outcomes</a>
-      <a href="event.html">Events</a>
-      <a href="ai-insights.html">AI Insights</a>
-      
-    </nav>
-
     <a class="lab-footer-top" href="#top">
       Back to top <span aria-hidden="true">↑</span>
     </a>
-
   </div>
 </footer>
 
-  <script src="js/site.js?v=4" defer></script>
-  <script src="js/chatbot.js" defer></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,104 @@
+/* Palette, type, and spacing. Dark mode redefines these on body.dark.
+   Breakpoint scale for new rules: 480, 640, 900, 1020, 1200.
+   Older queries stay on their current widths so the layout does not shift. */
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../../fonts/space-grotesk/space-grotesk-latin.woff2") format("woff2"),
+       url("../../fonts/space-grotesk/SpaceGrotesk-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2197, U+2212, U+FEFF;
+}
+
+@font-face {
+  font-family: "Oxanium";
+  src: url("../../fonts/oxanium/oxanium-latin.woff2") format("woff2"),
+       url("../../fonts/oxanium/Oxanium-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2197, U+2212, U+FEFF;
+}
+
+:root {
+  --color-ink: #10262f;
+  --color-navy: #17495a;
+  --color-blue: #24557a;
+  --color-red: #7d3542;
+  --color-green: #2f7d4f;
+  --color-paper: #d6e0e3;
+  --color-card: #e9eff0;
+  --color-sand: #c5d2d6;
+  --color-muted: #405761;
+  --color-line: rgba(16, 38, 47, 0.18);
+
+  --circuit-ink: var(--color-ink);
+  --circuit-navy: var(--color-navy);
+  --circuit-crimson: var(--color-red);
+  --circuit-muted: var(--color-muted);
+  --circuit-paper: var(--color-paper);
+  --circuit-card: var(--color-card);
+  --circuit-line: var(--color-line);
+  --circuit-soft: var(--color-sand);
+
+  --font-display: "Oxanium", sans-serif;
+  --font-ui: "Oxanium", "Space Grotesk", sans-serif;
+  --font-body: "Space Grotesk", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --radius-control: 10px;
+  --radius-card: 18px;
+  --header-height: 73px;
+  --container-max: 1360px;
+  --container: min(var(--container-max), calc(100% - clamp(1.25rem, 4vw, 6rem)));
+}
+
+body.dark {
+  --color-ink: #f3f6fa;
+  --color-navy: #d5e2f0;
+  --color-blue: #8eafc4;
+  --color-red: #f0c9d0;
+  --color-green: #8fbf9b;
+  --color-paper: #0e1622;
+  --color-card: #172433;
+  --color-sand: #1e2c3d;
+  --color-muted: #c5d0dc;
+  --color-line: rgba(213, 226, 240, 0.18);
+
+  --circuit-ink: var(--color-ink);
+  --circuit-navy: var(--color-navy);
+  --circuit-crimson: var(--color-red);
+  --circuit-muted: var(--color-muted);
+  --circuit-paper: var(--color-paper);
+  --circuit-card: var(--color-card);
+  --circuit-line: var(--color-line);
+  --circuit-soft: var(--color-sand);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --header-height: 65px;
+  }
+}
+
+html {
+  scroll-padding-top: var(--header-height);
+}
+
+@media print {
+  .reveal,
+  .lab-reveal,
+  .js .reveal,
+  html.reveal-ready .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
