@@ -1601,3 +1601,41 @@ body.dark .lab-menu-toggle {
 /* Hides the Industry Partners link in the navigation. To show it, remove this rule or make it a comment like this one */
 .lab-nav-links > a[href="industry.html"],
 .lab-footer-nav > a[href="industry.html"] { display: none; }
+
+
+/*  for Engish and Spanish Globe/flag positionning  */
+.gtranslate_wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.gtranslate_wrapper .gsatelite {
+  top: calc(100% + 12px) !important;
+}
+
+.gtranslate_wrapper .gsatelite[data-gt-lang="en"] {
+  left: -20px !important;
+}
+
+.gtranslate_wrapper .gsatelite[data-gt-lang="es"] {
+  left: 16px !important;
+}
+
+/* Remove the large shadow around the selected flag */
+.gtranslate_wrapper .gsatelite.gt-current-lang img {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Translator spacing on smaller screens */
+@media (max-width: 1024px) {
+  .lab-nav .gtranslate_wrapper {
+    margin-left: 12px;
+  }
+
+  .gtranslate_wrapper .gglobe {
+    width: 30px !important;
+    height: 30px !important;
+    background-size: contain;
+  }
+}

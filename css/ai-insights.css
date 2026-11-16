@@ -316,31 +316,215 @@ img { display: block; }
 .vids .vid:first-child:not(:only-child) h4 { font-family: var(--display); font-size: 24px; letter-spacing: -.02em; }
 .vids .vid:first-child:not(:only-child) .play { width: 84px; height: 84px; }
 
-/* Layout E: Use cases (alternating story rows) */
-.cases { display: flex; flex-direction: column; gap: 26px; }
-.case { display: grid; grid-template-columns: 1.1fr 1fr; background: #fff; border: 1px solid var(--line); border-radius: 0; overflow: hidden;
-  transition: box-shadow .2s, transform .2s; }
-.case:hover { transform: translateY(-3px); box-shadow: 0 30px 50px -32px rgba(11,16,32,.5); }
-.case:nth-child(even) { grid-template-columns: 1fr 1.1fr; }
-.case:nth-child(even) .media { order: 2; }
-.case .media { min-height: 300px; }
-.case .body { padding: 36px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-.case .kicker { font-family: var(--display); font-weight: 700; color: var(--c); font-size: 14px; letter-spacing: .08em; }
-.case h4 { font-family: var(--display); font-size: clamp(22px, 2.3vw, 28px); line-height: 1.15; letter-spacing: -.025em; margin: 0; }
-.case .desc { font-size: 15.5px; line-height: 1.65; color: var(--ink-2); margin: 0; }
-.case .btn { align-self: flex-start; background: var(--c); color: #fff; padding: 12px 18px; font-size: 14.5px; }
+/* Layout E: Applied AI Use Cases */
+
+#applied-ai-use-cases .cases {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+#applied-ai-use-cases .case {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+/* Alternate image placement on desktop. */
+#applied-ai-use-cases .case:nth-child(even) .media {
+  order: 2;
+}
+
+/* Keep photos and image placeholders inside their column. */
+#applied-ai-use-cases .case .media {
+  position: relative;
+  min-width: 0;
+  min-height: 320px;
+}
+
+#applied-ai-use-cases .case .media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#applied-ai-use-cases .case .body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  gap: 14px;
+  padding: clamp(24px, 3vw, 40px);
+  overflow-wrap: anywhere;
+}
+
+#applied-ai-use-cases .case .kicker {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--c);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+#applied-ai-use-cases .case h4 {
+  margin: 0;
+  font-size: clamp(22px, 2.3vw, 28px);
+  line-height: 1.2;
+}
+
+#applied-ai-use-cases .case .desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* Let the action button and heart wrap if space is tight. */
+#applied-ai-use-cases .case .body > div:last-child {
+  flex-wrap: wrap;
+}
+
+#applied-ai-use-cases .case .btn {
+  background: var(--c);
+  color: var(--surface);
+  padding: 12px 18px;
+  font-size: 14px;
+  white-space: normal;
+}
+
+/* Tablets and phones: image above text. */
+@media (max-width: 800px) {
+  #applied-ai-use-cases .case {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #applied-ai-use-cases .case .media {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  #applied-ai-use-cases .case:nth-child(even) .media {
+    order: 0;
+  }
+
+  #applied-ai-use-cases .case .body {
+    padding: 24px;
+  }
+}
 
 /* Layout F: Research list */
-.papers { background: #fff; border: 1px solid var(--line); border-radius: 0; overflow: hidden; }
-.paper { display: grid; grid-template-columns: 70px 120px 1fr auto; align-items: center; gap: 22px; padding: 20px 26px;
-  border-bottom: 1px solid var(--line); transition: background .15s; }
-.paper:last-child { border-bottom: 0; }
-.paper:hover { background: #EFEDEA; }
-.paper .n { font-family: var(--display); font-size: 40px; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--c); line-height: 1; }
-.paper .media { width: 120px; aspect-ratio: 4/3; border-radius: 0; }
-.paper h4 { font-size: 16.5px; line-height: 1.35; margin: 0 0 6px; }
-.paper .desc { font-size: 14px; line-height: 1.55; color: var(--ink-2); margin: 0 0 8px; }
-.paper .save { position: static; box-shadow: none; border: 1px solid var(--line); }
+
+#research-spotlight {
+  padding-top: 32px;
+}
+
+#research-spotlight .sec-head {
+  margin-bottom: 20px;
+}
+
+#research-spotlight .papers {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+#research-spotlight .paper {
+  display: grid;
+  grid-template-columns: 50px 120px minmax(0, 1fr) 38px;
+  align-items: center;
+  gap: 22px;
+  padding: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+#research-spotlight .paper:last-child {
+  border-bottom: 0;
+}
+
+#research-spotlight .paper .n {
+  grid-column: 1;
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c);
+  line-height: 1;
+}
+
+#research-spotlight .paper > a {
+  grid-column: 2;
+  min-width: 0;
+}
+
+#research-spotlight .paper .media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+#research-spotlight .paper .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#research-spotlight .paper > div {
+  grid-column: 3;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#research-spotlight .paper h4 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+#research-spotlight .paper .desc {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+#research-spotlight .paper .save {
+  grid-column: 4;
+  position: static;
+  align-self: start;
+  box-shadow: none;
+}
+
+#research-spotlight .paper .go {
+  white-space: normal;
+}
+
+/* Phones: text on the left, heart on the right. */
+@media (max-width: 680px) {
+  #research-spotlight .paper {
+    grid-template-columns: minmax(0, 1fr) 38px;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  #research-spotlight .paper .n,
+  #research-spotlight .paper > a {
+    display: none;
+  }
+
+  #research-spotlight .paper > div {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #research-spotlight .paper .save {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
 
 /* ---------- Subscribe ---------- */
 .subscribe { margin: 90px 0 0; }
@@ -580,4 +764,393 @@ body.dark .back-to-top {
   background: var(--surface);
   color: var(--ink);
   border-color: var(--line);
+}
+
+/* NEWS CAROUSEL: side arrows and centered articles. */
+#latest-ai-news .news-carousel {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+/* Lets the buttons sit on either side of the slide. */
+#latest-ai-news .news-carousel-controls {
+  display: contents;
+}
+
+#latest-ai-news .news-slide {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
+#latest-ai-news .news-slide-title {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+#latest-ai-news .story .desc {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* Keep the footer at the bottom */
+#latest-ai-news .story .foot {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* Simple circular navigation buttons */
+#latest-ai-news .news-carousel-controls button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+
+  border: 1px solid #418fde;
+  border-radius: 50%;
+  background: transparent;
+  color: #316a9f;
+
+  font: 24px/1 sans-serif;
+  cursor: pointer;
+  box-shadow: none;
+
+  transition: background 180ms ease, color 180ms ease;
+}
+
+#latest-ai-news .news-carousel-controls button:hover {
+  background: #316a9f;
+  color: #fff;
+  transform: none;
+  box-shadow: none;
+}
+
+#latest-ai-news [data-news-step="1"] {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#latest-ai-news .news-carousel-controls button:hover {
+  background: linear-gradient(145deg, #235583, #0c2340);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 0 22px rgb(65 143 222 / 40%);
+}
+
+#latest-ai-news .news-carousel-controls button:active {
+  transform: scale(0.96);
+}
+
+#latest-ai-news .news-carousel-controls button:focus-visible {
+  outline: 3px solid #ffc92d;
+  outline-offset: 4px;
+}
+
+/* Topic indicator stays below the articles. */
+#latest-ai-news .news-carousel-status {
+  grid-column: 2;
+  grid-row: 2;
+  text-align: center;
+  font-family: var(--mono, monospace);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+/* Real articles and placeholders enter together on each slide. */
+/* Animate the whole slide together, including real articles. */
+.js #latest-ai-news .news-slide .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes news-slide-enter {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Keep inactive slides and unused placeholders hidden. */
+#latest-ai-news .news-slide[hidden],
+#latest-ai-news .news-slide-empty[hidden],
+#latest-ai-news .mag:empty {
+  display: none !important;
+}
+
+/* Dark-mode cards. */
+body.dark #latest-ai-news .news-carousel-controls button {
+  color: #91c7ff;
+}
+
+body.dark #latest-ai-news .news-carousel-controls button:hover {
+  color: #fff;
+}
+
+/* On phones, move arrows below to give articles more space. */
+@media (max-width: 600px) {
+  #latest-ai-news .news-carousel {
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    gap: 12px;
+  }
+
+  #latest-ai-news .news-slide {
+    grid-column: 1 / -1;
+  }
+
+  #latest-ai-news .news-carousel-controls button {
+    grid-row: 2;
+  }
+
+  #latest-ai-news .news-carousel-status {
+    align-self: center;
+  }
+}
+
+/* Respect visitors who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  #latest-ai-news .news-slide,
+  #latest-ai-news .story,
+  #latest-ai-news .news-placeholder,
+  #latest-ai-news .news-carousel-controls button {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+#latest-ai-news .news-carousel-controls button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #df270e;
+  transform: none;
+  box-shadow: none;
+}
+
+body.dark #latest-ai-news .news-carousel-controls button:hover {
+  color: #fff;
+}
+
+/* Center cards in Industry News and every subtopic */
+#latest-ai-news .news-slide .mag {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Give real articles and Coming soon cards the same width */
+#latest-ai-news .news-slide .mag > .story {
+  flex: 0 1 360px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+  /* ===== Tutorials & Learning ===== */
+
+#tutorials-learning .learning-carousel {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+/* Place arrows and counter independently in the grid. */
+#tutorials-learning .learning-controls {
+  display: contents;
+}
+
+#tutorials-learning .lessons {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  max-width: 744px;
+  min-width: 0;
+  margin-inline: auto;
+  overflow: hidden;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+}
+
+/* Shared card height for News and Learning. */
+#latest-ai-news .news-slide .mag > .story,
+#tutorials-learning .lessons > .lesson {
+  height: 460px;
+}
+
+#tutorials-learning .lessons > .lesson {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc((100% - 24px) / 2);
+  min-width: 0;
+  grid-template-columns: none;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+}
+
+#tutorials-learning .lesson .media {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+}
+
+#tutorials-learning .lesson .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#tutorials-learning .lesson .body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 10px;
+  padding: 18px 20px 20px;
+}
+
+#tutorials-learning .lesson h4 {
+  margin: 0;
+  font-size: 17.5px;
+  line-height: 1.35;
+}
+
+#tutorials-learning .lesson .desc {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+#tutorials-learning .lesson .foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* Side arrows match News. */
+#tutorials-learning .learning-controls button {
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid #418fde;
+  border-radius: 50%;
+  background: transparent;
+  color: #316a9f;
+  font: 24px/1 sans-serif;
+  box-shadow: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+#tutorials-learning [data-learning-step="-1"] {
+  grid-column: 1;
+}
+
+#tutorials-learning [data-learning-step="1"] {
+  grid-column: 3;
+}
+
+#tutorials-learning .learning-controls button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #df270e;
+  transform: none;
+  box-shadow: none;
+}
+
+#tutorials-learning .learning-controls button:focus-visible {
+  outline: 3px solid #ffc92d;
+  outline-offset: 4px;
+}
+
+/* Counter underneath the cards. */
+#tutorials-learning .learning-status {
+  grid-column: 2;
+  grid-row: 2;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+body.dark #tutorials-learning .learning-controls button {
+  color: #91c7ff;
+}
+
+body.dark #tutorials-learning .learning-controls button:hover {
+  color: #fff;
+}
+
+/* Show one full card when two News-sized cards cannot fit. */
+@media (max-width: 932px) {
+  #tutorials-learning .lessons {
+    max-width: 360px;
+  }
+
+  #tutorials-learning .lessons > .lesson {
+    flex-basis: 100%;
+  }
+}
+
+/* Match the News control positioning on phones. */
+@media (max-width: 600px) {
+  #tutorials-learning .learning-carousel {
+    gap: 12px;
+  }
+
+  #tutorials-learning .lessons {
+    grid-column: 1 / -1;
+  }
+
+  #tutorials-learning .learning-controls button {
+    grid-row: 2;
+  }
+}
+
+
+.page-ai-brief #site-footer .lab-footer-nav {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.page-ai-brief #site-footer .lab-footer-nav a[href^="https://forms.cloud.microsoft/"] {
+  display: inline-flex;
+  visibility: visible;
+  opacity: 1;
+  color: #fff;
 }
