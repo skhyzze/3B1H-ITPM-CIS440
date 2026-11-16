@@ -177,7 +177,7 @@
   const section=document.getElementById('upcoming'),grid=section.querySelector('.event-grid'),note=section.querySelector('.section-note');
   const node=(tag,cls,text)=>{const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;};
   const safe=value=>{try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}};
-  function message(text,retry){const box=node('div','event-content','');const p=node('p','',text);p.setAttribute('role','status');box.append(p);if(retry){const button=node('button','button button-ghost','Try again');button.type='button';button.addEventListener('click',load);box.append(button);}grid.replaceChildren(box);}
+  function message(text,retry){const box=node('div','event-status','');const p=node('p','',text);p.setAttribute('role','status');box.append(p);if(retry){const button=node('button','button button-ghost','Try again');button.type='button';button.addEventListener('click',load);box.append(button);}grid.replaceChildren(box);}
   function cardFor(event){
     const card=node('article','event-card',''),category=event.category||'Event';
     const art=category==='Research'?'research-art':category==='Idea Lab'?'idea-art':'workshop-art';

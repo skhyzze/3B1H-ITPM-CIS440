@@ -5044,7 +5044,7 @@ body.dark.page-fellowship #fellows::after {
 }
 
 [aria-busy="true"] > .feed-message,
-.page-events .event-grid[aria-busy="true"] .event-content,
+.page-events .event-grid[aria-busy="true"] .event-status,
 #fellowTrack[aria-busy="true"] {
   border: 1px solid rgba(20, 59, 99, 0.22) !important;
   border-left: 4px solid #8e2433 !important;
@@ -5085,7 +5085,7 @@ body.dark.page-fellowship #fellows::after {
   grid-template-columns: minmax(0, 1fr) !important;
 }
 
-.page-events .event-grid[aria-busy="true"] .event-content {
+.page-events .event-grid[aria-busy="true"] .event-status {
   min-height: 120px;
   padding: 28px;
 }
@@ -5135,23 +5135,23 @@ body.dark.page-fellowship #fellows::after {
   animation: lab-load-pulse 1.3s ease-in-out infinite;
 }
 
-body.dark .page-events .event-grid:empty {
+body.dark.page-events .event-grid:empty {
   border-color: rgba(213, 226, 240, 0.28);
   border-left-color: #f0c9d0;
   background: #1e2c3d;
 }
 
-body.dark .page-events .event-grid:empty::after {
+body.dark.page-events .event-grid:empty::after {
   color: #f3f6fa;
 }
 
-body.dark .page-events .event-grid:empty::before {
+body.dark.page-events .event-grid:empty::before {
   border-color: rgba(213, 226, 240, 0.28);
   border-top-color: #f0c9d0;
 }
 
 body.dark [aria-busy="true"] > .feed-message,
-body.dark .page-events .event-grid[aria-busy="true"] .event-content,
+body.dark.page-events .event-grid[aria-busy="true"] .event-status,
 body.dark #fellowTrack[aria-busy="true"] {
   border-color: rgba(213, 226, 240, 0.28) !important;
   border-left-color: #f0c9d0 !important;
@@ -5159,13 +5159,13 @@ body.dark #fellowTrack[aria-busy="true"] {
 }
 
 body.dark [aria-busy="true"] .feed-message p[role="status"],
-body.dark .page-events .event-grid[aria-busy="true"] p[role="status"],
+body.dark.page-events .event-grid[aria-busy="true"] p[role="status"],
 body.dark #fellowTrack[aria-busy="true"]::after {
   color: #f3f6fa !important;
 }
 
 body.dark [aria-busy="true"] .feed-message p[role="status"]::before,
-body.dark .page-events .event-grid[aria-busy="true"] p[role="status"]::before,
+body.dark.page-events .event-grid[aria-busy="true"] p[role="status"]::before,
 body.dark #fellowTrack[aria-busy="true"]::before {
   border-color: rgba(213, 226, 240, 0.28);
   border-top-color: #f0c9d0;

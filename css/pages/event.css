@@ -270,9 +270,101 @@ and Industry. */
   gap: 16px;
 }
 
-.page-events .event-grid > .event-content{
+.page-events .event-grid > .event-status{
   grid-column: 1 / -1;
-  max-width: 40rem;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+/* Settled empty and error panels. The in-flight loader stays on aria-busy. */
+.page-events .event-grid:not([aria-busy="true"]) > .event-status,
+.page-events .event-soon{
+  --event-status-bg: #e9eff0;
+  --event-status-ink: #102033;
+  --event-status-line: rgba(20, 59, 99, 0.22);
+  --event-status-accent: #8e2433;
+  --event-status-trace: #143b63;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 0;
+  padding: 32px 36px;
+  border: 1px solid var(--event-status-line);
+  border-left: 4px solid var(--event-status-accent);
+  border-radius: 8px;
+  background: var(--event-status-bg);
+  color: var(--event-status-ink);
+  box-shadow: none;
+}
+
+.page-events .event-grid:not([aria-busy="true"]) > .event-status::before,
+.page-events .event-soon::before{
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--event-status-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--event-status-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0 46%, #000 84%);
+  mask-image: linear-gradient(90deg, transparent 0 46%, #000 84%);
+}
+
+.page-events .event-grid:not([aria-busy="true"]) > .event-status{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  min-height: 148px;
+}
+
+.page-events .event-soon{
+  display: flex;
+  align-items: center;
+  min-height: 148px;
+}
+
+.page-events .event-grid:not([aria-busy="true"]) > .event-status::after,
+.page-events .event-soon::after{
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 12px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--event-status-trace), var(--event-status-trace)) top left / 16px 1.5px no-repeat,
+    linear-gradient(var(--event-status-trace), var(--event-status-trace)) top left / 1.5px 16px no-repeat,
+    linear-gradient(var(--event-status-accent), var(--event-status-accent)) top right / 16px 1.5px no-repeat,
+    linear-gradient(var(--event-status-accent), var(--event-status-accent)) top right / 1.5px 16px no-repeat,
+    linear-gradient(var(--event-status-trace), var(--event-status-trace)) bottom left / 16px 1.5px no-repeat,
+    linear-gradient(var(--event-status-trace), var(--event-status-trace)) bottom left / 1.5px 16px no-repeat,
+    linear-gradient(var(--event-status-accent), var(--event-status-accent)) bottom right / 16px 1.5px no-repeat,
+    linear-gradient(var(--event-status-accent), var(--event-status-accent)) bottom right / 1.5px 16px no-repeat;
+}
+
+.page-events .event-grid:not([aria-busy="true"]) > .event-status > *{
+  position: relative;
+  z-index: 1;
+}
+
+.page-events .event-grid:not([aria-busy="true"]) > .event-status p[role="status"]{
+  margin: 0;
+  max-width: 46rem;
+  color: var(--event-status-ink);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.55;
+  text-transform: none;
+}
+
+.page-events .event-status .button{
+  min-height: 44px;
 }
 
 .page-events .event-card,
@@ -601,6 +693,20 @@ body.dark.page-events .event-meta dd{
   color: #edf3f8;
 }
 
+body.dark.page-events .event-grid:not([aria-busy="true"]) > .event-status,
+body.dark.page-events .event-soon{
+  --event-status-bg: #1e2c3d;
+  --event-status-ink: #f3f6fa;
+  --event-status-line: rgba(213, 226, 240, 0.28);
+  --event-status-accent: #f0c9d0;
+  --event-status-trace: #d5e2f0;
+}
+
+body.dark.page-events .event-grid:not([aria-busy="true"]) > .event-status p[role="status"],
+body.dark.page-events p.event-soon{
+  color: var(--event-status-ink);
+}
+
 @media (max-width: 980px) {
   .page-events .event-grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -650,6 +756,19 @@ body.dark.page-events .event-meta dd{
     grid-template-columns: 1fr;
     gap: 16px;
     padding: 22px;
+  }
+
+  .page-events .event-grid:not([aria-busy="true"]) > .event-status,
+  .page-events .event-soon{
+    min-height: 0;
+    padding: 24px 20px;
+  }
+
+  .page-events .event-grid:not([aria-busy="true"]) > .event-status::before,
+  .page-events .event-soon::before{
+    -webkit-mask-image: none;
+    mask-image: none;
+    opacity: 0.28;
   }
 }
 
