@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: microsoft-lists-content
+  group: microsoft-lists-content-${{ github.event.client_payload.feed }}
   cancel-in-progress: false
 
 jobs:
@@ -17,6 +17,9 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
       - name: Validate public content and update its snapshot
         shell: bash
         run: |
@@ -96,4 +99,9 @@ jobs:
           git add -- data/cms-*.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Update approved Microsoft Lists content'
-          git push
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          echo 'Could not publish after five attempts' >&2
+          exit 1
