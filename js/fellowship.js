@@ -9,6 +9,28 @@ window.LAB_FELLOWS_READY=(async function(){
   function unfinishedCopy(text){return typeof text==='string'&&(/^\s*\[/.test(text)||/add a short, student-approved/i.test(text)||/^add the project title/i.test(text));}
   function pending(el,text){if(unfinishedCopy(text))el.setAttribute('data-unfinished','');return el;}
   function safeUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}}
+  function photoFrame(fellow){
+    const name=fellow.name.trim();
+    const frame=node('div','image-slot-frame fellow-photo','');
+    const mark='<svg class="image-slot-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="10" width="36" height="28" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 32l10-9 8 7 6-5 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="19" r="2.5" fill="currentColor"/></svg>';
+    function showPlaceholder(){
+      frame.setAttribute('role','img');
+      frame.setAttribute('aria-label','Photo placeholder for '+name);
+      const svg=document.createElement('template');
+      svg.innerHTML=mark;
+      frame.replaceChildren(svg.content.firstElementChild,node('span','image-slot-label','Fellow photo'));
+    }
+    const href=safeUrl(fellow.image);
+    if(!href){showPlaceholder();return frame;}
+    const img=document.createElement('img');
+    img.alt=name;
+    img.loading='lazy';
+    img.referrerPolicy='no-referrer';
+    img.addEventListener('error',showPlaceholder,{once:true});
+    img.src=href;
+    frame.replaceChildren(img);
+    return frame;
+  }
   const controller=new AbortController();
   const timer=setTimeout(function(){controller.abort();},20000);
   try {
@@ -20,7 +42,7 @@ window.LAB_FELLOWS_READY=(async function(){
       if(!f || typeof f.name!=='string' || !f.name.trim())return;
       const card=node('article','fellow-card','');
       const initials=node('div','initials',f.initials||f.name.split(/\s+/).map(n=>n[0]).join('').slice(0,2));initials.setAttribute('aria-hidden','true');
-      card.append(node('div','card-index',String(i+1).padStart(2,'0')),initials,node('h3','',f.name),node('p','fellow-role',f.role));
+      card.append(photoFrame(f),node('div','card-index',String(i+1).padStart(2,'0')),initials,node('h3','',f.name),node('p','fellow-role',f.role));
       if(f.bio)card.append(pending(node('p','fellow-focus',f.bio),f.bio));
       if(f.projectLabel||f.projectTitle||f.projectDescription||f.url){
         const project=node('p','fellow-project','');

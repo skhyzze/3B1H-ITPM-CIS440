@@ -114,6 +114,12 @@ button.console-line.is-active{ box-shadow: inset 3px 0 0 var(--red); }
 .fellow-card.is-option .fellow-project{ display: none; }
 .fellow-card.is-option h3{ margin-top: 34px; font-size: 1rem; }
 .fellow-card.is-option .initials{ width: 50px; height: 50px; }
+.fellow-card .fellow-photo{ min-width: 0; max-width: 100%; margin: 4px 0 22px; pointer-events: none; }
+.fellow-card .card-index{ z-index: 3; }
+.fellow-card.is-option .fellow-photo{ display: none; }
+@media (min-width: 941px){
+  .page-fellowship .fellow-card.is-option{ align-self: start; }
+}
 .carousel-controls{ display: flex; align-items: center; gap: 12px; margin-top: 34px; }
 .carousel-button{ width: 46px; height: 46px; border: 1px solid var(--navy); border-radius: 2px; background: transparent; color: var(--navy); font-size: 1.1rem; cursor: pointer; transition: .2s; }
 .carousel-button:hover:not(:disabled){ background: var(--navy); color: var(--white); }
@@ -190,6 +196,7 @@ body.dark.page-fellowship .carousel-count{ color: #d1dce5; }
   .fellow-card.is-option .fellow-role{ display: none; }
   .page-fellowship .fellow-card.is-option::before{ content: none; }
   .fellow-card.is-active .initials{ width: 66px; height: 66px; }
+  .fellow-card.is-active .fellow-photo{ margin-top: 18px; }
   .carousel-progress{ margin-inline: 2px; }
   .contact-strip{ align-items: start; }
 }
@@ -474,6 +481,11 @@ body.dark.page-fellowship .program-support .ico{ color: #ff9ba8; }
 @media (max-width: 940px) {
   .circuit-field{ width: 240px; opacity: .2; top: auto; bottom: 12px; }
   .circuit-decor{ width: 110px; opacity: .35; }
+}
+
+@media (max-width: 900px) {
+  .fellow-card .image-slot-frame::before,
+  .fellow-card .image-slot-frame::after{ animation: none; }
 }
 
 @media (max-width: 640px) {
