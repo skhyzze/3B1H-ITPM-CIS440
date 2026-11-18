@@ -23,9 +23,10 @@ part of the website. Neither needs Python running on anyone's computer.
    preview picture for each item, and commits
    `data/newsletter-candidates.json`. **Run collector** on the desk starts it
    on demand.
-2. **Review.** Sign in to the desk with the team password. Tick **Approve**,
-   choose one **Spotlight**, adjust **Section**, and paste a **Custom picture
-   link** if an item has no picture.
+2. **Review.** Sign in to the desk with the team password. Tick the articles
+   to add, click ☆ to choose the **Spotlight**, and adjust the **Section** (and
+   the **News topic** for news). To fix a missing picture, click the item in
+   **This issue** and paste a picture link.
 3. **Publish.** Click **Publish to The Circuit**. The desk commits
    `data/newsletter.json`, and AI Insights shows it once the site redeploys
    (about a minute on GitHub Pages).
@@ -33,9 +34,6 @@ part of the website. Neither needs Python running on anyone's computer.
 If two people publish at the same time, the second one is told to reload
 instead of overwriting the first. Setup steps for the desk are in
 `circuit-admin/README.md`.
-
-The Streamlit app (`app.py`) and its page (`newsletter_component/`) are the
-earlier local version of the desk. The website does not use them.
 
 ---
 
@@ -107,7 +105,7 @@ All sources are real, well-known public RSS feeds. Notes from testing:
   (Import AI), and videos via YouTube channel RSS (IBM Technology, Two Minute
   Papers, 3Blue1Brown). The YouTube channels post less often, so some weeks
   they will have 0 recent videos.
-- **content_type values the app understands:** `news`, `research`,
+- **content_type values the collector understands:** `news`, `research`,
   `tutorial`, `educational`, `tool`, `video`, `use case`. These decide which
   newsletter section an item goes to by default.
 
@@ -124,40 +122,3 @@ say so in its output rather than inventing content.
 - **Readable code:** clear functions and plain-English comments throughout
   `collect_news.py`, so each step can be explained easily.
 
----
-
-## Newsletter app (Streamlit)
-
-`app.py` adds a web app on top of the collector. It has two views:
-
-| View | URL | Who it's for |
-|------|-----|--------------|
-| **Public newsletter** | `http://localhost:8501` | Students and faculty. Shows **only approved** items. |
-| **Internal review desk** | `http://localhost:8501/?view=admin` | The Applied AI Lab team (password protected). |
-
-**Run it:**
-```bash
-pip3 install -r requirements.txt
-streamlit run app.py
-```
-
-Default team password: `appliedai`. Change it before sharing:
-```bash
-export AI_LAB_ADMIN_PASSWORD="your-password"
-streamlit run app.py
-```
-
-**Flow:** sources → `collect_news.py` → `output/ai_resources.csv` → review desk
-(approve / feature / pick section) → `output/approved_resources.csv` → public newsletter.
-
-Approvals are stored separately in `output/approved_resources.csv`, so
-re-running the collector never erases them.
-
-**The public page** is built by `newsletter_component/index.html` (layout,
-styling, filters, search, saved list, video player). `app.py` sends it the
-approved items as data.
-
-**Pictures:** for approved items, the app looks up each article's preview
-image (the one social media shows for a shared link) and remembers it in
-`output/image_cache.json`. YouTube videos use their thumbnails. Items with
-no picture get generated artwork in their section's color.
