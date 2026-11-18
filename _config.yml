@@ -1,0 +1,6 @@
+# GitHub Pages settings, used while the site is served from this repository.
+# circuit-admin/ is the team-only review desk. It runs on Cloudflare, so GitHub Pages
+# must not publish its files. The production build (npm run build) skips it as well.
+exclude:
+  - circuit-admin
+  - node_modules

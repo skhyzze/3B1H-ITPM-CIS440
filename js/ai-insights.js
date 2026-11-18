@@ -952,15 +952,42 @@ document.addEventListener("click", function (event) {
  *
  * Reads ai_brief/sharepoint-content.json and keeps Published entries.
  * Converts SharePoint column names into the format our article cards use.
- * Adds these test entries alongside the existing newsletter resources.
+ * Adds these test entries alongside the issue published from the review desk.
  * Builds the page before setting up the Learning carousel counter.
  *
- * If the file cannot load, the existing newsletter content still displays.
+ * If the file cannot load, the published issue still displays.
  * Later, an approved SharePoint connection will supply the real content.
  */
 
+// Shown when data/newsletter.json cannot be loaded.
+function renderLoadError() {
+  const app = document.getElementById("app");
+  const footer = document.getElementById("site-footer");
+  app.innerHTML = '<div class="wrap"><div class="curating"><b>The Circuit could not load.</b>' +
+    '<span>Check your connection and refresh the page.</span></div></div>';
+  if (footer) app.appendChild(footer);
+}
+
+// The review desk (circuit-admin/) publishes data/newsletter.json. no-cache asks
+// the browser to check for a newer issue instead of reusing an old copy.
+async function loadPublishedIssue() {
+  const response = await fetchWithTimeout("data/newsletter.json", { cache: "no-cache", credentials: "omit" }, 15000);
+  if (!response.ok) throw new Error("Newsletter unavailable");
+  const data = await response.json();
+  if (!data || !Array.isArray(data.items) || !Array.isArray(data.sections)) throw new Error("Invalid newsletter");
+  return data;
+}
+
 (async function () {
-  let newsletter = STATIC_NEWSLETTER_DATA;
+  let issue;
+  try {
+    issue = await loadPublishedIssue();
+  } catch (error) {
+    renderLoadError();
+    return;
+  }
+
+  let newsletter = issue;
 
   try {
     const response = await fetch("./ai_brief/sharepoint-content.json", {
@@ -982,7 +1009,7 @@ document.addEventListener("click", function (event) {
     const testItems = rows
       .filter(row => row.Status === "Published")
       .map(function (row) {
-        const section = STATIC_NEWSLETTER_DATA.sections.find(
+        const section = issue.sections.find(
           section => section.name === row.Section
         );
 
@@ -1005,8 +1032,8 @@ document.addEventListener("click", function (event) {
       .filter(Boolean);
 
     newsletter = {
-      ...STATIC_NEWSLETTER_DATA,
-      items: [...STATIC_NEWSLETTER_DATA.items, ...testItems]
+      ...issue,
+      items: [...issue.items, ...testItems]
     };
   } catch (error) {
     console.warn("Using existing newsletter content:", error);
