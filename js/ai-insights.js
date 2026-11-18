@@ -638,4 +638,24 @@ window.addEventListener("load", syncHeaderOffset);
 window.addEventListener("resize", syncHeaderOffset);
 syncHeaderOffset();
 
-render(STATIC_NEWSLETTER_DATA);
+// Shown when data/newsletter.json cannot be loaded.
+function renderLoadError() {
+  const app = document.getElementById("app");
+  const footer = document.getElementById("site-footer");
+  app.innerHTML = '<div class="wrap"><div class="curating"><b>The Circuit could not load.</b>' +
+    '<span>Check your connection and refresh the page.</span></div></div>';
+  if (footer) app.appendChild(footer);
+}
+
+// The review desk (circuit-admin/) publishes this file. no-cache asks the browser
+// to check for a newer issue instead of reusing an old copy.
+fetchWithTimeout("data/newsletter.json", { cache: "no-cache", credentials: "omit" }, 15000)
+  .then(function (response) {
+    if (!response.ok) throw new Error("Newsletter unavailable");
+    return response.json();
+  })
+  .then(function (data) {
+    if (!data || !Array.isArray(data.items) || !Array.isArray(data.sections)) throw new Error("Invalid newsletter");
+    render(data);
+  })
+  .catch(renderLoadError);

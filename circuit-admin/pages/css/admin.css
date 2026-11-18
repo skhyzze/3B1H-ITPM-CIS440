@@ -1,0 +1,484 @@
+/* The Circuit review desk (desk.html and login.html), served by the Worker.
+   The pages also load the website's css/pages/event.css, so they share the Events hero,
+   buttons, colors (--navy, --blue, --red, --sand, --ink, --muted, --line, --surface), and dark mode.
+   These rules add the slim header, sign-in panel, filters, review table, and publish bar. */
+
+/* ---- Header: logo, desk name, theme toggle ---- */
+.page-admin .desk-header .lab-nav{
+  justify-content: flex-start;
+  gap: 18px;
+}
+
+.page-admin .desk-header-title{
+  flex: 1 1 auto;
+  font-family: var(--display);
+  font-weight: 650;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+body.dark.page-admin .desk-header-title{
+  color: #eef3f7;
+}
+
+.page-admin .admin-hero{
+  padding-bottom: 64px;
+}
+
+.page-admin .admin-body{
+  padding: 56px 0 120px;
+}
+
+.page-admin h2{
+  margin: 0 0 12px;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.page-admin code{
+  font-family: var(--mono);
+  font-size: 0.9em;
+  padding: 1px 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.page-admin input,
+.page-admin select{
+  font: inherit;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+}
+
+body.dark.page-admin input,
+body.dark.page-admin select{
+  background: #0b1c2e;
+  color: #eef3f7;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+body.dark.page-admin input::placeholder{
+  color: #a8b5c0;
+}
+
+.page-admin .admin-field input,
+.page-admin .admin-field select{
+  width: 100%;
+  min-width: 0;
+}
+
+.page-admin input:focus-visible,
+.page-admin select:focus-visible{
+  outline: 3px solid var(--red);
+  outline-offset: 1px;
+}
+
+.page-admin .button[disabled]{
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---- Sign in ---- */
+.page-admin .admin-panel{
+  max-width: 760px;
+  padding: clamp(24px, 4vw, 44px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+}
+
+.page-admin .admin-panel p{
+  color: var(--muted);
+}
+
+.page-admin .admin-message a{
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.page-admin .admin-signin label{
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.page-admin .admin-signin-row{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.page-admin .admin-signin-row input{
+  flex: 1 1 260px;
+  font-family: var(--mono);
+}
+
+.page-admin .admin-signin .admin-check{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.page-admin .admin-check input{
+  min-height: 0;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--blue);
+}
+
+/* ---- Messages ---- */
+.page-admin .admin-message{
+  margin: 16px 0 0;
+  min-height: 1.6em;
+  color: var(--muted);
+}
+
+.page-admin .admin-message:empty{
+  display: none;
+}
+
+.page-admin .admin-message[data-tone]:not([data-tone=""]){
+  padding: 12px 16px;
+  border-left: 4px solid var(--blue);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.page-admin .admin-message[data-tone="error"]{ border-left-color: var(--red); }
+.page-admin .admin-message[data-tone="success"]{ border-left-color: #2f7d4f; }
+
+.page-admin .admin-link-button{
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---- Desk header ---- */
+.page-admin .admin-account{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-admin .admin-meta{
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.page-admin .admin-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-admin .admin-stats{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 28px 0;
+}
+
+.page-admin .admin-stat{
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.page-admin .admin-stat dt{
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.page-admin .admin-stat dd{
+  margin: 6px 0 0;
+  font-family: var(--display);
+  font-size: 1.7rem;
+  font-weight: 650;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+/* ---- Filters ---- */
+.page-admin .admin-toolbar{
+  display: grid;
+  grid-template-columns: 2fr repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.page-admin .admin-field{
+  display: grid;
+  gap: 6px;
+}
+
+.page-admin .admin-field span{
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.page-admin .admin-count{
+  margin: 18px 0 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---- Review table ---- */
+.page-admin .admin-table-wrap{
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.page-admin .admin-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.page-admin .admin-table th{
+  position: sticky;
+  top: 0;
+  padding: 12px 14px;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.page-admin .admin-table td{
+  padding: 16px 14px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-admin .admin-table tr.is-approved td{
+  background: color-mix(in srgb, var(--blue) 7%, transparent);
+}
+
+.page-admin .admin-table tr.is-approved td:first-child{
+  box-shadow: inset 4px 0 0 var(--blue);
+}
+
+.page-admin .admin-cell-check{
+  width: 92px;
+  text-align: center;
+}
+
+.page-admin .admin-cell-check input{
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  margin: 2px 0 0;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.page-admin .admin-cell-check .admin-star{
+  accent-color: var(--red);
+}
+
+.page-admin .admin-item{
+  min-width: 300px;
+}
+
+.page-admin .admin-title{
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.page-admin .admin-title:hover{
+  text-decoration: underline;
+}
+
+.page-admin .admin-desc{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 6px 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.page-admin .admin-line{
+  margin: 8px 0 0;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.page-admin .admin-table select{
+  width: 100%;
+  min-width: 170px;
+}
+
+.page-admin .admin-cell-picture{
+  width: 230px;
+}
+
+.page-admin .admin-thumb{
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background: var(--sand);
+  border: 1px solid var(--line);
+}
+
+.page-admin .admin-thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page-admin .admin-thumb span{
+  padding: 8px;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.page-admin .admin-cell-picture input{
+  width: 100%;
+  font-size: 0.8rem;
+  min-height: 36px;
+}
+
+.page-admin .admin-empty td{
+  padding: 40px 14px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---- Publish bar ---- */
+.page-admin .admin-publish{
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: var(--navy);
+  color: #ffffff;
+  border-top: 4px solid var(--red);
+}
+
+.page-admin .admin-publish p{
+  margin: 0;
+  flex: 1 1 320px;
+  color: #ffffff;
+}
+
+/* theme.css forces every primary button navy with !important, so the
+   disabled state needs !important (and a more specific selector) to show. */
+.page-admin .admin-publish .button[disabled]{
+  opacity: 1;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: none;
+}
+
+.page-admin.dark .admin-publish{
+  background: #0b1c2e;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--red);
+}
+
+/* ---- Small screens: each row becomes a card ---- */
+@media (max-width: 900px){
+  .page-admin .admin-stats{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .page-admin .admin-toolbar{ grid-template-columns: 1fr 1fr; }
+  .page-admin .admin-field-search{ grid-column: 1 / -1; }
+
+  .page-admin .admin-table thead{ display: none; }
+  .page-admin .admin-table,
+  .page-admin .admin-table tbody,
+  .page-admin .admin-table tr,
+  .page-admin .admin-table td{ display: block; width: 100%; }
+
+  .page-admin .admin-table tr{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-admin .admin-table td{ border-bottom: 0; }
+  .page-admin .admin-table td[data-label]::before{
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .page-admin .admin-cell-check{ text-align: left; }
+  .page-admin .admin-item,
+  .page-admin .admin-table td[data-label="Section"],
+  .page-admin .admin-cell-picture{ grid-column: 1 / -1; min-width: 0; }
+  .page-admin .admin-empty td{ grid-column: 1 / -1; }
+  .page-admin .admin-table tr.is-approved td:first-child{ box-shadow: none; }
+  .page-admin .admin-table tr.is-approved{ box-shadow: inset 4px 0 0 var(--blue); }
+}
+
+@media (max-width: 640px){
+  .page-admin .admin-publish{
+    flex-wrap: nowrap;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+  .page-admin .admin-publish p{
+    flex: 1 1 auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  .page-admin .admin-publish .button{
+    flex: 0 0 auto;
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 480px){
+  .page-admin .admin-toolbar{ grid-template-columns: 1fr; }
+  .page-admin .admin-actions .button{ flex: 1 1 100%; }
+}

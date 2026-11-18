@@ -1,0 +1,13 @@
+{
+  "name": "circuit-review-desk",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "assets": "node scripts/copy-site-assets.mjs",
+    "dev": "npm run assets && wrangler dev",
+    "deploy": "npm run assets && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.158.0"
+  }
+}

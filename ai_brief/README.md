@@ -10,12 +10,42 @@ and choose the best items for a weekly newsletter.
 
 ---
 
+## How The Circuit is published
+
+The Circuit has one public page: **AI Insights** (`ai-insights.html`) on the
+lab website. Reviewers use the team-only **review desk** in `circuit-admin/`,
+a Cloudflare Worker with its own address and a team password. The desk is not
+part of the website. Neither needs Python running on anyone's computer.
+
+1. **Collect.** Every Monday, the GitHub Action
+   `.github/workflows/newsletter-collect.yml` runs `build_candidates.py`.
+   It uses `collect_news.py` to read the feeds, guesses a section, finds a
+   preview picture for each item, and commits
+   `data/newsletter-candidates.json`. **Run collector** on the desk starts it
+   on demand.
+2. **Review.** Sign in to the desk with the team password. Tick **Approve**,
+   choose one **Spotlight**, adjust **Section**, and paste a **Custom picture
+   link** if an item has no picture.
+3. **Publish.** Click **Publish to The Circuit**. The desk commits
+   `data/newsletter.json`, and AI Insights shows it once the site redeploys
+   (about a minute on GitHub Pages).
+
+If two people publish at the same time, the second one is told to reload
+instead of overwriting the first. Setup steps for the desk are in
+`circuit-admin/README.md`.
+
+The Streamlit app (`app.py`) and its page (`newsletter_component/`) are the
+earlier local version of the desk. The website does not use them.
+
+---
+
 ## Project files
 
 | File | What it is |
 |------|------------|
 | `sources.csv` | The list of trusted sources (name, feed URL, content type). Edit this to add/remove sources. |
 | `collect_news.py` | The main program. Reads the sources, collects content, and saves the results. |
+| `build_candidates.py` | Runs the collector and writes `data/newsletter-candidates.json` for the review desk. The GitHub Action runs it. |
 | `requirements.txt` | The Python packages the program needs. |
 | `output/ai_resources.csv` | The results (created when you run the program). |
 | `README.md` | This file. |
