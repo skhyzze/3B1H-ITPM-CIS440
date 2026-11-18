@@ -126,8 +126,6 @@ function getMondayDate() {
 
 // Builds the introduction and image collage.
 function heroHtml(d) {
-  const all = (d.spotlight ? [d.spotlight] : []).concat(d.items);
-  const sources = new Set(all.map(function (i) { return i.source; })).size;
   // Pick up to 3 items with pictures for the collage (different sections first).
   const withPics = d.items.filter(function (i) { return i.image; });
   const picks = []; const seen = {};
@@ -146,11 +144,6 @@ function heroHtml(d) {
       '<div class="hero-ctas reveal">' +
         (d.spotlight ? '<a class="btn primary" href="#spotlight" data-jump="spotlight">' + icon("sparkle", 18) + ' See the Spotlight</a>' : '') +
         '<a class="btn ghost" href="#explore" data-jump="explore">Browse this week ' + icon("arrow", 16) + '</a>' +
-      '</div>' +
-      '<div class="stats reveal">' +
-        '<div class="stat"><b data-count="' + all.length + '">0</b><span>hand-picked resources</span></div>' +
-        '<div class="stat"><b data-count="' + sources + '">0</b><span>trusted sources</span></div>' +
-        '<div class="stat"><b data-count="' + d.sections.length + '">0</b><span>topics this week</span></div>' +
       '</div>' +
     '</div>' +
     '<div class="collage reveal" aria-hidden="true">' + frames + '</div>' +
