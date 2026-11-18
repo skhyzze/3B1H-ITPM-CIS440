@@ -46,9 +46,16 @@
     <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
     <div class="lab-lang notranslate">
       <div class="gtranslate_wrapper" aria-hidden="true"></div>
-      <ul class="lab-lang-menu" aria-label="Choose site language">
-        <li><button type="button" data-gt-lang="en" lang="en" aria-pressed="true">English</button></li>
-        <li><button type="button" data-gt-lang="es" lang="es" aria-pressed="false">Español</button></li>
+      <button class="lab-theme-toggle lab-lang-toggle" type="button" aria-expanded="false" aria-controls="lab-lang-menu" aria-haspopup="listbox" aria-label="Choose site language" title="Choose language">
+        <svg class="lab-lang-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M12 3c2.2 2.5 3.4 5.6 3.4 9s-1.2 6.5-3.4 9c-2.2-2.5-3.4-5.6-3.4-9s1.2-6.5 3.4-9z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M3.2 12h17.6M4.6 7.6h14.8M4.6 16.4h14.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <ul class="lab-lang-menu" id="lab-lang-menu" role="listbox" aria-label="Site language" hidden>
+        <li><button type="button" role="option" data-gt-lang="en" lang="en" aria-pressed="true">English</button></li>
+        <li><button type="button" role="option" data-gt-lang="es" lang="es" aria-pressed="false">Español</button></li>
       </ul>
     </div>
     <script>

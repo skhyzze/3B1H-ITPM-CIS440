@@ -1241,11 +1241,20 @@ body.dark .lab-menu-toggle{
 .lab-footer-nav > a[href="industry.html"] { display: none; }
 
 
-/* Language list sits in the bar, beside the theme control. */
+/* Globe opens the language list beside the theme control. */
 .lab-lang {
   position: relative;
   flex: 0 0 auto;
-  margin-left: -18px;
+}
+
+.lab-lang-toggle {
+  margin-left: 0;
+}
+
+.lab-lang-globe {
+  display: block;
+  width: 18px;
+  height: 18px;
 }
 
 .lab-lang .gtranslate_wrapper,
@@ -1263,16 +1272,26 @@ body.dark .lab-menu-toggle{
 }
 
 .lab-lang-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 8.75rem;
   margin: 0;
   padding: 4px;
   list-style: none;
   border: 1px solid #13364d;
   border-radius: 12px;
   background: #f4f6f8;
+  box-shadow: 0 12px 28px rgba(12, 17, 20, 0.12);
   overflow: hidden;
+}
+
+.lab-lang-menu[hidden] {
+  display: none !important;
 }
 
 .lab-lang-menu li {
@@ -1326,7 +1345,8 @@ body.dark .lab-menu-toggle{
 
 body.dark .lab-lang-menu {
   border-color: rgba(230, 222, 216, 0.45);
-  background: rgba(20, 23, 29, 0.96);
+  background: rgba(14, 22, 34, 0.98);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
 body.dark .lab-lang-menu button {
@@ -1381,39 +1401,23 @@ body.dark .lab-lang-menu button[aria-pressed="true"]:focus-visible {
   }
 }
 
-@media (max-width: 1160px) {
+@media (max-width: 1180px) {
   .lab-nav {
-    gap: 8px;
-  }
-
-  .lab-lang {
-    margin-left: 0;
+    gap: 12px;
   }
 
   .lab-nav-links > a {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .lab-nav-links > a:not(.lab-nav-cta)::after {
-    right: 5px;
-    left: 5px;
-  }
-
-  .lab-lang-menu {
-    padding: 3px;
-  }
-
-  .lab-lang-menu button {
-    padding: 3px 8px 3px 10px;
+    right: 8px;
+    left: 8px;
   }
 }
 
 @media (max-width: 900px) {
-  .lab-lang {
-    margin-left: 0;
-  }
-
   .lab-lang-menu button {
     min-height: 26px;
     padding: 3px 8px 3px 10px;

@@ -345,7 +345,10 @@
   const root = document.querySelector('.lab-lang');
   if (!root) return;
 
+  const toggle = root.querySelector('.lab-lang-toggle');
+  const menu = root.querySelector('.lab-lang-menu');
   const options = root.querySelectorAll('[data-gt-lang]');
+  if (!toggle || !menu) return;
 
   function storedCode() {
     try {
@@ -384,15 +387,39 @@
     });
   }
 
+  function setOpen(open) {
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  toggle.addEventListener('click', function (event) {
+    event.stopPropagation();
+    setOpen(menu.hidden);
+  });
+
   options.forEach(function (button) {
     button.addEventListener('click', function () {
       const code = button.getAttribute('data-gt-lang');
       const select = selectEl();
-      if (!select || currentCode() === code) return;
-      select.value = 'en|' + code;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-      sync();
+      if (select && currentCode() !== code) {
+        select.value = 'en|' + code;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        sync();
+      }
+      setOpen(false);
+      toggle.focus();
     });
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!root.contains(event.target)) setOpen(false);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && !menu.hidden) {
+      setOpen(false);
+      toggle.focus();
+    }
   });
 
   function wait(tries) {
