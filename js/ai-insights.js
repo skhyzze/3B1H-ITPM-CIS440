@@ -110,6 +110,20 @@ const LABELS = { "latest-ai-news": "News", "tutorials-learning": "Tutorials", "a
   "videos": "Videos", "applied-ai-use-cases": "Use Cases", "research-spotlight": "Research" };
 
 
+// Returns this week's Monday date.
+function getMondayDate() {
+  const monday = new Date();
+  const daysSinceMonday = (monday.getDay() + 6) % 7;
+
+  monday.setDate(monday.getDate() - daysSinceMonday);
+
+  return monday.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
 // Builds the introduction and image collage.
 function heroHtml(d) {
   const all = (d.spotlight ? [d.spotlight] : []).concat(d.items);
@@ -126,7 +140,7 @@ function heroHtml(d) {
   }).join("");
   return '<header class="hero" id="top">' +
     '<div class="wrap"><div>' +
-      '<span class="eyebrow reveal"><span class="live"><span class="dot"></span>NEW</span>Weekly Edition · Week of ' + esc(d.weekOf) + '</span>' +
+      '<span class="eyebrow reveal"><span class="live"><span class="dot"></span>NEW</span>Weekly Edition · Week of ' + esc(getMondayDate()) + '</span>' +
       '<h1 class="reveal"><span class="grad">THE CIRCUIT</span></h1>' +
       '<p class="intro reveal">' + esc(d.intro) + '</p>' +
       '<div class="hero-ctas reveal">' +
@@ -207,19 +221,208 @@ function storyCard(item, i, section, lead) {
       '<div class="foot">' + meta(item) + '<span class="go">' + esc(section.button) + ' ' + icon("arrow", 15) + '</span></div>' +
     '</div></a>';
 }
+
+// Creates four news slides grouped by subtopic.
+function newsCarouselHtml(list, section) {
+  const topics = [
+    { id: "industry", title: "Industry News" },
+    { id: "ethics", title: "Ethics & Governance" },
+    { id: "machine-learning", title: "Machine Learning" },
+    { id: "agents", title: "AI Agents" }
+  ];
+
+  function comingSoonCard(title, description) {
+    return `
+      <div class="item story">
+        <div class="media" data-c="latest-ai-news">
+          <div class="art">
+            <div class="art-in">
+              ${icon("latest-ai-news", 40)}
+              <div class="art-src">The Circuit</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="body">
+          <div>
+            <span class="chip">Coming soon</span>
+          </div>
+
+          <h3 class="clamp3">${esc(title)}</h3>
+
+          <p class="desc clamp3">${esc(description)}</p>
+
+          <div class="foot">
+            <div class="meta">
+              <b>The Circuit</b>
+            </div>
+            <span class="go">Stay tuned</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  const slides = topics.map(function (topic, index) {
+    const articles = list.filter(function (x) {
+      return (x.item.subtopic || "industry") === topic.id;
+    });
+
+    const cards = articles.length
+      ? articles.map(function (x) {
+          return storyCard(x.item, x.i, section, false);
+        }).join("")
+      : comingSoonCard(
+          topic.title,
+          "We’re gathering the latest stories for this topic. Check back soon!"
+        ) +
+        comingSoonCard(
+          "More news on the way",
+          "Fresh updates and developments will appear here."
+        );
+
+    return `
+      <div class="news-slide"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="${esc(topic.title)}"
+        ${index === 0 ? "" : "hidden"}>
+
+        <h3 class="news-slide-title">${esc(topic.title)}</h3>
+
+        <div class="mag">${cards}</div>
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="news-carousel"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="AI news by subtopic"
+      data-slide-index="0">
+
+      ${slides}
+
+      <div class="news-carousel-controls">
+        <button type="button" data-news-step="-1"
+          aria-label="Previous news subtopic">←</button>
+
+        <span class="news-carousel-status"
+          role="status" aria-live="polite">
+          Industry News · 1 / ${topics.length}
+        </span>
+
+        <button type="button" data-news-step="1"
+          aria-label="Next news subtopic">→</button>
+      </div>
+    </div>
+  `;
+}
+function resourcePlaceholders(sectionId) {
+  return [1, 2].map(function (number) {
+    return `
+      <div class="lesson resource-placeholder">
+        <div class="media" data-c="${esc(sectionId)}">
+          <div class="art">
+            <div class="art-in">
+              ${icon(sectionId, 40)}
+              <div class="art-src">The Circuit</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="body">
+          <span class="num">COMING SOON</span>
+
+          <h3>
+            ${sectionId === "ai-tools"
+              ? "New tools on the way"
+              : "More learning resources"}
+          </h3>
+
+          <p class="desc">
+            ${number === 1
+              ? "We’re gathering fresh resources for you to explore."
+              : "Check back soon for our next collection of picks."}
+          </p>
+
+          <div class="foot">
+            <div class="meta"><b>The Circuit</b></div>
+            <span class="go">Stay tuned</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
 // Chooses a card layout for each topic.
 const LAYOUTS = {
   "latest-ai-news": function (list, s) {
-    return '<div class="mag">' + list.map(function (x, n) { return storyCard(x.item, x.i, s, n === 0); }).join("") + '</div>';
+    return newsCarouselHtml(list, s);
   },
   "tutorials-learning": function (list, s) {
-    return '<div class="lessons">' + list.map(function (x, n) {
+    const cards = list.map(function (x, n) {
       const item = x.item;
-      return '<a class="item lesson reveal" ' + itemAttrs(item, x.i) + ' ' + linkAttrs(item) + '>' + media(item, "", 40) + saveBtn(item) +
-        '<div class="body"><span class="num">LESSON ' + String(n + 1).padStart(2, "0") + ' · ' + esc(item.type.toUpperCase()) + '</span>' +
-        '<h3 class="clamp2">' + esc(item.title) + '</h3>' + descriptionHtml(item, 'clamp3') +
-        '<div class="foot">' + meta(item) + '<span class="go">' + esc(s.button) + ' ' + icon("arrow", 15) + '</span></div></div></a>';
-    }).join("") + '</div>';
+
+    return `
+      <a class="item lesson"
+        ${itemAttrs(item, x.i)}
+        ${linkAttrs(item)}>
+
+        ${media(item, "", 40)}
+        ${saveBtn(item)}
+
+        <div class="body">
+          <span class="num">
+            LESSON ${String(n + 1).padStart(2, "0")}
+            · ${esc(item.type.toUpperCase())}
+          </span>
+
+          <h3>${esc(item.title)}</h3>
+
+          ${descriptionHtml(item, "clamp3")}
+
+          <div class="foot">
+            ${meta(item)}
+            <span class="go">
+              ${esc(s.button)} ${icon("arrow", 15)}
+            </span>
+          </div>
+        </div>
+      </a>
+    `;
+    }).join("");
+
+  return `
+    <div class="learning-carousel"
+      role="region"
+      aria-label="Tutorials and learning resources"
+      aria-roledescription="carousel">
+
+      <div class="learning-controls">
+        <button type="button" data-learning-step="-1"
+          aria-label="Previous tutorials"
+          aria-controls="learning-track">←</button>
+
+          <span class="learning-status" role="status" aria-live="polite">
+              Learning
+            </span>
+
+
+        <button type="button" data-learning-step="1"
+          aria-label="Next tutorials"
+          aria-controls="learning-track">→</button>
+      </div>
+
+      <div class="lessons" id="learning-track"
+  tabindex="0" aria-label="Scrollable tutorial cards">
+  ${cards}
+  ${resourcePlaceholders("tutorials-learning")}
+    </div>
+    </div>
+  `;
   },
   "ai-tools": function (list) {
     const top = list[0].item;
@@ -638,4 +841,213 @@ window.addEventListener("load", syncHeaderOffset);
 window.addEventListener("resize", syncHeaderOffset);
 syncHeaderOffset();
 
-render(STATIC_NEWSLETTER_DATA);
+// News arrows: smoothly move between subtopics.
+document.addEventListener("click", async function (event) {
+  const button = event.target.closest("[data-news-step]");
+  if (!button) return;
+
+  const carousel = button.closest(".news-carousel");
+  if (!carousel || carousel.dataset.moving === "true") return;
+
+  const slides = carousel.querySelectorAll(".news-slide");
+  if (slides.length < 2) return;
+
+  const current = Number(carousel.dataset.slideIndex) || 0;
+  const direction = Number(button.dataset.newsStep);
+  const next = (current + direction + slides.length) % slides.length;
+
+  const outgoing = slides[current];
+  const incoming = slides[next];
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  carousel.dataset.moving = "true";
+  incoming.hidden = false;
+  outgoing.inert = true;
+
+  try {
+    if (!reduceMotion && typeof outgoing.animate === "function" && typeof incoming.animate === "function") {
+      const timing = {
+        duration: 450,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+      };
+
+      await Promise.all([
+        outgoing.animate([
+          { opacity: 1, transform: "translateX(0)" },
+          { opacity: 0, transform: `translateX(${-direction * 32}px)` }
+        ], timing).finished,
+
+        incoming.animate([
+          { opacity: 0, transform: `translateX(${direction * 32}px)` },
+          { opacity: 1, transform: "translateX(0)" }
+        ], timing).finished
+      ]);
+    }
+  } catch (error) {
+    // Finish the slide change even if an animation is interrupted.
+  } finally {
+    outgoing.hidden = true;
+    outgoing.inert = false;
+    carousel.dataset.slideIndex = next;
+    delete carousel.dataset.moving;
+
+    const title = incoming.querySelector(".news-slide-title").textContent;
+    carousel.querySelector(".news-carousel-status").textContent =
+      title + " · " + (next + 1) + " / " + slides.length;
+  }
+});
+
+
+// Learning arrows: move a full page and wrap around.
+document.addEventListener("click", function (event) {
+  const button = event.target.closest("[data-learning-step]");
+  if (!button) return;
+
+  const carousel = button.closest(".learning-carousel");
+  if (!carousel) return;
+
+  const track = carousel.querySelector(".lessons");
+
+  const cards = Array.from(track.children).filter(function (card) {
+    return getComputedStyle(card).display !== "none";
+  });
+
+  if (!cards.length || !track.clientWidth) return;
+
+  const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+  const cardWidth = cards[0].getBoundingClientRect().width;
+
+  const cardsPerPage = Math.max(
+    1,
+    Math.round((track.clientWidth + gap) / (cardWidth + gap))
+  );
+
+  const pageWidth = (cardWidth + gap) * cardsPerPage;
+  const pageCount = Math.ceil(cards.length / cardsPerPage);
+
+  const currentPage = Math.min(
+    pageCount - 1,
+    Math.round(track.scrollLeft / pageWidth)
+  );
+
+  const direction = Number(button.dataset.learningStep);
+  const nextPage =
+    (currentPage + direction + pageCount) % pageCount;
+
+  const maxScroll = Math.max(
+    0,
+    track.scrollWidth - track.clientWidth
+  );
+
+  track.scrollTo({
+    left: Math.min(nextPage * pageWidth, maxScroll),
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+  });
+});
+
+/*
+ * LOCAL CONTENT TEST — not connected to SharePoint yet.
+ *
+ * Reads ai_brief/sharepoint-content.json and keeps Published entries.
+ * Converts SharePoint column names into the format our article cards use.
+ * Adds these test entries alongside the existing newsletter resources.
+ * Builds the page before setting up the Learning carousel counter.
+ *
+ * If the file cannot load, the existing newsletter content still displays.
+ * Later, an approved SharePoint connection will supply the real content.
+ */
+
+(async function () {
+  let newsletter = STATIC_NEWSLETTER_DATA;
+
+  try {
+    const response = await fetch("./ai_brief/sharepoint-content.json", {
+      cache: "no-store"
+    });
+
+    if (!response.ok) throw new Error("Could not load the content file.");
+
+    const rows = await response.json();
+    if (!Array.isArray(rows)) throw new Error("The local content file must contain a list.");
+
+    const subtopics = {
+      "Industry News": "industry",
+      "Ethics & Governance": "ethics",
+      "Machine Learning": "machine-learning",
+      "AI Agents": "agents"
+    };
+
+    const testItems = rows
+      .filter(row => row.Status === "Published")
+      .map(function (row) {
+        const section = STATIC_NEWSLETTER_DATA.sections.find(
+          section => section.name === row.Section
+        );
+
+        if (!section) return null;
+
+        return {
+          title: row.Title,
+          description: row.Description || "",
+          source: row.Source || "Applied AI Lab",
+          date: row.PublishDate || "",
+          type: row.ResourceType === "Article" ? "News" : row.ResourceType,
+          section: section.name,
+          sectionId: section.id,
+          subtopic: subtopics[row.Subtopic] || "industry",
+          url: row.ResourceLink,
+          image: row.ImageLink || "",
+          videoId: ""
+        };
+      })
+      .filter(Boolean);
+
+    newsletter = {
+      ...STATIC_NEWSLETTER_DATA,
+      items: [...STATIC_NEWSLETTER_DATA.items, ...testItems]
+    };
+  } catch (error) {
+    console.warn("Using existing newsletter content:", error);
+  }
+
+  render(newsletter);
+
+  const learningTrack = document.querySelector("#learning-track");
+  const learningStatus = document.querySelector(".learning-status");
+
+  function updateLearningStatus() {
+    if (!learningTrack || !learningStatus || !learningTrack.clientWidth) return;
+
+    const cards = Array.from(learningTrack.children).filter(function (card) {
+      return getComputedStyle(card).display !== "none";
+    });
+
+    if (!cards.length) {
+      learningStatus.textContent = "Learning · 0 / 0";
+      return;
+    }
+
+    const gap = parseFloat(getComputedStyle(learningTrack).columnGap) || 0;
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const perPage = Math.max(
+      1,
+      Math.round((learningTrack.clientWidth + gap) / (cardWidth + gap))
+    );
+
+    const total = Math.ceil(cards.length / perPage);
+    const page = Math.min(
+      total,
+      Math.round(learningTrack.scrollLeft / ((cardWidth + gap) * perPage)) + 1
+    );
+
+    learningStatus.textContent = "Learning " + page + " / " + total;
+  }
+
+  if (learningTrack) {
+    learningTrack.addEventListener("scroll", updateLearningStatus, { passive: true });
+    window.addEventListener("resize", updateLearningStatus);
+    updateLearningStatus();
+  }
+})();

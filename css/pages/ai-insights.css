@@ -565,3 +565,205 @@ body.dark .back-to-top{
     overflow: visible;
   }
 }
+
+/* The Circuit topic carousel. */
+#latest-ai-news .news-carousel,
+#tutorials-learning .learning-carousel {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+#latest-ai-news .news-carousel-controls,
+#tutorials-learning .learning-controls {
+  display: contents;
+}
+
+#latest-ai-news .news-slide {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
+#latest-ai-news .news-slide[hidden] {
+  display: none !important;
+}
+
+#latest-ai-news .news-slide-title {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+#latest-ai-news .news-slide .mag {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#latest-ai-news .news-slide .mag > .story {
+  display: flex;
+  flex: 0 1 360px;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 460px;
+  box-sizing: border-box;
+}
+
+#latest-ai-news .story .body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+#latest-ai-news .story .foot {
+  margin-top: auto;
+}
+
+#latest-ai-news .news-carousel-controls button,
+#tutorials-learning .learning-controls button {
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--blue);
+  font: 24px/1 sans-serif;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+#latest-ai-news [data-news-step="-1"],
+#tutorials-learning [data-learning-step="-1"] {
+  grid-column: 1;
+}
+
+#latest-ai-news [data-news-step="1"],
+#tutorials-learning [data-learning-step="1"] {
+  grid-column: 3;
+}
+
+#latest-ai-news .news-carousel-controls button:hover,
+#tutorials-learning .learning-controls button:hover {
+  background: var(--blue);
+  color: var(--surface);
+}
+
+#latest-ai-news .news-carousel-controls button:focus-visible,
+#tutorials-learning .learning-controls button:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 4px;
+}
+
+#latest-ai-news .news-carousel-status,
+#tutorials-learning .learning-status {
+  grid-column: 2;
+  grid-row: 2;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+/* Tutorials use the same two-card rhythm and wrap-around controls. */
+#tutorials-learning .lessons {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  max-width: 744px;
+  min-width: 0;
+  margin-inline: auto;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+#tutorials-learning .lessons > .lesson {
+  display: flex;
+  flex: 0 0 calc((100% - 24px) / 2);
+  flex-direction: column;
+  min-width: 0;
+  height: 460px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+#tutorials-learning .lesson .media {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+}
+
+#tutorials-learning .lesson .body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 18px 20px 20px;
+}
+
+#tutorials-learning .lesson .foot {
+  margin-top: auto;
+}
+
+/* Keep the expanded footer links visible on the newsletter page. */
+.page-ai-brief #site-footer .lab-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+@media (max-width: 932px) {
+  #tutorials-learning .lessons {
+    max-width: 360px;
+  }
+
+  #tutorials-learning .lessons > .lesson {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  #latest-ai-news .news-carousel,
+  #tutorials-learning .learning-carousel {
+    gap: 12px;
+  }
+
+  #latest-ai-news .news-slide,
+  #tutorials-learning .lessons {
+    grid-column: 1 / -1;
+  }
+
+  #latest-ai-news .news-carousel-controls button,
+  #tutorials-learning .learning-controls button {
+    grid-row: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #latest-ai-news .news-slide,
+  #latest-ai-news .news-carousel-controls button,
+  #tutorials-learning .learning-controls button {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
