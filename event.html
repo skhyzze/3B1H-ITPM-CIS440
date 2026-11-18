@@ -10,52 +10,48 @@
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="images_icons/AAI-Logo-Black-Animated-Match.png" type="image/png">
   <meta name="theme-color" content="#f4f6f8">
+  <link rel="preload" href="fonts/oxanium/oxanium-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/space-grotesk/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <title>Events | Applied AI Lab</title>
 
-  <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/event.css">
-  <link rel="stylesheet" href="css/blended-theme.css">
-  <link rel="stylesheet" href="css/chatbot.css">
-  <link rel="stylesheet" href="css/lab-accents.css">
-  <link rel="stylesheet" href="css/bento-circuit.css">
+  <link rel="stylesheet" href="css/shared/tokens.css">
+  <link rel="stylesheet" href="css/shared/base.css">
+  <link rel="stylesheet" href="css/pages/event.css">
+  <link rel="stylesheet" href="css/shared/theme.css">
 </head>
 
-<body class="page-events">
+<body class="page-events" id="top">
+<script>
+(function(){try{var saved=localStorage.getItem("lab-theme");if(saved==="dark"||(!saved&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();
+</script>
   <a class="skip-link" href="#main">Skip to events</a>
 
-  <header class="lab-header">
-    <nav class="lab-nav" aria-label="Main navigation">
-      <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
-        <span class="lab-brand-logo" aria-hidden="true">
-          <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
-          <img class="lab-brand-image lab-brand-image-animated" alt="">
-        </span>
-      </a>
-      <div class="lab-nav-links">
-        <a href="index.html">Home</a>
-        <a href="industry.html">Industry Partners</a>
-        <a href="fellowship.html">Fellowship Pathway</a>
-        <a href="studentoutcomes.html">Student Outcomes</a>
-        <a href="event.html" aria-current="page">Events</a>
-         <a href="ai-insights.html">AI Insights</a>
-        <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
-        <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
-      </div>
-      <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
-         
-      <!-- English / Spanish translator -->
-<div class="gtranslate_wrapper"></div>
-<script>window.gtranslateSettings = {
-"default_language":"en",
-"languages":["en","es"],
-"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper",
-"flag_size":24,"alt_flags":{"en":"usa","es":"mexico"},
-"globe_size":40} 
-</script>
-<script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
-
-    </nav>
-  </header>
+<header class="lab-header" data-nav-current="events">
+  <nav class="lab-nav" aria-label="Main navigation">
+    <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
+      <span class="lab-brand-logo" aria-hidden="true">
+        <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
+        <img class="lab-brand-image lab-brand-image-animated" alt="">
+      </span>
+    </a>
+    <div class="lab-nav-links">
+      <a href="index.html">Home</a>
+      <a data-industry-link href="industry.html">Industry Partners</a>
+      <a href="fellowship.html">Fellowship Pathway</a>
+      <a href="studentoutcomes.html">Student Outcomes</a>
+      <a href="event.html" aria-current="page">Events</a>
+      <a href="ai-insights.html">AI Insights</a>
+      <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
+      <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
+    </div>
+    <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
+    <div class="gtranslate_wrapper" aria-label="Choose site language"></div>
+    <script>
+      window.gtranslateSettings = { default_language: "en", languages: ["en", "es"], globe_color: "#66aaff", wrapper_selector: ".gtranslate_wrapper", flag_size: 24, alt_flags: { en: "usa", es: "mexico" }, globe_size: 40 };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+  </nav>
+</header>
 
   <main id="main">
     <section class="events-hero" aria-labelledby="page-title">
@@ -94,7 +90,7 @@
 
     <div class="events-body">
     <!-- Replace sample listings with confirmed events before publishing. -->
-    <aside class="demo-notice">
+    <aside class="demo-notice" data-unfinished>
       <strong>Design preview.</strong>
       Listings marked Demo are samples. Their dates, locations, images, and faculty contacts still need confirmation.
     </aside>
@@ -110,7 +106,7 @@
           <h2 id="upcoming-title">Upcoming events</h2>
         </div>
 
-        <span class="section-note">Sample listings</span>
+        <span class="section-note" data-unfinished>Sample listings</span>
       </div>
 
       <div class="event-grid" aria-busy="true"></div>
@@ -128,7 +124,10 @@
         </div>
       </div>
 
-      <article class="past-card">
+      <!-- Remove this line when a confirmed past event is added. -->
+      <p class="event-soon">Past events will be posted here soon.</p>
+
+      <article class="past-card" data-unfinished>
         <span class="category"><svg class="lab-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="6" width="16" height="13" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 4v4M16 4v4M4 10h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Event</span>
 
         <div>
@@ -159,43 +158,30 @@
     </div>
   </main>
 
-   <footer class="lab-site-footer" id="site-footer">
+<footer class="lab-site-footer" id="site-footer">
   <div class="lab-footer-inner">
-
     <div class="lab-footer-brand">
       <strong>Applied AI Lab</strong>
       <span>Experiment. Build. Question. Apply.</span>
-
       <a class="footer-circuit" href="ai-insights.html#subscribe">
         Join The Circuit →
       </a>
     </div>
-
-    <nav class="lab-footer-nav" aria-label="Footer navigation">
-      <a href="index.html">Home</a>
-      <a href="industry.html">Industry Partners</a>
-      <a href="fellowship.html">Fellowship</a>
-      <a href="studentoutcomes.html">Student Outcomes</a>
-      <a href="event.html">Events</a>
-      <a href="ai-insights.html">AI Insights</a>
-      
-    </nav>
-
     <a class="lab-footer-top" href="#top">
       Back to top <span aria-hidden="true">↑</span>
     </a>
-
   </div>
 </footer>
 
   <!-- Reuse the existing site-wide theme controls. -->
-  <script src="js/site.js?v=4" defer></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/site.js" defer></script>
   <script>
 (async function(){
   const section=document.getElementById('upcoming'),grid=section.querySelector('.event-grid'),note=section.querySelector('.section-note');
   const node=(tag,cls,text)=>{const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;};
   const safe=value=>{try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}};
-  function message(text,retry){const box=node('div','event-content','');const p=node('p','',text);p.setAttribute('role','status');box.append(p);if(retry){const button=node('button','button button-ghost','Try again');button.type='button';button.addEventListener('click',load);box.append(button);}grid.replaceChildren(box);}
+  function message(text,retry){const box=node('div','event-status','');const p=node('p','',text);p.setAttribute('role','status');box.append(p);if(retry){const button=node('button','button button-ghost','Try again');button.type='button';button.addEventListener('click',load);box.append(button);}grid.replaceChildren(box);}
   function cardFor(event){
     const card=node('article','event-card',''),category=event.category||'Event';
     const art=category==='Research'?'research-art':category==='Idea Lab'?'idea-art':'workshop-art';
@@ -207,10 +193,10 @@
       If there is no URL, the colored frame and caption remain.
     */
     const image=node('div','event-image placeholder '+art,'');image.setAttribute('role','img');image.setAttribute('aria-label',event.title+' image placeholder');
-    image.append(node('span','image-caption','Event image placeholder'));
+    const caption=node('span','image-caption','Event image placeholder');caption.setAttribute('data-unfinished','');image.append(caption);
     const artLabel=node('span','art-label',category==='Research'?'ASK QUESTIONS.':category==='Idea Lab'?'WHAT IF?':'BUILD SOMETHING.');artLabel.setAttribute('aria-hidden','true');image.append(artLabel);
-    const src=safe(event.image);if(src){const img=document.createElement('img');img.src=src;img.alt=event.title;img.loading='lazy';img.referrerPolicy='no-referrer';img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1';img.addEventListener('load',()=>{image.removeAttribute('role');image.removeAttribute('aria-label');image.replaceChildren(img);});image.append(img);img.addEventListener('error',()=>img.remove(),{once:true});}
-    const content=node('div','event-content',''),top=node('div','event-topline','');top.append(node('span','category',category));if(event.sample)top.append(node('span','sample-label','Demo'));
+    const src=safe(event.image);if(src){const img=document.createElement('img');img.src=src;img.alt=event.title;img.loading=event._eager?'eager':'lazy';img.referrerPolicy='no-referrer';img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1';img.addEventListener('load',()=>{image.removeAttribute('role');image.removeAttribute('aria-label');image.replaceChildren(img);});image.append(img);img.addEventListener('error',()=>img.remove(),{once:true});}
+    const content=node('div','event-content',''),top=node('div','event-topline','');top.append(node('span','category',category));if(event.sample){top.append(node('span','sample-label','Demo'));card.setAttribute('data-unfinished','');}
     const meta=node('dl','event-meta','');for(const [label,value] of [['Date & time',event.dateTime||'To be announced'],['Location',event.location||'To be confirmed']]){const group=node('div','','');group.append(node('dt','',label),node('dd','',value));meta.append(group);}
     content.append(top,node('h3','',event.title),meta,node('p','event-summary',event.summary));
     const details=node('details','',''),copy=node('div','detail-copy','');details.append(node('summary','','Event details'));
@@ -223,17 +209,26 @@
   async function load(){
     grid.setAttribute('aria-busy','true');message('Loading upcoming events…');
     try{
-      const response=await fetch('https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-events.json?v=' + Date.now(),{cache:'no-store',credentials:'omit',signal:AbortSignal.timeout(20000)});
+      const controller=new AbortController();
+      const timer=setTimeout(()=>controller.abort(),20000);
+      let response;
+      try{
+        response=await fetch('data/cms-events.json',{credentials:'omit',signal:controller.signal});
+      }finally{clearTimeout(timer);}
       if(!response.ok)throw Error();const data=await response.json();if(data.error||!Array.isArray(data.events))throw Error();
       const items=data.events.filter(e=>e&&typeof e.title==='string'&&e.title.trim());
-      if(items.length)grid.replaceChildren(...items.map(cardFor));else message('No upcoming events published yet. Check back soon.');
-      note.textContent=items.length&&items.every(e=>e.sample)?'Sample listings':'Upcoming listings';
+      const samplesOnly=items.length>0&&items.every(e=>e.sample);
+      const showUnfinished=document.documentElement.hasAttribute('data-show-unfinished');
+      if(samplesOnly&&!showUnfinished){message('Upcoming events will be posted here soon.');}
+      else if(items.length){items[0]._eager=true;grid.replaceChildren(...items.map(cardFor));}
+      else message('No upcoming events published yet. Check back soon.');
+      note.textContent=samplesOnly?'Sample listings':'Upcoming listings';
+      if(samplesOnly)note.setAttribute('data-unfinished','');else note.removeAttribute('data-unfinished');
     }catch(error){message('Upcoming events are temporarily unavailable. Please try again.',true);}finally{grid.removeAttribute('aria-busy');}
   }
   await load();
 })();
 
 </script>
-  <script src="js/chatbot.js" defer></script>
 </body>
 </html>

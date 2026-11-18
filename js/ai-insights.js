@@ -12,6 +12,13 @@ function esc(text) {
 }
 // Allows web links starting with http:// or https://.
 function safeUrl(url) { return /^https?:\/\//i.test(url || "") ? esc(url) : "#"; }
+function fetchWithTimeout(url, options, ms) {
+  const controller = new AbortController();
+  const timer = setTimeout(function () { controller.abort(); }, ms || 8000);
+  return fetch(url, Object.assign({}, options, { signal: controller.signal })).finally(function () {
+    clearTimeout(timer);
+  });
+}
 
 // Stores the drawing instructions for each icon.
 const ICONS = {
@@ -23,7 +30,6 @@ const ICONS = {
   "research-spotlight": '<path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/>',
   star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
-  left: '<path d="M19 12H5M11 6l-6 6 6 6"/>',
   play: '<path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/>',
   heart: '<path d="M12 20s-7-4.4-9.2-8.6C1.3 8.4 3 5 6.4 5c2 0 3.3 1.1 3.9 2.2l1.7 2 1.7-2C14.3 6.1 15.6 5 17.6 5 21 5 22.7 8.4 21.2 11.4 19 15.6 12 20 12 20z"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
@@ -48,9 +54,9 @@ function art(item, size) {
   return '<div class="art"><div class="art-in">' + icon(item.sectionId, size || 42) + '<div class="art-src">' + esc(item.source) + '</div></div></div>';
 }
 // Shows the picture or a placeholder.
-function media(item, extraClass, artSize) {
+function media(item, extraClass, artSize, eager) {
   const inner = item.image
-    ? '<img src="' + safeUrl(item.image) + '" alt="" loading="lazy" referrerpolicy="no-referrer" data-art-size="' + (artSize || 42) + '">'
+    ? '<img src="' + safeUrl(item.image) + '" alt="" loading="' + (eager ? "eager" : "lazy") + '" referrerpolicy="no-referrer" data-art-size="' + (artSize || 42) + '">'
     : art(item, artSize);
   return '<div class="media ' + (extraClass || "") + '" data-c="' + esc(item.sectionId) + '">' + inner + '</div>';
 }
@@ -103,20 +109,6 @@ let ITEMS = [];
 const LABELS = { "latest-ai-news": "News", "tutorials-learning": "Tutorials", "ai-tools": "Tools",
   "videos": "Videos", "applied-ai-use-cases": "Use Cases", "research-spotlight": "Research" };
 
-// Builds the navigation bar.
-function navHtml(d) {
-  const links = d.sections.slice(0, 6).map(function (s) {
-    return '<a href="#' + esc(s.id) + '" data-jump="' + esc(s.id) + '">' + esc(LABELS[s.id] || s.name) + '</a>';
-  }).join("");
-  return '<nav class="nav" id="nav"><div class="wrap">' +
-    '<a class="brand" href="#top" data-jump="top"><span class="mark">' + icon("logo", 20) + '</span>' + esc(d.lab) + '</a>' +
-    '<div class="nav-links">' + links + '</div>' +
-    '<div class="nav-actions">' +
-      '<button class="pill-btn brief-theme-toggle" type="button" id="brief-theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>' +
-      '<button class="pill-btn" type="button" id="saved-btn">' + icon("heart", 16) + ' Liked <span class="count" id="saved-count">0</span></button>' +
-      '<a class="pill-btn dark sub-link" href="#subscribe" data-jump="subscribe">' + icon("mail", 16) + ' Subscribe</a>' +
-    '</div></div></nav>';
-}
 
 // Returns this week's Monday date.
 function getMondayDate() {
@@ -147,14 +139,13 @@ function heroHtml(d) {
       '<div class="cap"><i></i><span>' + esc(item.title) + '</span></div></a>';
   }).join("");
   return '<header class="hero" id="top">' +
-    '<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>' +
     '<div class="wrap"><div>' +
       '<span class="eyebrow reveal"><span class="live"><span class="dot"></span>NEW</span>Weekly Edition · Week of ' + esc(getMondayDate()) + '</span>' +
       '<h1 class="reveal"><span class="grad">THE CIRCUIT</span></h1>' +
       '<p class="intro reveal">' + esc(d.intro) + '</p>' +
       '<div class="hero-ctas reveal">' +
         (d.spotlight ? '<a class="btn primary" href="#spotlight" data-jump="spotlight">' + icon("sparkle", 18) + ' See the Spotlight</a>' : '') +
-        '<a css="btn ghost" href="#explore" data-jump="explore">Browse this week ' + icon("arrow", 16) + '</a>' +
+        '<a class="btn ghost" href="#explore" data-jump="explore">Browse this week ' + icon("arrow", 16) + '</a>' +
       '</div>' +
       '<div class="stats reveal">' +
         '<div class="stat"><b data-count="' + all.length + '">0</b><span>hand-picked resources</span></div>' +
@@ -190,8 +181,8 @@ function spotlightHtml(d) {
     '<div class="spot-label reveal"><span class="tag">' + icon("star", 16) + ' THIS WEEK\'S SPOTLIGHT</span><span class="rule"></span><span class="week">Editor\'s pick · ' + esc(d.weekOf) + '</span></div>' +
     '<div class="spot-grid">' +
       '<div class="spot-media-wrap reveal" data-index="-1">' +
-        (isVideo ? '<div style="position:relative">' + media(s, "", 80) + '<button class="play-big" type="button" data-video="-1" aria-label="Play video">' + icon("play", 34) + '</button></div>'
-                 : '<a ' + linkAttrs(s) + '>' + media(s, "", 80) + '</a>') +
+        (isVideo ? '<div style="position:relative">' + media(s, "", 80, true) + '<button class="play-big" type="button" data-video="-1" aria-label="Play video">' + icon("play", 34) + '</button></div>'
+                 : '<a ' + linkAttrs(s) + '>' + media(s, "", 80, true) + '</a>') +
       '</div>' +
       '<div class="spot-body reveal">' +
         '<div class="chips"><span class="chip glass">' + esc(s.section) + '</span><span class="chip glass">' + esc(s.type) + '</span></div>' +
@@ -225,14 +216,14 @@ function storyCard(item, i, section, lead) {
     media(item, "", lead ? 70 : 40) + saveBtn(item) +
     '<div class="body">' +
       '<div><span class="chip">' + esc(item.type) + '</span></div>' +
-      '<h4 class="clamp3">' + esc(item.title) + '</h4>' +
+      '<h3 class="clamp3">' + esc(item.title) + '</h3>' +
       descriptionHtml(item, lead ? 'clamp2' : 'clamp3') +
       '<div class="foot">' + meta(item) + '<span class="go">' + esc(section.button) + ' ' + icon("arrow", 15) + '</span></div>' +
     '</div></a>';
 }
 
-// creates four slides 
-  function newsCarouselHtml(list, section) {
+// Creates four news slides grouped by subtopic.
+function newsCarouselHtml(list, section) {
   const topics = [
     { id: "industry", title: "Industry News" },
     { id: "ethics", title: "Ethics & Governance" },
@@ -240,7 +231,7 @@ function storyCard(item, i, section, lead) {
     { id: "agents", title: "AI Agents" }
   ];
 
-     function comingSoonCard(title, description) {
+  function comingSoonCard(title, description) {
     return `
       <div class="item story">
         <div class="media" data-c="latest-ai-news">
@@ -257,7 +248,7 @@ function storyCard(item, i, section, lead) {
             <span class="chip">Coming soon</span>
           </div>
 
-          <h4 class="clamp3">${esc(title)}</h4>
+          <h3 class="clamp3">${esc(title)}</h3>
 
           <p class="desc clamp3">${esc(description)}</p>
 
@@ -297,12 +288,12 @@ function storyCard(item, i, section, lead) {
         aria-label="${esc(topic.title)}"
         ${index === 0 ? "" : "hidden"}>
 
-        <h4 class="news-slide-title">${esc(topic.title)}</h4>
+        <h3 class="news-slide-title">${esc(topic.title)}</h3>
 
         <div class="mag">${cards}</div>
       </div>
     `;
-  }).join ("");
+  }).join("");
 
   return `
     <div class="news-carousel"
@@ -328,7 +319,7 @@ function storyCard(item, i, section, lead) {
     </div>
   `;
 }
-    function resourcePlaceholders(sectionId) {
+function resourcePlaceholders(sectionId) {
   return [1, 2].map(function (number) {
     return `
       <div class="lesson resource-placeholder">
@@ -344,11 +335,11 @@ function storyCard(item, i, section, lead) {
         <div class="body">
           <span class="num">COMING SOON</span>
 
-          <h4>
+          <h3>
             ${sectionId === "ai-tools"
               ? "New tools on the way"
               : "More learning resources"}
-          </h4>
+          </h3>
 
           <p class="desc">
             ${number === 1
@@ -369,11 +360,11 @@ function storyCard(item, i, section, lead) {
 // Chooses a card layout for each topic.
 const LAYOUTS = {
   "latest-ai-news": function (list, s) {
-  return newsCarouselHtml(list, s);
+    return newsCarouselHtml(list, s);
   },
   "tutorials-learning": function (list, s) {
-  const cards = list.map(function (x, n) {
-    const item = x.item;
+    const cards = list.map(function (x, n) {
+      const item = x.item;
 
     return `
       <a class="item lesson"
@@ -389,7 +380,7 @@ const LAYOUTS = {
             · ${esc(item.type.toUpperCase())}
           </span>
 
-          <h4>${esc(item.title)}</h4>
+          <h3>${esc(item.title)}</h3>
 
           ${descriptionHtml(item, "clamp3")}
 
@@ -402,7 +393,7 @@ const LAYOUTS = {
         </div>
       </a>
     `;
-  }).join("");
+    }).join("");
 
   return `
     <div class="learning-carousel"
@@ -432,25 +423,23 @@ const LAYOUTS = {
     </div>
     </div>
   `;
-},
+  },
   "ai-tools": function (list) {
     const top = list[0].item;
     let html = '<div class="item tool-hero" ' + itemAttrs(top, list[0].i) + '>' +
       '<a class="tool-shot reveal" ' + linkAttrs(top) + '>' + media(top, "", 72) + '</a>' +
       '<div class="tool-info reveal"><span class="kicker">' + icon("sparkle", 16) + ' TOOL OF THE WEEK</span>' +
-      '<h4>' + esc(top.title) + '</h4>' + descriptionHtml(top, 'clamp4') + meta(top) +
+      '<h3>' + esc(top.title) + '</h3>' + descriptionHtml(top, 'clamp4') + meta(top) +
       '<div class="tool-ctas"><a class="btn" ' + linkAttrs(top) + '>' + toolAction(top) + ' ' + icon("arrow", 16) + '</a>' + saveBtn(top) + '</div></div></div>';
     if (list.length > 1) {
       html += '<div class="tool-shelf">' + list.slice(1).map(function (x) {
         const item = x.item;
         return '<a class="item tool-row reveal" ' + itemAttrs(item, x.i) + ' ' + linkAttrs(item) + '>' + media(item, "", 28) +
-          '<div><h5 class="clamp2">' + esc(item.title) + '</h5>' + descriptionHtml(item, 'clamp2') + meta(item) + '</div>' +
+          '<div><h4 class="clamp2">' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp2') + meta(item) + '</div>' +
           '<div style="display:flex;align-items:center;gap:12px"><span class="go">' + toolAction(item) + ' ' + icon("arrow", 15) + '</span>' + saveBtn(item) + '</div></a>';
       }).join("") + '</div>';
     }
-  
-
-return html;
+    return html;
   },
   "videos": function (list) {
     return '<div class="vids">' + list.map(function (x) {
@@ -459,7 +448,7 @@ return html;
       const tag = item.videoId ? 'div' : 'a';
       return '<' + tag + ' class="item vid reveal" ' + itemAttrs(item, x.i) + ' ' + open + '>' +
         '<div class="thumb">' + media(item, "", 48) + saveBtn(item) + '<span class="play">' + icon("play", 26) + '</span><span class="src-tag">' + esc(item.source) + '</span></div>' +
-        '<h4 class="clamp2">' + esc(item.title) + '</h4>' + meta(item) + '</' + tag + '>';
+        '<h3 class="clamp2">' + esc(item.title) + '</h3>' + meta(item) + '</' + tag + '>';
     }).join("") + '</div>';
   },
   "applied-ai-use-cases": function (list, s) {
@@ -467,7 +456,7 @@ return html;
       const item = x.item;
       return '<div class="item case reveal" ' + itemAttrs(item, x.i) + '>' + '<a ' + linkAttrs(item) + ' class="media-link" style="display:contents">' + media(item, "", 64) + '</a>' +
         '<div class="body"><span class="kicker">CASE ' + String(n + 1).padStart(2, "0") + ' · ' + esc(item.source.toUpperCase()) + '</span>' +
-        '<h4>' + esc(item.title) + '</h4>' + descriptionHtml(item, 'clamp3') + meta(item) +
+        '<h3>' + esc(item.title) + '</h3>' + descriptionHtml(item, 'clamp3') + meta(item) +
         '<div style="display:flex;gap:10px;align-items:center"><a class="btn" ' + linkAttrs(item) + '>' + esc(s.button) + ' ' + icon("arrow", 15) + '</a>' +
         saveBtn(item).replace('class="save"', 'class="save" style="position:static"') + '</div></div></div>';
     }).join("") + '</div>';
@@ -477,7 +466,7 @@ return html;
       const item = x.item;
       return '<div class="item paper reveal" ' + itemAttrs(item, x.i) + '><span class="n">' + String(n + 1).padStart(2, "0") + '</span>' +
         '<a ' + linkAttrs(item) + '>' + media(item, "", 26) + '</a>' +
-        '<div><a ' + linkAttrs(item) + '><h4 class="clamp2">' + esc(item.title) + '</h4></a>' + descriptionHtml(item, 'clamp2') +
+        '<div><a ' + linkAttrs(item) + '><h3 class="clamp2">' + esc(item.title) + '</h3></a>' + descriptionHtml(item, 'clamp2') +
         '<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">' + meta(item) + '<a class="go" ' + linkAttrs(item) + '>' + esc(s.button) + ' ' + icon("arrow", 15) + '</a></div></div>' +
         saveBtn(item) + '</div>';
     }).join("") + '</div>';
@@ -491,15 +480,15 @@ function sectionHtml(section, list) {
   const band = section.id === "ai-tools" ? " band" : "";
   return '<section class="section' + band + '" id="' + esc(section.id) + '" data-c="' + esc(section.id) + '" data-sec="' + esc(section.id) + '"><div class="wrap">' +
     '<div class="sec-head reveal"><div class="sec-title"><span class="sec-icon">' + icon(section.id, 24) + '</span>' +
-    '<div><h3>' + esc(section.name) + '</h3><p>' + esc(section.subtitle) + '</p></div></div>' + side + '</div>' +
+    '<div><h2>' + esc(section.name) + '</h2><p>' + esc(section.subtitle) + '</p></div></div>' + side + '</div>' +
     layout(list, section) + '</div></section>';
 }
 
 // Builds the signup preview; emails are not saved.
 function subscribeHtml(d) {
   return '<section class="subscribe" id="subscribe"><div class="wrap"><div class="sub-card reveal">' +
-    '<div><span class="tag">' + icon("sparkle", 14) + 'NEW</span>' +
-    '<h3>Subscribe to the ' + esc(d.lab) + ' Newsletter</h3>' +
+    '<div><span class="tag">' + icon("sparkle", 14) + ' NEW</span>' +
+    '<h2>Subscribe to the ' + esc(d.lab) + ' Newsletter</h2>' +
     '<p>Get The Circuit in your inbox every week: one spotlight, the best of the rest, zero noise.</p></div>' +
     '<div><form class="sub-form" id="sub-form"><input type="email" placeholder="you@university.edu" aria-label="Email address" required>' +
     '<input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">' +
@@ -673,16 +662,9 @@ function reveal() {
 // Connects the controls to their actions.
 function wireUp() {
   refreshSaved(); applyFilters(); countUp(); reveal();
-  const themeToggle = document.getElementById("brief-theme-toggle");
-  if (themeToggle) {
-    updateBriefThemeButton(themeToggle);
-    themeToggle.addEventListener("click", function () {
-      setBriefTheme(!document.body.classList.contains("dark"), true);
-      updateBriefThemeButton(themeToggle);
-    });
-  }
   const nav = document.getElementById("nav");
-  const scroller = document.getElementById("app");
+  const app = document.getElementById("app");
+  const desktopScroll = window.matchMedia("(min-width: 901px)");
   let backToTop = document.getElementById("back-to-top");
   if (!backToTop) {
     backToTop = document.createElement("button");
@@ -694,15 +676,22 @@ function wireUp() {
     backToTop.innerHTML = '<span aria-hidden="true">↑</span>';
     document.body.appendChild(backToTop);
   }
+  function scrollRoot() {
+    return desktopScroll.matches ? app : document.scrollingElement;
+  }
+  function onScroll() {
+    const top = scrollRoot().scrollTop || 0;
+    nav.classList.toggle("scrolled", top > 8);
+    backToTop.hidden = top <= 800;
+  }
   backToTop.onclick = function () {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    scroller.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    scrollRoot().scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
   };
-  scroller.onscroll = function () {
-    nav.classList.toggle("scrolled", scroller.scrollTop > 8);
-    backToTop.hidden = scroller.scrollTop <= 800;
-  };
-  scroller.onscroll();
+  app.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
+  desktopScroll.addEventListener("change", onScroll);
+  onScroll();
   const search = document.getElementById("search");
   if (search) search.addEventListener("input", function () { filterState.query = search.value; applyFilters(); });
   const form = document.getElementById("sub-form");
@@ -715,29 +704,30 @@ function wireUp() {
     const trap = form.querySelector('input[name="company"]');
     if (trap && trap.value) return;
 
-    let already = false;
-    try { already = localStorage.getItem(SUBSCRIBED_KEY) === "1"; } catch (err) { already = false; }
-    if (already) {
-      note.textContent = "You're already subscribed on this device.";
+    const email = input.value.trim().toLowerCase();
+    let sentFor = "";
+    try { sentFor = localStorage.getItem(SUBSCRIBED_KEY) || ""; } catch (err) { sentFor = ""; }
+    if (sentFor === email) {
+      note.textContent = "This browser already sent a request for that address. Enter a different email to add someone else.";
       return;
     }
 
-    const email = input.value.trim().toLowerCase();
     button.disabled = true;
     note.textContent = "Sending…";
 
     try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
+      await fetchWithTimeout(
+        (window.LAB_CONFIG && window.LAB_CONFIG.newsletterSubscribeUrl) || "https://script.google.com/macros/s/AKfycbyx00UsgASEw0tnGsR0At-JDQrG4a5fGHihSKIANXiyLZu7nufCU8CuhiEYdcVjLPrGSg/exec",
         {
           method: "POST",
           mode: "no-cors",
           body: new URLSearchParams({ email: email })
-        }
+        },
+        8000
       );
-      note.textContent = "Thanks for joining The Circuit! You're on the list.";
+      note.textContent = "Request sent. This page can't confirm the signup, so check your inbox for The Circuit.";
       form.reset();
-      try { localStorage.setItem(SUBSCRIBED_KEY, "1"); } catch (err) { /* private mode */ }
+      try { localStorage.setItem(SUBSCRIBED_KEY, email); } catch (err) { /* private mode */ }
     } catch (error) {
       note.textContent = "Could not send. Please try again.";
     } finally {
@@ -746,7 +736,7 @@ function wireUp() {
   });
 }
 
-const LIKES_URL = "https://script.google.com/macros/s/AKfycbzAKsbaQZBCjk2Nvy41X4u76dRuA36ayQN5ZEl5NDW-0K_3rMHmaBNNqFPy4SYAdeq4sA/exec";
+const LIKES_URL = (window.LAB_CONFIG && window.LAB_CONFIG.newsletterLikesUrl) || "https://script.google.com/macros/s/AKfycbzAKsbaQZBCjk2Nvy41X4u76dRuA36ayQN5ZEl5NDW-0K_3rMHmaBNNqFPy4SYAdeq4sA/exec";
 
 function sendLikeToSheet(url) {
   const item =
@@ -768,7 +758,7 @@ function sendLikeToSheet(url) {
   }
 
   // Send the title, URL, and current heart selection.
-  fetch(LIKES_URL, {
+  fetchWithTimeout(LIKES_URL, {
     method: "POST",
     mode: "no-cors",
     body: new URLSearchParams({
@@ -777,18 +767,29 @@ function sendLikeToSheet(url) {
       url: url,
       liked: String(saved.has(url))
     })
-  }).catch(function (error) {
-    console.error("Could not send the like:", error);
+  }, 8000).catch(function () {
+    toast("Could not save that like. Please try again.");
   });
+}
+
+const likeTimers = new Map();
+
+function scheduleLike(url) {
+  clearTimeout(likeTimers.get(url));
+  likeTimers.set(url, setTimeout(function () {
+    likeTimers.delete(url);
+    try { sendLikeToSheet(url); } catch (err) { toast("Could not save that like. Please try again."); }
+  }, 400));
 }
 
 // Toggles a heart and keeps the surrounding article link from opening.
 function toggleLike(button) {
   const url = button.dataset.save;
-  if (saved.has(url)) { saved.delete(url); toast("Removed from Liked Feedback"); }
-  else { saved.add(url); toast("♥ LIKED! Thanks for you feedback!"); }
+  if (!url) return;
+  if (saved.has(url)) { saved.delete(url); toast("Removed from Liked."); }
+  else { saved.add(url); toast("Thanks for your feedback!"); }
   persistSaved(); refreshSaved();
-  sendLikeToSheet(url);
+  scheduleLike(url);
   if (filterState.topic === "saved") applyFilters();
 }
 
@@ -804,7 +805,6 @@ document.addEventListener("click", function (e) {
   if (video) { e.preventDefault(); openVideo(+video.dataset.video); return; }
   const chip = e.target.closest("[data-filter]");
   if (chip) { setTopic(chip.dataset.filter); return; }
-  if (e.target.closest("#saved-btn")) { setTopic("saved"); jumpTo("explore"); return; }
   const jump = e.target.closest("[data-jump]");
   if (jump) {
     e.preventDefault();
@@ -828,38 +828,20 @@ document.addEventListener("keydown", function (e) {
   if (vid && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openVideo(+vid.dataset.video); }
 });
 
-const BRIEF_THEME_KEY = "lab-theme";
-// Reads the theme saved in this browser.
-function readBriefTheme() {
-  try { return localStorage.getItem(BRIEF_THEME_KEY); } catch (e) { return null; }
-}
-// Switches the theme and optionally remembers it.
-function setBriefTheme(dark, persist) {
-  document.body.classList.toggle("dark", dark);
-  if (persist) {
-    try { localStorage.setItem(BRIEF_THEME_KEY, dark ? "dark" : "light"); } catch (e) { /* private mode */ }
-  }
-}
-// Updates the theme button symbol and label.
-function updateBriefThemeButton(button) {
-  const dark = document.body.classList.contains("dark");
-  button.textContent = dark ? "☀" : "☾";
-  button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-  button.setAttribute("aria-pressed", String(dark));
-}
-
 // Matches the scrolling area to the real site header height.
 function syncHeaderOffset() {
   const header = document.querySelector(".lab-header");
   if (!header) return;
-  document.documentElement.style.setProperty("--header-offset", header.offsetHeight + "px");
+  const height = header.offsetHeight + "px";
+  document.documentElement.style.setProperty("--header-offset", height);
+  document.documentElement.style.setProperty("--header-height", height);
 }
 document.addEventListener("DOMContentLoaded", syncHeaderOffset);
 window.addEventListener("load", syncHeaderOffset);
 window.addEventListener("resize", syncHeaderOffset);
 syncHeaderOffset();
 
-    // News arrows: smoothly move between subtopics.
+// News arrows: smoothly move between subtopics.
 document.addEventListener("click", async function (event) {
   const button = event.target.closest("[data-news-step]");
   if (!button) return;
@@ -885,7 +867,7 @@ document.addEventListener("click", async function (event) {
   outgoing.inert = true;
 
   try {
-    if (!reduceMotion) {
+    if (!reduceMotion && typeof outgoing.animate === "function" && typeof incoming.animate === "function") {
       const timing = {
         duration: 450,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)"
@@ -903,6 +885,8 @@ document.addEventListener("click", async function (event) {
         ], timing).finished
       ]);
     }
+  } catch (error) {
+    // Finish the slide change even if an animation is interrupted.
   } finally {
     outgoing.hidden = true;
     outgoing.inert = false;
@@ -959,21 +943,9 @@ document.addEventListener("click", function (event) {
 
   track.scrollTo({
     left: Math.min(nextPage * pageWidth, maxScroll),
-    behavior: "smooth"
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
   });
 });
-
-// Apply the preferred theme and build the page.
-const savedBriefTheme = readBriefTheme();
-const prefersBriefDark =
-  window.matchMedia &&
-  window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-setBriefTheme(
-  savedBriefTheme ? savedBriefTheme === "dark" : prefersBriefDark,
-  false
-);
-
 
 /*
  * LOCAL CONTENT TEST — not connected to SharePoint yet.
@@ -998,6 +970,7 @@ setBriefTheme(
     if (!response.ok) throw new Error("Could not load the content file.");
 
     const rows = await response.json();
+    if (!Array.isArray(rows)) throw new Error("The local content file must contain a list.");
 
     const subtopics = {
       "Industry News": "industry",
@@ -1040,42 +1013,41 @@ setBriefTheme(
   }
 
   render(newsletter);
-  
 
-const learningTrack = document.querySelector("#learning-track");
-const learningStatus = document.querySelector(".learning-status");
+  const learningTrack = document.querySelector("#learning-track");
+  const learningStatus = document.querySelector(".learning-status");
 
-function updateLearningStatus() {
-  if (!learningTrack || !learningStatus || !learningTrack.clientWidth) return;
+  function updateLearningStatus() {
+    if (!learningTrack || !learningStatus || !learningTrack.clientWidth) return;
 
-  const cards = Array.from(learningTrack.children).filter(function (card) {
-    return getComputedStyle(card).display !== "none";
-  });
+    const cards = Array.from(learningTrack.children).filter(function (card) {
+      return getComputedStyle(card).display !== "none";
+    });
 
-  if (!cards.length) {
-    learningStatus.textContent = "Learning · 0 / 0";
-    return;
+    if (!cards.length) {
+      learningStatus.textContent = "Learning · 0 / 0";
+      return;
+    }
+
+    const gap = parseFloat(getComputedStyle(learningTrack).columnGap) || 0;
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const perPage = Math.max(
+      1,
+      Math.round((learningTrack.clientWidth + gap) / (cardWidth + gap))
+    );
+
+    const total = Math.ceil(cards.length / perPage);
+    const page = Math.min(
+      total,
+      Math.round(learningTrack.scrollLeft / ((cardWidth + gap) * perPage)) + 1
+    );
+
+    learningStatus.textContent = "Learning " + page + " / " + total;
   }
 
-  const gap = parseFloat(getComputedStyle(learningTrack).columnGap) || 0;
-  const cardWidth = cards[0].getBoundingClientRect().width;
-  const perPage = Math.max(
-    1,
-    Math.round((learningTrack.clientWidth + gap) / (cardWidth + gap))
-  );
-
-  const total = Math.ceil(cards.length / perPage);
-  const page = Math.min(
-    total,
-    Math.round(learningTrack.scrollLeft / ((cardWidth + gap) * perPage)) + 1
-  );
-
-  learningStatus.textContent = "Learning " + page + " / " + total;
-}
-
-if (learningTrack) {
-  learningTrack.addEventListener("scroll", updateLearningStatus);
-  window.addEventListener("resize", updateLearningStatus);
-  updateLearningStatus();
-}
+  if (learningTrack) {
+    learningTrack.addEventListener("scroll", updateLearningStatus, { passive: true });
+    window.addEventListener("resize", updateLearningStatus);
+    updateLearningStatus();
+  }
 })();

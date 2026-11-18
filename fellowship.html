@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-show-unfinished>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Draft Fellowship sections stay on screen until the client copy is confirmed. Remove data-show-unfinished with this robots tag. -->
   <meta name="robots" content="noindex">
   <meta name="description" content="Learn how students join the Applied AI Lab Fellowship Pathway and take a deeper role in research, projects, and the Lab community.">
   <meta property="og:title" content="Fellowship Pathway | Applied AI Lab">
@@ -11,48 +12,46 @@
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="images_icons/AAI-Logo-Black-Animated-Match.png" type="image/png">
   <meta name="theme-color" content="#f4f6f8">
+  <link rel="preload" href="fonts/oxanium/oxanium-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/space-grotesk/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <title>Fellowship Pathway | Applied AI Lab</title>
-  <link rel="stylesheet" href="css/site.css">
-  <link rel="stylesheet" href="css/fellowship.css?v=10">
-  <link rel="stylesheet" href="css/blended-theme.css">
-  <link rel="stylesheet" href="css/chatbot.css">
-  <link rel="stylesheet" href="css/lab-accents.css">
-  <link rel="stylesheet" href="css/bento-circuit.css">
+  <link rel="stylesheet" href="css/shared/tokens.css">
+  <link rel="stylesheet" href="css/shared/base.css">
+  <link rel="stylesheet" href="css/pages/fellowship.css">
+  <link rel="stylesheet" href="css/shared/theme.css">
 </head>
 <body class="page-fellowship" id="top">
+<script>
+(function(){try{var saved=localStorage.getItem("lab-theme");if(saved==="dark"||(!saved&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();
+</script>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header class="lab-header">
-    <nav class="lab-nav" aria-label="Main navigation">
-      <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
-        <span class="lab-brand-logo" aria-hidden="true">
-          <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
-          <img class="lab-brand-image lab-brand-image-animated" alt="">
-        </span>
-      </a>
-      <div class="lab-nav-links">
-        <a href="index.html">Home</a>
-        <a href="industry.html">Industry Partners</a>
-        <a href="fellowship.html" aria-current="page">Fellowship Pathway</a>
-        <a href="studentoutcomes.html">Student Outcomes</a>
-        <a href="event.html">Events</a>
-         <a href="ai-insights.html">AI Insights</a>
-        <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
-        <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
-      </div>
-      <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
-      <!-- English / Spanish translator -->
-<div class="gtranslate_wrapper"></div>
-<script>window.gtranslateSettings = {
-"default_language":"en",
-"languages":["en","es"],
-"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper",
-"flag_size":24,"alt_flags":{"en":"usa","es":"mexico"},
-"globe_size":40} 
-</script>
-<script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
-    </nav>
-  </header>
+<header class="lab-header" data-nav-current="fellowship">
+  <nav class="lab-nav" aria-label="Main navigation">
+    <a class="lab-brand" href="index.html" aria-label="Applied AI Lab home" data-logo-animated="images_icons/AAI-Animated-Logo-Black.gif" data-logo-duration="2700">
+      <span class="lab-brand-logo" aria-hidden="true">
+        <img class="lab-brand-image lab-brand-image-static" src="images_icons/AAI-Logo-Black-Animated-Match.png" alt="" width="1500" height="1500">
+        <img class="lab-brand-image lab-brand-image-animated" alt="">
+      </span>
+    </a>
+    <div class="lab-nav-links">
+      <a href="index.html">Home</a>
+      <a data-industry-link href="industry.html">Industry Partners</a>
+      <a href="fellowship.html" aria-current="page">Fellowship Pathway</a>
+      <a href="studentoutcomes.html">Student Outcomes</a>
+      <a href="event.html">Events</a>
+      <a href="ai-insights.html">AI Insights</a>
+      <a class="lab-nav-cta" href="index.html#opportunities">Get Involved</a>
+      <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
+    </div>
+    <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
+    <div class="gtranslate_wrapper" aria-label="Choose site language"></div>
+    <script>
+      window.gtranslateSettings = { default_language: "en", languages: ["en", "es"], globe_color: "#66aaff", wrapper_selector: ".gtranslate_wrapper", flag_size: 24, alt_flags: { en: "usa", es: "mexico" }, globe_size: 40 };
+    </script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+  </nav>
+</header>
 
   <main id="main-content">
     <section class="page-hero" aria-labelledby="hero-title">
@@ -77,7 +76,7 @@
           <h1 id="hero-title">Build what’s <em>next.</em></h1>
           <p class="lead content-pending">[One or two sentences introducing the Fellowship to prospective students. Confirm with the client.]</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#how-to-become">Become a Fellow <span aria-hidden="true">↘</span></a>
+            <a class="button button-primary" href="#how-to-become" data-unfinished>Become a Fellow <span aria-hidden="true">↘</span></a>
             <a class="button button-ghost" href="#fellows">Meet the fellows</a>
           </div>
         </div>
@@ -85,11 +84,11 @@
         <div class="hero-console" aria-label="Fellowship pathway overview">
           <div class="console-bar"><span></span><span></span><span></span><p>fellowship_pathway.json</p></div>
           <div class="console-body">
-            <button class="console-line is-active" type="button" data-pathway-target="#about-fellowship" aria-current="step"><span>01</span><code>WHAT</code><small>What the Fellowship is</small></button>
-            <button class="console-line" type="button" data-pathway-target="#ideal-candidates"><span>02</span><code>WHO</code><small>Who can be a Fellow</small></button>
-            <button class="console-line" type="button" data-pathway-target="#fellow-skills"><span>03</span><code>SKILLS</code><small>What you’ll develop</small></button>
-            <button class="console-line" type="button" data-pathway-target="#how-to-become"><span>04</span><code>APPLY</code><small>How to become a Fellow</small></button>
-            <p class="console-line console-status"><span aria-hidden="true">●</span><code>DETAILS</code><small>Pending client confirmation</small></p>
+            <button class="console-line" type="button" data-pathway-target="#about-fellowship" data-unfinished><span>01</span><code>WHAT</code><small>What the Fellowship is</small></button>
+            <button class="console-line is-active" type="button" data-pathway-target="#ideal-candidates" aria-current="step"><span>02</span><code>WHO</code><small>Who can be a Fellow</small></button>
+            <button class="console-line" type="button" data-pathway-target="#fellow-skills" data-unfinished><span>03</span><code>SKILLS</code><small>What you’ll develop</small></button>
+            <button class="console-line" type="button" data-pathway-target="#how-to-become" data-unfinished><span>04</span><code>APPLY</code><small>How to become a Fellow</small></button>
+            <p class="console-line console-status" data-unfinished><span aria-hidden="true">●</span><code>DETAILS</code><small>Pending client confirmation</small></p>
             <p class="console-instruction">Select a stage to explore the pathway.</p>
           </div>
         </div>
@@ -97,7 +96,7 @@
       <div class="hero-index" aria-hidden="true">FEL / 001</div>
     </section>
 
-    <section class="section about-fellowship" id="about-fellowship" aria-labelledby="about-fellowship-title">
+    <section class="section about-fellowship" id="about-fellowship" data-unfinished aria-labelledby="about-fellowship-title">
       <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
         <path class="circuit-trace" d="M8 48H48V18H110V48H172" stroke="currentColor" stroke-width="1.4"/>
         <circle class="circuit-node" cx="48" cy="18" r="3" fill="currentColor"/>
@@ -167,7 +166,7 @@
           </figure>
         </div>
         <div class="candidate-grid">
-          <article class="candidate-card reveal">
+          <article class="candidate-card reveal" data-unfinished>
             <div class="card-icon-row">
               <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><path d="M12 3l7 3v6c0 4.5-3 7.2-7 8.5C8 19.2 5 16.5 5 12V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <p class="candidate-label">Eligibility</p>
@@ -183,7 +182,7 @@
             <h3>Interests and qualities</h3>
             <p>A specific major is not required. A strong interest in the Fellowship matters most, together with curiosity, initiative, and a collaborative mindset.</p>
           </article>
-          <article class="candidate-card reveal">
+          <article class="candidate-card reveal" data-unfinished>
             <div class="card-icon-row">
               <span class="card-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4.5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <p class="candidate-label">Commitment</p>
@@ -196,7 +195,7 @@
       </div>
     </section>
 
-    <section class="section fellow-skills" id="fellow-skills" aria-labelledby="fellow-skills-title">
+    <section class="section fellow-skills" id="fellow-skills" data-unfinished aria-labelledby="fellow-skills-title">
       <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
         <path class="circuit-trace" d="M8 36H46V14H96V52H140V28H172" stroke="currentColor" stroke-width="1.4"/>
         <circle class="circuit-node" cx="46" cy="14" r="3" fill="currentColor"/>
@@ -271,7 +270,52 @@
 
         <div class="carousel" role="region" aria-roledescription="carousel" aria-labelledby="fellows-title" tabindex="0">
           <div class="carousel-viewport">
-            <div class="fellow-track" id="fellowTrack" aria-busy="true"></div>
+            <div class="fellow-track" id="fellowTrack">
+              <article class="fellow-card">
+                <div class="card-index">01</div>
+                <div class="initials" aria-hidden="true">FM</div>
+                <h3>Frank Mousa</h3>
+                <p class="fellow-role">School of Business · Finance</p>
+                <p class="fellow-focus">Frank is exploring how AI can help students practice the technical skills they may need before beginning an analyst role.</p>
+                <p class="fellow-project"><span>Featured project · Prototype</span><strong>IB Launchpad</strong> An AI-supported training experience for financial modeling, credit analysis, and investment-committee preparation. <a href="https://celadon-treacle-ba824a.netlify.app/#top" target="_blank" rel="noopener noreferrer" aria-label="View prototype ↗: Frank Mousa">View prototype ↗</a></p>
+              </article>
+              <article class="fellow-card">
+                <div class="card-index">02</div>
+                <div class="initials" aria-hidden="true">VE</div>
+                <h3>Vivian Etim</h3>
+                <p class="fellow-role">School of Business · Master's of Business Analytics and AI</p>
+                <p class="fellow-focus" data-unfinished>Add a short, student-approved description or quote.</p>
+                <p class="fellow-project" data-unfinished><span>Featured project</span> Add the project title and a concise explanation of the student’s work. </p>
+              </article>
+              <article class="fellow-card">
+                <div class="card-index">03</div>
+                <div class="initials" aria-hidden="true">HB</div>
+                <h3>Henry Bugai</h3>
+                <p class="fellow-role">School of Business · Business Analytics + Computer Information Systems</p>
+                <p class="fellow-project"><span>Featured project</span><strong>Coginchaug Benchwarmers</strong> A website showcasing a booster club supporting student-athletes in Regional School District 13. It highlights the club's Durham Fair food booth fundraising tradition and explains how funds are allocated to support student athletics. <a href="https://coginchaugbenchwarmers.com/" target="_blank" rel="noopener noreferrer" aria-label="View project ↗: Henry Bugai">View project ↗</a></p>
+              </article>
+              <article class="fellow-card">
+                <div class="card-index">04</div>
+                <div class="initials" aria-hidden="true">KC</div>
+                <h3>Katherine Contreras</h3>
+                <p class="fellow-role">School of Business · Computer Information Systems + Finance</p>
+                <p class="fellow-project"><span>Featured project</span><strong>Personal Portfolio</strong> An interactive portfolio highlighting academic coursework, honors, projects, student organizations, and credentials. It features numbered sections, a light-mode toggle, and a contact form. <a href="https://katherinec0115.github.io/katherineC0115/" target="_blank" rel="noopener noreferrer" aria-label="View portfolio ↗: Katherine Contreras">View portfolio ↗</a></p>
+              </article>
+              <article class="fellow-card">
+                <div class="card-index">05</div>
+                <div class="initials" aria-hidden="true">JM</div>
+                <h3>Jacob McCurry</h3>
+                <p class="fellow-role">School of Business · Computer Information Systems</p>
+                <p class="fellow-project"><span>Featured project</span><strong>Personal Portfolio</strong> A personal portfolio showcasing academic and technical projects, including the Applied AI Lab website and a proposed Maintenance Tracking System. The portfolio also offers a downloadable résumé. <a href="https://jtmccurry.github.io/" target="_blank" rel="noopener noreferrer" aria-label="View portfolio ↗: Jacob McCurry">View portfolio ↗</a></p>
+              </article>
+              <article class="fellow-card">
+                <div class="card-index">06</div>
+                <div class="initials" aria-hidden="true">SM</div>
+                <h3>Skhy Morris</h3>
+                <p class="fellow-role">School of Business · Computer Information Systems</p>
+                <p class="fellow-project"><span>Featured project · Scrum Master</span><strong>Applied AI &amp; Analytics Lab Website</strong> As Scrum Master and team leader, Skhy leads the team building the Applied AI &amp; Analytics Lab website—the site you are viewing now. </p>
+              </article>
+            </div>
           </div>
           <div class="carousel-controls">
             <button class="carousel-button" id="fellowPrev" type="button" aria-label="Show previous student fellow">←</button>
@@ -285,7 +329,7 @@
       </div>
     </section>
 
-    <section class="section details-section how-to-become" id="how-to-become" aria-labelledby="how-to-become-title">
+    <section class="section details-section how-to-become" id="how-to-become" data-unfinished aria-labelledby="how-to-become-title">
       <svg class="circuit-decor" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false">
         <path class="circuit-trace" d="M8 50H60V16H118V50H172" stroke="currentColor" stroke-width="1.4"/>
         <circle class="circuit-node" cx="60" cy="16" r="3" fill="currentColor"/>
@@ -348,7 +392,7 @@
         </ul>
         <div class="contact-strip reveal">
           <p class="content-pending">[Add the client-approved Fellowship contact and application link here.]</p>
-          <button class="button path-apply" type="button" disabled aria-disabled="true">Application link coming soon</button>
+          <button class="button path-apply" type="button" disabled aria-disabled="true" data-unfinished>Application link coming soon</button>
         </div>
           </div>
           <!--
@@ -372,352 +416,24 @@
     </section>
   </main>
 
-  <footer class="lab-site-footer" id="site-footer">
+<footer class="lab-site-footer" id="site-footer">
   <div class="lab-footer-inner">
-
     <div class="lab-footer-brand">
       <strong>Applied AI Lab</strong>
       <span>Experiment. Build. Question. Apply.</span>
-
       <a class="footer-circuit" href="ai-insights.html#subscribe">
         Join The Circuit →
       </a>
     </div>
-
-    <nav class="lab-footer-nav" aria-label="Footer navigation">
-      <a href="index.html">Home</a>
-      <a href="industry.html">Industry Partners</a>
-      <a href="fellowship.html">Fellowship</a>
-      <a href="studentoutcomes.html">Student Outcomes</a>
-      <a href="event.html">Events</a>
-      <a href="ai-insights.html">AI Insights</a>
-      
-    </nav>
-
     <a class="lab-footer-top" href="#top">
       Back to top <span aria-hidden="true">↑</span>
     </a>
-
   </div>
 </footer>
 
-  <script src="js/site.js?v=4" defer></script>
-  <script>
-window.LAB_FELLOWS_READY=(async function(){
-  const track=document.getElementById('fellowTrack');
-  const status=document.getElementById('fellowStatus');
-  track.replaceChildren();
-  track.setAttribute('aria-busy','true');
-  status.textContent='Loading student fellows…';
-  const url='https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-fellows.json?v=' + Date.now();
-  function node(tag,cls,text){const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;}
-  function safeUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}}
-  try {
-    const response=await fetch(url,{cache:'no-store',credentials:'omit',signal:AbortSignal.timeout(20000)});
-    if(!response.ok)throw Error();
-    const data=await response.json();if(data.error||!Array.isArray(data.fellows))throw Error();
-    data.fellows.forEach((f,i)=>{
-      if(!f || typeof f.name!=='string' || !f.name.trim())return;
-      const card=node('article','fellow-card','');
-      const initials=node('div','initials',f.initials||f.name.split(/\s+/).map(n=>n[0]).join('').slice(0,2));initials.setAttribute('aria-hidden','true');
-      card.append(node('div','card-index',String(i+1).padStart(2,'0')),initials,node('h3','',f.name),node('p','fellow-role',f.role));
-      if(f.bio)card.append(node('p','fellow-focus',f.bio));
-      if(f.projectLabel||f.projectTitle||f.projectDescription||f.url){
-        const project=node('p','fellow-project','');
-        if(f.projectLabel)project.append(node('span','',f.projectLabel));
-        if(f.projectTitle)project.append(node('strong','',f.projectTitle));
-        project.append(document.createTextNode(' '+(f.projectDescription||'')+' '));
-        const href=safeUrl(f.url);if(href){const link=node('a','',f.linkLabel||'View project ↗');link.href=href;link.target='_blank';link.rel='noopener noreferrer';link.setAttribute('aria-label',link.textContent+': '+f.name);project.append(link);}
-        card.append(project);
-      }
-      track.append(card);
-    });
-    if(!track.children.length){status.textContent='No published student fellows yet.';const p=node('p','','No published student fellows yet.');track.append(p);track.setAttribute('aria-busy','false');return false;}
-    track.setAttribute('aria-busy','false');
-    return true;
-  } catch(error){
-    const message=node('p','','Student fellows are temporarily unavailable. Please reload to try again.');message.setAttribute('role','status');track.append(message);
-    document.getElementById('fellowPrev').disabled=true;document.getElementById('fellowNext').disabled=true;
-    status.textContent='Student fellows are temporarily unavailable.';
-    track.setAttribute('aria-busy','false');
-    return false;
-  }
-})();
+  <script src="js/config.js" defer></script>
+  <script src="js/site.js" defer></script>
+  <script src="js/fellowship.js" defer></script>
 
-(async function () {
-  if(!await window.LAB_FELLOWS_READY) return;
-  const carousel = document.querySelector('.carousel');
-  const track = document.getElementById('fellowTrack');
-  if (!carousel || !track) return;
-
-  const cards = Array.from(track.children);
-  const previous = document.getElementById('fellowPrev');
-  const next = document.getElementById('fellowNext');
-  const dots = document.getElementById('fellowDots');
-  const count = document.getElementById('fellowCount');
-  const status = document.getElementById('fellowStatus');
-  const progress = document.getElementById('fellowProgress');
-  const viewport = carousel.querySelector('.carousel-viewport');
-  const optionCount = Math.min(3, Math.max(0, cards.length - 1));
-  let current = 0;
-  let swipeStartX = null;
-  let motionTimer;
-
-  function normalize(index) {
-    return (index + cards.length) % cards.length;
-  }
-
-  function visibleIndices() {
-    return Array.from({ length: optionCount + 1 }, function (_, offset) {
-      return normalize(current + offset);
-    });
-  }
-
-  function makeDots() {
-    dots.innerHTML = '';
-    cards.forEach(function (card, index) {
-      const dot = document.createElement('button');
-      dot.className = 'carousel-dot';
-      dot.type = 'button';
-      dot.setAttribute('aria-label', `Feature student profile ${index + 1}`);
-      dot.addEventListener('click', function () {
-        const direction = index >= current ? 'next' : 'previous';
-        current = index;
-        update(true, direction);
-      });
-      dots.appendChild(dot);
-    });
-  }
-
-  function update(animate, direction) {
-    const visible = visibleIndices();
-
-    window.clearTimeout(motionTimer);
-    track.classList.remove('is-shifting-next', 'is-shifting-previous');
-
-    cards.forEach(function (card, index) {
-      const position = visible.indexOf(index);
-      const active = index === current;
-      const option = position > 0;
-      const studentName = card.querySelector('h3')?.textContent || `Student ${index + 1}`;
-
-      card.classList.toggle('is-visible', position >= 0);
-      card.classList.toggle('is-active', active);
-      card.classList.toggle('is-option', option);
-      card.style.order = position >= 0 ? String(position) : '';
-      card.setAttribute('aria-hidden', position >= 0 ? 'false' : 'true');
-
-      if (option) {
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `Feature ${studentName}, profile ${index + 1}`);
-        card.removeAttribute('aria-current');
-      } else {
-        card.removeAttribute('role');
-        card.setAttribute('tabindex', '-1');
-        card.removeAttribute('aria-label');
-        if (active) card.setAttribute('aria-current', 'true');
-        else card.removeAttribute('aria-current');
-      }
-    });
-
-    if (animate) {
-      void track.offsetWidth;
-      requestAnimationFrame(function () {
-        track.classList.add(direction === 'previous' ? 'is-shifting-previous' : 'is-shifting-next');
-      });
-      motionTimer = window.setTimeout(function () {
-        track.classList.remove('is-shifting-next', 'is-shifting-previous');
-      }, 500);
-    }
-
-    previous.disabled = cards.length < 2;
-    next.disabled = cards.length < 2;
-    count.textContent = `${current + 1} of ${cards.length}`;
-    status.textContent = `Student profile ${current + 1} is featured. Select one of the next ${optionCount} profiles to change the feature.`;
-    if (progress) progress.style.width = `${((current + 1) / cards.length) * 100}%`;
-
-    Array.from(dots.children).forEach(function (dot, index) {
-      dot.classList.toggle('active', index === current);
-      dot.setAttribute('aria-current', index === current ? 'true' : 'false');
-    });
-  }
-
-  cards.forEach(function (card, index) {
-    card.addEventListener('click', function () {
-      if (!card.classList.contains('is-option')) return;
-      current = index;
-      update(true, 'next');
-    });
-
-    card.addEventListener('keydown', function (event) {
-      if (!card.classList.contains('is-option')) return;
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        current = index;
-        update(true, 'next');
-      }
-    });
-  });
-
-  previous.addEventListener('click', function () {
-    current = normalize(current - 1);
-    update(true, 'previous');
-  });
-
-  next.addEventListener('click', function () {
-    current = normalize(current + 1);
-    update(true, 'next');
-  });
-
-  carousel.addEventListener('keydown', function (event) {
-    if (event.target !== carousel) return;
-    if (event.key === 'ArrowLeft') {
-      current = normalize(current - 1);
-      update(true, 'previous');
-    }
-    if (event.key === 'ArrowRight') {
-      current = normalize(current + 1);
-      update(true, 'next');
-    }
-  });
-
-  if (viewport) {
-    viewport.addEventListener('pointerdown', function (event) {
-      if (event.pointerType === 'mouse' && event.button !== 0) return;
-      swipeStartX = event.clientX;
-      viewport.classList.add('is-swiping');
-    });
-
-    viewport.addEventListener('pointerup', function (event) {
-      if (swipeStartX === null) return;
-      const distance = event.clientX - swipeStartX;
-      swipeStartX = null;
-      viewport.classList.remove('is-swiping');
-
-      if (Math.abs(distance) < 48) return;
-      current = normalize(current + (distance < 0 ? 1 : -1));
-      update(true, distance < 0 ? 'next' : 'previous');
-    });
-
-    viewport.addEventListener('pointercancel', function () {
-      swipeStartX = null;
-      viewport.classList.remove('is-swiping');
-    });
-  }
-
-  makeDots();
-  update(false);
-})();
-
-(function () {
-  const pathwayButtons = Array.from(document.querySelectorAll('[data-pathway-target]'));
-  if (!pathwayButtons.length) return;
-
-  pathwayButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      const target = document.querySelector(button.dataset.pathwayTarget);
-      if (!target) return;
-
-      pathwayButtons.forEach(function (item) {
-        const active = item === button;
-        item.classList.toggle('is-active', active);
-        if (active) item.setAttribute('aria-current', 'step');
-        else item.removeAttribute('aria-current');
-      });
-
-      target.scrollIntoView({
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-        block: 'start'
-      });
-    });
-  });
-})();
-
-(function () {
-  const signalButtons = Array.from(document.querySelectorAll('.signal-item'));
-  const detail = document.getElementById('signalDetail');
-  const detailTitle = detail && detail.querySelector('strong');
-  if (!signalButtons.length || !detailTitle) return;
-
-  signalButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      signalButtons.forEach(function (item) {
-        const active = item === button;
-        item.classList.toggle('is-active', active);
-        item.setAttribute('aria-expanded', String(active));
-      });
-      detailTitle.textContent = button.dataset.signalTitle;
-    });
-  });
-})();
-
-(function () {
-  const steps = Array.from(document.querySelectorAll('.path-step'));
-  if (!steps.length) return;
-
-  steps.forEach(function (step) {
-    step.addEventListener('click', function () {
-      steps.forEach(function (item) {
-        const selected = item === step;
-        item.classList.toggle('is-selected', selected);
-        item.setAttribute('aria-expanded', String(selected));
-        const panel = document.getElementById(item.getAttribute('aria-controls'));
-        if (panel) panel.hidden = !selected;
-      });
-    });
-  });
-})();
-
-(function () {
-  const nodes = Array.from(document.querySelectorAll('.about-fellowship .reveal, .ideal-candidates .reveal, .fellow-skills .reveal, .how-to-become .reveal'));
-  const fellowsHeading = document.querySelector('#fellows .section-heading');
-  if (fellowsHeading) {
-    fellowsHeading.classList.add('reveal');
-    nodes.push(fellowsHeading);
-  }
-  if (!nodes.length) return;
-
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
-    nodes.forEach(function (node) { node.classList.add('is-in'); });
-    return;
-  }
-
-  nodes.forEach(function (node) {
-    const rect = node.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) node.classList.add('is-in');
-  });
-  document.documentElement.classList.add('reveal-ready');
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-in');
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: window.matchMedia('(max-width: 640px)').matches ? 0.08 : 0.18, rootMargin: '0px 0px -4% 0px' });
-
-  nodes.forEach(function (node) { observer.observe(node); });
-})();
-
-(function () {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  document.addEventListener('click', function (event) {
-    const el = event.target.closest('a, button');
-    if (!el || !el.closest('.page-fellowship')) return;
-    if (el.classList.contains('fellow-card') || el.closest('.fellow-card')) return;
-    if (el.matches(':disabled') || el.getAttribute('aria-disabled') === 'true') return;
-    if (el.classList.contains('skip-link')) return;
-
-    el.classList.remove('is-clicked');
-    void el.offsetWidth;
-    el.classList.add('is-clicked');
-    window.setTimeout(function () { el.classList.remove('is-clicked'); }, 520);
-  });
-})();
-
-</script>
-  <script src="js/chatbot.js" defer></script>
 </body>
 </html>
