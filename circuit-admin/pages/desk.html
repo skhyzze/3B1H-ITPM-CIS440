@@ -15,11 +15,11 @@
   <link rel="stylesheet" href="css/shared/theme.css">
 </head>
 <!-- The Worker only sends this page to signed-in reviewers. -->
-<body class="page-events page-admin" id="top">
+<body class="page-events page-admin page-desk" id="top">
 <script>
 (function(){try{var saved=localStorage.getItem("lab-theme");if(saved==="dark"||(!saved&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();
 </script>
-  <a class="skip-link" href="#desk">Skip to the review desk</a>
+  <a class="skip-link" href="#desk-table">Skip to the articles</a>
 
   <header class="lab-header desk-header">
     <nav class="lab-nav" aria-label="Review desk">
@@ -29,77 +29,97 @@
         </span>
       </span>
       <span class="desk-header-title">The Circuit · Review Desk</span>
+      <a class="desk-btn" id="view-link" href="#" target="_blank" rel="noopener">View The Circuit <span aria-hidden="true">↗</span></a>
+      <button class="desk-btn desk-btn-strong" id="signout-button" type="button">Sign out</button>
       <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
     </nav>
   </header>
 
-  <main id="main">
-    <section class="events-hero admin-hero" aria-labelledby="page-title">
-      <span class="lab-orbit lab-orbit-one" aria-hidden="true"></span>
-      <span class="lab-orbit lab-orbit-two" aria-hidden="true"></span>
-      <div class="container">
-        <p class="eyebrow"><span>Team only</span> The Circuit</p>
-        <h1 id="page-title">Review<br><em>desk.</em></h1>
-        <p class="intro-copy">
-          Collect, review, approve. Only the items you approve and publish here
-          appear on AI Insights.
-        </p>
+  <main id="main" class="desk">
+    <!-- Title, collector button, and totals -->
+    <section class="desk-banner" aria-labelledby="desk-title">
+      <div>
+        <p class="desk-kicker">Internal · Collect → review → publish</p>
+        <h1 id="desk-title">This week's articles</h1>
+        <div class="desk-run">
+          <button class="desk-run-button" id="collect-button" type="button">▶ Run collector</button>
+          <p id="collect-meta"></p>
+        </div>
       </div>
+      <dl class="desk-stats" id="stats"></dl>
     </section>
 
-    <div class="container admin-body">
-      <section class="admin-desk" id="desk" aria-labelledby="desk-title">
-        <div class="admin-account">
+    <p class="admin-message" id="desk-message" role="status" aria-live="polite"></p>
+
+    <div class="desk-layout">
+      <!-- Filters -->
+      <section class="desk-card desk-filters" aria-labelledby="filters-title">
+        <h2 id="filters-title">Filters</h2>
+        <label class="desk-label" for="filter-search">Search</label>
+        <input id="filter-search" type="search" placeholder="e.g. agents, healthcare" autocomplete="off">
+
+        <p class="desk-label" id="status-label">Status</p>
+        <div class="desk-segmented" role="group" aria-labelledby="status-label" id="filter-status">
+          <button type="button" data-status="" aria-pressed="true">All</button>
+          <button type="button" data-status="pending" aria-pressed="false">Not picked</button>
+          <button type="button" data-status="approved" aria-pressed="false">Picked</button>
+        </div>
+
+        <fieldset class="desk-sections">
+          <legend class="desk-label">Section</legend>
+          <div id="filter-sections"></div>
+        </fieldset>
+
+        <label class="desk-label" for="filter-source">Source</label>
+        <select id="filter-source"><option value="">All sources</option></select>
+
+        <label class="desk-label" for="filter-date">Published</label>
+        <select id="filter-date">
+          <option value="">Any time</option>
+          <option value="7">Last 7 days</option>
+          <option value="14">Last 14 days</option>
+          <option value="30">Last 30 days</option>
+        </select>
+      </section>
+
+      <!-- All collected articles: scrolls inside its own box -->
+      <section class="desk-card desk-table-card" aria-labelledby="table-title">
+        <div class="desk-table-head">
           <div>
-            <p class="eyebrow">Signed in</p>
-            <h2 id="desk-title">This week's candidates</h2>
-            <p class="admin-meta" id="account-meta"></p>
+            <h2 id="table-title">All collected articles</h2>
+            <p>Tick to add · ☆ for the spotlight · click a title to open the article</p>
           </div>
-          <div class="admin-actions">
-            <button class="button button-ghost" id="collect-button" type="button">Run collector</button>
-            <a class="button button-ghost" id="view-link" href="#" target="_blank" rel="noopener">View The Circuit <span aria-hidden="true">↗</span></a>
-            <button class="button button-ghost" id="signout-button" type="button">Sign out</button>
-          </div>
+          <p id="result-count" aria-live="polite"></p>
         </div>
-
-        <p class="admin-message" id="desk-message" role="status" aria-live="polite"></p>
-
-        <dl class="admin-stats" id="stats"></dl>
-
-        <div class="admin-toolbar" role="search" aria-label="Filter candidates">
-          <label class="admin-field admin-field-search"><span>Search</span><input id="filter-search" type="search" placeholder="Titles and descriptions" autocomplete="off"></label>
-          <label class="admin-field"><span>Source</span><select id="filter-source"><option value="">All sources</option></select></label>
-          <label class="admin-field"><span>Section</span><select id="filter-section"><option value="">All sections</option></select></label>
-          <label class="admin-field"><span>Status</span>
-            <select id="filter-status">
-              <option value="">All</option>
-              <option value="approved">Approved</option>
-              <option value="pending">Not yet approved</option>
-            </select>
-          </label>
-        </div>
-        <p class="admin-count" id="result-count" aria-live="polite"></p>
-
-        <div class="admin-table-wrap">
-          <table class="admin-table">
+        <div class="desk-scroll" id="desk-table" tabindex="0" aria-label="Collected articles">
+          <table class="desk-table">
             <thead>
               <tr>
-                <th scope="col">Approve</th>
-                <th scope="col">Spotlight</th>
-                <th scope="col">Item</th>
+                <th scope="col">Add</th>
+                <th scope="col">Spot</th>
+                <th scope="col"><span class="desk-sr">Picture</span>Pic</th>
+                <th scope="col">Article</th>
+                <th scope="col">Source</th>
+                <th scope="col">Date</th>
                 <th scope="col">Section</th>
-                <th scope="col">Picture</th>
+                <th scope="col">News topic</th>
               </tr>
             </thead>
             <tbody id="rows"></tbody>
           </table>
         </div>
-
-        <div class="admin-publish" id="publish-bar">
-          <p id="publish-summary"></p>
-          <button class="button button-primary" id="publish-button" type="button" disabled>Publish to The Circuit</button>
-        </div>
+        <p class="desk-table-foot">The list scrolls inside this box. Changes are kept on this page until you publish.</p>
       </section>
+
+      <!-- This issue -->
+      <aside class="desk-card desk-issue" aria-labelledby="issue-title">
+        <p class="desk-kicker" id="issue-week"></p>
+        <h2 id="issue-title"></h2>
+        <div id="issue-spotlight"></div>
+        <div class="desk-issue-list" id="issue-list"></div>
+        <button class="desk-publish" id="publish-button" type="button" disabled>Publish to The Circuit</button>
+        <p class="desk-issue-note" id="publish-summary"></p>
+      </aside>
     </div>
   </main>
 
