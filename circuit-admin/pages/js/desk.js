@@ -2,8 +2,11 @@
 //
 // Flow:
 //   ai_brief/build_candidates.py (GitHub Action) -> data/newsletter-candidates.json
-//   -> this page (approve, pick the spotlight and sections)
+//   -> this page (pick articles, the spotlight, sections and news topics)
 //   -> Publish -> the Worker commits data/newsletter.json -> AI Insights shows it.
+//
+// Layout: filters on the left, every collected article in a scrolling table in
+// the middle, and "This issue" (what will be published) on the right.
 //
 // This page only talks to the Worker (/api/...). The Worker checks the
 // sign-in cookie and holds the GitHub credential.
@@ -18,22 +21,38 @@
 
   // Newsletter sections, in the order they appear on AI Insights.
   const SECTIONS = [
-    { name: 'Latest AI News', subtitle: 'Headlines and developments from across the AI field', button: 'Read More' },
-    { name: 'Tutorials & Learning', subtitle: 'Guides and explainers to build your AI skills', button: 'Explore' },
-    { name: 'AI Tools', subtitle: 'New models, libraries, and products worth trying', button: 'Explore' },
-    { name: 'Videos', subtitle: 'Talks, demos, and walkthroughs to watch', button: 'Watch' },
-    { name: 'Applied AI Use Cases', subtitle: 'How AI is being put to work in the real world', button: 'Read More' },
-    { name: 'Research Spotlight', subtitle: 'Notable papers and research highlights', button: 'Read Paper' }
+    { name: 'Latest AI News', short: 'News', subtitle: 'Headlines and developments from across the AI field', button: 'Read More' },
+    { name: 'Tutorials & Learning', short: 'Tutorials', subtitle: 'Guides and explainers to build your AI skills', button: 'Explore' },
+    { name: 'AI Tools', short: 'Tools', subtitle: 'New models, libraries, and products worth trying', button: 'Explore' },
+    { name: 'Videos', short: 'Videos', subtitle: 'Talks, demos, and walkthroughs to watch', button: 'Watch' },
+    { name: 'Applied AI Use Cases', short: 'Use cases', subtitle: 'How AI is being put to work in the real world', button: 'Read More' },
+    { name: 'Research Spotlight', short: 'Research', subtitle: 'Notable papers and research highlights', button: 'Read Paper' }
   ];
   const SECTION_NAMES = SECTIONS.map(function (s) { return s.name; });
+  const NEWS = 'Latest AI News';
+
+  // The news carousel on AI Insights has one slide per topic (js/ai-insights.js).
+  const TOPICS = [
+    { id: 'industry', name: 'Industry' },
+    { id: 'ethics', name: 'Ethics' },
+    { id: 'machine-learning', name: 'Machine Learning' },
+    { id: 'agents', name: 'AI Agents' }
+  ];
+  const TOPIC_IDS = TOPICS.map(function (t) { return t.id; });
+
+  // How often to check whether a collector run has finished, and for how long.
+  const COLLECT_CHECK_MS = 30000;
+  const COLLECT_GIVE_UP_MS = 12 * 60000;
 
   const $ = function (id) { return document.getElementById(id); };
   const ui = {
-    accountMeta: $('account-meta'), deskMessage: $('desk-message'),
-    stats: $('stats'), rows: $('rows'), resultCount: $('result-count'),
-    search: $('filter-search'), source: $('filter-source'), section: $('filter-section'), status: $('filter-status'),
+    deskMessage: $('desk-message'), collectMeta: $('collect-meta'), stats: $('stats'),
+    rows: $('rows'), resultCount: $('result-count'),
+    search: $('filter-search'), status: $('filter-status'), sections: $('filter-sections'),
+    source: $('filter-source'), date: $('filter-date'),
     collect: $('collect-button'), signout: $('signout-button'), viewLink: $('view-link'),
-    publish: $('publish-button'), publishSummary: $('publish-summary')
+    issueWeek: $('issue-week'), issueTitle: $('issue-title'), issueSpotlight: $('issue-spotlight'),
+    issueList: $('issue-list'), publish: $('publish-button'), publishSummary: $('publish-summary')
   };
 
   let rows = [];            // One entry per candidate or published item.
@@ -41,6 +60,8 @@
   let published = null;     // The newsletter as last published.
   let candidates = null;    // The collector's latest run.
   let dirty = false;        // Unpublished changes on this page.
+  let statusFilter = '';    // '', 'pending' or 'approved'.
+  let editingUrl = '';      // The item whose picture editor is open in "This issue".
 
   // ---- Small helpers ------------------------------------------------------
   function el(tag, attrs, children) {
@@ -77,10 +98,17 @@
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
   }
 
+  function shortDate(iso) {
+    const date = new Date(iso);
+    if (!iso || isNaN(date)) return '';
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+  }
+
   function niceDateTime(iso) {
     const date = new Date(iso);
     if (!iso || isNaN(date)) return '';
-    return date.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' at ' +
+      date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
   }
 
   function typeLabel(contentType) {
@@ -88,7 +116,21 @@
   }
 
   function validSection(name) {
-    return SECTION_NAMES.indexOf(name) >= 0 ? name : 'Latest AI News';
+    return SECTION_NAMES.indexOf(name) >= 0 ? name : NEWS;
+  }
+
+  function shortSection(name) {
+    const section = SECTIONS.find(function (s) { return s.name === name; });
+    return section ? section.short : name;
+  }
+
+  // A starting guess for the news topic. Reviewers can change it in the table.
+  function guessTopic(row) {
+    const text = (row.title + ' ' + row.description).toLowerCase();
+    if (/\bagent(s|ic)?\b/.test(text)) return 'agents';
+    if (/ethic|polic(y|ies)|regulat|lawsuit|\blaws?\b|govern|safety|copyright|privacy|\bbias|senate|congress|court|\bban(s|ned)?\b/.test(text)) return 'ethics';
+    if (/\bmodels?\b|training|benchmark|\bllms?\b|neural|dataset|machine learning|reasoning|open-source/.test(text)) return 'machine-learning';
+    return 'industry';
   }
 
   function newestFirst(a, b) {
@@ -111,6 +153,10 @@
     if (extra) ui.deskMessage.append(' ', extra);
   }
 
+  function picked() { return rows.filter(function (row) { return row.approved; }); }
+  function spotlightRow() { return rows.find(function (row) { return row.approved && row.featured; }) || null; }
+  function pictureOf(row) { return safeUrl(row.customImage) || safeUrl(row.image); }
+
   // ---- Talking to the Worker ------------------------------------------------
   // Returns { ok, status, body }. Sends signed-out reviewers back to the sign-in page.
   async function api(path, payload) {
@@ -132,7 +178,7 @@
 
   // ---- Loading ------------------------------------------------------------
   async function loadDesk() {
-    say('Loading candidates and the current issue…');
+    say('Loading this week\'s articles and the current issue…');
     let result;
     try { result = await api('/api/data'); } catch (error) { offline(); return; }
     if (!result.ok) {
@@ -151,20 +197,25 @@
     fillFilterOptions();
     renderAll();
     if (candidates) say('');
-    else say('No candidates yet. Click Run collector to gather this week\'s content.', 'info');
+    else say('No articles yet. Click Run collector to gather this week\'s content.', 'info');
   }
 
-  // Combines the collector's candidates with what is already published.
+  function newRow(item) {
+    const row = {
+      title: item.title || '', description: item.description || '', source: item.source || '',
+      published: item.published || '', contentType: item.contentType || String(item.type || '').toLowerCase(),
+      url: item.url, videoId: item.videoId || '', image: item.image || '', customImage: '',
+      section: validSection(item.section), subtopic: '', approved: false, featured: false
+    };
+    row.subtopic = guessTopic(row);
+    return row;
+  }
+
+  // Combines the collector's articles with what is already published.
   function buildRows() {
     const byUrl = new Map();
     ((candidates && candidates.items) || []).forEach(function (item) {
-      if (!safeUrl(item.url)) return;
-      byUrl.set(item.url, {
-        title: item.title || '', description: item.description || '', source: item.source || '',
-        published: item.published || '', contentType: item.contentType || '', url: item.url,
-        videoId: item.videoId || '', image: item.image || '', customImage: '',
-        section: validSection(item.section), approved: false, featured: false
-      });
+      if (safeUrl(item.url)) byUrl.set(item.url, newRow(item));
     });
 
     const live = published ? [published.spotlight].concat(published.items || []).filter(Boolean) : [];
@@ -175,16 +226,13 @@
         // A picture that differs from the automatic one was pasted by a reviewer.
         if (item.image && item.image !== row.image) row.customImage = item.image;
       } else {
-        row = {
-          title: item.title || '', description: item.description || '', source: item.source || '',
-          published: item.published || '', contentType: item.contentType || String(item.type || '').toLowerCase(),
-          url: item.url, videoId: item.videoId || '', image: item.image || '', customImage: ''
-        };
+        row = newRow(item);
         byUrl.set(item.url, row);
       }
       row.approved = true;
       row.featured = !!item.featured;
       row.section = validSection(item.section);
+      if (TOPIC_IDS.indexOf(item.subtopic) >= 0) row.subtopic = item.subtopic;
     });
 
     rows = Array.from(byUrl.values()).sort(newestFirst);
@@ -195,99 +243,143 @@
     });
   }
 
+  // After a collector run: load the new articles but keep this page's decisions.
+  function keepDecisions(previous) {
+    const byUrl = new Map(rows.map(function (row) { return [row.url, row]; }));
+    previous.forEach(function (old) {
+      const row = byUrl.get(old.url);
+      if (row) {
+        ['approved', 'featured', 'section', 'subtopic', 'customImage'].forEach(function (key) { row[key] = old[key]; });
+      } else if (old.approved) {
+        rows.push(old);
+      }
+    });
+    rows.sort(newestFirst);
+  }
+
   // ---- Rendering ----------------------------------------------------------
   function fillFilterOptions() {
+    const chosen = ui.source.value;
     const sources = Array.from(new Set(rows.map(function (row) { return row.source; }))).sort();
     ui.source.replaceChildren(el('option', { value: '', text: 'All sources' }));
-    sources.forEach(function (name) { ui.source.append(el('option', { value: name, text: name })); });
-    ui.section.replaceChildren(el('option', { value: '', text: 'All sections' }));
-    SECTION_NAMES.forEach(function (name) { ui.section.append(el('option', { value: name, text: name })); });
+    sources.forEach(function (name) { ui.source.append(el('option', { value: name, text: name, selected: name === chosen })); });
+
+    const checked = chosenSections();
+    ui.sections.replaceChildren.apply(ui.sections, SECTIONS.map(function (s) {
+      return el('label', { className: 'desk-check' }, [
+        el('input', { type: 'checkbox', value: s.name, checked: checked.indexOf(s.name) >= 0 }),
+        el('span', { text: s.short }),
+        el('span', { className: 'desk-check-count', 'data-count': s.name })
+      ]);
+    }));
+    renderSectionCounts();
+  }
+
+  function renderSectionCounts() {
+    ui.sections.querySelectorAll('[data-count]').forEach(function (node) {
+      const name = node.dataset.count;
+      node.textContent = String(rows.filter(function (row) { return row.section === name; }).length);
+    });
+  }
+
+  function chosenSections() {
+    return Array.from(ui.sections.querySelectorAll('input:checked')).map(function (box) { return box.value; });
   }
 
   function renderAll() {
     renderMeta();
     renderStats();
     renderRows();
-    renderPublishBar();
+    renderIssue();
   }
 
   function renderMeta() {
-    const parts = [];
-    if (candidates && candidates.generatedAt) parts.push('Collected ' + niceDateTime(candidates.generatedAt));
-    if (published && published.publishedAt) parts.push('Last published ' + niceDateTime(published.publishedAt));
-    else if (published) parts.push('Live issue: week of ' + (published.weekOf || 'unknown'));
-    ui.accountMeta.textContent = parts.join(' · ');
+    const when = candidates && candidates.generatedAt ? niceDateTime(candidates.generatedAt) : '';
+    ui.collectMeta.replaceChildren(
+      when ? 'Last collection: ' : 'No collection yet',
+      when ? el('b', { text: when }) : '',
+      el('br'),
+      'Runs on its own every Monday morning'
+    );
   }
 
   function renderStats() {
-    const approved = rows.filter(function (row) { return row.approved; });
-    const spotlight = approved.find(function (row) { return row.featured; });
+    const sources = (candidates && candidates.sourcesChecked) || new Set(rows.map(function (row) { return row.source; })).size;
     const stats = [
-      ['Candidates', String((candidates && candidates.items && candidates.items.length) || 0)],
-      ['Approved', String(approved.length)],
-      ['Sources', String(new Set(rows.map(function (row) { return row.source; })).size)],
-      ['Spotlight', spotlight ? 'Chosen' : approved.length ? 'Newest approved' : 'None yet']
+      ['Collected', String((candidates && candidates.items && candidates.items.length) || 0)],
+      ['Picked', String(picked().length)],
+      ['Spotlight', spotlightRow() ? '1' : '0'],
+      ['Sources', String(sources)]
     ];
-    ui.stats.replaceChildren();
-    stats.forEach(function (pair) {
-      ui.stats.append(el('div', { className: 'admin-stat' }, [el('dt', { text: pair[0] }), el('dd', { text: pair[1] })]));
-    });
+    ui.stats.replaceChildren.apply(ui.stats, stats.map(function (pair) {
+      return el('div', { className: 'desk-stat' }, [el('dt', { text: pair[0] }), el('dd', { text: pair[1] })]);
+    }));
   }
 
   function visibleRows() {
     const query = ui.search.value.trim().toLowerCase();
+    const sections = chosenSections();
+    const days = Number(ui.date.value);
+    const since = days ? Date.now() - days * 86400000 : 0;
     return rows.filter(function (row) {
+      if (sections.length && sections.indexOf(row.section) < 0) return false;
       if (ui.source.value && row.source !== ui.source.value) return false;
-      if (ui.section.value && row.section !== ui.section.value) return false;
-      if (ui.status.value === 'approved' && !row.approved) return false;
-      if (ui.status.value === 'pending' && row.approved) return false;
-      return !query || (row.title + ' ' + row.description).toLowerCase().indexOf(query) >= 0;
+      if (statusFilter === 'approved' && !row.approved) return false;
+      if (statusFilter === 'pending' && row.approved) return false;
+      if (since && !(row.published && new Date(row.published).getTime() >= since)) return false;
+      return !query || (row.title + ' ' + row.description + ' ' + row.source).toLowerCase().indexOf(query) >= 0;
     });
   }
 
-  function thumbFor(row) {
-    const src = safeUrl(row.customImage) || safeUrl(row.image);
-    const frame = el('div', { className: 'admin-thumb' });
+  function thumb(row, extraClass) {
+    const src = pictureOf(row);
+    const frame = el('span', { className: 'desk-thumb' + (extraClass ? ' ' + extraClass : '') });
     if (src) {
       const img = el('img', { src: src, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' });
-      img.addEventListener('error', function () { frame.replaceChildren(el('span', { text: 'Picture failed to load' })); }, { once: true });
+      img.addEventListener('error', function () { frame.replaceChildren(el('span', { text: 'No pic' })); }, { once: true });
       frame.append(img);
     } else {
-      frame.append(el('span', { text: 'No picture. Generated artwork will be used.' }));
+      frame.append(el('span', { text: 'No pic' }));
     }
     return frame;
+  }
+
+  function topicCell(row, label) {
+    if (row.section !== NEWS) return el('span', { className: 'desk-dash', text: '—', title: 'Only news articles have a topic' });
+    const select = el('select', { 'data-field': 'subtopic', 'aria-label': 'News topic for ' + label });
+    TOPICS.forEach(function (t) { select.append(el('option', { value: t.id, text: t.name, selected: t.id === row.subtopic })); });
+    return select;
   }
 
   function rowFor(row, index) {
     const label = row.title || row.url;
     const sectionSelect = el('select', { 'data-field': 'section', 'aria-label': 'Section for ' + label });
-    SECTION_NAMES.forEach(function (name) {
-      sectionSelect.append(el('option', { value: name, text: name, selected: name === row.section }));
+    SECTIONS.forEach(function (s) {
+      sectionSelect.append(el('option', { value: s.name, text: s.short, selected: s.name === row.section }));
     });
 
-    const meta = [row.source, niceDate(row.published), typeLabel(row.contentType)].filter(Boolean).join(' · ');
-    const item = el('td', { className: 'admin-item' }, [
-      el('a', { className: 'admin-title', href: safeUrl(row.url), target: '_blank', rel: 'noopener noreferrer', text: label }),
-      row.description ? el('p', { className: 'admin-desc', text: row.description }) : null,
-      el('p', { className: 'admin-line', text: meta })
-    ]);
-
-    return el('tr', { 'data-index': String(index), className: row.approved ? 'is-approved' : '' }, [
-      el('td', { className: 'admin-cell-check', 'data-label': 'Approve' }, [
-        el('input', { type: 'checkbox', 'data-field': 'approved', checked: row.approved, 'aria-label': 'Approve: ' + label })
+    return el('tr', { 'data-index': String(index), className: row.approved ? 'is-picked' : '' }, [
+      el('td', { className: 'desk-cell-center', 'data-label': 'Add' }, [
+        el('input', { type: 'checkbox', 'data-field': 'approved', checked: row.approved, 'aria-label': 'Add to this issue: ' + label })
       ]),
-      el('td', { className: 'admin-cell-check', 'data-label': 'Spotlight' }, [
-        el('input', { type: 'checkbox', className: 'admin-star', 'data-field': 'featured', checked: row.featured, 'aria-label': 'Make the spotlight: ' + label })
-      ]),
-      item,
-      el('td', { 'data-label': 'Section' }, [sectionSelect]),
-      el('td', { className: 'admin-cell-picture', 'data-label': 'Picture' }, [
-        thumbFor(row),
-        el('input', {
-          type: 'url', 'data-field': 'customImage', value: row.customImage, placeholder: 'Custom picture link (optional)',
-          'aria-label': 'Custom picture link for ' + label, spellcheck: 'false'
+      el('td', { className: 'desk-cell-center', 'data-label': 'Spotlight' }, [
+        el('button', {
+          type: 'button', className: 'desk-star', 'data-field': 'featured', 'aria-pressed': String(row.featured),
+          'aria-label': 'Make the spotlight: ' + label, title: row.featured ? 'This is the spotlight' : 'Make this the spotlight',
+          text: row.featured ? '★' : '☆'
         })
-      ])
+      ]),
+      el('td', { className: 'desk-cell-pic' }, [thumb(row)]),
+      el('td', { className: 'desk-cell-article' }, [
+        el('a', { href: safeUrl(row.url), target: '_blank', rel: 'noopener noreferrer', title: label }, [
+          el('span', { text: label }), el('span', { className: 'desk-ext', 'aria-hidden': 'true', text: ' ↗' })
+        ]),
+        row.description ? el('small', { text: row.description }) : null
+      ]),
+      el('td', { className: 'desk-cell-source', 'data-label': 'Source', title: row.source, text: row.source }),
+      el('td', { className: 'desk-cell-date', 'data-label': 'Date', text: shortDate(row.published) }),
+      el('td', { 'data-label': 'Section' }, [sectionSelect]),
+      el('td', { 'data-label': 'News topic', className: 'desk-cell-topic' }, [topicCell(row, label)])
     ]);
   }
 
@@ -295,30 +387,107 @@
     const list = visibleRows();
     ui.rows.replaceChildren.apply(ui.rows, list.map(function (row) { return rowFor(row, rows.indexOf(row)); }));
     if (!list.length) {
-      ui.rows.append(el('tr', { className: 'admin-empty' }, [
-        el('td', { colspan: '5', text: rows.length ? 'Nothing matches these filters.' : 'No candidates yet. Click Run collector.' })
+      ui.rows.append(el('tr', { className: 'desk-empty' }, [
+        el('td', { colspan: '8', text: rows.length ? 'Nothing matches these filters.' : 'No articles yet. Click Run collector.' })
       ]));
     }
-    ui.resultCount.textContent = 'Showing ' + list.length + ' of ' + rows.length;
+    ui.resultCount.replaceChildren('Showing ', el('b', { text: String(list.length) }), ' of ' + rows.length);
   }
 
-  function renderPublishBar() {
-    const approved = rows.filter(function (row) { return row.approved; });
-    const spotlight = approved.find(function (row) { return row.featured; }) || approved.slice().sort(newestFirst)[0];
-    let text = approved.length + (approved.length === 1 ? ' item approved' : ' items approved');
-    if (spotlight) text += ' · Spotlight: ' + spotlight.title;
-    text += dirty ? ' · Unpublished changes' : ' · Matches the live issue';
-    ui.publishSummary.textContent = text;
+  function replaceRow(tr) {
+    const index = Number(tr.dataset.index);
+    tr.replaceWith(rowFor(rows[index], index));
+  }
+
+  // ---- "This issue" panel ---------------------------------------------------
+  function pictureEditor(row) {
+    const input = el('input', {
+      type: 'url', value: row.customImage, placeholder: 'Uses the article\'s own picture', spellcheck: 'false',
+      'data-url': row.url, 'aria-label': 'Picture link for ' + row.title
+    });
+    return el('div', { className: 'desk-picture-editor' }, [
+      el('label', { className: 'desk-label', text: 'Picture link' }),
+      input,
+      el('p', { text: 'No picture? Open the article, right-click its main image, choose Copy Image Address, and paste it here.' }),
+      el('a', { href: safeUrl(row.url), target: '_blank', rel: 'noopener noreferrer', text: 'Open the article ↗' })
+    ]);
+  }
+
+  function issueItem(row) {
+    const open = editingUrl === row.url;
+    return el('div', { className: 'desk-issue-item' + (open ? ' is-open' : '') }, [
+      el('div', { className: 'desk-issue-row' }, [
+        el('button', {
+          type: 'button', className: 'desk-issue-open', 'data-action': 'edit', 'data-url': row.url,
+          'aria-expanded': String(open), title: 'Change the picture'
+        }, [thumb(row, 'desk-thumb-small'), el('span', { text: row.title })]),
+        el('button', { type: 'button', className: 'desk-remove', 'data-action': 'remove', 'data-url': row.url, 'aria-label': 'Remove from this issue: ' + row.title, text: '✕' })
+      ]),
+      open ? pictureEditor(row) : null
+    ]);
+  }
+
+  function renderIssue() {
+    const chosen = picked();
+    const spotlight = spotlightRow();
+    ui.issueWeek.textContent = 'This issue · week of ' + mondayOfThisWeek();
+    ui.issueTitle.textContent = chosen.length + (chosen.length === 1 ? ' article picked' : ' articles picked');
+
+    if (spotlight) {
+      ui.issueSpotlight.replaceChildren(el('div', { className: 'desk-spotlight' }, [
+        thumb(spotlight, 'desk-thumb-spot'),
+        el('p', {}, [el('small', { text: '★ Spotlight' }), el('span', { text: spotlight.title })]),
+        el('button', { type: 'button', className: 'desk-remove', 'data-action': 'unstar', 'aria-label': 'Remove the spotlight', title: 'Remove the spotlight', text: '✕' })
+      ]));
+    } else {
+      ui.issueSpotlight.replaceChildren(el('p', {
+        className: 'desk-spotlight-empty',
+        text: chosen.length ? 'No spotlight chosen. The newest pick will be used. Click ☆ on an article to choose one.'
+          : 'Tick articles in the table to add them here.'
+      }));
+    }
+
+    const groups = SECTIONS.map(function (s) {
+      const items = chosen.filter(function (row) { return row.section === s.name && row !== spotlight; });
+      if (!items.length) return null;
+      return el('div', { className: 'desk-issue-group' }, [
+        el('h3', {}, [s.short + ' ', el('span', { text: String(items.length) })])
+      ].concat(items.map(issueItem)));
+    }).filter(Boolean);
+    ui.issueList.replaceChildren.apply(ui.issueList, groups);
+
     ui.publish.disabled = !dirty;
+    ui.publishSummary.textContent = dirty ? changeSummary() : 'Matches the live issue';
   }
 
-  function markDirty() {
+  function changeSummary() {
+    const live = new Set((published ? [published.spotlight].concat(published.items || []) : [])
+      .filter(Boolean).map(function (item) { return item.url; }));
+    const now = new Set(picked().map(function (row) { return row.url; }));
+    let added = 0;
+    let removed = 0;
+    now.forEach(function (url) { if (!live.has(url)) added += 1; });
+    live.forEach(function (url) { if (!now.has(url)) removed += 1; });
+    const parts = [];
+    if (added) parts.push(added + ' added');
+    if (removed) parts.push(removed + ' removed');
+    return 'Not published yet' + (parts.length ? ' · ' + parts.join(', ') : ' · edits made');
+  }
+
+  function changed() {
     dirty = true;
     renderStats();
-    renderPublishBar();
+    renderIssue();
+    renderSectionCounts();
   }
 
-  // ---- Editing ------------------------------------------------------------
+  // ---- Editing in the table ---------------------------------------------------
+  function setSpotlight(row, on) {
+    rows.forEach(function (other) { other.featured = false; });
+    row.featured = on;
+    if (on) row.approved = true;
+  }
+
   ui.rows.addEventListener('change', function (event) {
     const field = event.target.dataset.field;
     const tr = event.target.closest('tr[data-index]');
@@ -327,43 +496,86 @@
 
     if (field === 'approved') {
       row.approved = event.target.checked;
-      if (!row.approved && row.featured) {
-        row.featured = false;
-        tr.querySelector('[data-field="featured"]').checked = false;
-      }
-      tr.classList.toggle('is-approved', row.approved);
-    } else if (field === 'featured') {
-      rows.forEach(function (other) { other.featured = false; });
-      row.featured = event.target.checked;
-      if (row.featured) row.approved = true;
-      renderRows();
+      if (!row.approved) row.featured = false;
+      tr.classList.toggle('is-picked', row.approved);
+      tr.querySelector('[data-field="featured"]').replaceWith(rowFor(row, Number(tr.dataset.index)).querySelector('[data-field="featured"]'));
     } else if (field === 'section') {
       row.section = validSection(event.target.value);
-    } else if (field === 'customImage') {
-      const value = event.target.value.trim();
-      if (value && !safeUrl(value)) {
-        event.target.setCustomValidity('Use a link that starts with https://');
-        event.target.reportValidity();
-        return;
-      }
-      event.target.setCustomValidity('');
-      row.customImage = value ? safeUrl(value) : '';
-      tr.querySelector('.admin-thumb').replaceWith(thumbFor(row));
+      replaceRow(tr);
+    } else if (field === 'subtopic') {
+      if (TOPIC_IDS.indexOf(event.target.value) >= 0) row.subtopic = event.target.value;
     }
-    markDirty();
+    changed();
   });
 
-  [ui.search, ui.source, ui.section, ui.status].forEach(function (control) {
-    control.addEventListener(control === ui.search ? 'input' : 'change', renderRows);
+  ui.rows.addEventListener('click', function (event) {
+    const star = event.target.closest('[data-field="featured"]');
+    if (!star) return;
+    const row = rows[Number(star.closest('tr[data-index]').dataset.index)];
+    setSpotlight(row, !row.featured);
+    renderRows();
+    changed();
+  });
+
+  // ---- Editing in "This issue" ------------------------------------------------
+  function rowByUrl(url) { return rows.find(function (row) { return row.url === url; }); }
+
+  document.querySelector('.desk-issue').addEventListener('click', function (event) {
+    const button = event.target.closest('[data-action]');
+    if (!button) return;
+    const action = button.dataset.action;
+    if (action === 'unstar') {
+      rows.forEach(function (row) { row.featured = false; });
+    } else if (action === 'remove') {
+      const row = rowByUrl(button.dataset.url);
+      if (row) { row.approved = false; row.featured = false; }
+      if (editingUrl === button.dataset.url) editingUrl = '';
+    } else if (action === 'edit') {
+      editingUrl = editingUrl === button.dataset.url ? '' : button.dataset.url;
+      renderIssue();
+      const input = editingUrl && ui.issueList.querySelector('.desk-picture-editor input');
+      if (input) input.focus();
+      return;
+    }
+    renderRows();
+    changed();
+  });
+
+  ui.issueList.addEventListener('change', function (event) {
+    const input = event.target;
+    if (!input.dataset.url) return;
+    const row = rowByUrl(input.dataset.url);
+    const value = input.value.trim();
+    if (value && !safeUrl(value)) {
+      input.setCustomValidity('Use a link that starts with https://');
+      input.reportValidity();
+      return;
+    }
+    input.setCustomValidity('');
+    row.customImage = value ? safeUrl(value) : '';
+    renderRows();
+    changed();
+  });
+
+  // ---- Filters ------------------------------------------------------------
+  ui.search.addEventListener('input', renderRows);
+  [ui.source, ui.date].forEach(function (control) { control.addEventListener('change', renderRows); });
+  ui.sections.addEventListener('change', renderRows);
+  ui.status.addEventListener('click', function (event) {
+    const button = event.target.closest('[data-status]');
+    if (!button) return;
+    statusFilter = button.dataset.status;
+    ui.status.querySelectorAll('[data-status]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === button)); });
+    renderRows();
   });
 
   // ---- Publishing ---------------------------------------------------------
   function buildNewsletter() {
-    const approved = rows.filter(function (row) { return row.approved; }).sort(newestFirst);
+    const approved = picked().sort(newestFirst);
     const spotlight = approved.find(function (row) { return row.featured; }) || approved[0] || null;
 
     function toItem(row) {
-      return {
+      const item = {
         title: row.title,
         description: row.description,
         source: row.source,
@@ -372,12 +584,14 @@
         section: row.section,
         sectionId: slug(row.section),
         url: safeUrl(row.url),
-        image: safeUrl(row.customImage) || safeUrl(row.image),
+        image: pictureOf(row),
         videoId: row.videoId,
         published: row.published,
         contentType: row.contentType,
-        featured: !!row.featured
+        featured: row === spotlight
       };
+      if (row.section === NEWS) item.subtopic = row.subtopic;
+      return item;
     }
 
     const items = approved.filter(function (row) { return row !== spotlight; }).map(toItem);
@@ -401,8 +615,8 @@
     const data = buildNewsletter();
     const count = (data.spotlight ? 1 : 0) + data.items.length;
     const question = count
-      ? 'Publish ' + count + (count === 1 ? ' item' : ' items') + ' to The Circuit for the week of ' + data.weekOf + '?'
-      : 'Nothing is approved. Publishing now will show "This week\'s issue is being curated" on AI Insights. Continue?';
+      ? 'Publish ' + count + (count === 1 ? ' article' : ' articles') + ' to The Circuit for the week of ' + data.weekOf + '?'
+      : 'Nothing is picked. Publishing now will show "This week\'s issue is being curated" on AI Insights. Continue?';
     if (!confirm(question)) return;
 
     ui.publish.disabled = true;
@@ -412,19 +626,19 @@
       result = await api('/api/publish', { newsletter: data, sha: newsletterSha });
     } catch (error) {
       say('Could not reach the desk. Nothing was published. Try again.', 'error');
-      renderPublishBar();
+      renderIssue();
       return;
     }
 
     if (result.status === 409) {
       say('Someone else published while you were reviewing, so nothing was saved. ' +
         'Reload the desk to see their version, then make your changes again.', 'error', reloadButton());
-      renderPublishBar();
+      renderIssue();
       return;
     }
     if (!result.ok) {
       say((result.body.error || 'Publishing failed.') + ' Nothing was published.', 'error');
-      renderPublishBar();
+      renderIssue();
       return;
     }
 
@@ -445,14 +659,49 @@
   }
 
   // ---- Running the collector ----------------------------------------------
+  function collectorIdle() {
+    ui.collect.disabled = false;
+    ui.collect.textContent = '▶ Run collector';
+  }
+
+  // Checks every 30 seconds until the collector saves a new list, then shows it.
+  function waitForNewArticles(before, startedAt) {
+    setTimeout(async function () {
+      let result;
+      try { result = await api('/api/data'); } catch (error) { result = null; }
+      const fresh = result && result.ok && result.body.candidates;
+      if (fresh && fresh.generatedAt && fresh.generatedAt !== before) {
+        const previous = rows;
+        candidates = fresh;
+        buildRows();
+        keepDecisions(previous);
+        fillFilterOptions();
+        renderAll();
+        collectorIdle();
+        say('New articles are in: ' + fresh.items.length + ' collected. Your picks were kept.', 'success');
+        return;
+      }
+      if (Date.now() - startedAt > COLLECT_GIVE_UP_MS) {
+        collectorIdle();
+        say('The collector is taking longer than usual. Check again in a few minutes:', 'info', reloadButton());
+        return;
+      }
+      waitForNewArticles(before, startedAt);
+    }, COLLECT_CHECK_MS);
+  }
+
   async function runCollector() {
     ui.collect.disabled = true;
+    ui.collect.textContent = 'Collecting…';
     say('Starting the collector…');
     try {
       const result = await api('/api/collect', {});
       if (result.ok) {
-        say('The collector is running. It usually takes 3 to 5 minutes. Then', 'success', reloadButton());
-      } else if (result.body.actionsUrl) {
+        say('The collector is running. It usually takes 2 to 5 minutes, and the new articles appear here on their own.', 'info');
+        waitForNewArticles(candidates && candidates.generatedAt, Date.now());
+        return;
+      }
+      if (result.body.actionsUrl) {
         say((result.body.error || 'Could not start the collector.') + ' You can start it from GitHub instead:', 'error',
           el('a', { href: safeUrl(result.body.actionsUrl), target: '_blank', rel: 'noopener noreferrer', text: 'Collect newsletter candidates ↗' }));
       } else {
@@ -460,9 +709,8 @@
       }
     } catch (error) {
       offline();
-    } finally {
-      ui.collect.disabled = false;
     }
+    collectorIdle();
   }
 
   // ---- Signing out ----------------------------------------------------------
