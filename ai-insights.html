@@ -43,11 +43,22 @@
       <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
     </div>
     <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
-    <div class="gtranslate_wrapper" aria-label="Choose site language"></div>
+    <div class="lab-lang notranslate">
+      <div class="gtranslate_wrapper" aria-hidden="true"></div>
+      <ul class="lab-lang-menu" aria-label="Choose site language">
+        <li><button type="button" data-gt-lang="en" lang="en" aria-pressed="true">English</button></li>
+        <li><button type="button" data-gt-lang="es" lang="es" aria-pressed="false">Español</button></li>
+      </ul>
+    </div>
     <script>
-      window.gtranslateSettings = { default_language: "en", languages: ["en", "es"], globe_color: "#66aaff", wrapper_selector: ".gtranslate_wrapper", flag_size: 24, alt_flags: { en: "usa", es: "mexico" }, globe_size: 40 };
+      window.gtranslateSettings = {
+        default_language: "en",
+        languages: ["en", "es"],
+        wrapper_selector: ".gtranslate_wrapper",
+        native_language_names: true
+      };
     </script>
-    <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
   </nav>
 </header>
 
