@@ -169,11 +169,29 @@ body.dark .feature .image-slot {background:#123A63}
       <a class="circuit-join" href="ai-insights.html#subscribe">Join The Circuit</a>
     </div>
     <button class="lab-theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Light / Dark mode">☾</button>
-    <div class="gtranslate_wrapper" aria-label="Choose site language"></div>
+    <div class="lab-lang notranslate">
+      <div class="gtranslate_wrapper" aria-hidden="true"></div>
+      <button class="lab-theme-toggle lab-lang-toggle" type="button" aria-expanded="false" aria-controls="lab-lang-menu" aria-haspopup="listbox" aria-label="Choose site language" title="Choose language">
+        <svg class="lab-lang-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M12 3c2.2 2.5 3.4 5.6 3.4 9s-1.2 6.5-3.4 9c-2.2-2.5-3.4-5.6-3.4-9s1.2-6.5 3.4-9z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M3.2 12h17.6M4.6 7.6h14.8M4.6 16.4h14.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <ul class="lab-lang-menu" id="lab-lang-menu" role="listbox" aria-label="Site language" hidden>
+        <li><button type="button" role="option" data-gt-lang="en" lang="en" aria-pressed="true"><img class="lab-lang-flag" src="https://cdn.gtranslate.net/flags/svg/en-us.svg" alt="" width="20" height="20">English</button></li>
+        <li><button type="button" role="option" data-gt-lang="es" lang="es" aria-pressed="false"><img class="lab-lang-flag" src="https://cdn.gtranslate.net/flags/svg/es-mx.svg" alt="" width="20" height="20">Español</button></li>
+      </ul>
+    </div>
     <script>
-      window.gtranslateSettings = { default_language: "en", languages: ["en", "es"], globe_color: "#66aaff", wrapper_selector: ".gtranslate_wrapper", flag_size: 24, alt_flags: { en: "usa", es: "mexico" }, globe_size: 40 };
+      window.gtranslateSettings = {
+        default_language: "en",
+        languages: ["en", "es"],
+        wrapper_selector: ".gtranslate_wrapper",
+        native_language_names: true
+      };
     </script>
-    <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
   </nav>
 </header>
 <main id="top"><section class="hero"><span class="lab-orbit lab-orbit-one" aria-hidden="true"></span><span class="lab-orbit lab-orbit-two" aria-hidden="true"></span><svg class="lab-circuit" viewBox="0 0 180 70" fill="none" aria-hidden="true" focusable="false"><path class="lab-trace" d="M8 40H40V16H88V52H132V24H172" stroke="currentColor" stroke-width="1.4"/><circle class="lab-node" cx="40" cy="16" r="3" fill="currentColor"/><circle class="lab-node lab-node-hot" cx="88" cy="52" r="3" fill="#2F7D4F"/><circle class="lab-node" cx="132" cy="24" r="3" fill="currentColor"/></svg><div class="wrap"><div class="eyebrow">See our impact</div><h1>Student Outcomes</h1><p class="lead">Explore student projects, collaborative work, and the people and achievements shaping the Applied AI Lab.</p></div></section><section class="cis-showcase" id="cis440"><div class="wrap"><div class="section-head"><div><div class="eyebrow">01 / Built by CIS 440</div><h2>Defining Work.</h2></div><p>Ideas brought to life through collaboration, experimentation, and applied technology. Project links will be added as teams share their work.</p></div><div class="cis-grid">
