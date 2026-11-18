@@ -1,7 +1,43 @@
 {
- "generatedAt": "2026-11-18T12:24:18+00:00",
+ "generatedAt": "2026-11-18T13:07:32+00:00",
  "sourcesChecked": 27,
  "items": [
+  {
+   "title": "Nvidia isn’t selling any more AI chips to China",
+   "description": "Nvidia has stopped sending its advanced AI chips to China, despite the approval it received from the White House to do so in December last year. The announcement was made by interim Nvidia CEO Colette Kress during an earnings call on Tuesday, marking a notable shift for the company that, under…",
+   "source": "The Verge - AI",
+   "published": "2026-11-18T13:01:05+00:00",
+   "contentType": "news",
+   "url": "https://www.theverge.com/tech/1036445/nvidia-h200-ai-chips-china-stop-selling",
+   "videoId": "",
+   "section": "Latest AI News",
+   "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/04/STK083_NVIDIA_C.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+   "imageChecked": "2026-11-18T13:07:32+00:00"
+  },
+  {
+   "title": "Startup Makes Headway Towards Formalizing All of Math With AI",
+   "description": "As Axiom Math’s AI swarm was putting the final touches on the automatic verification of 15,000-page proof of the Classification of Finite Simple Groups (CFSG), colloquially referred to as the ‘enormous theorem’, on Sunday 25 October, the company’s Founding Mathematician Ken Ono had nothing to do…",
+   "source": "IEEE Spectrum - AI",
+   "published": "2026-11-18T13:00:03+00:00",
+   "contentType": "news",
+   "url": "https://spectrum.ieee.org/enormous-theorem-ai",
+   "videoId": "",
+   "section": "Latest AI News",
+   "image": "https://spectrum.ieee.org/media-library/ai-verifies-the-enormous-theorem-in-just-24-days.jpg?id=68692858&width=1200&height=600&coordinates=0%2C519%2C0%2C82",
+   "imageChecked": "2026-11-18T13:07:32+00:00"
+  },
+  {
+   "title": "Nvidia clarifies when it will — and won’t —keep financing neoclouds",
+   "description": "If Nvidia is backstopping a data center loan, it won't be on the hook unless the neocould has independent financing and gets the facility built, with Nvidia gear installed, interim CEO Colette Kress explained.",
+   "source": "TechCrunch AI",
+   "published": "2026-11-18T13:00:00+00:00",
+   "contentType": "news",
+   "url": "https://techcrunch.com/2026/11/18/nvidia-clarifies-when-it-will-and-wont-keep-financing-neoclouds/",
+   "videoId": "",
+   "section": "Latest AI News",
+   "image": "https://techcrunch.com/wp-content/uploads/2026/04/dollar-signs-data-center.png?w=1024",
+   "imageChecked": "2026-11-18T13:07:32+00:00"
+  },
   {
    "title": "Will AI Coding Eat Video Game Engines?",
    "description": "When Travis McGeathy’s studio, Seeker Entertainment, ran out of funding in September, its game KinForge went down with it. KinForge was an online game built in Unreal Engine 5.7 and designed to run on servers hosted by Amazon Web Services (AWS). With no one left to pay the server bill, the game…",
@@ -13,6 +49,18 @@
    "section": "Latest AI News",
    "image": "https://spectrum.ieee.org/media-library/will-ai-coding-eat-video-game-engines.jpg?id=68705132&width=1200&height=600&coordinates=0%2C425%2C0%2C766",
    "imageChecked": "2026-11-18T12:24:17+00:00"
+  },
+  {
+   "title": "Felicis leads $7.5M bet on Unsiloed AI to make enterprise documents usable by AI agents",
+   "description": "With a team of just seven, Unsiloed AI plans to compete with tech giants and specialized startups in the crowded AI document-processing market.",
+   "source": "TechCrunch AI",
+   "published": "2026-11-18T12:00:00+00:00",
+   "contentType": "news",
+   "url": "https://techcrunch.com/2026/11/18/felicis-leads-7-5m-bet-on-unsiloed-ai-to-make-enterprise-documents-usable-by-ai-agents/",
+   "videoId": "",
+   "section": "Latest AI News",
+   "image": "https://techcrunch.com/wp-content/uploads/2026/11/unsiloed-AI-founders-adnan-abbas-aman-mishra.jpg?resize=1200,800",
+   "imageChecked": "2026-11-18T13:07:32+00:00"
   },
   {
    "title": "India’s Humyn Labs raises $47M to feed U.S. robotics companies the data they need",
@@ -759,18 +807,6 @@
    "imageChecked": "2026-11-18T01:09:43+00:00"
   },
   {
-   "title": "Pedestal AI raises $4.7 million to agentify the supply chain",
-   "description": "The company uses agentic AI to make supply chains faster and more reliable.",
-   "source": "TechCrunch AI",
-   "published": "2026-11-17T18:04:16+00:00",
-   "contentType": "news",
-   "url": "https://techcrunch.com/2026/11/17/pedestal-ai-raises-4-7-million-to-agentify-the-supply-chain/",
-   "videoId": "",
-   "section": "Latest AI News",
-   "image": "https://techcrunch.com/wp-content/uploads/2026/11/Pedestal-Cofounders-Photo-November-2026.jpg?resize=1200,800",
-   "imageChecked": "2026-11-18T01:09:43+00:00"
-  },
-  {
    "title": "Introducing GPT-6.2 Astra and Sol",
    "description": "Introducing GPT‑6.2 Astra and Sol, with better professional outputs, coding, computer use, and efficiency at lower cost across ChatGPT Work, Codex, and the API.",
    "source": "OpenAI News",
@@ -780,18 +816,6 @@
    "videoId": "",
    "section": "AI Tools",
    "image": "https://cdn.openai.com/mdx-assets/e193aefe-5e58-431c-8cd2-adadac0c1496/44573edd-9653-49b3-ba07-7b3643545ef9.d3072be3.png",
-   "imageChecked": "2026-11-18T01:09:43+00:00"
-  },
-  {
-   "title": "Proton’s Lumo, a privacy-focused alternative to ChatGPT and Claude, arrives on desktop",
-   "description": "Proton's new Lumo Desktop app for Windows, Mac, and Linux lets users automate tasks across files and connected apps, with granular controls over what its AI can access.",
-   "source": "TechCrunch AI",
-   "published": "2026-11-17T17:32:25+00:00",
-   "contentType": "news",
-   "url": "https://techcrunch.com/2026/11/17/protons-lumo-a-privacy-focused-alternative-to-chatgpt-and-claude-arrives-on-desktop/",
-   "videoId": "",
-   "section": "Latest AI News",
-   "image": "https://techcrunch.com/wp-content/uploads/2025/07/Lumo-by-proton.jpeg?resize=1200,600",
    "imageChecked": "2026-11-18T01:09:43+00:00"
   },
   {
@@ -867,7 +891,7 @@
    "imageChecked": "2026-11-18T01:09:43+00:00"
   },
   {
-   "title": "How to compress text to 1 bit per character | Compression is Intelligence Part 3",
+   "title": "How to compress text to 1 bit per character | Information theory, part 3",
    "description": "Arithmetic codes and how they elucidate this trilogy's title Channel career fair: https://3b1b.com/talent New store items! https://3b1b.com/store Early views for supporters: https://3b1b.com/support Other resources you may enjoy. On Arithmetic Codes…",
    "source": "3Blue1Brown (YouTube)",
    "published": "2026-11-17T16:43:16+00:00",
@@ -1260,18 +1284,6 @@
    "videoId": "",
    "section": "Latest AI News",
    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/10/STK155_OPEN_AI_4_CVirginia_D.png?quality=90&strip=all&crop=0%2C10.742221417566%2C100%2C78.515557164868&w=1200",
-   "imageChecked": "2026-11-18T01:09:43+00:00"
-  },
-  {
-   "title": "Sam Altman says he wants everyone ‘to have a lot of RAM’",
-   "description": "OpenAI CEO Sam Altman is once again addressing his controversial comments on PC RAM purchases. \"I want to be clear, I want people to have a lot of RAM, I think everybody should be able to buy a lot of RAM for their own computer,\" Altman said today. \"I think the home tinkering is great.\" […]",
-   "source": "The Verge - AI",
-   "published": "2026-11-16T20:41:28+00:00",
-   "contentType": "news",
-   "url": "https://www.theverge.com/ai-artificial-intelligence/1034787/sam-altman-ram-shortage-semafor",
-   "videoId": "",
-   "section": "Latest AI News",
-   "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/gettyimages-1778705436.jpg?quality=90&strip=all&crop=0%2C12.629941573716%2C100%2C74.740116852568&w=1200",
    "imageChecked": "2026-11-18T01:09:43+00:00"
   },
   {
@@ -2256,18 +2268,6 @@
    "videoId": "",
    "section": "Latest AI News",
    "image": "https://spectrum.ieee.org/media-library/when-does-it-actually-make-sense-to-put-ai-into-products.jpg?id=68653834&width=1200&height=600&coordinates=0%2C55%2C0%2C570",
-   "imageChecked": "2026-11-18T01:09:43+00:00"
-  },
-  {
-   "title": "NSF’s X-Labs Program Draws Support From Charities and Investors",
-   "description": "When the U.S. National Science Foundation began its X-Labs program in May, the agency said the higher-risk, higher-funded awards would create new kinds of partnerships that would confront urgent scientific and technological challenges. Now the NSF is doubling down on the idea, with an announcement…",
-   "source": "IEEE Spectrum - AI",
-   "published": "2026-11-11T13:00:03+00:00",
-   "contentType": "news",
-   "url": "https://spectrum.ieee.org/national-science-foundation-x-labs",
-   "videoId": "",
-   "section": "Latest AI News",
-   "image": "https://spectrum.ieee.org/media-library/three-men-conversing-in-front-of-a-construction-sign-on-a-dirt-lot.jpg?id=68653956&width=1200&height=600&coordinates=0%2C248%2C0%2C377",
    "imageChecked": "2026-11-18T01:09:43+00:00"
   }
  ]
