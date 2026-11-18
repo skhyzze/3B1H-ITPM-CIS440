@@ -105,7 +105,7 @@ These accounts are personal or unnamed. Move them to lab-owned accounts before t
 | Circuit likes | Google Apps Script. The Google account is not named in the repo. | `js/config.js` (`newsletterLikesUrl`) |
 | Outcomes submission form | Quinnipiac SharePoint user `hjbugai_quinnipiac_edu` | `studentoutcomes.html` |
 | Microsoft Lists sync | The account that sends the `lab-content-sync` repository dispatch is not named. The workflow commits as `github-actions[bot]`. | `.github/workflows/lab-content-sync.yml` |
-| Newsletter preview images | Public Microlink API (`api.microlink.io`). No key is stored in the repo. | `ai_brief/build_candidates.py` and `ai_brief/app.py` |
-| Circuit review desk | Cloudflare Worker. The account is not set up yet; use a lab-owned one. Its secrets hold the team password and a GitHub token for this repo. | `circuit-admin/wrangler.jsonc` |
+| Newsletter preview images | Public Microlink API (`api.microlink.io`). No key is stored in the repo. | `ai_brief/build_candidates.py` |
+| Circuit review desk | Cloudflare Worker `circuit-review-desk.applied-ai.workers.dev`, on the newsletter owner's personal Cloudflare account for now. It will move to a lab-owned account. Its secrets hold the team password and a GitHub token for this repo. | `circuit-admin/wrangler.jsonc` |
 
 Sprint 1 page owners are in `CONTRIBUTING.md`.

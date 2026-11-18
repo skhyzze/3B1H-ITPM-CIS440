@@ -43,7 +43,7 @@ NEWSLETTER_FILE = os.path.join(REPO_DIR, "data", "newsletter.json")
 
 
 # ---------------------------------------------------------------------------
-# Section guessing (same rules the Streamlit review desk used).
+# Section guessing. Reviewers can change the section on the review desk.
 # ---------------------------------------------------------------------------
 TOOL_KEYWORDS = [
     "launch", "releases", "released", "introducing", "open-source", "open source",
@@ -107,7 +107,7 @@ def youtube_id(url):
 
 
 # ---------------------------------------------------------------------------
-# Preview pictures (same lookup the Streamlit review desk used).
+# Preview pictures
 # ---------------------------------------------------------------------------
 IMAGE_RETRY_DAYS = 1
 # Microlink's free plan allows about 50 lookups a day. Stay under that.
