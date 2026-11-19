@@ -966,7 +966,7 @@ body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible){
 }
 
 body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) :is(h3, p, .resource-num, .arrow){
-  color: #ffffff !important;
+  color: #143b63 !important;
 }
 
 body.page-home.dark #resources .resource:is(:hover, :focus-visible){
