@@ -714,3 +714,10 @@ body.page-home.dark #resources .resources-grid > article.resource.coming-soon:is
   color:#ff6b78 !important;
 }
 
+
+/* CMS highlights: real images only, with readable titles and uncluttered copy. */
+.preview-image img{display:block;width:100%;height:100%;object-fit:contain;background:var(--panel)}
+.preview-card.without-photo>div:not(.preview-image){max-width:100%}
+.preview-card[data-cms-feed] h2{font-size:clamp(1.7rem,3vw,2.8rem);line-height:1.06;overflow-wrap:anywhere}
+.preview-card[data-cms-feed] p{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.preview-card[data-cms-feed="fellows"] .preview-image img{object-fit:cover;object-position:center 30%}
