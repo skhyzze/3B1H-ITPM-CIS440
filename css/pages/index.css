@@ -85,9 +85,9 @@
       border:1px solid var(--black);padding:25px;min-height:235px;
       display:flex;flex-direction:column;transition:.2s ease;background:var(--panel)
     }
-    .resource:hover{background:var(--blue);color:white;transform:translateY(-4px)}
+    .resource:hover{background:var(--blue);color:#143b63;transform:translateY(-4px)}
     .resource:hover p,
-    .resource:hover .resource-num{color:#dbe5ef}
+    .resource:hover .resource-num{color:#143b63}
     .resource-num{font:700 .7rem ui-monospace,SFMono-Regular,Menlo,monospace;color:#777}
     .resource h3{font-size:1.25rem;margin:46px 0 8px}
     .resource p{font-size:.88rem;color:#666;margin:0}
@@ -515,7 +515,7 @@ body.dark #resources .resource{
 }
 
 /* Keep inactive carousel previews out of keyboard navigation and fix hover contrast. */
-body:not(.dark) a.resource:hover h3{color:white!important}
+body:not(.dark) a.resource:hover h3{color:#143b63!important}
 /*
  * Homepage dark theme
  * Keep this final,
