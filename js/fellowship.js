@@ -12,15 +12,22 @@ window.LAB_FELLOWS_READY=(async function(){
   const controller=new AbortController();
   const timer=setTimeout(function(){controller.abort();},20000);
   try {
-    const response=await fetch(url,{credentials:'omit',signal:controller.signal});
+    const response=await fetch(url,{credentials:'omit',cache:'no-store',signal:controller.signal});
     if(!response.ok)throw Error();
     const data=await response.json();if(data.error||!Array.isArray(data.fellows))throw Error();
     track.replaceChildren();
-    data.fellows.forEach((f,i)=>{
+    data.fellows.sort((a,b)=>Number(a.displayOrder||999999)-Number(b.displayOrder||999999)).forEach((f,i)=>{
       if(!f || typeof f.name!=='string' || !f.name.trim())return;
       const card=node('article','fellow-card','');
       const initials=node('div','initials',f.initials||f.name.split(/\s+/).map(n=>n[0]).join('').slice(0,2));initials.setAttribute('aria-hidden','true');
-      card.append(node('div','card-index',String(i+1).padStart(2,'0')),initials,node('h3','',f.name),node('p','fellow-role',f.role));
+      let portrait=initials;
+      const photo=safeUrl(f.image);
+      if(photo){
+        portrait=node('div','fellow-portrait','');
+        const img=document.createElement('img');img.src=photo;img.alt=f.name;img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';
+        img.addEventListener('error',()=>portrait.replaceWith(initials),{once:true});portrait.append(img);
+      }
+      card.append(node('div','card-index',String(i+1).padStart(2,'0')),portrait,node('h3','',f.name),node('p','fellow-role',f.role));
       if(f.bio)card.append(pending(node('p','fellow-focus',f.bio),f.bio));
       if(f.projectLabel||f.projectTitle||f.projectDescription||f.url){
         const project=node('p','fellow-project','');
