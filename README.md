@@ -13,7 +13,7 @@ Page HTML stays at the repo root so the public URLs do not change. The shared he
 | Industry Partners | `industry.html` | `css/pages/industry.css` | Shared scripts only. |
 | Events | `event.html` | `css/pages/event.css` | Events load from `data/cms-events.json`. |
 | Student Outcomes | `studentoutcomes.html` | Shared CSS, plus a style block in the page | Outcomes load from `data/cms-projects.json`. |
-| AI Insights (The Circuit) | `ai-insights.html` | `css/pages/ai-insights.css` | `js/ai-insights.js` and `ai_brief/static-newsletter-data.js`. |
+| AI Insights (The Circuit) | `ai-insights.html` | `css/pages/ai-insights.css` | `js/ai-insights.js`. The issue loads from `data/newsletter.json`. |
 | Page not found | `404.html` | `css/pages/industry.css` | Same industry stylesheet as Industry Partners. |
 
 Each page loads at most four stylesheets:
@@ -91,7 +91,7 @@ Placeholder copy, with the current file and line:
 ## Updating content
 
 - Events, fellows, and student outcomes come from `data/cms-events.json`, `data/cms-fellows.json`, and `data/cms-projects.json`. The Microsoft Lists sync workflow writes those files, and the pages fetch them from the same site.
-- The newsletter comes from the tool in `ai_brief/`. `collect_news.py` gathers items, the Streamlit review desk approves them, and `ai_brief/static-newsletter-data.js` is what AI Insights shows.
+- The Circuit is reviewed on the team-only review desk in `circuit-admin/`, a Cloudflare Worker with its own address. It is not part of the website: `npm run build` skips it and `_config.yml` keeps GitHub Pages from serving it. Every Monday, `.github/workflows/newsletter-collect.yml` runs `ai_brief/build_candidates.py` and commits `data/newsletter-candidates.json`. A reviewer signs in to the desk with the team password, approves items, and clicks Publish, which commits `data/newsletter.json`. AI Insights shows that file. Setup steps are in `circuit-admin/README.md`.
 
 ## Accounts and handoff
 
@@ -105,6 +105,7 @@ These accounts are personal or unnamed. Move them to lab-owned accounts before t
 | Circuit likes | Google Apps Script. The Google account is not named in the repo. | `js/config.js` (`newsletterLikesUrl`) |
 | Outcomes submission form | Quinnipiac SharePoint user `hjbugai_quinnipiac_edu` | `studentoutcomes.html` |
 | Microsoft Lists sync | The account that sends the `lab-content-sync` repository dispatch is not named. The workflow commits as `github-actions[bot]`. | `.github/workflows/lab-content-sync.yml` |
-| Newsletter preview images | Public Microlink API (`api.microlink.io`). No key is stored in the repo. | `ai_brief/app.py` |
+| Newsletter preview images | Public Microlink API (`api.microlink.io`). No key is stored in the repo. | `ai_brief/build_candidates.py` |
+| Circuit review desk | Cloudflare Worker `circuit-review-desk.applied-ai.workers.dev`, on the newsletter owner's personal Cloudflare account for now. It will move to a lab-owned account. Its secrets hold the team password and a GitHub token for this repo. | `circuit-admin/wrangler.jsonc` |
 
 Sprint 1 page owners are in `CONTRIBUTING.md`.

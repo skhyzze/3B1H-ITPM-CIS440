@@ -126,8 +126,6 @@ function getMondayDate() {
 
 // Builds the introduction and image collage.
 function heroHtml(d) {
-  const all = (d.spotlight ? [d.spotlight] : []).concat(d.items);
-  const sources = new Set(all.map(function (i) { return i.source; })).size;
   // Pick up to 3 items with pictures for the collage (different sections first).
   const withPics = d.items.filter(function (i) { return i.image; });
   const picks = []; const seen = {};
@@ -146,11 +144,6 @@ function heroHtml(d) {
       '<div class="hero-ctas reveal">' +
         (d.spotlight ? '<a class="btn primary" href="#spotlight" data-jump="spotlight">' + icon("sparkle", 18) + ' See the Spotlight</a>' : '') +
         '<a class="btn ghost" href="#explore" data-jump="explore">Browse this week ' + icon("arrow", 16) + '</a>' +
-      '</div>' +
-      '<div class="stats reveal">' +
-        '<div class="stat"><b data-count="' + all.length + '">0</b><span>hand-picked resources</span></div>' +
-        '<div class="stat"><b data-count="' + sources + '">0</b><span>trusted sources</span></div>' +
-        '<div class="stat"><b data-count="' + d.sections.length + '">0</b><span>topics this week</span></div>' +
       '</div>' +
     '</div>' +
     '<div class="collage reveal" aria-hidden="true">' + frames + '</div>' +
@@ -952,15 +945,42 @@ document.addEventListener("click", function (event) {
  *
  * Reads ai_brief/sharepoint-content.json and keeps Published entries.
  * Converts SharePoint column names into the format our article cards use.
- * Adds these test entries alongside the existing newsletter resources.
+ * Adds these test entries alongside the issue published from the review desk.
  * Builds the page before setting up the Learning carousel counter.
  *
- * If the file cannot load, the existing newsletter content still displays.
+ * If the file cannot load, the published issue still displays.
  * Later, an approved SharePoint connection will supply the real content.
  */
 
+// Shown when data/newsletter.json cannot be loaded.
+function renderLoadError() {
+  const app = document.getElementById("app");
+  const footer = document.getElementById("site-footer");
+  app.innerHTML = '<div class="wrap"><div class="curating"><b>The Circuit could not load.</b>' +
+    '<span>Check your connection and refresh the page.</span></div></div>';
+  if (footer) app.appendChild(footer);
+}
+
+// The review desk (circuit-admin/) publishes data/newsletter.json. no-cache asks
+// the browser to check for a newer issue instead of reusing an old copy.
+async function loadPublishedIssue() {
+  const response = await fetchWithTimeout("data/newsletter.json", { cache: "no-cache", credentials: "omit" }, 15000);
+  if (!response.ok) throw new Error("Newsletter unavailable");
+  const data = await response.json();
+  if (!data || !Array.isArray(data.items) || !Array.isArray(data.sections)) throw new Error("Invalid newsletter");
+  return data;
+}
+
 (async function () {
-  let newsletter = STATIC_NEWSLETTER_DATA;
+  let issue;
+  try {
+    issue = await loadPublishedIssue();
+  } catch (error) {
+    renderLoadError();
+    return;
+  }
+
+  let newsletter = issue;
 
   try {
     const response = await fetch("./ai_brief/sharepoint-content.json", {
@@ -982,7 +1002,7 @@ document.addEventListener("click", function (event) {
     const testItems = rows
       .filter(row => row.Status === "Published")
       .map(function (row) {
-        const section = STATIC_NEWSLETTER_DATA.sections.find(
+        const section = issue.sections.find(
           section => section.name === row.Section
         );
 
@@ -1005,8 +1025,8 @@ document.addEventListener("click", function (event) {
       .filter(Boolean);
 
     newsletter = {
-      ...STATIC_NEWSLETTER_DATA,
-      items: [...STATIC_NEWSLETTER_DATA.items, ...testItems]
+      ...issue,
+      items: [...issue.items, ...testItems]
     };
   } catch (error) {
     console.warn("Using existing newsletter content:", error);

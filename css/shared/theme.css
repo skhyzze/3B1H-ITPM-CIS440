@@ -747,7 +747,7 @@ body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible){
 
 body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible)
   :is(h3, p, .resource-num, .arrow){
-  color: #ffffff !important;
+  color: #143b63 !important;
 }
 
 body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible)
@@ -1732,7 +1732,7 @@ body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible){
 }
 
 body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) :is(h3, p, .resource-num, .arrow){
-  color: #f4f6f8 !important;
+  color: #143b63 !important;
 }
 
 body.page-ai-brief:not(.dark) [data-c]{
@@ -3269,10 +3269,10 @@ body.page-outcomes #people .wrap {
     "controls controls";
 }
 body.page-outcomes #highlights .wrap {
-  grid-template-columns: minmax(240px, 380px) minmax(0, 1fr);
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
   grid-template-areas:
     "shot head"
-    "shot track"
+    "track track"
     "controls controls";
 }
 body.page-outcomes #people .section-head,
@@ -3305,6 +3305,24 @@ body.page-outcomes #people .spotlight-track,
 body.page-outcomes #highlights .spotlight-track {
   grid-area: track;
   padding-bottom: 0;
+}
+/* Momentum, documented uses the same carousel card size as Explore more projects. */
+body.page-outcomes #highlights .spotlight-track .feature {
+  flex: 0 0 calc((100% - 36px) / 3);
+  width: auto;
+  max-width: none;
+  min-height: 430px;
+  padding: 20px;
+}
+@media (max-width: 960px) {
+  body.page-outcomes #highlights .spotlight-track .feature {
+    flex-basis: calc((100% - 18px) / 2);
+  }
+}
+@media (max-width: 620px) {
+  body.page-outcomes #highlights .spotlight-track .feature {
+    flex-basis: 85%;
+  }
 }
 body.page-outcomes #people .spotlight-controls,
 body.page-outcomes #highlights .spotlight-controls {
@@ -3797,7 +3815,7 @@ body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) {
   box-shadow: 0 10px 24px rgba(16, 32, 51, 0.08) !important;
 }
 
-body.page-home:not(.dark) #resources .resource:is(:hover, :focus-visible) :is(h3, p) {
+body.page-home:not(.dark) #resources .resources-grid .resource:is(:hover, :focus-visible) :is(h3, p) {
   color: #143b63 !important;
 }
 

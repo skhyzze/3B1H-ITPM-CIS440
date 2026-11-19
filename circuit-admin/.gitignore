@@ -1,0 +1,6 @@
+# Built by npm run assets from pages/ and the site's files.
+public/
+node_modules/
+# Local secrets for npm run dev. Never commit these.
+.dev.vars
+.wrangler/

@@ -533,3 +533,9 @@ html.reveal-ready .how-to-become .section-heading.reveal.is-in h2{ transform-ori
  100%{ border-color: var(--sand); } 50%{ border-color: var(--red); } }
 @keyframes progress-sheen { 0%{ transform: translateX(-120%); } 100%{ transform: translateX(120%); } }
 @keyframes circuit-drift { to{ background-position: 28px 12px; } }
+
+/* Approved profile photos share a consistent portrait frame. */
+.fellow-portrait{width:112px;height:112px;margin:0 0 20px;border-radius:50%;overflow:hidden;border:1px solid var(--border);background:var(--panel)}
+.fellow-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+
+.fellow-submit{margin:0 0 28px}

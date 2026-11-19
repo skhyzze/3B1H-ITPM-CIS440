@@ -340,3 +340,97 @@
 
 //   window.open(translatedPage, "_blank", "noopener,noreferrer");
 // }
+
+(function () {
+  const root = document.querySelector('.lab-lang');
+  if (!root) return;
+
+  const toggle = root.querySelector('.lab-lang-toggle');
+  const menu = root.querySelector('.lab-lang-menu');
+  const options = root.querySelectorAll('[data-gt-lang]');
+  if (!toggle || !menu) return;
+
+  function storedCode() {
+    try {
+      const stored = JSON.parse(localStorage.getItem('__GT_TRANSLATE_LANGS'));
+      if (stored && typeof stored.tgtLang === 'string') return stored.tgtLang;
+    } catch (error) {
+    }
+    return 'en';
+  }
+
+  function selectEl() {
+    return root.querySelector('.gt_selector');
+  }
+
+  function currentCode() {
+    const select = selectEl();
+    if (select && select.value) {
+      const parts = select.value.split('|');
+      if (parts[1]) return parts[1];
+    }
+    return storedCode();
+  }
+
+  function concealSelect() {
+    const select = selectEl();
+    if (!select) return;
+    select.tabIndex = -1;
+    select.setAttribute('aria-hidden', 'true');
+  }
+
+  function sync() {
+    const code = currentCode();
+    concealSelect();
+    options.forEach(function (button) {
+      button.setAttribute('aria-pressed', button.getAttribute('data-gt-lang') === code ? 'true' : 'false');
+    });
+  }
+
+  function setOpen(open) {
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  toggle.addEventListener('click', function (event) {
+    event.stopPropagation();
+    setOpen(menu.hidden);
+  });
+
+  options.forEach(function (button) {
+    button.addEventListener('click', function () {
+      const code = button.getAttribute('data-gt-lang');
+      const select = selectEl();
+      if (select && currentCode() !== code) {
+        select.value = 'en|' + code;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        sync();
+      }
+      setOpen(false);
+      toggle.focus();
+    });
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!root.contains(event.target)) setOpen(false);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && !menu.hidden) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  function wait(tries) {
+    if (selectEl()) {
+      sync();
+      return;
+    }
+    if (tries > 40) return;
+    window.setTimeout(function () { wait(tries + 1); }, 50);
+  }
+
+  sync();
+  wait(0);
+})();

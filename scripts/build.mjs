@@ -6,7 +6,8 @@ import { checkDist } from "./check-dist.mjs";
 
 const root = process.cwd();
 const dist = path.join(root, "dist");
-const skipDirs = new Set([".git", ".github", ".cursor", "node_modules", "dist", "scripts", "src"]);
+// circuit-admin is the team-only review desk. It deploys separately to Cloudflare and must never be published with the site.
+const skipDirs = new Set([".git", ".github", ".cursor", "node_modules", "dist", "scripts", "src", "circuit-admin"]);
 const headerTemplate = fs.readFileSync(path.join(root, "src", "partials", "header.html"), "utf8").trim();
 const footerTemplate = fs.readFileSync(path.join(root, "src", "partials", "footer.html"), "utf8").trim();
 const headerPages = new Set(["home", "industry", "fellowship", "outcomes", "events", "insights"]);

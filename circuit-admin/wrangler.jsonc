@@ -1,0 +1,24 @@
+// Cloudflare settings for The Circuit review desk. See circuit-admin/README.md.
+{
+  "name": "circuit-review-desk",
+  "main": "src/worker.js",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    // npm run assets fills ./public with pages/ and the site's fonts, styles, and logo.
+    "directory": "./public",
+    "binding": "ASSETS",
+    // The Worker checks the session before any file is served.
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  "vars": {
+    // Where The Circuit is published. Change these if the repository moves.
+    "GITHUB_REPO": "skhyzze/3B1H-ITPM-CIS440",
+    "GITHUB_BRANCH": "main",
+    "COLLECT_WORKFLOW": "newsletter-collect.yml",
+    // The public website. Used for the "View The Circuit" link. Update it when the site moves.
+    "PUBLIC_SITE_URL": "https://skhyzze.github.io/3B1H-ITPM-CIS440/"
+  },
+  "observability": { "enabled": true }
+}

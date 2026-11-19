@@ -30,7 +30,7 @@ jobs:
           feed = payload.get('feed')
           fields = {
               'projects': {'category','title','description','image','url','displayOrder'},
-              'fellows': {'name','initials','role','bio','projectLabel','projectTitle','projectDescription','url','linkLabel','displayOrder'},
+              'fellows': {'name','image','initials','role','bio','projectLabel','projectTitle','projectDescription','url','linkLabel','displayOrder'},
               'events': {'category','title','dateTime','location','summary','details','contact','image','url','linkLabel','displayOrder','sample'},
           }
           if feed not in fields or not isinstance(payload.get('records'), list):
