@@ -4,7 +4,7 @@ window.LAB_FELLOWS_READY=(async function(){
   const parked=Array.from(track.querySelectorAll('article.fellow-card'));
   track.setAttribute('aria-busy','true');
   if(!parked.length) status.textContent='Loading student fellows…';
-  const url='data/cms-fellows.json';
+  const url='https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-fellows.json';
   function node(tag,cls,text){const el=document.createElement(tag);el.className=cls;el.textContent=typeof text==='string'?text:'';return el;}
   function unfinishedCopy(text){return typeof text==='string'&&(/^\s*\[/.test(text)||/add a short, student-approved/i.test(text)||/^add the project title/i.test(text));}
   function pending(el,text){if(unfinishedCopy(text))el.setAttribute('data-unfinished','');return el;}
@@ -12,7 +12,7 @@ window.LAB_FELLOWS_READY=(async function(){
   const controller=new AbortController();
   const timer=setTimeout(function(){controller.abort();},20000);
   try {
-    const response=await fetch(url,{credentials:'omit',cache:'no-store',signal:controller.signal});
+    const response=await fetch(url+'?v='+Date.now(),{credentials:'omit',cache:'no-store',signal:controller.signal});
     if(!response.ok)throw Error();
     const data=await response.json();if(data.error||!Array.isArray(data.fellows))throw Error();
     track.replaceChildren();
