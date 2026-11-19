@@ -221,7 +221,7 @@ body.dark .feature .image-slot {background:#123A63}
 */
 const LAB_CONTENT_CONFIG = {
   submissionFormUrl: 'https://quinnipiacuniversity.sharepoint.com/:l:/s/AppliedAILab/JADM3WWIQqUfT4A1w4safTnrATedvJgTABeQrQ9k7kivZsM?nav=Yjk5MzAzNjctNDQ5OC00NDhjLWI0MjctYzQxM2MxMjRlOWI1',
-  publicApprovedFeedUrl: 'data/cms-projects.json'
+  publicApprovedFeedUrl: 'https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-projects.json'
 };
 (function(){
   const cfg=LAB_CONTENT_CONFIG;
@@ -316,8 +316,8 @@ const LAB_CONTENT_CONFIG = {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 20000);
     try {
-      if (endpoint !== 'data/cms-projects.json') throw new Error('Feed not configured');
-      const response = await fetch(endpoint, {credentials: 'omit', signal: controller.signal});
+      if (endpoint !== 'https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-projects.json') throw new Error('Feed not configured');
+      const response = await fetch(endpoint+'?v='+Date.now(), {credentials: 'omit', cache: 'no-store', signal: controller.signal});
       if (!response.ok) throw new Error('Feed unavailable');
       const data = await response.json();
       if (!data || data.error || !Array.isArray(data.projects)) throw new Error('Invalid feed');
