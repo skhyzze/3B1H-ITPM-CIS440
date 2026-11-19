@@ -14,7 +14,7 @@ window.LAB_HOME_HIGHLIGHTS_READY=(async function(){
     template.querySelector('.preview-image')?.remove();template.classList.add('without-photo');
     const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),10000);
     try{
-      const response=await fetch('data/cms-'+cfg.feed+'.json',{credentials:'omit',cache:'no-store',signal:controller.signal});
+      const response=await fetch('https://raw.githubusercontent.com/skhyzze/3B1H-ITPM-CIS440/main/data/cms-'+cfg.feed+'.json?v='+Date.now(),{credentials:'omit',cache:'no-store',signal:controller.signal});
       if(!response.ok)throw Error('Unavailable');const data=await response.json();
       if(!Array.isArray(data[cfg.feed]))return;
       const groups=new Set();
