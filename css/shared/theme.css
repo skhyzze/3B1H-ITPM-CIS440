@@ -3306,28 +3306,23 @@ body.page-outcomes #highlights .spotlight-track {
   grid-area: track;
   padding-bottom: 0;
 }
-/* Momentum, documented: the card fills the section width. Height stays put. */
-body.page-outcomes #highlights .spotlight-track {
-  width: 100%;
-}
+/* Momentum, documented uses the same carousel card size as Explore more projects. */
 body.page-outcomes #highlights .spotlight-track .feature {
-  flex: 0 0 100% !important;
-  width: 100% !important;
-  max-width: none !important;
-  min-height: 0;
-  padding: 28px 32px 32px;
+  flex: 0 0 calc((100% - 36px) / 3);
+  width: auto;
+  max-width: none;
+  min-height: 430px;
+  padding: 20px;
 }
-body.page-outcomes #highlights .feature .image-slot {
-  height: 220px;
-  max-height: 220px;
-  aspect-ratio: auto;
+@media (max-width: 960px) {
+  body.page-outcomes #highlights .spotlight-track .feature {
+    flex-basis: calc((100% - 18px) / 2);
+  }
 }
-body.page-outcomes #highlights .feature h3 {
-  font-size: clamp(1.55rem, 2.2vw, 2rem);
-}
-body.page-outcomes #highlights .feature p {
-  font-size: 1.02rem;
-  line-height: 1.7;
+@media (max-width: 620px) {
+  body.page-outcomes #highlights .spotlight-track .feature {
+    flex-basis: 85%;
+  }
 }
 body.page-outcomes #people .spotlight-controls,
 body.page-outcomes #highlights .spotlight-controls {
