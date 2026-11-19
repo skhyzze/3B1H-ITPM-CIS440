@@ -5497,7 +5497,7 @@ body.page-outcomes .outcomes-shot-frame span {
   }
 
   .lab-brand-logo {
-    width: 68px;
+    width: 148px;
   }
 
   .lab-menu-toggle,
@@ -5546,6 +5546,10 @@ body.page-outcomes .outcomes-shot-frame span {
 }
 
 @media (max-width: 560px) {
+  .lab-brand-logo {
+    width: 128px;
+  }
+
   .lab-chat-launcher {
     width: 48px;
     height: 48px;
